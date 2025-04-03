@@ -10,7 +10,7 @@
   --color-dark-olive: #3e401f;
   --color-forest-green: #0d371e;
   --color-muted-green: #508e42;
-  --color-sage-green: #a1ed08;
+  --color-sage-green: #daff8f;
 
   --color-light-mint: #fdf751;
   --color-mint-green: #b5f4a6;
@@ -196,6 +196,7 @@ footer h5 {
 
 footer h4 {
   font-family: "Playwrite US Trad", cursive;
+  color: var(--color-sage-green);
 }
 
 footer p {
