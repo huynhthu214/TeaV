@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-4">
             <h5>Contact</h5>
-            <p>Email: trangtra@gmail.com</p>
+            <p>Email: teavshop@gmail.com</p>
             <p>Phone: +123 456 7890</p>
           </div>
           <div class="col-md-4">
@@ -23,7 +23,7 @@
         </div>
         <div class="text-center mt-3">
           <p class="mb-0">
-            &copy; <span id="year"></span> 2025 Trang Tra. All rights reserved.
+            &copy; <span id="year"></span> 2025 TeaV. All rights reserved.
           </p>
         </div>
       </div>
