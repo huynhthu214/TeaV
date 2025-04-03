@@ -163,7 +163,7 @@
               of flavor, culture, and pure delight.
             </p>
             <div class="buttons">
-              <a href="#" class="button- order-now">Order Now</a>
+              <a href="#" class="button-order-now">Order Now</a>
             </div>
           </div>
         </div>
