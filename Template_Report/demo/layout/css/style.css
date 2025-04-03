@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lato&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  font-family: "Lora", sans-serif;
 }
 :root {
   /* Color */
@@ -108,7 +108,7 @@ header .navbar {
 
 .navbar .nav-logo .logo-text {
   color: var(--color-sage-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playwrite US Trad", cursive;
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-semibold);
 }
@@ -121,14 +121,14 @@ header .navbar {
   align-items: center;
 }
 .nav-link.active {
-  color: #fcfcfc !important; 
+  color: #fcfcfc !important;
 }
 
 .nav-link:hover {
   color: var(--color-light-mint);
 }
 .nav-link:focus {
-  color: #fcfcfc !important; 
+  color: #fcfcfc !important;
 }
 .hero-section {
   position: relative;
@@ -192,6 +192,10 @@ footer h5 {
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+footer h4 {
+  font-family: "Playwrite US Trad", cursive;
 }
 
 footer p {
