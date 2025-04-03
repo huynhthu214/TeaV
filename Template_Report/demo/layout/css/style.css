@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&family=WindSong:wght@400;500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -180,11 +180,11 @@ header .navbar {
 .hero-details .buttons .button-order-now:hover {
   color: var(--color-light-mint);
 }
+
 footer {
   background-color: var(--color-forest-green);
   color: var(--color-light-brown);
   padding: 40px 0;
-  font-family: "Arial", sans-serif;
 }
 
 footer h5 {
@@ -346,4 +346,60 @@ footer .social-links a {
   font-size: 2.5rem;
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
+}
+
+/* Style for term */
+.term h1 {
+  font-size: 2.5rem;
+  color: var(--color-forest-green);
+  font-family: "Gravitas One", serif;
+}
+
+.term h5 {
+  font-family: "Pacifico", serif;
+  font-size: var(--font-size-xxl);
+  color: var(--color-forest-green);
+}
+
+.term h4 {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-forest-green);
+}
+
+.term p {
+  font-size: var(--font-size-l);
+}
+
+.term li {
+  font-size: var(--font-size-l);
+  padding-left: var(--spacing-l);
+}
+
+.table-of-contents {
+  margin: 20px 0;
+}
+
+.table-of-contents ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.table-of-contents li {
+  margin: 8px 0;
+}
+
+.table-of-contents a {
+  font-size: var(--font-size-m);
+  color: var(--color-dark-olive);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.table-of-contents a:hover {
+  color: #86f71d;
+  text-decoration: underline;
+}
+
+.table-of-contents a:active {
+  color: #14a600;
 }
