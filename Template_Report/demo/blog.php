@@ -12,7 +12,7 @@
             <h2>The Health Benefits of Green Tea</h2>
             <p class="text-muted">Posted on March 26, 2025 by Trang Tea Team</p>
             <img
-              src="images/6a3771cc2b2e3f060e1e6fec7d60344c.jpg"
+              src="layout/images/6a3771cc2b2e3f060e1e6fec7d60344c.jpg"
               class="img-fluid mb-3"
               alt="Green Tea"
             />
@@ -60,7 +60,7 @@
             <h2>How to Brew the Perfect Cup of Tea</h2>
             <p class="text-muted">Posted on March 20, 2025 by Trang Tea Team</p>
             <img
-              src="images/3fc845b5f8f91e1f7f047fdf92ed2bfc.jpg"
+              src="layout/images/3fc845b5f8f91e1f7f047fdf92ed2bfc.jpg"
               class="img-fluid mb-3"
               alt="Tea Brewing"
             />
@@ -108,7 +108,7 @@
             <h2>DIY Tea-Infused Essential Oil Recipe</h2>
             <p class="text-muted">Posted on March 15, 2025 by Trang Tea Team</p>
             <img
-              src="images/1bc5ea54ad81f86126dcfae2caa71270.jpg"
+              src="layout/images/1bc5ea54ad81f86126dcfae2caa71270.jpg"
               class="img-fluid mb-3"
               alt="Essential Oil"
             />

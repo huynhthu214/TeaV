@@ -57,7 +57,7 @@
             >
               <div class="card">
                 <img
-                  src="images/d119b63b9bd8b731694dec72d8f09236.jpg"
+                  src="layout/images/d119b63b9bd8b731694dec72d8f09236.jpg"
                   class="card-img-top"
                   alt="Green Tea"
                 />
@@ -81,7 +81,7 @@
             >
               <div class="card">
                 <img
-                  src="images/5837da289e09a37a3439e6c176ea6df7.jpg"
+                  src="layout/images/5837da289e09a37a3439e6c176ea6df7.jpg"
                   class="card-img-top"
                   alt="Chamomile Tea"
                 />
@@ -104,7 +104,7 @@
             >
               <div class="card">
                 <img
-                  src="images/6a3771cc2b2e3f060e1e6fec7d60344c.jpg"
+                  src="layout/images/6a3771cc2b2e3f060e1e6fec7d60344c.jpg"
                   class="card-img-top"
                   alt="Black Tea"
                 />
@@ -127,7 +127,7 @@
             >
               <div class="card">
                 <img
-                  src="images/e89b1971d52f87f48259ad41d671f028.jpg"
+                  src="layout/images/e89b1971d52f87f48259ad41d671f028.jpg"
                   class="card-img-top"
                   alt="Peppermint Tea"
                 />

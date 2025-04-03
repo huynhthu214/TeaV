@@ -35,7 +35,7 @@
             <div class="col-md-6">
               <h3>Our Tea Fields</h3>
               <img
-                src="images/1bc5ea54ad81f86126dcfae2caa71270.jpg"
+                src="layout/images/1bc5ea54ad81f86126dcfae2caa71270.jpg"
                 alt="Tea Fields"
                 class="img-fluid rounded"
               />
@@ -47,7 +47,7 @@
             <div class="col-md-6">
               <h3>Our Craftsmanship</h3>
               <div class="video-wrapper">
-                <img src="images/3fc845b5f8f91e1f7f047fdf92ed2bfc.jpg" alt="" />
+                <img src="layout/images/3fc845b5f8f91e1f7f047fdf92ed2bfc.jpg" alt="" />
               </div>
               <p class="mt-2">
                 Watch how we transform fresh leaves into exquisite tea with
