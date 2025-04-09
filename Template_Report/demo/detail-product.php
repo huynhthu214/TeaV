@@ -23,11 +23,28 @@
         <h1 class="text-center mb-4"><?php echo $product['name']; ?></h1>
         <div class="row">
           <div class="col-md-6">
-            <img
-              src="<?php echo $product['image']; ?>"
-              class="img-fluid"
-              alt="<?php echo $product['name']; ?>"
-            />
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="<?php echo $product['image']; ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="<?php echo $product['image']; ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="<?php echo $product['image']; ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
           </div>
           <div class="col-md-6">
             <h3>Details</h3>
@@ -37,7 +54,7 @@
             <p><strong>Ingredients:</strong> <?php echo $product['ingredients']; ?></p>
             <p><strong>Uses:</strong> <?php echo $product['usefor']; ?></p>
             <p><strong>Description:</strong> <?php echo $product['description']; ?></p>
-            <a href="products.php" class="btn btn-secondary">Back to Products</a>
+            <a href="product.php" class="btn btn-success">Back to Products</a>
           </div>
         </div>
       </div>
