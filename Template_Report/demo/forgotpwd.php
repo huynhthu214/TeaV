@@ -3,10 +3,9 @@
     $namePage = "Forgot Password";
     include "view/header.php";
 ?>
-<div class="container mt-5 d-flex justify-content-center">
-  <div class="form-box p-5" style="width: 450px; background-color: #ffffff;">
-    <h1 class="text-center mb-4 sign-up">Forgot Password</h1>
-    <form>
+<div class="container form-box-forgot mt-5">
+    <form method="post">
+    <h1 class="forgotpwd text-center mb-4">Forgot Password</h1>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input

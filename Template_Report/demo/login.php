@@ -4,8 +4,7 @@
     include "view/header.php";
 ?>
 <!-- Login -->
-<div class="center-container">
-  <div class="form-box">
+<div class="container form-box mt-5">
     <form method="post">
       <h1 class="login text-center mb-4">Login</h1>
 

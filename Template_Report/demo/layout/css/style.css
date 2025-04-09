@@ -225,11 +225,13 @@ footer .social-links a {
   opacity: 0.7;
   transition: opacity 0.3s ease;
 }
-/* Style cho Login form */
+/* Style cho Login form, Sign up form, Forgot Password */
 .form-label {
+  display: block;
   font-weight: bold;
   color: var(--color-forest-green);
   text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 .text-end a,
@@ -242,21 +244,13 @@ footer .social-links a {
   color: #86f71d;
 }
 
-.login {
+.login, .signup, .forgotpwd{
   font-size: 2.5rem;
   font-family: "Gravitas One", serif;
   color: #0d511d;
 }
 
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f8f9fa;
-  padding: 20px;
-}
-
-.form-box {
+.form-box, .form-box-sign, .form-box-forgot {
   width: 100%;
   max-width: 450px;
   background-color: #ffffff;
@@ -265,7 +259,7 @@ footer .social-links a {
   padding: 30px;
 }
 
-.login-btn {
+.login-btn, .signup-btn {
   width: 100%;
   max-width: 400px;
   display: block;
@@ -279,58 +273,20 @@ footer .social-links a {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.login-btn:hover {
+.login-btn:hover, .signup-btn:hover {
   background-color: #086b15;
   color: #fdf751;
 }
 
 /* Style cho Sign up*/
 
-.container-sign {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8f9fa;
-  padding: 20px;
+.form-check-label {
+  vertical-align: middle;
 }
-
-.form-box-sign {
-  width: 100%;
-  max-width: 450px;
-  background-color: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
-  padding: 30px;
+.form-check-input {
+  margin-top: 0.2rem;
+  vertical-align: middle;
 }
-
-.signup-btn {
-  width: 100%;
-  max-width: 400px;
-  display: block;
-  margin: 0 auto;
-  background-color: #0d511d;
-  color: white;
-  border: none;
-  padding: 10px 0;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.signup-btn:hover {
-  background-color: #086b15;
-  color: #fdf751;
-}
-
-.form-label {
-  display: inline-block;
-  width: 100px;
-  font-weight: bold;
-  color: var(--color-forest-green);
-  text-align: left;
-}
-
 /* Style cho section About Us */
 .about-us {
   padding: 300px 0;
