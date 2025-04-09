@@ -1,4 +1,5 @@
-<?php 
+
+  <?php 
     $namePage = "Blog";
     include "view/header.php";
 ?>

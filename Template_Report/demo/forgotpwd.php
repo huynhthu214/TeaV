@@ -1,3 +1,4 @@
+  
 <?php 
     $namePage = "Forgot Password";
     include "view/header.php";
