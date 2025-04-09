@@ -43,9 +43,9 @@ $result = mysqli_query($conn, $query);
             <div class="col-md-3">
               <select class="form-select" id="priceFilter">
                 <option value="">Filter by Price</option>
-                <option value="low">Under $10</option>
-                <option value="mid">$10 - $20</option>
-                <option value="high">Above $20</option>
+                <option value="low">Under $30</option>
+                <option value="mid">$30 - $40</option>
+                <option value="high">Above $40</option>
               </select>
             </div>
             <div class="col-md-2">
@@ -81,7 +81,7 @@ $result = mysqli_query($conn, $query);
                     <strong>Uses:</strong> <?php echo $product['usefor']; ?><br />
                     <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
                   </p>
-                  <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>
+                  <a href="detail-product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>
                 </div>
               </div>
             </div>
