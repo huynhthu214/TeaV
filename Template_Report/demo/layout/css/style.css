@@ -225,13 +225,43 @@ footer .social-links a {
   opacity: 0.7;
   transition: opacity 0.3s ease;
 }
+<<<<<<< HEAD
 /* Style cho Login form, Sign up form, Forgot Password */
+=======
+form h1.login {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--color-forest-green);
+  font-family: "Gravitas One", serif;
+}
+label.form-label {
+  display: block;
+  margin-left: 510px;
+}
+
+>>>>>>> 05795ad4d6990f47bebfd027a0235ccc13bf2c97
 .form-label {
   display: block;
   font-weight: bold;
   color: var(--color-forest-green);
   text-align: left;
   margin-bottom: 0.5rem;
+}
+input.form-control {
+  margin-left: 500px;
+  width: 500px;
+  height: auto;
+  padding: 10px;
+}
+.text-end a {
+  color: var(--color-dark-olive);
+  margin-right: 480px;
+}
+.text-end a:hover {
+  color: #86f71d;
+}
+.text-center a {
+  color: var(--color-dark-olive);
 }
 
 .text-end a,
@@ -341,6 +371,7 @@ footer .social-links a {
 .product-card {
   margin-bottom: 20px;
 }
+
 .filter-section {
   margin-bottom: 30px;
 }
@@ -361,6 +392,28 @@ footer .social-links a {
 .card .card-img-top:hover {
   transform: scale(1.05);
   filter: brightness(110%);
+}
+
+.card-content {
+  padding: 15px;
+}
+.card-title {
+  font-size: 20px;
+  margin: 0;
+}
+.card-price {
+  color: #28a745;
+  font-size: 18px;
+  margin: 5px 0;
+}
+.card-description {
+  font-size: 14px;
+  color: #555;
+}
+.card-use {
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
 }
 
 .btn-success {
