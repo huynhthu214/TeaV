@@ -1,7 +1,8 @@
 
-<?php
-      $namePage = "Terms & Conditions";
-      include "view/header.php";
+<!-- Header/Navbar -->
+<?php 
+        $namePage = "Terms & Conditions";
+        include "view/header.php";
     ?>
     <main>
       <div class="container">

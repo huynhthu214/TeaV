@@ -1,4 +1,3 @@
-
    <?php
       $namePage = "Home";
       include "view/header.php";

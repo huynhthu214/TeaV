@@ -1,3 +1,4 @@
+  
 <!-- Header/Navbar -->
     <?php 
         $namePage = "About";
