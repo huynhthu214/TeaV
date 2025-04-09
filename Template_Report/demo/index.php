@@ -7,7 +7,7 @@
       <section class="hero-section">
         <video autoplay loop muted class="hero-video-background">
           <source
-            src="layout/images/Chai - Cinematic Tea B-Roll.mp4"
+            src="layout/images/video-home.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.

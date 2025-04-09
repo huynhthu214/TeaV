@@ -7,7 +7,8 @@
       <section class="about-us py-5">
         <div class="container">
           <h1 class="text-center mb-4">About Trang Tra</h1>
-          <div class="row">
+          <section class="section-1">
+          <div class="row py-5">
             <div class="col-md-6">
               <h3>Our History</h3>
               <p>
@@ -31,34 +32,36 @@
               </p>
             </div>
           </div>
-          <div class="row mt-5">
-            <div class="col-md-6">
-              <h3>Our Tea Fields</h3>
-              <img
-                src="layout/images/1bc5ea54ad81f86126dcfae2caa71270.jpg"
-                alt="Tea Fields"
-                class="img-fluid rounded"
-              />
-              <p class="mt-2">
-                Carefully tended tea fields where every leaf tells a story of
-                dedication and nature.
-              </p>
-            </div>
-            <div class="col-md-6">
-              <h3>Our Craftsmanship</h3>
-              <div class="video-wrapper">
-                <img src="layout/images/3fc845b5f8f91e1f7f047fdf92ed2bfc.jpg" alt="" />
+          </section> 
+          <section class="section-2">
+            <div class="row mt-5">
+              <div class="col-md-4">
+                <img
+                  src="layout/images/tea-field.jpg" alt="Tea Fields" class="img-fluid rounded" />
+                <h3 class="mt-2">Our Tea Fields</h3>
+                <p class="mt-2">
+                  Carefully tended tea fields reflect dedication and harmony with nature. Each leaf tells the story of farmers who nurture the plants, ensuring high-quality tea that embodies the region's unique flavors and traditions.              
+                </p>
               </div>
-              <p class="mt-2">
-                Watch how we transform fresh leaves into exquisite tea with
-                time-honored techniques.
-              </p>
+              <div class="col-md-4">
+                <h3 class="mt-2">Harvest</h3>
+                <p class="mt-2">
+                  Harvest tea begins with cultivating tea plants under optimal conditions. Farmers hand-pick young leaves at peak seasons, which are then withered and oxidized or dried. Finally, the leaves are packaged to preserve their quality for consumers.              
+                </p>
+                <img src="layout/images/thu-hoach.jpg" alt="" class="img-fluid rounded" />
+              </div>
+              <div class="col-md-4">
+                <img src="layout/images/van-chuyen.jpg" alt="" class="img-fluid rounded" />
+                <h3 class="mt-2">Our Craftsmanship</h3>
+                <p class="mt-2">
+                  Transportation tea involves collecting high-quality leaves and processing them through drying and rolling. After packaging in airtight containers, logistics ensure timely delivery to retailers or consumers while maintaining quality control throughout the journey.             
+                </p>
+              </div>
             </div>
-          </div>
+          </section>
           <div class="text-center mt-5">
             <p class="lead">
-              Discover the soul of tea with Trang Tea - where tradition meets
-              taste.
+              Discover the soul of tea with Trang Tea - where tradition meets taste.
             </p>
           </div>
         </div>
