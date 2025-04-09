@@ -232,14 +232,14 @@ form h1.login {
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
 }
-label.form-label{
+label.form-label {
   display: block;
   margin-left: 510px;
   font-weight: bold;
   color: var(--color-forest-green);
   margin-top: 10px;
 }
-input.form-control{
+input.form-control {
   margin-left: 500px;
   width: 500px;
   height: auto;
@@ -249,26 +249,26 @@ input.form-control{
   color: var(--color-dark-olive);
   margin-right: 480px;
 }
-.text-end a:hover{
+.text-end a:hover {
   color: #86f71d;
 }
-.text-center a{
+.text-center a {
   color: var(--color-dark-olive);
 }
-.text-center a:hover{
+.text-center a:hover {
   color: #86f71d;
 }
 .login-btn {
   width: 400px;
   display: block;
-  margin: 0 auto; 
+  margin: 0 auto;
   background-color: #0d511d;
   color: white;
 }
 
 .login-btn:hover {
   background-color: #086b15;
-  color: #fdf751; 
+  color: #fdf751;
 }
 /* Style cho Sign up */
 form h1.sign-up {
@@ -281,14 +281,14 @@ form h1.sign-up {
 .signup-btn {
   width: 400px;
   display: block;
-  margin: 0 auto; 
+  margin: 0 auto;
   background-color: #0d511d;
   color: white;
 }
 
 .signup-btn:hover {
   background-color: #086b15;
-  color: #fdf751; 
+  color: #fdf751;
 }
 
 .form-check-input {
@@ -349,6 +349,7 @@ form h1.sign-up {
 .product-card {
   margin-bottom: 20px;
 }
+
 .filter-section {
   margin-bottom: 30px;
 }
@@ -369,6 +370,28 @@ form h1.sign-up {
 .card .card-img-top:hover {
   transform: scale(1.05);
   filter: brightness(110%);
+}
+
+.card-content {
+  padding: 15px;
+}
+.card-title {
+  font-size: 20px;
+  margin: 0;
+}
+.card-price {
+  color: #28a745;
+  font-size: 18px;
+  margin: 5px 0;
+}
+.card-description {
+  font-size: 14px;
+  color: #555;
+}
+.card-use {
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
 }
 
 .btn-success {

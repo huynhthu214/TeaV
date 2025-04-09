@@ -2,7 +2,21 @@
   $namePage = "Products";
   include "view/header.php";
 ?>
-  <main>
+
+<?php
+// Kết nối database
+$conn = mysqli_connect("localhost", "root", "", "teav_shop");
+
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+
+// Truy vấn tất cả sản phẩm
+$query = "SELECT * FROM products";
+$result = mysqli_query($conn, $query);
+?>
+
+<main>
     <section class="products py-5">
       <div class="container">
         <h1 class="text-center mb-4">Our Tea Products</h1>
@@ -47,104 +61,42 @@
 
         <!-- Product List -->
         <div class="row" id="productList">
-          <!-- Green Tea -->
-          <div
-            class="col-md-4 product-card"
-            data-type="green"
-            data-price="mid"
-            data-use="energy"
-          >
-            <div class="card">
-              <img
-                src="layout/images/d119b63b9bd8b731694dec72d8f09236.jpg"
-                class="card-img-top"
-                alt="Green Tea"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Premium Green Tea</h5>
-                <p class="card-text">
-                  <strong>Ingredients:</strong> Organic green tea leaves<br />
-                  <strong>Uses:</strong> Boosts energy, rich in
-                  antioxidants<br />
-                  <strong>Price:</strong> $15.00
-                </p>
+          <?php while ($product = mysqli_fetch_assoc($result)) { ?>
+            <div
+              class="col-md-4 product-card"
+              data-type="<?php echo strtolower($product['type']); ?>"
+              data-price="<?php echo ($product['price'] < 10 ? 'low' : ($product['price'] <= 20 ? 'mid' : 'high')); ?>"
+              data-use="<?php echo strtolower($product['usefor']); ?>"
+            >
+              <div class="card">
+                <img
+                  src="<?php echo $product['image']; ?>"
+                  class="card-img-top"
+                  alt="<?php echo $product['name']; ?>"
+                />
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo $product['name']; ?></h5>
+                  <p class="card-ingredients">Ingredients: <?php echo $product['ingredients']?></p>
+                  <p class="card-ingredients">Uses: <?php echo $product['ingredients']?></p>
+                  <p class="card-ingredients">Ingredients: <?php echo $product['ingredients']</p>
+                  <strong>Uses:</strong> <?php echo $product['usefor']; ?><br />
+                  <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
+                  <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Herbal Tea -->
-          <div
-            class="col-md-4 product-card"
-            data-type="herbal"
-            data-price="low"
-            data-use="relax"
-          >
-            <div class="card">
-              <img
-                src="layout/images/5837da289e09a37a3439e6c176ea6df7.jpg"
-                class="card-img-top"
-                alt="Chamomile Tea"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Chamomile Bliss</h5>
-                <p class="card-text">
-                  <strong>Ingredients:</strong> Chamomile flowers, lavender<br />
-                  <strong>Uses:</strong> Promotes relaxation and sleep<br />
-                  <strong>Price:</strong> $8.00
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Black Tea -->
-          <div
-            class="col-md-4 product-card"
-            data-type="black"
-            data-price="high"
-            data-use="energy"
-          >
-            <div class="card">
-              <img
-                src="layout/images/6a3771cc2b2e3f060e1e6fec7d60344c.jpg"
-                class="card-img-top"
-                alt="Black Tea"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Classic Black Tea</h5>
-                <p class="card-text">
-                  <strong>Ingredients:</strong> Assam black tea leaves<br />
-                  <strong>Uses:</strong> Enhances focus and energy<br />
-                  <strong>Price:</strong> $25.00
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Herbal Tea -->
-          <div
-            class="col-md-4 product-card"
-            data-type="herbal"
-            data-price="mid"
-            data-use="digestion"
-          >
-            <div class="card">
-              <img
-                src="layout/images/e89b1971d52f87f48259ad41d671f028.jpg"
-                class="card-img-top"
-                alt="Peppermint Tea"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Peppermint Refresh</h5>
-                <p class="card-text">
-                  <strong>Ingredients:</strong> Peppermint leaves, ginger<br />
-                  <strong>Uses:</strong> Aids digestion, refreshes<br />
-                  <strong>Price:</strong> $12.00
-                </p>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </section>
-  </main>
-    <!-- footer -->
+</main>
+
+<?php
+// Đóng kết nối
+mysqli_close($conn);
+?>
+
+<!-- footer -->
 <?php 
     include "view/footer.php";
 ?>
