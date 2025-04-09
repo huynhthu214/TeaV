@@ -6,7 +6,7 @@
     <!-- Register -->
     <div class="container form-box-sign mt-5">
     <form method="post">
-      <h1 class="login text-center mb-4">Sign up</h1>
+      <h1 class="signup text-center mb-4">Sign up</h1>
 
       <div class="mb-3">
         <label for="full-name" class="form-label">Full name</label>
@@ -38,7 +38,7 @@
         <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password" />
       </div>
 
-      <div class="mb-3">
+      <div class="form-check mb-3">
         <input type="checkbox" class="form-check-input" id="terms" />
         <label class="form-check-label" for="terms">
           By continuing to sign up, I confirm that I have read and agree to
