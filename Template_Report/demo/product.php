@@ -76,11 +76,11 @@ $result = mysqli_query($conn, $query);
                 />
                 <div class="card-body">
                   <h5 class="card-title"><?php echo $product['name']; ?></h5>
-                  <p class="card-ingredients">Ingredients: <?php echo $product['ingredients']?></p>
-                  <p class="card-ingredients">Uses: <?php echo $product['ingredients']?></p>
-                  <p class="card-ingredients">Ingredients: <?php echo $product['ingredients']</p>
-                  <strong>Uses:</strong> <?php echo $product['usefor']; ?><br />
-                  <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
+                  <p class="card-text">
+                    <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
+                    <strong>Uses:</strong> <?php echo $product['usefor']; ?><br />
+                    <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
+                  </p>
                   <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>
                 </div>
               </div>
