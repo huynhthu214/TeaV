@@ -27,6 +27,9 @@
           </div>
         </div>
       </section>
+      <section>
+        <h1 class="prd">Product</h1>
+      </section>
     </main>
 <?php 
     include "view/footer.php";

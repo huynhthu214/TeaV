@@ -264,13 +264,13 @@ footer .social-links a {
 }
 
 .login-btn,
-.signup-btn {
+.signup-btn, .forgot-btn {
   width: 100%;
   max-width: 400px;
   display: block;
   margin: 0 auto;
-  background-color: #0d511d;
-  color: white;
+  background-color: #03423b; /* màu nền nút login */
+  color: white; /* màu chữ */
   border: none;
   padding: 10px 0;
   border-radius: 8px;
@@ -278,7 +278,7 @@ footer .social-links a {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.login-btn:hover {
+.login-btn:hover , .signup-btn:hover, .forgot-btn:hover{
   background-color: #086b15;
   color: #fdf751;
 }
