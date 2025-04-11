@@ -285,7 +285,13 @@ footer .social-links a {
   background-color: #086b15;
   color: #fdf751;
 }
-
+/* Style cho Home*/
+section .product, section .blog, section .about{
+  margin-left:100px;
+  color: #03423b;
+  font-weight: bold;
+  margin-top: 30px;
+}
 /* Style cho Sign up*/
 
 .signup-btn:hover {

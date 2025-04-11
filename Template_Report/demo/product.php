@@ -12,7 +12,7 @@ if (!$conn) {
 }
 
 // Truy vấn tất cả sản phẩm
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM Product";
 $result = mysqli_query($conn, $query);
 ?>
 
