@@ -1,19 +1,20 @@
 <?php
-  $namePage = "Products";
-  include "view/header.php";
-?>
+$namePage = "Products";
+include "view/header.php";
 
-<?php
-// Kết nối database
 $conn = mysqli_connect("localhost", "root", "", "teav_shop");
 
 if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
-
-// Truy vấn tất cả sản phẩm
-$query = "SELECT * FROM Product";
+$query = "SELECT ProductId AS id, Name AS name, Price AS price, ImgUrl AS image, Type AS type,   Ingredients AS ingredients, Usefor AS usefor 
+          FROM Product 
+          WHERE Status = 'Available'";
 $result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
 ?>
 
 <main>
@@ -38,7 +39,8 @@ $result = mysqli_query($conn, $query);
                 <option value="green">Green Tea</option>
                 <option value="herbal">Herbal Tea</option>
                 <option value="black">Black Tea (Spiced)</option>
-                <option value="oolong">Oolong tea</option>
+                <option value="blacktea">Black Tea</option>
+                <option value="oolong">Oolong Tea</option>
               </select>
             </div>
             <div class="col-md-2">
@@ -58,19 +60,39 @@ $result = mysqli_query($conn, $query);
               </select>
             </div>
             <div class="col-md-2">
-              <button class="btn btn-primary" type="button">Search</button>
+              <button class="btn btn-primary" id="searchButton" type="button">Search</button>
             </div>
           </div>
         </div>
 
         <!-- Product List -->
         <div class="row" id="productList">
-          <?php while ($product = mysqli_fetch_assoc($result)) { ?>
+          <?php while ($product = mysqli_fetch_assoc($result)) { 
+            $useCategory = 'energy'; 
+            $useforLower = strtolower($product['usefor']);
+            if (strpos($useforLower, 'relax') !== false || strpos($useforLower, 'sleep') !== false || 
+                strpos($useforLower, 'unwind') !== false || strpos($useforLower, 'calm') !== false || 
+                strpos($useforLower, 'soothe') !== false) {
+                $useCategory = 'relax';
+            } elseif (strpos($useforLower, 'warm') !== false || strpos($useforLower, 'digestion') !== false || 
+                     strpos($useforLower, 'cozy') !== false || strpos($useforLower, 'healthy') !== false) {
+                $useCategory = 'digestion';
+            }
+          ?>
             <div
               class="col-md-4 product-card"
-              data-type="<?php echo strtolower($product['type']); ?>"
-              data-price="<?php echo ($product['price'] < 20 ? 'low' : ($product['price'] <= 30 ? 'mid' : 'high')); ?>"
-              data-use="<?php echo strtolower($product['usefor']); ?>"
+              data-type="<?php 
+                $type = strtolower($product['type']);
+                if (strpos($type, 'green') !== false) echo 'green';
+                elseif (strpos($type, 'herbal') !== false) echo 'herbal';
+                elseif (strpos($type, 'black tea (spiced)') !== false) echo 'black';
+                elseif (strpos($type, 'black tea') !== false) echo 'blacktea';
+                elseif (strpos($type, 'oolong') !== false) echo 'oolong';
+              ?>"
+              data-price="<?php 
+                echo ($product['price'] < 30 ? 'low' : ($product['price'] <= 40 ? 'mid' : 'high')); 
+              ?>"
+              data-use="<?php echo $useCategory; ?>"
             >
               <div class="card">
                 <img
@@ -93,13 +115,3 @@ $result = mysqli_query($conn, $query);
       </div>
     </section>
 </main>
-
-<?php
-// Đóng kết nối
-mysqli_close($conn);
-?>
-
-<!-- footer -->
-<?php 
-    include "view/footer.php";
-?>

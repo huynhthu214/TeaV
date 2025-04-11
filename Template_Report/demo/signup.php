@@ -42,7 +42,7 @@
         <input type="checkbox" class="form-check-input" id="terms" />
         <label class="form-check-label" for="terms">
           By continuing to sign up, I confirm that I have read and agree to
-          <a href="term.php" target="_blank">Terms & Conditions</a> of TeaV.
+          <a href="term.php" target="_blank" style="color:rgb(3, 184, 54); text-decoration: underline">Terms & Conditions</a> of TeaV.
         </label>
       </div>
 

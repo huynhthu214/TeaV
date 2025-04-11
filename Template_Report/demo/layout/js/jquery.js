@@ -32,50 +32,44 @@ document.getElementById("quantity").addEventListener("input", function () {
   }
 });
 
-const searchInput = document.getElementById("searchInput");
-const herbalFilter = document.getElementById("herbalFilter");
-const priceFilter = document.getElementById("priceFilter");
-const useFilter = document.getElementById("useFilter");
-const productList = document.getElementById("productList");
-const productCards = productList.getElementsByClassName("product-card");
+document.getElementById("searchButton").addEventListener("click", function () {
+  const searchValue = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
+  const herbalFilter = document.getElementById("herbalFilter").value;
+  const priceFilter = document.getElementById("priceFilter").value;
+  const useFilter = document.getElementById("useFilter").value;
 
-function applyFilters() {
-  const searchText = searchInput.value.toLowerCase();
-  const herbalValue = herbalFilter.value;
-  const priceValue = priceFilter.value;
-  const useValue = useFilter.value;
+  const productCards = document.querySelectorAll(".product-card");
 
-  for (let i = 0; i < productCards.length; i++) {
-    const card = productCards[i];
-    const cardTitle = card
-      .querySelector(".card-title")
-      .textContent.toLowerCase();
-    const herbalType = card.getAttribute("data-type") || "";
-    const price = card.getAttribute("data-price") || "";
-    const useType = card.getAttribute("data-use") || "";
-    const matchesSearch = cardTitle.includes(searchText);
-    const matchesHerbal = !herbalValue || herbalType === herbalValue;
-    let matchesPrice = true;
-    if (priceValue) {
-      if (priceValue === "low" && price !== "low") matchesPrice = false;
-      else if (priceValue === "mid" && price !== "mid") matchesPrice = false;
-      else if (priceValue === "high" && price !== "high") matchesPrice = false;
+  productCards.forEach((card) => {
+    const name = card.querySelector(".card-title").textContent.toLowerCase();
+    const type = card.getAttribute("data-type");
+    const price = card.getAttribute("data-price");
+    const use = card.getAttribute("data-use");
+
+    const matchesSearch = searchValue === "" || name.includes(searchValue);
+    const matchesHerbal = herbalFilter === "" || type === herbalFilter;
+    const matchesPrice = priceFilter === "" || price === priceFilter;
+    const matchesUse = useFilter === "" || use === useFilter;
+
+    if (matchesSearch && matchesHerbal && matchesPrice && matchesUse) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
     }
+  });
+});
 
-    const matchesUse = !useValue || useType === useValue;
-
-    card.style.display =
-      matchesSearch && matchesHerbal && matchesPrice && matchesUse
-        ? ""
-        : "none";
-  }
-}
-
-// Add event listeners to all filter inputs
-searchInput.addEventListener("keyup", applyFilters);
-herbalFilter.addEventListener("change", applyFilters);
-priceFilter.addEventListener("change", applyFilters);
-useFilter.addEventListener("change", applyFilters);
-
-// Initial filter application
-applyFilters();
+document.getElementById("searchInput").addEventListener("input", function () {
+  document.getElementById("searchButton").click();
+});
+document.getElementById("herbalFilter").addEventListener("change", function () {
+  document.getElementById("searchButton").click();
+});
+document.getElementById("priceFilter").addEventListener("change", function () {
+  document.getElementById("searchButton").click();
+});
+document.getElementById("useFilter").addEventListener("change", function () {
+  document.getElementById("searchButton").click();
+});
