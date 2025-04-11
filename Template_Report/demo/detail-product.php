@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-6">
           <div class="delivery-notice mb-3 p-2 bg-light text-success fw-bold">
-            Free US Delivery on US Orders Over $35
+            Free Vietnam Delivery on Vietnam Orders Over $35
           </div>
           
           

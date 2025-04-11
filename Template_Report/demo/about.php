@@ -7,13 +7,13 @@
     <main>
       <section class="about-us py-5">
         <div class="container">
-          <h1 class="text-center mb-4">About Trang Tra</h1>
+          <h1 class="text-center mb-4">About TeaV</h1>
           <section class="section-1">
           <div class="row py-5">
             <div class="col-md-6">
               <h3>Our History</h3>
               <p>
-                Trang Tra was founded in 2015 with a deep passion for tea, born
+                TeaV was founded in 2015 with a deep passion for tea, born
                 from the lush green tea fields of Vietnam. What started as a
                 small family venture has grown into a brand dedicated to sharing
                 the finest teas with the world. Our journey is rooted in
@@ -62,7 +62,7 @@
           </section>
           <div class="text-center mt-5">
             <p class="lead">
-              Discover the soul of tea with Trang Tea - where tradition meets taste.
+              Discover the soul of tea with TeaV - where tradition meets taste.
             </p>
           </div>
         </div>

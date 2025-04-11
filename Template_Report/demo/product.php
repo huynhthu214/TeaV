@@ -32,15 +32,16 @@ $result = mysqli_query($conn, $query);
                 placeholder="Search by name..."
               />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <select class="form-select" id="herbalFilter">
                 <option value="">Filter by Herbal Type</option>
                 <option value="green">Green Tea</option>
                 <option value="herbal">Herbal Tea</option>
-                <option value="black">Black Tea</option>
+                <option value="black">Black Tea (Spiced)</option>
+                <option value="oolong">Oolong tea</option>
               </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <select class="form-select" id="priceFilter">
                 <option value="">Filter by Price</option>
                 <option value="low">Under $30</option>
@@ -56,6 +57,9 @@ $result = mysqli_query($conn, $query);
                 <option value="digestion">Digestion</option>
               </select>
             </div>
+            <div class="col-md-2">
+              <button class="btn btn-primary" type="button">Search</button>
+            </div>
           </div>
         </div>
 
@@ -65,7 +69,7 @@ $result = mysqli_query($conn, $query);
             <div
               class="col-md-4 product-card"
               data-type="<?php echo strtolower($product['type']); ?>"
-              data-price="<?php echo ($product['price'] < 10 ? 'low' : ($product['price'] <= 20 ? 'mid' : 'high')); ?>"
+              data-price="<?php echo ($product['price'] < 20 ? 'low' : ($product['price'] <= 30 ? 'mid' : 'high')); ?>"
               data-use="<?php echo strtolower($product['usefor']); ?>"
             >
               <div class="card">
@@ -78,7 +82,6 @@ $result = mysqli_query($conn, $query);
                   <h5 class="card-title"><?php echo $product['name']; ?></h5>
                   <p class="card-text">
                     <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
-                    <strong>Uses:</strong> <?php echo $product['usefor']; ?><br />
                     <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
                   </p>
                   <a href="detail-product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>

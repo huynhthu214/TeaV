@@ -264,7 +264,8 @@ footer .social-links a {
 }
 
 .login-btn,
-.signup-btn, .forgot-btn {
+.signup-btn,
+.forgot-btn {
   width: 100%;
   max-width: 400px;
   display: block;
@@ -278,7 +279,9 @@ footer .social-links a {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.login-btn:hover , .signup-btn:hover, .forgot-btn:hover{
+.login-btn:hover,
+.signup-btn:hover,
+.forgot-btn:hover {
   background-color: #086b15;
   color: #fdf751;
 }
@@ -361,8 +364,8 @@ footer .social-links a {
 }
 
 .card {
-  width: 100%;
-  height: 475px;
+  width: 90%;
+  height: 400px;
 }
 
 .card .card-img-top {
