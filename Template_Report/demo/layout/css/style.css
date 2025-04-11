@@ -147,7 +147,7 @@ button#addItem {
   padding: 8px 16px;
   font-size: 16px;
   color: #004d08;
-  background-color: #03ff688d;
+  background-color: #77ad80;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -155,7 +155,7 @@ button#addItem {
 }
 
 button#addItem:hover {
-  background-color: #005d14;
+  background-color: #024410;
   color: var(--color-light-brown);
 }
 

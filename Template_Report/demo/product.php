@@ -115,3 +115,7 @@ if (!$result) {
       </div>
     </section>
 </main>
+<!-- footer -->
+<?php
+  include "view/footer.php";
+?>
