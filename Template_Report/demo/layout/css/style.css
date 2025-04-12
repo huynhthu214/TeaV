@@ -612,3 +612,30 @@ button.add-to-cart {
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
 }
+/* --- Home Product --- */
+
+.product-card-home {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* ↓ giảm nếu muốn sát hơn, ví dụ 5px */
+  justify-content: center;
+}
+
+.product-card-home .card {
+  width: 300px;
+  height: 350px;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0; /* Xoá mọi margin dư thừa */
+}
+
+@media (max-width: 768px) {
+  .product-card-home {
+    justify-content: center;
+  }
+
+  .product-card-home .card {
+    width: 90%;
+  }
+}

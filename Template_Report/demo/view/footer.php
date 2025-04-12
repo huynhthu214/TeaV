@@ -16,8 +16,8 @@
           </div>
           <div class="col-md-4">
             <h5>Follow Us</h5>
-            <a href="#" class="text-light me-2">Facebook</a>
-            <a href="#" class="text-light me-2">Instagram</a>
+            <a href="https://www.facebook.com/profile.php?id=61574969201523" class="text-light me-2">Facebook</a>
+            <a href="https://www.instagram.com/" class="text-light me-2">Instagram</a>
             <a href="https://www.youtube.com/watch?v=_uns7Nm2d2c" class="text-light">YouTube</a>
           </div>
         </div>
