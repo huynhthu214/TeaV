@@ -69,7 +69,7 @@
         <div>
           <button>
             <i class="bi bi-cart"></i>
-            <span id="cartCount" class="badge">0</span>
+            <span id="cartCount" class="badge" href="cart.html">0</span>
           </button>
         </div>
       </div>
