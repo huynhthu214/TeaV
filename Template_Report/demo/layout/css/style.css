@@ -606,3 +606,11 @@ section .about {
 }
 
 /* Style for card */
+.title-cart {
+  background-image: url('/layout/images/background-about.jpg');
+  background-size: cover;      
+  background-repeat: no-repeat;  
+  font-size: 2.5rem;
+  color: var(--color-forest-green);
+  font-family: "Gravitas One", serif;           
+}
