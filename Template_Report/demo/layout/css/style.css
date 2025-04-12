@@ -541,6 +541,7 @@ section .about {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 576px) {
   button,
   button#addItem,
@@ -564,3 +565,14 @@ section .about {
     padding: 0 15px;
   }
 }
+=======
+/* Style for card */
+.title-cart {
+  background-image: url('/layout/images/background-about.jpg');
+  background-size: cover;      
+  background-repeat: no-repeat;  
+  font-size: 2.5rem;
+  color: var(--color-forest-green);
+  font-family: "Gravitas One", serif;           
+}
+>>>>>>> b61f6bbd1ab23820226a94fc7a9ffe34f9850885
