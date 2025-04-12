@@ -1,22 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&family=WindSong:wght@400;500&display=swap");
+
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Lora", sans-serif;
 }
+
 :root {
-  /* Color */
+  /* Colors */
   --color-dark-olive: #3e401f;
   --color-forest-green: #0d371e;
   --color-muted-green: #508e42;
   --color-sage-green: #daff8f;
-
   --color-light-mint: #fdf751;
   --color-mint-green: #b5f4a6;
   --color-lime-pastel: #e9f2a7;
   --color-light-brown: #edfcdc;
-
   --color-bg-light: #9ed6ba;
   --color-bg-dark: #5a8279;
 
@@ -47,12 +48,12 @@
   --border-radius-xxl: 32px;
 
   /* Spacing */
-  --spacing-xs: 0.25rem; /* 4px */
-  --spacing-s: 0.5rem; /* 8px */
-  --spacing-m: 1rem; /* 16px */
-  --spacing-l: 1.5rem; /* 24px */
-  --spacing-xl: 2rem; /* 32px */
-  --spacing-xxl: 3rem; /* 48px */
+  --spacing-xs: 0.25rem;
+  --spacing-s: 0.5rem;
+  --spacing-m: 1rem;
+  --spacing-l: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
 
   /* Site Dimensions */
   --site-max-width: 1300px;
@@ -69,37 +70,42 @@
 ul {
   list-style: none;
 }
+
 a {
   text-decoration: none;
 }
+
 button {
   cursor: pointer;
   border: none;
   background: none;
 }
+
 img {
   width: 100%;
 }
 
+/* Layout */
 .section-content {
   margin: -10px auto;
   padding: 0 20px;
   max-width: var(--site-max-width);
 }
 
+/* Header */
 header {
-  /* position: fixed; */
   width: 100%;
   z-index: 5;
-  /* height: 70px; */
-  background-color: #0d371e;
+  background-color: var(--color-forest-green);
 }
+
 header .navbar {
   display: flex;
   padding: 20px;
   align-items: center;
   justify-content: space-between;
 }
+
 .navbar .navbar-item {
   display: flex;
   gap: 10px;
@@ -112,23 +118,22 @@ header .navbar {
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-semibold);
 }
+
 .nav-link {
   padding: 10px 18px;
   color: var(--color-bg-light);
   border-radius: var(--border-radius-m);
   font-size: var(--font-size-l);
-  transition: 0.3s ease;
-  align-items: center;
+  transition: color 0.3s ease;
 }
-.nav-link.active {
-  color: #fcfcfc !important;
+
+.nav-link.active,
+.nav-link:focus {
+  color: #fcfcfc;
 }
 
 .nav-link:hover {
   color: var(--color-light-mint);
-}
-.nav-link:focus {
-  color: #fcfcfc !important;
 }
 
 button i.bi-cart {
@@ -136,52 +141,85 @@ button i.bi-cart {
   color: white;
 }
 
-/* Style cho badge */
 span#cartCount.badge {
   color: white;
   padding: 3px 0.5px;
   font-size: 10px;
 }
 
-button#addItem {
-  padding: 8px 16px;
-  font-size: 16px;
-  color: #004d08;
-  background-color: #77ad80;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button#addItem:hover {
-  background-color: #024410;
-  color: var(--color-light-brown);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-@media (max-width: 576px) {
-  button {
-    padding: 6px 12px;
-    font-size: 14px;
-  }
-  button i.bi-cart {
-    font-size: 16px;
-  }
-}
-
 span#cartCount.badge:empty {
   display: none;
 }
 
+/* Buttons */
+button#addItem,
+.add-to-cart {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #004d08;
+  background-color: #77ad80;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button#addItem:hover,
+.add-to-cart:hover {
+  background-color: #024410;
+  color: var(--color-light-brown);
+}
+
+.btn-primary {
+  background-color: #16a085;
+  border: none;
+  padding: 10px 24px;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #138a72;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+  background-color: #add4ae;
+  color: #03423d;
+  border: none;
+  transition: background-color 0.5s;
+}
+
+.btn-success:hover {
+  background-color: #03423b;
+}
+
+.login-btn,
+.signup-btn,
+.forgot-btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #03423b;
+  color: white;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-btn:hover,
+.signup-btn:hover,
+.forgot-btn:hover {
+  background-color: #086b15;
+  color: #fdf751;
+}
+
+/* Hero Section */
 .hero-section {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
+
 .hero-section .section-content {
   display: flex;
   align-items: center;
@@ -189,6 +227,7 @@ span#cartCount.badge:empty {
   color: var(--color-light-brown);
   justify-content: space-between;
 }
+
 .hero-video-background {
   position: absolute;
   top: 50%;
@@ -198,10 +237,11 @@ span#cartCount.badge:empty {
   width: auto;
   height: auto;
   z-index: -1;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translate(-50%, -50%);
   background-size: cover;
   filter: brightness(60%);
 }
+
 .hero-details .title {
   font-size: 5rem;
   color: var(--color-light-mint);
@@ -219,15 +259,18 @@ span#cartCount.badge:empty {
   font-size: var(--font-size-l);
   line-height: 1.6;
 }
+
 .hero-details .buttons .button-order-now {
   color: var(--color-bg-light);
   font-size: var(--font-size-l);
+  transition: color 0.3s;
 }
 
 .hero-details .buttons .button-order-now:hover {
   color: var(--color-light-mint);
 }
 
+/* Footer */
 footer {
   background-color: var(--color-forest-green);
   color: var(--color-light-brown);
@@ -257,22 +300,21 @@ footer .col-md-4 {
 
 footer a {
   color: #ecf0f1;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 footer a:hover {
   color: #3498db;
-  text-decoration: none;
 }
 
 footer .social-links a {
   margin-right: 15px;
   font-size: 18px;
   opacity: 0.7;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
 }
-/* Style cho Login form, Sign up form, Forgot Password */
+
+/* Forms */
 .form-label {
   display: block;
   font-weight: bold;
@@ -284,6 +326,7 @@ footer .social-links a {
 .text-end a,
 .text-center a {
   color: var(--color-dark-olive);
+  transition: color 0.3s;
 }
 
 .text-end a:hover,
@@ -310,60 +353,33 @@ footer .social-links a {
   padding: 30px;
 }
 
-.login-btn,
-.signup-btn,
-.forgot-btn {
-  width: 100%;
-  max-width: 400px;
-  display: block;
-  margin: 0 auto;
-  background-color: #03423b; /* màu nền nút login */
-  color: white; /* màu chữ */
-  border: none;
-  padding: 10px 0;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.form-check-label,
+.form-check-input {
+  vertical-align: middle;
 }
 
-.login-btn:hover,
-.signup-btn:hover,
-.forgot-btn:hover {
-  background-color: #086b15;
-  color: #fdf751;
+.form-check-input {
+  margin-top: 0.2rem;
 }
-/* Style cho Home*/
+
+/* Sections */
 section .product,
 section .blog,
 section .about {
-  margin-left: 100px;
+  margin: 30px 0 0 100px;
   color: #03423b;
   font-weight: bold;
-  margin-top: 30px;
 }
-/* Style cho Sign up*/
 
-.signup-btn:hover {
-  background-color: #086b15;
-  color: #fdf751;
-}
-.form-check-label {
-  vertical-align: middle;
-}
-.form-check-input {
-  margin-top: 0.2rem;
-  vertical-align: middle;
-}
-/* Style cho section About Us */
 .about-us {
   padding: 300px 0;
 }
 
-/* .about-us .section-1 {
-  background-image: ;
-} */
-
-.about-us h1 {
+.about-us h1,
+.products h1,
+.blog h1,
+.term h1,
+.product-detail h1 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
@@ -376,20 +392,11 @@ section .about {
   margin-bottom: 15px;
 }
 
-.about-us p {
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.6;
-}
-
-.about-us ul {
-  list-style: none;
-  padding-left: 0;
-}
-
+.about-us p,
 .about-us ul li {
   font-size: 1rem;
   color: #333;
+  line-height: 1.6;
   margin-bottom: 10px;
 }
 
@@ -403,19 +410,13 @@ section .about {
   font-style: italic;
 }
 
-/* Style for products */
-
+/* Product Cards */
 .product-card {
   margin-bottom: 20px;
 }
+
 .filter-section {
   margin-bottom: 30px;
-}
-
-.products h1 {
-  font-size: 2.5rem;
-  color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
 }
 
 .card {
@@ -427,7 +428,7 @@ section .about {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: transform 0.3s, filter 0.3s;
 }
 
 .card .card-img-top:hover {
@@ -435,30 +436,7 @@ section .about {
   filter: brightness(110%);
 }
 
-.btn-success {
-  background-color: #add4ae;
-  color: #03423d;
-  transition: 0.5s;
-  border: none;
-}
-
-.btn-success:hover {
-  background-color: #03423b;
-}
-
-.blog h1 {
-  font-size: 2.5rem;
-  color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
-}
-
-/* Style for term */
-.term h1 {
-  font-size: 2.5rem;
-  color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
-}
-
+/* Terms */
 .term h5 {
   font-family: "Pacifico", serif;
   font-size: var(--font-size-xxl);
@@ -470,12 +448,12 @@ section .about {
   color: var(--color-forest-green);
 }
 
-.term p {
+.term p,
+.term li {
   font-size: var(--font-size-l);
 }
 
 .term li {
-  font-size: var(--font-size-l);
   padding-left: var(--spacing-l);
 }
 
@@ -483,20 +461,10 @@ section .about {
   margin: 20px 0;
 }
 
-.table-of-contents ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.table-of-contents li {
-  margin: 8px 0;
-}
-
 .table-of-contents a {
   font-size: var(--font-size-m);
   color: var(--color-dark-olive);
-  text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .table-of-contents a:hover {
@@ -508,7 +476,7 @@ section .about {
   color: #14a600;
 }
 
-/* detail product */
+/* Product Detail */
 .product-detail h1 {
   font-family: "Pacifico", serif;
   font-size: 1.5cm;
@@ -517,7 +485,6 @@ section .about {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* CSS cho carousel hình ảnh */
 .product-detail .carousel-item img {
   width: 100%;
   height: 500px;
@@ -530,6 +497,7 @@ section .about {
   color: #0d371e;
   text-decoration: underline;
   font-weight: var(--font-weight-bold);
+  transition: color 0.3s, transform 0.3s;
 }
 
 .product-detail .back:hover {
@@ -537,8 +505,9 @@ section .about {
   transform: translateY(-2px);
 }
 
-.d-flex.gap-2.mb-4 {
-  align-items: center;
+.product-detail p {
+  margin-bottom: 12px;
+  line-height: 1.6;
 }
 
 .quantity-selector .input-group {
@@ -555,46 +524,13 @@ section .about {
   line-height: 48px;
 }
 
-@media (max-width: 576px) {
-  .quantity-selector .form-control,
-  button.add-to-cart {
-    height: 40px;
-    font-size: 14px;
-    line-height: 40px;
-  }
-  button.add-to-cart {
-    padding: 0 15px;
-  }
-}
-
-/* CSS cho các chi tiết sản phẩm */
-.product-detail p {
-  margin-bottom: 12px;
-  line-height: 1.6;
-}
-
-/* CSS cho các nút */
-.btn-primary {
-  background-color: #16a085;
-  border-color: #16a085;
-  padding: 10px 24px;
-  transition: all 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #138a72;
-  border-color: #138a72;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .carousel-control-prev,
 .carousel-control-next {
   opacity: 0.5;
-  transition: all 0.3s;
+  transition: opacity 0.3s;
 }
 
-/* Thiết lập responsive */
+/* Responsive */
 @media (max-width: 768px) {
   .product-detail h1 {
     font-size: 1cm;
@@ -605,4 +541,26 @@ section .about {
   }
 }
 
-/* Style for card */
+@media (max-width: 576px) {
+  button,
+  button#addItem,
+  .add-to-cart {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  button i.bi-cart {
+    font-size: 16px;
+  }
+
+  .quantity-selector .form-control,
+  .add-to-cart {
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+
+  .add-to-cart {
+    padding: 0 15px;
+  }
+}
