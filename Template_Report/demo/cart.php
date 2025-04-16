@@ -64,8 +64,7 @@ if (!$result) {
         </table>
         <div class="total">Total: <span id="total">$0.00</span></div>
         <div class="col">
-          <textarea name="coupon" id="coupon" placeholder="Coupon code"></textarea>
-          <button class="checkout-btn">Proceed to Payment</button>
+          <a href="payment.php" class="checkout-btn">Proceed to Payment</a>
         </div>
      </div>
 <?php 
