@@ -389,12 +389,21 @@ footer .social-links a {
 }
 
 /* Sections */
-section .product,
-section .blog,
-section .about {
-  margin: 30px 0 0 100px;
+.product-section,
+.blogs-section,
+.about-section {
+  margin: 30px 0 0 80px;
   color: #03423b;
   font-weight: bold;
+}
+h2.fw-bold.mb-3{
+color: orange;
+margin-top: -100px;
+}
+
+button .btn-primary.fw-bold{
+  justify-items: center;
+  align-items: center;
 }
 
 .about-us {
@@ -410,6 +419,11 @@ section .about {
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
 }
+
+.product-section {
+  margin-top: -70px;
+}
+
 
 .about-us h3 {
   font-size: 1.5rem;
@@ -435,14 +449,21 @@ section .about {
   color: var(--color-dark-olive);
   font-style: italic;
 }
+/* Product Cards Home */
+.product-card-home {
+  margin-top: 20px;
+  justify-items: center;
+}
 
 /* Product Cards */
 .product-card {
   margin-bottom: 20px;
+  justify-items: center;
 }
 
 .filter-section {
   margin-bottom: 30px;
+  justify-items: center;
 }
 
 .card {
