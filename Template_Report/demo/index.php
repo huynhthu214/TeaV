@@ -28,6 +28,9 @@
         </div>
       </section>
       <section>
+        <h2 class="about">About</h2>
+      </section>
+      <section>
         <h2 class="product">Products</h2>
         <div class="row" id="productList">
   
@@ -126,9 +129,7 @@
       <section>
         <h2 class="blog">Blogs</h2>
       </section>
-      <section>
-        <h2 class="about">About</h2>
-      </section>
+      
     </main>
 <?php 
     include "view/footer.php";
