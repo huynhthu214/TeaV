@@ -44,7 +44,7 @@
         <a href="forgotpwd.php" id="forgotPassword" class="text-decoration-none">Forgot Password?</a>
       </div>
 
-      <button type="submit" class="btn login-btn">Login</button>
+      <button type="submit" class="btn btn-outline-primary">Login</button>
 
       <div class="text-center mt-3">
         <p>Don't have an account? <a href="signup.php" id="openRegisterModal">Sign Up</a></p>

@@ -375,6 +375,18 @@ footer .social-links a {
 .form-check-input {
   margin-top: 0.2rem;
 }
+.btn-outline-primary{
+  background-color: #004d08;
+  align-items: center;
+  width: 400px;
+  transition: all 0.2s ease;
+}
+.btn-outline-primary:hover{
+  background-color: #086b15;
+}
+.btn-outline-primary:active {
+  background-color: #508e42 !important; 
+}
 
 /* Sections */
 section .product,
