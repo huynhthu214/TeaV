@@ -1,7 +1,15 @@
    <?php
       $namePage = "Home";
       include "view/header.php";
-    ?>
+    
+    // require_once('db/product_db.php'); 
+    // session_start();
+    // if (!isset($_SESSION['user'])) {
+    //     header('Location: login.php');
+    //     exit();
+    // }
+?>
+
     <main>
       <section class="hero-section">
         <video autoplay loop muted class="hero-video-background">
