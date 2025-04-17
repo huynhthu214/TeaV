@@ -349,7 +349,7 @@ footer .social-links a {
 
 .login,
 .signup,
-.forgotpwd {
+.forgotpwd, .reset {
   font-size: 2.5rem;
   font-family: "Gravitas One", serif;
   color: #0d511d;
@@ -358,7 +358,7 @@ footer .social-links a {
 /* Khung form */
 .form-box,
 .form-box-sign,
-.form-box-forgot {
+.form-box-forgot, .form-box-reset {
   width: 100%;
   max-width: 450px;
   background-color: #ffffff;
@@ -374,6 +374,18 @@ footer .social-links a {
 
 .form-check-input {
   margin-top: 0.2rem;
+}
+.btn-outline-primary{
+  background-color: #004d08;
+  align-items: center;
+  width: 400px;
+  transition: all 0.2s ease;
+}
+.btn-outline-primary:hover{
+  background-color: #086b15;
+}
+.btn-outline-primary:active {
+  background-color: #508e42 !important; 
 }
 
 /* Sections */

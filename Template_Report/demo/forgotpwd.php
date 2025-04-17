@@ -16,7 +16,7 @@
                 placeholder="Enter your email"
                 required />
         </div>
-        <button type="submit" class="btn signup-btn">Send code</button>
+        <button type="submit" class="btn btn-outline-primary">Send code</button>
         <div class="text-center mt-3">
             <a href="login.php" class="text-decoration-none">Back to login</a>
         </div>

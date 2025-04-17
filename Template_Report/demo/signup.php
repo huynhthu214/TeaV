@@ -46,7 +46,7 @@
         </label>
       </div>
 
-      <button type="submit" class="btn signup-btn">Sign up</button>
+      <button type="submit" class="btn btn-outline-primary">Sign up</button>
 
       <div class="text-center mt-3">
         <p>
