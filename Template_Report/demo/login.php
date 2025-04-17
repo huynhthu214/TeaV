@@ -2,26 +2,55 @@
 <?php 
     $namePage = "Login";
     include "view/header.php";
-   /*  require_once 'config.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+    $conn = mysqli_connect("localhost", "root", "", "teav_shop");
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
+    if (!$conn) {
+        die("Kết nối thất bại: " . mysqli_connect_error());
+    }
+    $query = "SELECT CustomerId AS id, FirstName AS fname, LastName AS lname, Email AS email, Password AS password, Adress AS adress, RegistrationDate AS regis_date 
+              FROM Customer
+              WHERE Status = 'Available'";
+    $result = mysqli_query($conn, $query);
 
-        if ($user && password_verify($password, $user['password'])) {
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            header("Location: index.php");
-            exit;
-        } else {
-            echo "<div class='alert alert-danger text-center'>Email hoặc mật khẩu không đúng!</div>";
-        }
-    } */
+    if (!$result) {
+        die("Kết nối thất bại: " . mysqli_error($conn));
+    }
+
+    // require_once('db/account_db.php');
+    // session_start();
+    // if (isset($_SESSION['user'])) {
+    //     header('Location: index.php');
+    //     exit();
+    // }
+
+    // $error = '';
+
+    // $user = '';
+    // $pass = '';
+
+    // if (isset($_POST['user']) && isset($_POST['pass'])) {
+    //     $user = $_POST['user'];
+    //     $pass = $_POST['pass'];
+
+    //     if (empty($user)) {
+    //         $error = 'Please enter your username';
+    //     }
+    //     else if (empty($pass)) {
+    //         $error = 'Please enter your password';
+    //     }
+    //     else if (strlen($pass) < 6) {
+    //         $error = 'Password must have at least 6 characters';
+    //     }else{
+    //         $result = login($user, $pass);
+    //         if(gettype($result) == 'boolean'){
+    //             $_SESSION['user'] = 'admin';
+    //             $_SESSION['name'] = 'Mai Van Manh';
+
+    //         }
+    //     }
+    //   }
+
 ?>
 
 

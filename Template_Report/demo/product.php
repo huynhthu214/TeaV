@@ -13,7 +13,7 @@ $query = "SELECT ProductId AS id, Name AS name, Price AS price, ImgUrl AS image,
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-    die("Query failed: " . mysqli_error($conn));
+    die("Kết nối thất bại: " . mysqli_error($conn));
 }
 ?>
 
