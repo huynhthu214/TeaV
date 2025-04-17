@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/17/2025 11:55:38 PM                        */
+/* Created on:     4/18/2025 12:30:48 AM                        */
 /*==============================================================*/
 
 
@@ -14,6 +14,7 @@ create table Account
    Password             text,
    CreatedDate          datetime,
    Type                 text,
+   IsActive             text,
    primary key (Email)
 );
 
@@ -29,6 +30,7 @@ create table Blog
    BlogId               varchar(10) not null,
    Email                varchar(100),
    Content              text,
+   IsShow               text,
    primary key (BlogId)
 );
 
@@ -138,6 +140,7 @@ create table Product
    UpdatedAt            datetime,
    Price                float,
    Usefor               text,
+   IsShow               text,
    primary key (ProductId)
 );
 
@@ -160,6 +163,7 @@ create table Reaction
    BlogId               varchar(10),
    Email                varchar(100),
    Comment              text,
+   IsShow               text,
    primary key (ReactionId)
 );
 
