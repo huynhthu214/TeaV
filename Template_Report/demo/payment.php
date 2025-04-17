@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($couponCode)) {
 
 <body>
     <div class="payment-container py-5">
-        <h2>PAYMENT INFORMATION</h2>
+        <h2>Payment Information</h2>
         
         <!-- Coupon Form -->
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?total=' . $totalFromCart; ?>" method="POST" class="coupon-form">
@@ -86,10 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($couponCode)) {
                     <div class="form-group">
                         <label for="expiryDate">Expiry Date</label>
                         <input type="text" id="expiryDate" name="expiryDate" pattern="\d{2}/\d{2}" placeholder="MM/YY">
-                    </div>
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" name="cvv" pattern="\d{3,4}" placeholder="3-4 digits">
                     </div>
                 </div>
             </div>

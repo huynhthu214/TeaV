@@ -20,7 +20,7 @@ if (!$result) {
 <main>
     <section class="products py-5">
       <div class="container">
-        <h1 class="text-center mb-4">Our Tea Products</h1>
+        <h1 class="text-center mb-4">Our Products</h1>
 
         <!-- Search and Filter Section -->
         <div class="filter-section">

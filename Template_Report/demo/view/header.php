@@ -13,7 +13,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="layout/css/style.css"/>
+  <link rel="stylesheet" href="layout/css/style.css?v=2"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -67,10 +67,9 @@
           </ul>
         </div>
         <div>
-          <button>
-            <i class="bi bi-cart"></i>
-            <span id="cartCount" class="badge" href="cart.html">0</span>
-          </button>
+          <a href="cart.php">
+            <i class="bi bi-cart" style="color: white; font-size:16px"></i>
+          </a>
         </div>
       </div>
     </nav>

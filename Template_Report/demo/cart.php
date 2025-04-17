@@ -21,7 +21,7 @@ if (!$result) {
 
 <body>
     <div class="cart-container py-5">
-        <h2>YOUR CART</h2>
+        <h2>Your cart</h2>
         <table>
             <thead>
                 <tr>

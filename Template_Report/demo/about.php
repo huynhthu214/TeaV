@@ -7,7 +7,7 @@
     <main>
       <section class="about-us py-5">
         <div class="container">
-          <h1 class="text-center mb-4">About TeaV</h1>
+          <h1 class="text-center mb-4">About Us</h1>
           <section class="section-1">
           <div class="row py-5">
             <div class="col-md-6">
