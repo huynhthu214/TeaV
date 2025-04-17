@@ -472,6 +472,59 @@ section .about {
   font-family: "Gravitas One", serif;
 }
 
+.img-fluid-blog {
+  width: 90%;
+  height: 400px;
+  object-fit: cover;
+}
+.btn-primary-blog {
+  background-color: #106dd1;
+}
+.btn-primary-blog:hover {
+  background-color: #106dd1;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+.comment-section h5 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+.comment-form .form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.sidebar h3 {
+  font-size: 20px;
+  color: #333;
+  font-style: italic;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 15px;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+.sidebar ul li a {
+  color: #007a4d;
+  text-decoration: none;
+  font-size: 16px;
+}
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+.blog-post h2 {
+  font-weight: var(--font-weight-bold);
+}
+.col-3 {
+  margin-top: 10px;
+}
 /* --- Terms --- */
 .term h1 {
   font-size: 2.5rem;
@@ -617,9 +670,6 @@ button.add-to-cart {
   transition: opacity 0.3s;
 }
 
-/* --- Cart title section --- */
-
-/* Responsive */
 @media (max-width: 768px) {
   .product-detail h1 {
     font-size: 1cm;
@@ -636,10 +686,6 @@ button.add-to-cart {
   .add-to-cart {
     padding: 6px 12px;
     font-size: 14px;
-  }
-
-  button i.bi-cart {
-    font-size: 16px;
   }
 
   .quantity-selector .form-control,
@@ -738,9 +784,9 @@ input[type="number"] {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.delete-btn,
+.delete-btn:hover,
 .btn-cancel:hover {
-  background-color: #d20404;
+  background-color: #7d0606;
   color: rgb(255, 255, 255);
 }
 
@@ -889,6 +935,7 @@ input[type="number"] {
 
 .btn-submit {
   background-color: #28a745;
+  font-weight: var(--font-weight-bold);
 }
 
 .btn-cancel {
