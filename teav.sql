@@ -1,47 +1,100 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/10/2025 8:56:25 AM                         */
+/* Created on:     4/17/2025 11:55:38 PM                        */
 /*==============================================================*/
 
 
+/*==============================================================*/
+/* Table: Account                                               */
+/*==============================================================*/
+create table Account
+(
+   Email                varchar(100) not null,
+   OrderId              varchar(10),
+   Password             text,
+   CreatedDate          datetime,
+   Type                 text,
+   primary key (Email)
+);
 
+/*==============================================================*/
+/* Table: Blog                                                  */
+/*==============================================================*/
+create table Blog
+(
+   Title                text,
+   DateUpload           datetime,
+   ImgLink              text,
+   Summary              text,
+   BlogId               varchar(10) not null,
+   Email                varchar(100),
+   Content              text,
+   primary key (BlogId)
+);
+
+/*==============================================================*/
+/* Table: BlogTag                                               */
+/*==============================================================*/
+create table BlogTag
+(
+   BlogId               varchar(10) not null,
+   TagId                varchar(10) not null,
+   primary key (BlogId, TagId)
+);
+
+/*==============================================================*/
+/* Table: CalculationUnit                                       */
+/*==============================================================*/
+create table CalculationUnit
+(
+   UnitId               varchar(10) not null,
+   Name                 text,
+   primary key (UnitId)
+);
 
 /*==============================================================*/
 /* Table: Categories                                            */
 /*==============================================================*/
 create table Categories
 (
-   CategorypId          varchar(10) not null  comment '',
-   Name                  varchar(50)  comment '',
-   Description           char(50)  comment '',
-   primary key (CategorypId)
+   CategoryId           varchar(10) not null,
+   Name                 varchar(50),
+   Description          text,
+   primary key (CategoryId)
 );
 
 /*==============================================================*/
-/* Table: Customers                                             */
+/* Table: Clients                                               */
 /*==============================================================*/
-create table Customers
+create table Clients
 (
-   CustomerId           varchar(10) not null  comment '',
-   FirstName             varchar(50)  comment '',
-   LastName              varchar(50)  comment '',
-   Email                 varchar(100)  comment '',
-   Password             text  comment '',
-   Address              text  comment '',
-   RegistrationDate     date  comment '',
-   primary key (CustomerId)
+   FullName             varchar(50),
+   Email                varchar(100) not null,
+   AccEmail             varchar(100),
+   PhoneNumber          varchar(10),
+   primary key (Email)
 );
 
 /*==============================================================*/
-/* Table: OrderDetail                                           */
+/* Table: Ingredients                                           */
 /*==============================================================*/
-create table OrderDetail
+create table Ingredients
 (
-   ProductId            varchar(10) not null  comment '',
-   OrderId              varchar(10) not null  comment '',
-   OrderItemId          varchar(10)  comment '',
-   Quantity             int  comment '',
-   primary key (ProductId, OrderId)
+   IngredientId         varchar(10) not null,
+   IngreName            text,
+   Origin               text,
+   primary key (IngredientId)
+);
+
+/*==============================================================*/
+/* Table: OrderProduct                                          */
+/*==============================================================*/
+create table OrderProduct
+(
+   OrderId              varchar(10) not null,
+   ProductId            varchar(10) not null,
+   Quantity             int,
+   primary key (OrderId, ProductId)
 );
 
 /*==============================================================*/
@@ -49,16 +102,25 @@ create table OrderDetail
 /*==============================================================*/
 create table Orders
 (
-   OrderId              varchar(10) not null  comment '',
-   CustomerId           varchar(10)  comment '',
-   OrderDate            date  comment '',
-   TotalAmount          float  comment '',
-   Status               text  comment '',
-   ShippingAddress      text  comment '',
-   ShippingMethod        varchar(100)  comment '',
-   PaymentMethod         varchar(100)  comment '',
-   TrackingNumber       float  comment '',
+   OrderId              varchar(10) not null,
+   VoucherId            varchar(10),
+   PaymentId            varchar(10),
+   OrderDate            datetime,
+   TotalAmount          float,
+   PaymentMethod        national varchar(100),
    primary key (OrderId)
+);
+
+/*==============================================================*/
+/* Table: Payment                                               */
+/*==============================================================*/
+create table Payment
+(
+   PaymentId            varchar(10) not null,
+   OrderId              varchar(10),
+   TotalPrice           float,
+   PaymentMethod        varchar(100),
+   primary key (PaymentId)
 );
 
 /*==============================================================*/
@@ -66,100 +128,133 @@ create table Orders
 /*==============================================================*/
 create table Product
 (
-   ProductId            varchar(10) not null  comment '',
-   SupplierId           varchar(10) not null  comment '',
-   CategorypId          varchar(10)  comment '',
-   Name                  varchar(50)  comment '',
-   Description           char(50)  comment '',
-   Quantity             int  comment '',
-   ImgUrl               text  comment '',
-   CreatedAt            date  comment '',
-   UpdatedAt            date  comment '',
-   Status               text  comment '',
-   Price                float  comment '',
-   Type                 text  comment '',
-   Ingredients          text  comment '',
-   Usefor               text  comment '',
+   ProductId            varchar(10) not null,
+   CategoryId           varchar(10),
+   UnitId               varchar(10),
+   Name                 varchar(50),
+   Description          text,
+   Quantity             int,
+   ImgUrl               text,
+   UpdatedAt            datetime,
+   Price                float,
+   Usefor               text,
    primary key (ProductId)
 );
 
 /*==============================================================*/
-/* Table: Promotions                                            */
+/* Table: ProductIngredient                                     */
 /*==============================================================*/
-create table Promotions
+create table ProductIngredient
 (
-   ProId                varchar(10) not null  comment '',
-   Name                  varchar(50)  comment '',
-   Description           char(50)  comment '',
-   DiscountType          varchar(50)  comment '',
-   DiscountValue         varchar(50)  comment '',
-   StartDate            date  comment '',
-   EndDate              date  comment '',
-   Active                varchar(100)  comment '',
-   primary key (ProId)
+   ProductId            varchar(10) not null,
+   IngredientId         varchar(10) not null,
+   primary key (ProductId, IngredientId)
 );
 
 /*==============================================================*/
-/* Table: Reviews                                               */
+/* Table: Reaction                                              */
 /*==============================================================*/
-create table Reviews
+create table Reaction
 (
-   ReviewId             varchar(10) not null  comment '',
-   CustomerId           varchar(10)  comment '',
-   ProductId            varchar(10) not null  comment '',
-   Rating               float  comment '',
-   Comment              text  comment '',
-   ReviewDate           date  comment '',
-   primary key (ReviewId)
+   ReactionId           varchar(10) not null,
+   BlogId               varchar(10),
+   Email                varchar(100),
+   Comment              text,
+   primary key (ReactionId)
 );
 
 /*==============================================================*/
-/* Table: Sale                                                  */
+/* Table: ReviewProduct                                         */
 /*==============================================================*/
-create table Sale
+create table ReviewProduct
 (
-   ProId                varchar(10) not null  comment '',
-   ProductId            varchar(10) not null  comment '',
-   primary key (ProId, ProductId)
+   Email                varchar(100) not null,
+   ProductId            varchar(10) not null,
+   Rating               float,
+   Comment              text,
+   ReviewDate           datetime,
+   primary key (Email, ProductId)
 );
 
 /*==============================================================*/
-/* Table: Suppliers                                             */
+/* Table: Tag                                                   */
 /*==============================================================*/
-create table Suppliers
+create table Tag
 (
-   SupplierId           varchar(10) not null  comment '',
-   Name                  varchar(50)  comment '',
-   ContactPp            text  comment '',
-   Email                 varchar(100)  comment '',
-   Phone                int  comment '',
-   primary key (SupplierId)
+   TagId                varchar(10) not null,
+   Name                 text,
+   primary key (TagId)
 );
 
-alter table OrderDetail add constraint FK_ORDERDET_ORDERDETA_PRODUCT foreign key (ProductId)
-      references Product (ProductId) on delete restrict on update restrict;
+/*==============================================================*/
+/* Table: Vouchers                                              */
+/*==============================================================*/
+create table Vouchers
+(
+   VoucherId            varchar(10) not null,
+   Name                 varchar(50),
+   Description          text,
+   DiscountType         national varchar(50),
+   DiscountPercent      float,
+   StartDate            datetime,
+   EndDate              datetime,
+   primary key (VoucherId)
+);
 
-alter table OrderDetail add constraint FK_ORDERDET_ORDERDETA_ORDERS foreign key (OrderId)
+alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
 
-alter table Orders add constraint FK_ORDERS_ORDER_CUSTOMER foreign key (CustomerId)
-      references Customers (CustomerId) on delete restrict on update restrict;
+alter table Account add constraint FK_ACCOUNT_REGISTER_CLIENTS foreign key (Email)
+      references Clients (Email) on delete restrict on update restrict;
 
-alter table Product add constraint FK_PRODUCT_CATEGORY_CATEGORI foreign key (CategorypId)
-      references Categories (CategorypId) on delete restrict on update restrict;
+alter table Blog add constraint FK_BLOG_WRITE_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
 
-alter table Product add constraint FK_PRODUCT_SUPPLY_SUPPLIER foreign key (SupplierId)
-      references Suppliers (SupplierId) on delete restrict on update restrict;
+alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG_BLOG foreign key (BlogId)
+      references Blog (BlogId) on delete restrict on update restrict;
 
-alter table Reviews add constraint FK_REVIEWS_REVIEW_CUSTOMER foreign key (CustomerId)
-      references Customers (CustomerId) on delete restrict on update restrict;
+alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG2_TAG foreign key (TagId)
+      references Tag (TagId) on delete restrict on update restrict;
 
-alter table Reviews add constraint FK_REVIEWS_REVIEWED_PRODUCT foreign key (ProductId)
+alter table Clients add constraint FK_CLIENTS_REGISTER2_ACCOUNT foreign key (AccEmail)
+      references Account (Email) on delete restrict on update restrict;
+
+alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_ORDERS foreign key (OrderId)
+      references Orders (OrderId) on delete restrict on update restrict;
+
+alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
 
-alter table Sale add constraint FK_SALE_SALE_PROMOTIO foreign key (ProId)
-      references Promotions (ProId) on delete restrict on update restrict;
+alter table Orders add constraint FK_ORDERS_APPLY_VOUCHERS foreign key (VoucherId)
+      references Vouchers (VoucherId) on delete restrict on update restrict;
 
-alter table Sale add constraint FK_SALE_SALE2_PRODUCT foreign key (ProductId)
+alter table Orders add constraint FK_ORDERS_PAY_PAYMENT foreign key (PaymentId)
+      references Payment (PaymentId) on delete restrict on update restrict;
+
+alter table Payment add constraint FK_PAYMENT_PAY2_ORDERS foreign key (OrderId)
+      references Orders (OrderId) on delete restrict on update restrict;
+
+alter table Product add constraint FK_PRODUCT_CATEGORY_CATEGORI foreign key (CategoryId)
+      references Categories (CategoryId) on delete restrict on update restrict;
+
+alter table Product add constraint FK_PRODUCT_PRODUCTUN_CALCULAT foreign key (UnitId)
+      references CalculationUnit (UnitId) on delete restrict on update restrict;
+
+alter table ProductIngredient add constraint FK_PRODUCTI_PRODUCTIN_PRODUCT foreign key (ProductId)
+      references Product (ProductId) on delete restrict on update restrict;
+
+alter table ProductIngredient add constraint FK_PRODUCTI_PRODUCTIN_INGREDIE foreign key (IngredientId)
+      references Ingredients (IngredientId) on delete restrict on update restrict;
+
+alter table Reaction add constraint FK_REACTION_REACT_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
+
+alter table Reaction add constraint FK_REACTION_REACTBLOG_BLOG foreign key (BlogId)
+      references Blog (BlogId) on delete restrict on update restrict;
+
+alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
+
+alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
 
