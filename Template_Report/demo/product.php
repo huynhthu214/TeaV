@@ -2,20 +2,34 @@
 $namePage = "Products";
 include "view/header.php";
 
-$conn = mysqli_connect("localhost", "root", "", "teav_shop");
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
 if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
-$query = "SELECT ProductId AS id, Name AS name, Price AS price, ImgUrl AS image, Type AS type,   Ingredients AS ingredients, Usefor AS usefor 
-          FROM Product 
-          WHERE Status = 'Available'";
+
+$query = "SELECT 
+            product.ProductId AS id,
+            product.Name AS name,
+            product.Price AS price,
+            product.ImgUrl AS image,
+            product.Type AS type,
+            GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
+            product.Usefor AS usefor
+          FROM product
+          JOIN productingredient ON product.ProductId = productingredient.ProductId
+          JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+          WHERE product.IsShow = 'Yes'
+          GROUP BY product.ProductId";
+
+
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
     die("Kết nối thất bại: " . mysqli_error($conn));
 }
 ?>
+
 
 <main>
     <section class="products py-5">

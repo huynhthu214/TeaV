@@ -36,6 +36,7 @@ create table Blog
    primary key (BlogId)
 );
 
+
 /*==============================================================*/
 /* Table: BlogTag                                               */
 /*==============================================================*/
@@ -46,6 +47,8 @@ create table BlogTag
    primary key (BlogId, TagId)
 );
 
+
+
 /*==============================================================*/
 /* Table: CalculationUnit                                       */
 /*==============================================================*/
@@ -55,6 +58,7 @@ create table CalculationUnit
    Name                 text,
    primary key (UnitId)
 );
+
 
 /*==============================================================*/
 /* Table: Categories                                            */
@@ -67,6 +71,8 @@ create table Categories
    primary key (CategoryId)
 );
 
+
+
 /*==============================================================*/
 /* Table: Ingredients                                           */
 /*==============================================================*/
@@ -78,6 +84,8 @@ create table Ingredients
    primary key (IngredientId)
 );
 
+
+
 /*==============================================================*/
 /* Table: OrderProduct                                          */
 /*==============================================================*/
@@ -88,6 +96,7 @@ create table OrderProduct
    Quantity             int,
    primary key (OrderId, ProductId)
 );
+
 
 /*==============================================================*/
 /* Table: Orders                                                */
@@ -102,6 +111,8 @@ create table Orders
    primary key (OrderId)
 );
 
+
+
 /*==============================================================*/
 /* Table: Payment                                               */
 /*==============================================================*/
@@ -113,6 +124,7 @@ create table Payment
    PaymentMethod        varchar(100),
    primary key (PaymentId)
 );
+
 
 /*==============================================================*/
 /* Table: Product                                               */
@@ -133,6 +145,8 @@ create table Product
    primary key (ProductId)
 );
 
+
+
 /*==============================================================*/
 /* Table: ProductIngredient                                     */
 /*==============================================================*/
@@ -142,6 +156,8 @@ create table ProductIngredient
    IngredientId         varchar(10) not null,
    primary key (ProductId, IngredientId)
 );
+
+
 
 /*==============================================================*/
 /* Table: Reaction                                              */
@@ -156,6 +172,7 @@ create table Reaction
    primary key (ReactionId)
 );
 
+
 /*==============================================================*/
 /* Table: ReviewProduct                                         */
 /*==============================================================*/
@@ -168,6 +185,7 @@ create table ReviewProduct
    ReviewDate           datetime,
    primary key (Email, ProductId)
 );
+
 
 /*==============================================================*/
 /* Table: Tag                                                   */
@@ -192,6 +210,8 @@ create table Vouchers
    EndDate              datetime,
    primary key (VoucherId)
 );
+
+
 
 alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
