@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/18/2025 12:30:48 AM                        */
+/* Created on:     4/20/2025 11:07:16 AM                        */
 /*==============================================================*/
 
 
@@ -9,12 +9,14 @@
 /*==============================================================*/
 create table Account
 (
-   Email                varchar(100) not null,
-   OrderId              varchar(10),
    Password             text,
    CreatedDate          datetime,
    Type                 text,
    IsActive             text,
+   FullName             varchar(100),
+   Email                varchar(100) not null,
+   OrderId              varchar(10),
+   PhoneNumber          varchar(10),
    primary key (Email)
 );
 
@@ -66,18 +68,6 @@ create table Categories
 );
 
 /*==============================================================*/
-/* Table: Clients                                               */
-/*==============================================================*/
-create table Clients
-(
-   FullName             varchar(50),
-   Email                varchar(100) not null,
-   AccEmail             varchar(100),
-   PhoneNumber          varchar(10),
-   primary key (Email)
-);
-
-/*==============================================================*/
 /* Table: Ingredients                                           */
 /*==============================================================*/
 create table Ingredients
@@ -109,7 +99,6 @@ create table Orders
    PaymentId            varchar(10),
    OrderDate            datetime,
    TotalAmount          float,
-   PaymentMethod        national varchar(100),
    primary key (OrderId)
 );
 
@@ -160,8 +149,8 @@ create table ProductIngredient
 create table Reaction
 (
    ReactionId           varchar(10) not null,
-   BlogId               varchar(10),
    Email                varchar(100),
+   BlogId               varchar(10),
    Comment              text,
    IsShow               text,
    primary key (ReactionId)
@@ -198,7 +187,6 @@ create table Vouchers
    VoucherId            varchar(10) not null,
    Name                 varchar(50),
    Description          text,
-   DiscountType         national varchar(50),
    DiscountPercent      float,
    StartDate            datetime,
    EndDate              datetime,
@@ -208,9 +196,6 @@ create table Vouchers
 alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
 
-alter table Account add constraint FK_ACCOUNT_REGISTER_CLIENTS foreign key (Email)
-      references Clients (Email) on delete restrict on update restrict;
-
 alter table Blog add constraint FK_BLOG_WRITE_ACCOUNT foreign key (Email)
       references Account (Email) on delete restrict on update restrict;
 
@@ -219,9 +204,6 @@ alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG_BLOG foreign key (BlogId)
 
 alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG2_TAG foreign key (TagId)
       references Tag (TagId) on delete restrict on update restrict;
-
-alter table Clients add constraint FK_CLIENTS_REGISTER2_ACCOUNT foreign key (AccEmail)
-      references Account (Email) on delete restrict on update restrict;
 
 alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
