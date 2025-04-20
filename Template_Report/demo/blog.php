@@ -24,6 +24,7 @@
                   heart health, boosts metabolism, and enhances mental focus. Learn
                   how a daily cup can transform your wellness routine.
                 </p>
+                <a href="#" class="read-more">Read more</a>
                 <div class="share-buttons">
                   <a
                     href="https://facebook.com"
@@ -71,6 +72,7 @@
                   perfectly (2-3 minutes). Follow these steps to elevate your tea
                   experience.
                 </p>
+                <a href="#" class="read-more">Read more</a>
                 <div class="share-buttons">
                   <a
                     href="https://facebook.com"
@@ -119,6 +121,7 @@
                   aromatic blend is perfect for relaxation or as a natural skincare
                   boost.
                 </p>
+                <a href="#" class="read-more">Read more</a>
                 <div class="share-buttons">
                   <a
                     href="https://facebook.com"
@@ -167,6 +170,39 @@
                   <li><a href="#">How to Brew Great Tea</a></li>
                   <li><a href="#">History of Organic Tea</a></li>
                   <li><a href="#">This Month's Promotions</a></li>
+                </ul>
+                <h3>Popular posts</h3>
+                <ul>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <a href="#"><img src="layout/images/graphic-1.jpg" alt="" class="img-fluid-blog-min mb-3"></a>
+                      </div>
+                      <div class="col-8">
+                        <a href="#" class="min-title">The Health Benefits of Green Tea</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <img src="layout/images/chamomile-bliss-1.jpg" alt="" class="img-fluid-blog-min mb-3">
+                      </div>
+                      <div class="col-8">
+                        <a href="#" class="min-title">How to Brew the Perfect Cup of Tea</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <img src="layout/images/graphic-3.jpg" alt="" class="img-fluid-blog-min mb-3">
+                      </div>
+                      <div class="col-8">
+                        <a href="#" class="min-title">DIY Tea-Infused Essential Oil Recipe</a>
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>

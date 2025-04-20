@@ -8,7 +8,7 @@
       <div class="container">
         <section class="term py-5">
           <h1 class="text-center mb-4">
-            Terms and Conditions - TeaV
+            Terms and Conditions
           </h1>
           
           <h5>Welcome to TeaV!</h5>
