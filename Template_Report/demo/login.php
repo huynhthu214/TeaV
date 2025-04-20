@@ -3,19 +3,29 @@
     $namePage = "Login";
     include "view/header.php";
 
-    $conn = mysqli_connect("localhost", "root", "", "teav_shop");
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
 
-    if (!$conn) {
-        die("Kết nối thất bại: " . mysqli_connect_error());
-    }
-    $query = "SELECT CustomerId AS id, FirstName AS fname, LastName AS lname, Email AS email, Password AS password, Adress AS adress, RegistrationDate AS regis_date 
-              FROM Customer
-              WHERE Status = 'Available'";
-    $result = mysqli_query($conn, $query);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password);
 
-    if (!$result) {
-        die("Kết nối thất bại: " . mysqli_error($conn));
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
     }
+
+    // prepare and bind
+    $stmt = $conn->prepare("Select Email, Password from Customer where(?,?)");
+    $stmt->bind_param("sss", $email, $password);
+
+    // set parameters and execute
+
+
+    echo "New records created successfully";
+
+    $stmt->close();
+    $conn->close();
 
     // require_once('db/account_db.php');
     // session_start();

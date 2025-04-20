@@ -11,7 +11,7 @@
 ?>
 
     <main>
-      <section class="hero-section">
+      <section class="hero-section mb-5">
         <video autoplay loop muted class="hero-video-background">
           <source
             src="layout/images/video-home.mp4"
@@ -37,7 +37,6 @@
       </section>
 
       <section>
-        <h1 class="about-section">About</h1>
           <div class="container">
             <div class="row align-items-center">
    
@@ -57,21 +56,15 @@
               <div class="d-flex gap-3">
                 <div class="card border-0">
                   <img src="../demo/layout/images/assam-gold.jpg" class="card-img-top rounded" alt="Green Tea">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Green Tea</p>
-                  </div>
+                  <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
                   <img src="./layout/images/background-about.jpg" class="card-img-top rounded" alt="Chai Teas">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Chai Teas</p>
-                  </div>
+                  <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
                   <img src="../demo/layout/images/ceylon-star.jpg" class="card-img-top rounded" alt="Single Estate">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Single Estate</p>
-                  </div>
+                  <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
             </div>
@@ -79,21 +72,15 @@
               <div class="d-flex gap-3">
                 <div class="card border-0">
                   <img src="../demo/layout/images/assam-gold.jpg" class="card-img-top rounded" alt="Green Tea">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Green Tea</p>
-                  </div>
+                  <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
                   <img src="./layout/images/background-about.jpg" class="card-img-top rounded" alt="Chai Teas">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Chai Teas</p>
-                  </div>
+                  <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
                   <img src="../demo/layout/images/ceylon-star.jpg" class="card-img-top rounded" alt="Single Estate">
-                  <div class="card-body text-center bg-beige rounded-bottom">
-                    <p class="fw-bold m-0">Single Estate</p>
-                  </div>
+                  <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
             </div>

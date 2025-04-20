@@ -74,7 +74,7 @@ $product = mysqli_fetch_assoc($result);
           <div class="d-flex gap-2 mb-4">
             <div class="quantity-selector d-flex align-items-center mb-3">
                 <div class="input-group" style="width: 130px">
-                    <input type="number" id="quantity" class="form-control text-center" value="1" min="1" max="<?php echo $product['quantity']; ?>" step="1">
+                    <input type="number" id="quantity" class="form-control text-center" value="1" min="0" max="<?php echo $product['quantity']; ?>" step="1">
                 </div>
             </div>
             <button class="add-to-cart" id="addItem" data-product-id="<?php echo htmlspecialchars($product['id']); ?>">Add to cart</button>
