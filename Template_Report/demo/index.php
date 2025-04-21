@@ -8,6 +8,47 @@
     //     header('Location: login.php');
     //     exit();
     // }
+
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+
+$query = "SELECT 
+            product.ProductId,
+            product.Name,
+            product.Price,
+            product.ImgUrl AS img_product,
+            product.Type,
+            GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
+            product.Usefor
+          FROM product
+          JOIN productingredient ON product.ProductId = productingredient.ProductId
+          JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+          WHERE product.IsShow = 'Yes'
+          GROUP BY product.ProductId";
+
+$blog_query = "SELECT 
+            blog.BlogId,
+            blog.ImgUrl AS img_blog,
+            blog.Title,
+            blog.Content,
+            blog.DateUpload,
+            GROUP_CONCAT(tag.Name SEPARATOR ', ') AS tag_names
+          FROM blog
+          JOIN blogtag ON blog.BlogId = blog.BlogId
+          JOIN tag ON blogtag.TagId = tag.TagId
+          WHERE blog.IsShow = 'Yes'
+          GROUP BY blog.BlogId";
+
+
+$result = mysqli_query($conn, $query);
+$blog_result = mysqli_query($conn, $blog_query);
+
+if (!$result || !$blog_result) {
+    die("Kết nối thất bại: " . mysqli_error($conn));
+}
 ?>
 
     <main>
@@ -55,15 +96,15 @@
             <div class="carousel-item active">
               <div class="d-flex gap-3">
                 <div class="card border-0">
-                  <img src="../demo/layout/images/assam-gold.jpg" class="card-img-top rounded" alt="Green Tea">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Green Tea">
                   <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
-                  <img src="./layout/images/background-about.jpg" class="card-img-top rounded" alt="Chai Teas">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Chai Teas">
                   <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
-                  <img src="../demo/layout/images/ceylon-star.jpg" class="card-img-top rounded" alt="Single Estate">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Single Estate">
                   <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
@@ -71,15 +112,15 @@
             <div class="carousel-item active">
               <div class="d-flex gap-3">
                 <div class="card border-0">
-                  <img src="../demo/layout/images/assam-gold.jpg" class="card-img-top rounded" alt="Green Tea">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Green Tea">
                   <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
-                  <img src="./layout/images/background-about.jpg" class="card-img-top rounded" alt="Chai Teas">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Chai Teas">
                   <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
-                  <img src="../demo/layout/images/ceylon-star.jpg" class="card-img-top rounded" alt="Single Estate">
+                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Single Estate">
                   <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
@@ -99,7 +140,9 @@
       </div>
     </div>
   </div>
-      <h1 class="product-section">Products</h1>
+  <h1 class="product-section">
+  <a href="product.php" style="text-decoration: none; color: inherit;">Products</a>
+</h1>
         <div class="container-p-0">
           <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -107,99 +150,51 @@
         <div class="carousel-item active">
           <div class="container">
             <div class="row">
-              <div class="col-md-4 product-card-home" data-type="green" data-price="mid" data-use="relax">
-                <div class="card">
-                  <img src="images/green-tea.jpg" class="card-img-top" alt="Green Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Green Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Green tea leaves, Jasmine<br />
-                      <strong>Price:</strong> $35.00
-                    </p>
-                    <a href="detail-product.php?id=1" class="btn btn-success">View Details</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 product-card-home" data-type="herbal" data-price="low" data-use="digestion">
-                <div class="card">
-                  <img src="images/herbal-tea.jpg" class="card-img-top" alt="Herbal Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Herbal Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Chamomile, Peppermint<br />
-                      <strong>Price:</strong> $25.00
-                    </p>
-                    <a href="detail-product.php?id=2" class="btn btn-success">View Details</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 product-card-home" data-type="blacktea" data-price="high" data-use="energy">
-                <div class="card">
-                  <img src="images/black-tea.jpg" class="card-img-top" alt="Black Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Black Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Black tea, Spices<br />
-                      <strong>Price:</strong> $45.00
-                    </p>
-                    <a href="detail-product.php?id=3" class="btn btn-success">View Details</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item active">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4 product-card-home" data-type="green" data-price="mid" data-use="relax">
-                <div class="card">
-                  <img src="images/green-tea.jpg" class="card-img-top" alt="Green Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Green Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Green tea leaves, Jasmine<br />
-                      <strong>Price:</strong> $35.00
-                    </p>
-                    <a href="detail-product.php?id=1" class="btn btn-success">View Details</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 product-card-home" data-type="herbal" data-price="low" data-use="digestion">
-                <div class="card">
-                  <img src="images/herbal-tea.jpg" class="card-img-top" alt="Herbal Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Herbal Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Chamomile, Peppermint<br />
-                      <strong>Price:</strong> $25.00
-                    </p>
-                    <a href="detail-product.php?id=2" class="btn btn-success">View Details</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 product-card-home" data-type="blacktea" data-price="high" data-use="energy">
-                <div class="card">
-                  <img src="images/black-tea.jpg" class="card-img-top" alt="Black Tea" />
-                  <div class="card-body">
-                    <h5 class="card-title">Black Tea</h5>
-                    <p class="card-text">
-                      <strong>Ingredients:</strong> Black tea, Spices<br />
-                      <strong>Price:</strong> $45.00
-                    </p>
-                    <a href="detail-product.php?id=3" class="btn btn-success">View Details</a>
-                  </div>
+            <?php while ($product = mysqli_fetch_assoc($result)) { 
+            $useCategory = 'energy'; 
+            $useforLower = strtolower($product['Usefor']);
+            if (strpos($useforLower, 'relax') !== false || strpos($useforLower, 'sleep') !== false || 
+                strpos($useforLower, 'unwind') !== false || strpos($useforLower, 'calm') !== false || 
+                strpos($useforLower, 'soothe') !== false) {
+                $useCategory = 'relax';
+            } elseif (strpos($useforLower, 'warm') !== false || strpos($useforLower, 'digestion') !== false || 
+                     strpos($useforLower, 'cozy') !== false || strpos($useforLower, 'healthy') !== false) {
+                $useCategory = 'digestion';
+            }
+          ?>
+              <div class="col-md-4 product-card-home" data-type="<?php 
+                $type = strtolower($product['Type']);
+                if (strpos($type, 'green') !== false) echo 'green';
+                elseif (strpos($type, 'herbal') !== false) echo 'herbal';
+                elseif (strpos($type, 'black tea (spiced)') !== false) echo 'black';
+                elseif (strpos($type, 'black tea') !== false) echo 'blacktea';
+                elseif (strpos($type, 'oolong') !== false) echo 'oolong';
+              ?>"
+              data-price="<?php 
+                echo ($product['Price'] < 30 ? 'low' : ($product['Price'] <= 40 ? 'mid' : 'high')); 
+              ?>"
+              data-use="<?php echo $useCategory; ?>"
+            >
+              <div class="card">
+                <img
+                  src="<?php echo $product['img_product']; ?>"
+                  class="card-img-top"
+                  alt="<?php echo $product['Name']; ?>"
+                />
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo $product['Name']; ?></h5>
+                  <p class="card-text">
+                    <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
+                    <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
+                  </p>
+                  <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">View Details</a>
                 </div>
               </div>
             </div>
+          <?php } ?>
+            </div>
           </div>
         </div>
-
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct" data-bs-slide="prev">
@@ -212,54 +207,30 @@
       </button>
     </div>
   </div>
-        <h1 class="blogs-section">Blogs</h1>
-        <div class="container my-5">
+  <h1 class="blogs-section">
+  <a href="blog.php" style="text-decoration: none; color: inherit;">Blogs</a>
+</h1>
+  <div class="container my-5" style="margin-left: 100px;">
   <div class="row g-4">
-   
-    <div class="col-md-4">
+    <?php while ($blog = mysqli_fetch_assoc($blog_result)){?>
+      <div class="col-md-4">
       <div class="card h-100 shadow-sm">
-        <img src="./layout/images/chamomile-bliss.jpg" class="card-img-top" alt="Green Tea Daily" />
+        <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['Title']; ?>" />
         <div class="card-body">
           <div class="mb-2">
-            <span class="badge bg-success">Healthcare</span>
-            <span class="badge bg-warning text-dark">Lifestyle</span>
+            <?php if (!empty($blog['tag_names'])){ ?>
+              <span class="badge bg-success"><?php echo $blog['tag_names']; ?></span>
+              <?php } ?>
           </div>
-          <h5 class="card-title">Five Reasons to Drink Green Tea Daily</h5>
-          <p class="card-text">Break down some of the health benefits of one of the most classic teas, GREEN tea!</p>
+          <h5 class="card-title"><?php echo $blog['Title']; ?></h5>
+          <p class="card-text"><?php echo $blog['Content']; ?></p>
         </div>
-        <div class="card-footer text-muted small">3 min read • May 24, 2022</div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm">
-        <img src="./layout/images/earl-grey-classic.jpg" class="card-img-top" alt="Yerba Mate Tea" />
-        <div class="card-body">
-          <div class="mb-2">
-            <span class="badge bg-success">Healthcare</span>
-          </div>
-          <h5 class="card-title">3 Reasons We Are Obsessed with Yerba Mate Tea</h5>
-          <p class="card-text">Why Yerba Mate Tea is becoming everyone's favorite energetic tea lately.</p>
+        <div class="card-footer text-muted small">
+          <?php echo $blog['DateUpload']; ?>
         </div>
-        <div class="card-footer text-muted small">3 min read • May 24, 2022</div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm">
-        <img src="./layout/images/chamomile-bliss-1.jpg" class="card-img-top" alt="Motivated This Winter" />
-        <div class="card-body">
-          <div class="mb-2">
-            <span class="badge bg-info">Recipe</span>
-          </div>
-          <h5 class="card-title">How Tea Can Help You Stay Motivated This Winter</h5>
-          <p class="card-text">Warm up your soul and motivation with a good cup of seasonal tea.</p>
-        </div>
-        <div class="card-footer text-muted small">3 min read • May 24, 2022</div>
-      </div>
-    </div>
   </div>
-</div>
+    <?php } ?>
+   
 
 <div class="d-flex justify-content-center my-4">
   <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>

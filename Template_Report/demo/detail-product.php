@@ -2,7 +2,7 @@
 $namePage = "Product Details";
 include "view/header.php";
 
-$conn = mysqli_connect("localhost", "root", "", "teav_shop");
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
 if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
@@ -14,9 +14,22 @@ if (!$productId) {
     die("Lỗi: Không tìm thấy ID sản phẩm.");
 }
 
-$query = "SELECT ProductId AS id, Name AS name, Price AS price, ImgUrl AS image, Type AS type, Ingredients AS ingredients, Usefor AS usefor, Description AS description, Quantity AS quantity 
-          FROM Product 
-          WHERE ProductId = ? AND Status = 'Available'";
+$query = "SELECT 
+            product.ProductId AS id,
+            product.Name AS name,
+            product.Price AS price,
+            product.ImgUrl AS image,
+            product.Type AS type,
+            GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
+            product.Usefor AS usefor, 
+            product.Description AS description, 
+            product.Quantity AS quantity 
+          FROM product 
+          JOIN productingredient ON product.ProductId = productingredient.ProductId
+          JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+          WHERE product.ProductId = ? AND product.IsShow = 'Yes'
+          GROUP BY product.ProductId";
+
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "s", $productId);
 mysqli_stmt_execute($stmt);

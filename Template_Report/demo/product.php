@@ -9,13 +9,13 @@ if (!$conn) {
 }
 
 $query = "SELECT 
-            product.ProductId AS id,
-            product.Name AS name,
-            product.Price AS price,
-            product.ImgUrl AS image,
-            product.Type AS type,
+            product.ProductId,
+            product.Name,
+            product.Price,
+            product.ImgUrl,
+            product.Type,
             GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
-            product.Usefor AS usefor
+            product.Usefor
           FROM product
           JOIN productingredient ON product.ProductId = productingredient.ProductId
           JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
@@ -83,7 +83,7 @@ if (!$result) {
         <div class="row" id="productList">
           <?php while ($product = mysqli_fetch_assoc($result)) { 
             $useCategory = 'energy'; 
-            $useforLower = strtolower($product['usefor']);
+            $useforLower = strtolower($product['Usefor']);
             if (strpos($useforLower, 'relax') !== false || strpos($useforLower, 'sleep') !== false || 
                 strpos($useforLower, 'unwind') !== false || strpos($useforLower, 'calm') !== false || 
                 strpos($useforLower, 'soothe') !== false) {
@@ -96,7 +96,7 @@ if (!$result) {
             <div
               class="col-md-4 product-card"
               data-type="<?php 
-                $type = strtolower($product['type']);
+                $type = strtolower($product['Type']);
                 if (strpos($type, 'green') !== false) echo 'green';
                 elseif (strpos($type, 'herbal') !== false) echo 'herbal';
                 elseif (strpos($type, 'black tea (spiced)') !== false) echo 'black';
@@ -104,23 +104,23 @@ if (!$result) {
                 elseif (strpos($type, 'oolong') !== false) echo 'oolong';
               ?>"
               data-price="<?php 
-                echo ($product['price'] < 30 ? 'low' : ($product['price'] <= 40 ? 'mid' : 'high')); 
+                echo ($product['Price'] < 30 ? 'low' : ($product['Price'] <= 40 ? 'mid' : 'high')); 
               ?>"
               data-use="<?php echo $useCategory; ?>"
             >
               <div class="card">
                 <img
-                  src="<?php echo $product['image']; ?>"
+                  src="<?php echo $product['ImgUrl']; ?>"
                   class="card-img-top"
-                  alt="<?php echo $product['name']; ?>"
+                  alt="<?php echo $product['Name']; ?>"
                 />
                 <div class="card-body">
-                  <h5 class="card-title"><?php echo $product['name']; ?></h5>
+                  <h5 class="card-title"><?php echo $product['Name']; ?></h5>
                   <p class="card-text">
                     <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
-                    <strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?>
+                    <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
                   </p>
-                  <a href="detail-product.php?id=<?php echo $product['id']; ?>" class="btn btn-success">View Details</a>
+                  <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">View Details</a>
                 </div>
               </div>
             </div>

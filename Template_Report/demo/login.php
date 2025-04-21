@@ -2,30 +2,33 @@
 <?php 
     $namePage = "Login";
     include "view/header.php";
+    
+    $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
-
-    // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+    if (!$conn) {
+        die("Kết nối thất bại: " . mysqli_connect_error());
     }
-
-    // prepare and bind
-    $stmt = $conn->prepare("Select Email, Password from Customer where(?,?)");
-    $stmt->bind_param("sss", $email, $password);
-
-    // set parameters and execute
-
-
-    echo "New records created successfully";
-
-    $stmt->close();
-    $conn->close();
+    
+    $query = "SELECT 
+                product.ProductId,
+                product.Name,
+                product.Price,
+                product.ImgUrl,
+                product.Type,
+                GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
+                product.Usefor
+              FROM product
+              JOIN productingredient ON product.ProductId = productingredient.ProductId
+              JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+              WHERE product.IsShow = 'Yes'
+              GROUP BY product.ProductId";
+    
+    
+    $result = mysqli_query($conn, $query);
+    
+    if (!$result) {
+        die("Kết nối thất bại: " . mysqli_error($conn));
+    }
 
     // require_once('db/account_db.php');
     // session_start();
