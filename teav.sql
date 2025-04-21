@@ -1,8 +1,23 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/20/2025 6:31:05 PM                         */
+/* Created on:     4/21/2025 10:26:14 PM                        */
 /*==============================================================*/
 
+
+/*==============================================================*/
+/* Table: About                                                 */
+/*==============================================================*/
+create table About
+(
+   AboutId              varchar(10) not null,
+   Email                varchar(100),
+   ImgUrl               text,
+   Content              text,
+   Title                text,
+   DateUpload           datetime,
+   IsShow               text,
+   primary key (AboutId)
+);
 
 /*==============================================================*/
 /* Table: Account                                               */
@@ -130,6 +145,7 @@ create table Product
    Price                float,
    Usefor               text,
    IsShow               text,
+   Type                 text,
    primary key (ProductId)
 );
 
@@ -180,6 +196,21 @@ create table Tag
 );
 
 /*==============================================================*/
+/* Table: Term                                                  */
+/*==============================================================*/
+create table Term
+(
+   TermId               varchar(10) not null,
+   Email                varchar(100),
+   Title                text,
+   Content              text,
+   ImgUrl               text,
+   DateUpload           datetime,
+   IsShow               text,
+   primary key (TermId)
+);
+
+/*==============================================================*/
 /* Table: Vouchers                                              */
 /*==============================================================*/
 create table Vouchers
@@ -192,6 +223,9 @@ create table Vouchers
    EndDate              datetime,
    primary key (VoucherId)
 );
+
+alter table About add constraint FK_ABOUT_WRITEABOU_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
 
 alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
@@ -243,4 +277,7 @@ alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_ACCOUNT foreign k
 
 alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
+
+alter table Term add constraint FK_TERM_WRITETERM_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
 
