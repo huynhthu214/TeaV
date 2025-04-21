@@ -1,0 +1,98 @@
+INSERT INTO Vouchers (VoucherId, Name, Description, DiscountPercent, StartDate, EndDate) VALUES
+('V001', 'TET50', 'Giảm 50% dịp Tết', 50, '2025-01-01', '2025-01-31');
+
+INSERT INTO CalculationUnit (UnitId, Name) VALUES
+('U001', '250g'),
+('U002', '500g');
+
+INSERT INTO Ingredients (IngredientId, IngreName, Origin) VALUES
+('I001', 'Green Tea', 'Việt Nam'),
+('I002', 'Black Tea', 'Đà Lạt');
+
+INSERT INTO Categories (`CategoryId`, `Name`, `Description`) VALUES
+('C001', 'Green Tea', 'Fresh and antioxidant-rich green teas'),
+('C002', 'Herbal Tea', 'Soothing teas made from herbs'),
+('C003', 'Oolong Tea', 'Semi-oxidized teas with complex flavors'),
+('C004', 'Black Tea', 'Robust and bold black teas'),
+('C005', 'Black Tea (Spiced)', 'Black teas with aromatic spices');
+
+INSERT INTO Orders (`OrderId`, `VoucherId`, `OrderDate`, `TotalAmount`) VALUES
+('ORD001', 'V001', '2025-04-12', 86),
+('ORD002', null, '2025-04-13', 83),
+('ORD003', null, '2025-04-14', 70),
+('ORD004', null, '2025-04-15', 105);
+
+INSERT INTO Payment (PaymentId, OrderId, TotalPrice, PaymentMethod) VALUES
+('PM001', 'ORD001', 55000, 'MOMO');
+
+INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber) VALUES
+('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL),
+('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL),
+('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL),
+('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL),
+('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL);
+
+INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
+('P001', 'C001', 'U001', 'Premium Green Tea', 'This high-quality green tea is carefully harvested', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Pure green tea leaves', 'Yes'),
+('P002', 'C002', 'U002', 'Chamomile Bliss', 'A soothing herbal tea made from dried chamomile', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 22, 'Dried chamomile flowers', 'Yes'),
+('P003', 'C002', 'U002', 'Herbal Serenity', 'This calming blend features a variety of herbs', 100, 'layout/images/herbal-serenity.jpg', '2025-04-11', 27, 'Lemon balm, lavender, and other calming herbs', 'Yes'),
+('P004', 'C003', 'U001', 'Mystic Oolong', 'Mystic Oolong is a semi-oxidized tea that combines', 100, 'layout/images/mystic-oolong.jpg', '2025-04-11', 38, 'Oolong tea leaves', 'Yes'),
+('P005', 'C004', 'U002', 'Royal Darjeeling', 'Often referred to as the "Champagne of teas"', 100, 'layout/images/royal-darjeeling.jpg', '2025-04-11', 45, 'Black tea leaves from the Darjeeling region', 'Yes'),
+('P006', 'C005', 'U002', 'Golden Chai Delight', 'This traditional spiced tea blend features robust', 100, 'layout/images/golden-chai-delight.jpg', '2025-04-11', 22, 'Black tea, cinnamon, cardamom, ginger', 'Yes'),
+('P007', 'C002', 'U002', 'Elderflower Essence', 'Elderflower Essence is a light herbal tea', 100, 'layout/images/elderflower-essence.jpg', '2025-04-11', 30, 'Dried elderflowers', 'Yes'),
+('P008', 'C005', 'U002', 'Traditional Masala Tea', 'A classic Indian brew, Traditional Masala Tea', 100, 'layout/images/traditional-masala-tea.jpg', '2025-04-11', 22, 'Black tea, cloves, cinnamon, ginger, black pepper', 'Yes'),
+('P009', 'C001', 'U001', 'Jasmine Pearl Elegance', 'Jasmine Pearl Elegance features hand-rolled green', 100, 'layout/images/jasmine-pearl-elegance.jpg', '2025-04-11', 55, 'Green tea leaves, jasmine blossoms', 'Yes'),
+('P010', 'C001', 'U001', 'Matcha Supreme', 'A vibrant green tea powder with a rich umami taste', 80, 'layout/images/matcha-supreme.jpg', '2025-04-11', 48, 'Matcha green tea powder', 'Yes'),
+('P011', 'C001', 'U001', 'Sencha Delight', 'A classic Japanese green tea with a grassy flavor', 90, 'layout/images/sencha-delight.jpg', '2025-04-11', 35, 'Sencha green tea leaves', 'Yes'),
+('P012', 'C001', 'U001', 'Dragonwell Bliss', 'A Chinese green tea with a nutty and sweet taste', 85, 'layout/images/dragonwell-bliss.jpg', '2025-04-11', 40, 'Dragonwell green tea leaves', 'Yes'),
+('P013', 'C002', 'U002', 'Peppermint Glow', 'A refreshing herbal tea with a cool minty taste', 100, 'layout/images/peppermint-glow.jpg', '2025-04-11', 20, 'Dried peppermint leaves', 'Yes'),
+('P014', 'C002', 'U002', 'Rooibos Harmony', 'A caffeine-free herbal tea with a sweet earthy fla', 95, 'layout/images/rooibos-harmony.jpg', '2025-04-11', 25, 'Rooibos leaves', 'Yes'),
+('P015', 'C002', 'U002', 'Lemon Verbena', 'A citrusy herbal tea with a bright and zesty flavo', 90, 'layout/images/lemon-verbena.jpg', '2025-04-11', 23, 'Dried lemon verbena leaves', 'Yes'),
+('P016', 'C002', 'U002', 'Hibiscus Dream', 'A tart and floral herbal tea with a vibrant red co', 85, 'layout/images/hibiscus-dream.jpg', '2025-04-11', 28, 'Dried hibiscus flowers', 'Yes'),
+('P017', 'C003', 'U001', 'Tie Guan Yin', 'A floral oolong tea with a smooth and creamy finis', 75, 'layout/images/tie-guan-yin.jpg', '2025-04-11', 42, 'Tie Guan Yin oolong leaves', 'Yes'),
+('P018', 'C003', 'U001', 'Phoenix Dan Cong', 'A fruity oolong tea with a honey-like sweetness', 70, 'layout/images/phoenix-dan-cong.jpg', '2025-04-11', 50, 'Phoenix Dan Cong oolong leaves', 'Yes'),
+('P019', 'C004', 'U002', 'Assam Gold', 'A bold black tea with a malty and robust flavor', 90, 'layout/images/assam-gold.jpg', '2025-04-11', 38, 'Assam black tea leaves', 'Yes'),
+('P020', 'C004', 'U002', 'Ceylon Star', 'A bright and brisk black tea from Sri Lanka', 85, 'layout/images/ceylon-star.jpg', '2025-04-11', 35, 'Ceylon black tea leaves', 'Yes'),
+('P021', 'C004', 'U002', 'Earl Grey Classic', 'A black tea infused with bergamot for a citrusy no', 80, 'layout/images/earl-grey-classic.jpg', '2025-04-11', 30, 'Black tea, bergamot oil', 'Yes'),
+('P022', 'C005', 'U002', 'Spiced Apple Chai', 'A cozy black tea with apple and warm spices', 90, 'layout/images/spiced-apple-chai.jpg', '2025-04-11', 24, 'Black tea, apple, cinnamon, cloves', 'Yes'),
+('P023', 'C005', 'U002', 'Vanilla Spice Blend', 'A black tea with vanilla and spicy notes', 85, 'layout/images/vanilla-spice-blend.jpg', '2025-04-11', 26, 'Black tea, vanilla, cardamom, nutmeg', 'Yes'),
+('P024', 'C005', 'U002', 'Ginger Turmeric Chai', 'A warming black tea with ginger and turmeric', 80, 'layout/images/ginger-turmeric-chai.jpg', '2025-04-11', 28, 'Black tea, ginger, turmeric, black pepper', 'Yes');
+
+INSERT INTO ReviewProduct (Email, ProductId, Rating, Comment, ReviewDate) VALUES
+('anna.nguyen@email.com', 'P001', 4.5, 'Trà ngon, đậm vị', NOW());
+
+INSERT INTO ProductIngredient (ProductId, IngredientId) VALUES
+('P001', 'I001'),
+('P002', 'I002'),
+('P003', 'I001');
+
+INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
+('ORD001', 'P001', 2),
+('ORD001', 'P002', 1),
+('ORD002', 'P004', 1),
+('ORD002', 'P005', 1),
+('ORD003', 'P010', 1),
+('ORD003', 'P013', 1),
+('ORD004', 'P017', 1),
+('ORD004', 'P019', 1),
+('ORD004', 'P022', 1);
+
+INSERT INTO About (AboutId, Email, ImgUrl, Content, Title, DateUpload, IsShow) VALUES
+('A001', 'anna.nguyen@email.com', 'img/about.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'Mission', NOW(), 'Yes');
+
+INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) VALUES
+('TE001', 'anna.nguyen@email.com', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'Mission', 'img/term.jpg', NOW(), 'Yes');
+
+INSERT INTO Blog (Title, DateUpload, ImgLink, Summary, BlogId, Email, Content, IsShow) VALUES
+('Lợi ích của trà trái cây', NOW(), 'img/blog1.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'B001', 'anna.nguyen@email.com', 'Nội dung chi tiết về lợi ích trà trái cây...', 'Yes');
+
+INSERT INTO Tag (TagId, Name) VALUES
+('T001', 'Health'),
+('T002', 'Tea');
+
+INSERT INTO BlogTag (BlogId, TagId) VALUES
+('B001', 'T001'),
+('B001', 'T002');
+
+INSERT INTO Reaction (ReactionId, Email, BlogId, Comment, IsShow) VALUES
+('R001', 'anna.nguyen@email.com', 'B001', 'Bài viết rất hữu ích!', 'Yes');
