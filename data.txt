@@ -80,19 +80,110 @@ INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
 INSERT INTO About (AboutId, Email, ImgUrl, Content, Title, DateUpload, IsShow) VALUES
 ('A001', 'anna.nguyen@email.com', 'img/about.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'Mission', NOW(), 'Yes');
 
-INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) VALUES
-('TE001', 'anna.nguyen@email.com', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'Mission', 'img/term.jpg', NOW(), 'Yes');
+INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) 
+VALUES
+(
+  'TE001',
+  'anna.nguyen@email.com',
+  'Terms and Conditions',
+  '
+  <h5>Welcome to TeaV!</h5>
+  <p>The following Terms and Conditions govern your use of our website and the purchase of tea products. By accessing or placing an order on this website, you agree to be bound by these terms. If you do not agree, please refrain from using the site.</p>
+  <div class="table-of-contents">
+            <ul>
+              <li><a href="#definitions">1. Definitions</a></li>
+              <li><a href="#ordering-payment">2. Ordering and Payment</a></li>
+              <li><a href="#shipping-delivery">3. Shipping and Delivery</a></li>
+              <li><a href="#returns-refunds">4. Returns and Refunds</a></li>
+              <li><a href="#intellectual-property">5. Intellectual Property</a></li>
+              <li><a href="#limitation-liability">6. Limitation of Liability</a></li>
+              <li><a href="#privacy">7. Privacy</a></li>
+              <li><a href="#changes-terms">8. Changes to Terms</a></li>
+              <li><a href="#governing-law">9. Governing Law</a></li>
+              <li><a href="#contact-us">10. Contact Us</a></li>
+            </ul>
+          </div>
+  <h4 id="definitions">1. Definitions</h4>
+  <ul>
+    <li>"We," "Us," "Our": TeaV, the entity operating the website TeaV.</li>
+    <li>"You," "Customer": Any individual accessing or purchasing from the website.</li>
+    <li>"Products": Teas and related items sold on the website.</li>
+  </ul>
+
+  <h4 id="ordering-payment">2. Ordering and Payment</h4>
+  <ul>
+    <li>All orders are subject to product availability. We reserve the right to refuse or cancel an order if items are out of stock or for any other reason, without prior notice.</li>
+    <li>Product prices are displayed in USD and include/exclude taxes as specified. Shipping costs will be clearly indicated at checkout.</li>
+    <li>Payment is accepted via credit card, PayPal, cash on delivery. Orders will only be processed after payment is confirmed (except for cash-on-delivery options).</li>
+  </ul>
+
+  <h4 id="shipping-delivery">3. Shipping and Delivery</h4>
+  <ul>
+    <li>We ship to Vietnam and neighboring countries. Estimated delivery time is 7 to 10 business days, though delays may occur due to unforeseen circumstances (weather, carrier issues, etc.)</li>
+    <li>You are responsible for providing an accurate delivery address. We are not liable for failed deliveries due to incorrect information.</li>
+  </ul>
+
+  <h4 id="returns-refunds">4. Returns and Refunds</h4>
+  <ul>
+    <li>Returns are accepted within 7 days of receipt if the product is defective or not as described.</li>
+    <li>Returned items must be unused, unopened (except to verify defects), and accompanied by proof of purchase.</li>
+    <li>Return shipping costs are borne by the customer unless the error is ours, in which case we will cover the cost.</li>
+  </ul>
+
+  <h4 id="intellectual-property">5. Intellectual Property</h4>
+  <ul>
+    <li>All content on the TeaV website (images, logos, product descriptions) is the property of TeaV. You may not copy, distribute, or use this content without our written permission.</li>
+  </ul>
+
+  <h4 id="limitation-liability">6. Limitation of Liability</h4>
+  <ul>
+    <li>We strive to provide high-quality tea products but are not responsible for damages arising from improper use or individual allergic reactions to ingredients.</li>
+    <li>The website is provided "as is," and we do not guarantee uninterrupted or error-free access.</li>
+  </ul>
+
+  <h4 id="privacy">7. Privacy</h4>
+  <ul>
+    <li>We collect personal information (name, address, email, phone number) to process orders. Your data is protected under our Privacy Policy and will not be shared with third parties except as necessary for delivery or legal requirements.</li>
+  </ul>
+
+  <h4 id="changes-terms">8. Changes to Terms</h4>
+  <ul>
+    <li>We may update these Terms and Conditions at any time without prior notice. The latest version will be posted on the website and take effect immediately upon posting.</li>
+  </ul>
+
+  <h4 id="governing-law">9. Governing Law</h4>
+  <ul>
+    <li>These terms are governed by the laws of Vietnam. Any disputes will be resolved in Vietnam.</li>
+  </ul>
+
+  <h4 id="contact-us">10. Contact Us</h4>
+  <ul>
+    <li>Email: teavshop@gmail.com</li>
+    <li>Phone: +123 456 7890</li>
+  </ul>
+  ',
+  'images/terms.jpg',
+  NOW(),
+  'Yes');
 
 INSERT INTO Blog (Title, DateUpload, ImgLink, Summary, BlogId, Email, Content, IsShow) VALUES
-('Lợi ích của trà trái cây', NOW(), 'img/blog1.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'B001', 'anna.nguyen@email.com', 'Nội dung chi tiết về lợi ích trà trái cây...', 'Yes');
+('Lợi ích của trà trái cây', NOW(), 'img/blog1.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'B001', 'anna.nguyen@email.com', 'Nội dung chi tiết về lợi ích trà trái cây...', 'Yes'),
+('Cách pha trà đúng cách', NOW(), 'img/blog2.jpg', 'Pha trà đúng cách giúp giữ trọn hương vị', 'B002', 'anna.nguyen@email.com', 'Chi tiết về các bước pha trà để giữ nguyên hương vị...', 'Yes'),
+('Trà và sức khỏe tinh thần', NOW(), 'img/blog3.jpg', 'Trà giúp thư giãn và cải thiện tâm trạng', 'B003', 'anna.nguyen@email.com', 'Nội dung về ảnh hưởng tích cực của trà đến sức khỏe tinh thần...', 'Yes');
 
 INSERT INTO Tag (TagId, Name) VALUES
 ('T001', 'Health'),
-('T002', 'Tea');
+('T002', 'Tips'),
+('T003', 'Relaxation');
 
 INSERT INTO BlogTag (BlogId, TagId) VALUES
 ('B001', 'T001'),
-('B001', 'T002');
+('B002', 'T002'),
+('B003', 'T003');
 
 INSERT INTO Reaction (ReactionId, Email, BlogId, Comment, IsShow) VALUES
-('R001', 'anna.nguyen@email.com', 'B001', 'Bài viết rất hữu ích!', 'Yes');
+('R001', 'anna.nguyen@email.com', 'B001', 'Bài viết rất hữu ích!', 'Yes'),
+('R002', 'anna.nguyen@email.com', 'B002', 'Mình đã thử cách này, hiệu quả thật!', 'Yes'),
+('R003', 'anna.nguyen@email.com', 'B003', 'Đọc xong muốn uống trà liền luôn!', 'Yes');
+
+
