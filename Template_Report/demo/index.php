@@ -1,13 +1,6 @@
    <?php
       $namePage = "Home";
       include "view/header.php";
-    
-    // require_once('db/product_db.php'); 
-    // session_start();
-    // if (!isset($_SESSION['user'])) {
-    //     header('Location: login.php');
-    //     exit();
-    // }
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -15,7 +8,7 @@ if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
 
-$query = "SELECT 
+$product_query = "SELECT 
             product.ProductId,
             product.Name,
             product.Price,
@@ -29,26 +22,36 @@ $query = "SELECT
           WHERE product.IsShow = 'Yes'
           GROUP BY product.ProductId";
 
+$about_query = "SELECT 
+            about.AboutId,
+            about.ImgUrl AS img_about,
+            about.Title,
+            about.Content,
+            about.DateUpload
+        FROM about
+        WHERE about.IsShow = 'Yes'";
+
 $blog_query = "SELECT 
             blog.BlogId,
-            blog.ImgUrl AS img_blog,
+            blog.ImgLink AS img_blog,
             blog.Title,
             blog.Content,
             blog.DateUpload,
             GROUP_CONCAT(tag.Name SEPARATOR ', ') AS tag_names
-          FROM blog
-          JOIN blogtag ON blog.BlogId = blog.BlogId
-          JOIN tag ON blogtag.TagId = tag.TagId
-          WHERE blog.IsShow = 'Yes'
-          GROUP BY blog.BlogId";
+        FROM blog
+        JOIN blogtag ON blog.BlogId = blogtag.BlogId
+        JOIN tag ON blogtag.TagId = tag.TagId
+        WHERE blog.IsShow = 'Yes'
+        GROUP BY blog.BlogId";
 
-
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $product_query);
+$about_result = mysqli_query($conn, $about_query);
 $blog_result = mysqli_query($conn, $blog_query);
 
-if (!$result || !$blog_result) {
+if (!$result || !$blog_result || !$about_result) {
     die("Kết nối thất bại: " . mysqli_error($conn));
 }
+
 ?>
 
     <main>
@@ -86,25 +89,27 @@ if (!$result || !$blog_result) {
         <p class="mb-4">
           We also specialize in bubble tea, a beverage originating from Taiwan that combines freshly brewed teas with a large variety of exotic natural fruit concentrates, served cold with delicious chewy tapioca pearls.
         </p>
-        <button class="btn btn-primary fw-bold" id="learnMoreButton" type="button">Learn more</button>
+        <a href="about.php" target="_blank">
+          <button class="btn btn-primary fw-bold" id="learnMoreButton" type="button">Learn more</button>
+        </a>
       </div>
 
       <div class="col-lg-7">
         <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-          
+          <?php while ($about = mysqli_fetch_assoc($about_result)) { ?>
             <div class="carousel-item active">
               <div class="d-flex gap-3">
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Green Tea">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
                   <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Chai Teas">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
                   <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Single Estate">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
                   <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
@@ -112,20 +117,21 @@ if (!$result || !$blog_result) {
             <div class="carousel-item active">
               <div class="d-flex gap-3">
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Green Tea">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
                   <p class="fw-bold m-0">Green Tea</p>
                 </div>
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Chai Teas">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
                   <p class="fw-bold m-0">Chai Teas</p>
                 </div>
                 <div class="card border-0">
-                  <img src="<?php echo $about['img_blog']; ?>" class="card-img-top rounded" alt="Single Estate">
+                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
                   <p class="fw-bold m-0">Single Estate</p>
                 </div>
               </div>
             </div>
           </div>
+          <?php } ?>
 
           <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -146,7 +152,7 @@ if (!$result || !$blog_result) {
         <div class="container-p-0">
           <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-       
+    
         <div class="carousel-item active">
           <div class="container">
             <div class="row">
@@ -210,34 +216,37 @@ if (!$result || !$blog_result) {
   <h1 class="blogs-section">
   <a href="blog.php" style="text-decoration: none; color: inherit;">Blogs</a>
 </h1>
-  <div class="container my-5" style="margin-left: 100px;">
-  <div class="row g-4">
-    <?php while ($blog = mysqli_fetch_assoc($blog_result)){?>
-      <div class="col-md-4">
-      <div class="card h-100 shadow-sm">
-        <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['Title']; ?>" />
-        <div class="card-body">
-          <div class="mb-2">
-            <?php if (!empty($blog['tag_names'])){ ?>
-              <span class="badge bg-success"><?php echo $blog['tag_names']; ?></span>
-              <?php } ?>
-          </div>
-          <h5 class="card-title"><?php echo $blog['Title']; ?></h5>
-          <p class="card-text"><?php echo $blog['Content']; ?></p>
-        </div>
-        <div class="card-footer text-muted small">
-          <?php echo $blog['DateUpload']; ?>
-        </div>
-  </div>
-    <?php } ?>
-   
 
-<div class="d-flex justify-content-center my-4">
-  <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>
+<div class="container my-5" style="margin-left: 100px;">
+  <div class="row g-4">
+    <?php while ($blog = mysqli_fetch_assoc($blog_result)) { ?>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <a href="blog.php?id=>?<?php echo $blog['BlogId']; ?>"> 
+          <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['Title']; ?>" /></a>
+          <div class="card-body">
+            <div class="mb-2">
+              <?php if (!empty($blog['tag_names'])) { ?>
+                <span class="badge bg-success"><?php echo $blog['tag_names']; ?></span>
+              <?php } ?>
+            </div>
+            <h5 class="card-title"><?php echo $blog['Title']; ?></h5>
+            <p class="card-text"><?php echo $blog['Content']; ?></p>
+          </div>
+          <div class="card-footer text-muted small">
+            <?php echo $blog['DateUpload']; ?>
+          </div>
+        </div>
+      </div> 
+    <?php } ?>
+  </div> 
+
+  <div class="d-flex justify-content-center my-4">
+    <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>
+  </div>
 </div>
 
-        </section>
-      
+      </section>
     </main>
 <?php 
     include "view/footer.php";

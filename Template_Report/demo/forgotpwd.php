@@ -16,14 +16,14 @@
                 placeholder="Enter your email"
                 required />
         </div>
-        <button type="submit" class="btn btn-outline-primary">Send code</button>
+        <a href="confirm-mail.php" class="btn btn-outline-primary">Send code</a>
         <div class="text-center mt-3">
             <a href="login.php" class="text-decoration-none">Back to login</a>
         </div>
     </form>
 
     <!-- Modal -->
-    <div class="modal fade" id="verifyCodeModal" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="verifyCodeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <form id="verifyCodeForm" class="modal-content">
                 <div class="modal-header">
@@ -38,8 +38,9 @@
                 </div>
             </form>
         </div>
+        -->
     </div>
-</div>
+</div> 
 
 
 <?php 

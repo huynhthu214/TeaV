@@ -10,18 +10,13 @@
     }
     
     $query = "SELECT 
-                product.ProductId,
-                product.Name,
-                product.Price,
-                product.ImgUrl,
-                product.Type,
-                GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
-                product.Usefor
-              FROM product
-              JOIN productingredient ON product.ProductId = productingredient.ProductId
-              JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
-              WHERE product.IsShow = 'Yes'
-              GROUP BY product.ProductId";
+                account.Email,
+                account.Password,
+                account.FullName,
+                account.PhoneNumber,
+                account.Type
+              FROM account
+              WHERE account.IsActive = 'Yes'";
     
     
     $result = mysqli_query($conn, $query);

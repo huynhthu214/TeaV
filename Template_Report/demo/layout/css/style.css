@@ -350,7 +350,8 @@ footer .social-links a {
 .login,
 .signup,
 .forgotpwd,
-.reset {
+.reset,
+.confirmmail {
   font-size: 2.5rem;
   font-family: "Gravitas One", serif;
   color: #0d511d;
@@ -360,7 +361,8 @@ footer .social-links a {
 .form-box,
 .form-box-sign,
 .form-box-forgot,
-.form-box-reset {
+.form-box-reset,
+.form-box-confirmmail {
   width: 100%;
   max-width: 450px;
   background-color: #ffffff;
