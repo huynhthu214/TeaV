@@ -17,8 +17,8 @@ $query = "SELECT
             GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
             product.Usefor
           FROM product
-          JOIN productingredient ON product.ProductId = productingredient.ProductId
-          JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+          LEFT JOIN productingredient ON product.ProductId = productingredient.ProductId
+          LEFT JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
           WHERE product.IsShow = 'Yes'
           GROUP BY product.ProductId";
 

@@ -3,6 +3,29 @@
     <?php 
         $namePage = "About";
         include "view/header.php";
+        
+        $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+
+$about_query = "SELECT 
+            about.AboutId,
+            about.ImgUrl AS img_about,
+            about.Title,
+            about.Content,
+            about.DateUpload
+        FROM about
+        WHERE about.IsShow = 'Yes'
+        ORDER BY DateUpload ASC";
+
+$about_result = mysqli_query($conn, $about_query);
+
+if (!$about_result) {
+    die("Kết nối thất bại: " . mysqli_error($conn));
+}
+$about = mysqli_fetch_assoc($about_result);
     ?>
     <main>
       <section class="about-us">

@@ -9,56 +9,64 @@
         die("Kết nối thất bại: " . mysqli_connect_error());
     }
     
-    $query = "SELECT 
-                account.Email,
-                account.Password,
-                account.FullName,
-                account.PhoneNumber,
-                account.Type
-              FROM account
-              WHERE account.IsActive = 'Yes'";
-    
-    
-    $result = mysqli_query($conn, $query);
-    
-    if (!$result) {
-        die("Kết nối thất bại: " . mysqli_error($conn));
+    function login($email, $password) { 
+      global $conn;
+  
+      $sql = "SELECT * FROM account WHERE email = ?";
+      $stm = $conn->prepare($sql);
+      if (!$stm) {
+          return 'Can not login, please contact your admin (prepare failed)';
+      }
+  
+      $stm->bind_param('s', $email);
+      if (!$stm->execute()) {
+          return 'Can not login, please contact your admin (execute failed)';
+      }
+  
+      $result = $stm->get_result();
+      if ($result->num_rows !== 1) {
+          return 'Can not login, invalid username or password';
+      }
+  
+      $data = $result->fetch_assoc();
+      $hashed = $data['password'];
+  
+      if (!password_verify($password, $hashed)) {
+          return 'Can not login, invalid password';
+      }
+  
+      // Login thành công, có thể lưu thông tin user hoặc return true/data
+      return $data; // hoặc return true;
+  }
+  
+
+    $error = '';
+    $email = '';
+    $pass = '';
+
+    if (isset($_POST['email']) && isset($_POST['pass'])) {
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+        
+        if (empty($email)) {
+            // echo 'email error';
+            $error = 'Please enter your email';
+        }
+        else if (empty($pass)) {
+            // echo 'password error';
+            $error = 'Please enter your password';
+        }
+        else if (strlen($pass) < 8) {
+            // echo 'length pass error';
+            $error = 'Password must have at least 8 characters';
+        }else if (login($email, $pass)) {
+            // echo 'login';
+            header('Location: index.php');
+            exit();
+        }else {
+            $error = 'Invalid email or password';
+        }
     }
-
-    // require_once('db/account_db.php');
-    // session_start();
-    // if (isset($_SESSION['user'])) {
-    //     header('Location: index.php');
-    //     exit();
-    // }
-
-    // $error = '';
-
-    // $user = '';
-    // $pass = '';
-
-    // if (isset($_POST['user']) && isset($_POST['pass'])) {
-    //     $user = $_POST['user'];
-    //     $pass = $_POST['pass'];
-
-    //     if (empty($user)) {
-    //         $error = 'Please enter your username';
-    //     }
-    //     else if (empty($pass)) {
-    //         $error = 'Please enter your password';
-    //     }
-    //     else if (strlen($pass) < 6) {
-    //         $error = 'Password must have at least 6 characters';
-    //     }else{
-    //         $result = login($user, $pass);
-    //         if(gettype($result) == 'boolean'){
-    //             $_SESSION['user'] = 'admin';
-    //             $_SESSION['name'] = 'Mai Van Manh';
-
-    //         }
-    //     }
-    //   }
-
 ?>
 
 
@@ -69,18 +77,22 @@
 
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Enter your email" />
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+        <input type="password" class="form-control" id="password" name="pass" placeholder="Enter your password" />
       </div>
 
       <div class="mb-3 text-end">
         <a href="forgotpwd.php" id="forgotPassword" class="text-decoration-none">Forgot Password?</a>
       </div>
-
+      <?php
+           if (!empty($error)) {
+              echo "<div class='alert alert-danger'>$error</div>";
+           }
+      ?>
       <button type="submit" class="btn btn-outline-primary">Login</button>
 
       <div class="text-center mt-3">

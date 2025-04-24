@@ -18,7 +18,8 @@
                     term.ImgUrl AS img_term,
                     term.DateUpload
                   FROM term
-                  WHERE term.IsShow = 'Yes'";
+                  WHERE term.IsShow = 'Yes'
+                  ORDER BY DateUpload ASC";
         
         
         $result = mysqli_query($conn, $term_query);
