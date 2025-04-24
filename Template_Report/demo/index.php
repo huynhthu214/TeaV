@@ -29,7 +29,8 @@ $about_query = "SELECT
             about.Content,
             about.DateUpload
         FROM about
-        WHERE about.IsShow = 'Yes'";
+        WHERE about.IsShow = 'Yes'
+        ORDER BY DateUpload DESC";
 
 $blog_query = "SELECT 
             blog.BlogId,
@@ -42,7 +43,8 @@ $blog_query = "SELECT
         JOIN blogtag ON blog.BlogId = blogtag.BlogId
         JOIN tag ON blogtag.TagId = tag.TagId
         WHERE blog.IsShow = 'Yes'
-        GROUP BY blog.BlogId";
+        GROUP BY blog.BlogId
+        ORDER BY DateUpload ASC";
 
 $result = mysqli_query($conn, $product_query);
 $about_result = mysqli_query($conn, $about_query);
