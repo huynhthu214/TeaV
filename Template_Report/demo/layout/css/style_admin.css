@@ -1,0 +1,250 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lora", sans-serif;
+    display: flex; 
+}
+
+.sidebar {
+      width: 250px;
+      height: 100vh;
+      background: #024410;
+      color: rgb(165, 198, 76);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .brand-icon {
+      font-size: 1.5rem;
+      transform: rotate(-15deg);
+      margin-right: 0.5rem;
+    }
+
+    .brand-text {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .sidebar hr {
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin: 1rem 0;
+    }
+
+    .sidebar h6 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      opacity: 0.5;
+      margin: 1rem 0 0.5rem 0.5rem;
+    }
+
+    .nav-item {
+      padding: 0.4rem 0.8rem;
+      color: rgb(164, 190, 130);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      border-radius: 0.35rem;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-item.active {
+      background-color:rgba(255, 255, 255, 0.1);
+      color: #c2e6b9;
+      font-weight: bold;
+    }
+
+    .nav-item i {
+      margin-right: 0.75rem;
+    }
+
+    .toggle-btn {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .toggle-circle {
+      background-color: rgba(255,255,255,0.2);
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 50%;
+      display: inline-block;
+      text-align: center;
+    }
+    .content-wrapper {
+        padding: 0rem;
+        width: 100%;
+      }
+  
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      }
+      
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fc;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 40px;
+        width: 250px;
+        box-shadow: inset 0 0 0 1px #d1d3e2;
+      }
+      
+      .search-bar input {
+        flex: 1;
+        border: none;
+        padding: 10px 15px;
+        background-color: #f8f9fc;
+        font-size: 14px;
+        outline: none;
+      }
+      
+      .search-bar button {
+        background-color: #4e73df;
+        border: none;
+        padding: 0 15px;
+        cursor: pointer;
+        color: white;
+        height: 100%;
+      }
+      
+      .search-bar button i {
+        font-size: 14px;
+      }
+      
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      .icon-button {
+        position: relative;
+        font-size: 18px;
+        color: #6c757d;
+        cursor: pointer;
+      }
+      
+      .badge {
+        position: absolute;
+        top: -6px;
+        right: -10px;
+        background-color: #e74a3b;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 10px;
+        font-weight: bold;
+      }
+      
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .user-name {
+        font-size: 14px;
+        color: #4e73df;
+      }
+      
+      .user-info img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+      .page-title {
+        margin-bottom: 1rem;
+      }
+  
+      .page-title h1 {
+        font-size: 2rem;
+        color: #5a5c69;
+        margin: 0;
+      }
+  
+      .page-title p {
+        margin-top: 0.5rem;
+        color: #858796;
+        font-size: 0.95rem;
+      }
+  
+      .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      }
+  
+      .card h2 {
+        font-size: 1rem;
+        color: #4e73df;
+        margin-bottom: 1rem;
+      }
+  
+      .table-wrapper {
+        overflow-x: auto;
+      }
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+  
+      thead {
+        background-color: #f8f9fc;
+      }
+  
+      th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #e3e6f0;
+        font-size: 0.9rem;
+        color: #5a5c69;
+      }
+  
+      th {
+        font-weight: bold;
+        color: #4e73df;
+      }
+  
+      .entries-control {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+      }
+  
+      .entries-control select {
+        margin: 0 0.5rem;
+        padding: 0.3rem;
+      }
+  
+      .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verification_code'])) 
             <label for="confirm_password" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" name="confirm_password" required />
         </div>
-        <button type="submit" class="btn btn-outline-primary">Reset Password</button>
+        <button type="submit" class="btn btn-outline-primary">Changing Password</button>
     </form>
 </div>
 

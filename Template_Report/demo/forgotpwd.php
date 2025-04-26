@@ -22,23 +22,7 @@
         </div>
     </form>
 
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="verifyCodeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="verifyCodeForm" class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Enter Verification Code</h5>
-                </div>
-                <div class="modal-body">
-                    <label for="verificationCode" class="form-label">Verification Code</label>
-                    <input type="text" name="verification_code" class="form-control" id="verificationCode" required />
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Verify</button>
-                </div>
-            </form>
-        </div>
-        -->
+
     </div>
 </div> 
 
