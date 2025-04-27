@@ -35,8 +35,7 @@
           return 'Can not login, invalid password';
       }
   
-      // Login thành công, có thể lưu thông tin user hoặc return true/data
-      return $data; // hoặc return true;
+      return $data; 
   }
   
 
@@ -60,18 +59,27 @@
             // echo 'length pass error';
             $error = 'Password must have at least 8 characters';
         }else if (login($email, $pass)) {
-            // echo 'login';
-            header('Location: index.php');
-            exit();
-        }else {
-            $error = 'Invalid email or password';
-        }
+          $email = $conn->real_escape_string($email);
+          $sql = "SELECT Type FROM account WHERE Email = '$email' AND Type = 'Admin' LIMIT 1";
+          $result = $conn->query($sql);
+      
+          if ($result && $result->num_rows > 0) {
+              header('Location: dashboard.php');
+              exit();
+          } else {
+              header('Location: index.php');
+              exit();
+          }
+      }
     }
 ?>
 
 
 <!-- Login -->
 <div class="container form-box mt-5">
+<div class="text-center mb-3">
+    <img id="avatarPreview" src="uploads/default.png" alt="Avatar" class="rounded-circle" width="100" height="100">
+</div>
     <form method="post">
       <h1 class="login text-center mb-4">Login</h1>
 
