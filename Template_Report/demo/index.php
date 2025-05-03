@@ -107,15 +107,12 @@ if (!$result || !$blog_result || !$about_result) {
         <div class="d-flex gap-3">
           <div class="card border-0">
             <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
-            <p class="fw-bold m-0">Green Tea</p>
           </div>
           <div class="card border-0">
             <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
-            <p class="fw-bold m-0">Chai Teas</p>
           </div>
           <div class="card border-0">
             <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
-            <p class="fw-bold m-0">Single Estate</p>
           </div>
         </div>
       </div>
@@ -181,7 +178,7 @@ if (!$result || !$blog_result || !$about_result) {
   </button>
 </div>
   </div>
-  <h1 class="blogs-section">
+  <h1 class="blog-section">
   <a href="blog.php" style="text-decoration: none; color: inherit;">Blogs</a>
 </h1>
 

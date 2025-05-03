@@ -77,9 +77,6 @@
 
 <!-- Login -->
 <div class="container form-box mt-5">
-<div class="text-center mb-3">
-    <img id="avatarPreview" src="uploads/default.png" alt="Avatar" class="rounded-circle" width="100" height="100">
-</div>
     <form method="post">
       <h1 class="login text-center mb-4">Login</h1>
 

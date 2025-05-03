@@ -15,6 +15,7 @@
   />
   <link rel="stylesheet" href="layout/css/style.css?v=2"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ 
 </head>
 <body>
 <header>
@@ -39,32 +40,36 @@
           class="collapse navbar-collapse justify-content-end"
           id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link <?php if ($namePage === "Home") {
-                echo "active";} ?>" href="index.php">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($namePage === "About") {
-                echo "active";} ?>" href="about.php">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($namePage === "Products") {
-                echo "active";} ?>" href="product.php">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($namePage === "Blog") {
-                echo "active";} ?>" href="blog.php">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($namePage === "Terms & Conditions") {
-                echo "active";} ?>" href="term.php">Terms & Conditions</a>
-            </li>
-            <li class="nav-item">
-                <a
-                  class="nav-link <?php if ($namePage === "Login") {
-                  echo "active";} ?>"href="login.php">Login</a>
-              </li>
-          </ul>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Home") echo "active"; ?>" href="index.php">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "About") echo "active"; ?>" href="about.php">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Products") echo "active"; ?>" href="product.php">Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Blog") echo "active"; ?>" href="blog.php">Blog</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Terms & Conditions") echo "active"; ?>" href="term.php">Terms & Conditions</a>
+  </li>
+  
+  <?php if (isset($_SESSION['username'])): ?>
+    <li class="nav-item d-flex align-items-center">
+      <img src="<?php echo $_SESSION['avatar']; ?>" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 8px;">
+      <span style="color: white;"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="logout.php">Logout</a>
+    </li>
+  <?php else: ?>
+    <li class="nav-item">
+      <a class="nav-link <?php if ($namePage === "Login") echo "active"; ?>" href="login.php">Login</a>
+    </li>
+  <?php endif; ?>
+</ul>
         </div>
         <div>
           <a href="cart.php">

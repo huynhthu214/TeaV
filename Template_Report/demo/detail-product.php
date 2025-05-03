@@ -2,6 +2,8 @@
 $namePage = "Product Details";
 include "view/header.php";
 
+session_start();
+
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
 if (!$conn) {
@@ -9,9 +11,44 @@ if (!$conn) {
 }
 
 $productId = isset($_GET['id']) ? $_GET['id'] : null;
-
 if (!$productId) {
     die("Lỗi: Không tìm thấy ID sản phẩm.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $product_price = floatval($_POST['product_price']);
+    $product_image = $_POST['product_image'];
+
+    $product = [
+        'id' => $product_id,
+        'name' => $product_name,
+        'price' => $product_price,
+        'quantity' => 1,
+        'image' => $product_image
+    ];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $found = false;
+    foreach ($_SESSION['cart'] as &$item) {
+        if ($item['id'] == $product['id']) {
+            $item['quantity'] += 1;
+            $found = true;
+            break;
+        }
+    }
+
+    if (!$found) {
+        $_SESSION['cart'][] = $product;
+    }
+
+    // Quay lại trang hiện tại
+    header("Location: detail-product.php?id=$product_id&added=1");
+    exit;
 }
 
 $query = "SELECT 
@@ -84,18 +121,24 @@ $product = mysqli_fetch_assoc($result);
           <p><strong>Uses:</strong> <?php echo htmlspecialchars($product['Usefor']); ?></p>
           <p><strong>Description:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
           
+          
           <div class="d-flex gap-2 mb-4">
             <div class="quantity-selector d-flex align-items-center mb-3">
                 <div class="input-group" style="width: 130px">
                     <input type="number" id="quantity" class="form-control text-center" value="1" min="0" max="<?php echo $product['Quantity']; ?>" step="1">
                 </div>
             </div>
-            <form action="cart.php" method="post">
-                    <input type="hidden" name="product_id" value="<?php echo $product['ProductId']; ?>">
-                    <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['Name']); ?>">
-                    <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
-                    <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Add to Cart</button>
-                  </form>
+            <form method="post" action="detail-product.php?id=<?= $product['ProductId'] ?>">
+              <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
+              <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['Name']) ?>">
+              <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
+              <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['ImgUrl']) ?>">
+              <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Add to Cart</button>
+             </form>
+
+              <?php if (isset($_GET['added']) && $_GET['added'] == 1): ?>
+                  <div id="addedAlert" class="alert alert-success mt-2">Added to cart</div>
+              <?php endif; ?>
           </div>
           <a href="product.php" class="back">Back to Products</a>
         </div>
