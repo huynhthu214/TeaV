@@ -25,12 +25,12 @@ INSERT INTO Orders (`OrderId`, `VoucherId`, `OrderDate`, `TotalAmount`) VALUES
 INSERT INTO Payment (PaymentId, OrderId, TotalPrice, PaymentMethod) VALUES
 ('PM001', 'ORD001', 55000, 'MOMO');
 
-INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber) VALUES
-('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL),
-('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL),
-('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL),
-('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL),
-('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL);
+INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber, Avatar) VALUES
+('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL, 'img/about1.jpg'),
+('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL, 'img/about2.jpg'),
+('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL, 'img/about3.jpg'),
+('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL, 'img/about4.jpg'),
+('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, 'img/about5.jpg');
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
 ('P001', 'C001', 'U001', 'Premium Green Tea', 'This high-quality green tea is carefully harvested', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Pure green tea leaves', 'Yes'),
@@ -78,7 +78,7 @@ INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
 ('ORD004', 'P022', 1);
 
 INSERT INTO About (AboutId, Email, ImgUrl, Content, Title, DateUpload, IsShow) VALUES
-('A001', 'anna.nguyen@email.com', 'img/about.jpg', 'Trà trái cây giúp giải nhiệt và tăng đề kháng', 'Mission', NOW(), 'Yes');
+('A001', 'anna.nguyen@email.com', 'img/about.jpg',  'Our History\nTeaV was founded in 2015 with a deep passion for tea, born from the lush green tea fields of Vietnam. What started as a small family venture has grown into a brand dedicated to sharing the finest teas with the world. Our journey is rooted in tradition, craftsmanship, and a love for nature\'s simplest pleasures.\n\nMission & Vision\nMission: To bring the essence of premium tea to every cup, connecting tea lovers with the rich heritage and flavors of Vietnam and beyond.\nVision: To become a globally recognized tea brand that celebrates sustainability, quality, and the art of tea-making.\n\nOur Tea Fields\nCarefully tended tea fields reflect dedication and harmony with nature. Each leaf tells the story of farmers who nurture the plants, ensuring high-quality tea that embodies the region\'s unique flavors and traditions.\n\nHarvest\nHarvest tea begins with cultivating tea plants under optimal conditions. Farmers hand-pick young leaves at peak seasons, which are then withered and oxidized or dried. Finally, the leaves are packaged to preserve their quality for consumers.\n\nOur Craftsmanship\nTransportation tea involves collecting high-quality leaves and processing them through drying and rolling. After packaging in airtight containers, logistics ensure timely delivery to retailers or consumers while maintaining quality control throughout the journey.\n\nDiscover the soul of tea with TeaV - where tradition meets taste.', 'Mission', NOW(), 'Yes');
 
 INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) 
 VALUES
