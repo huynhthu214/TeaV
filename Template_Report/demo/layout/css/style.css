@@ -1051,3 +1051,16 @@ input[type="number"] {
   color: #fdf751;
   transition: ease 0.3s;
 }
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  background-color: #3a813b;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  line-height: 36px;
+  display: inline-block;
+  margin-right: 8px;
+}

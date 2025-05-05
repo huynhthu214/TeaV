@@ -1,4 +1,8 @@
-
+<?php
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+  }
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -55,28 +59,33 @@
   <li class="nav-item">
     <a class="nav-link <?php if ($namePage === "Terms & Conditions") echo "active"; ?>" href="term.php">Terms & Conditions</a>
   </li>
-  
-  <?php if (isset($_SESSION['username'])): ?>
-    <li class="nav-item d-flex align-items-center">
-      <img src="<?php echo $_SESSION['avatar']; ?>" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 8px;">
-      <span style="color: white;"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="logout.php">Logout</a>
-    </li>
-  <?php else: ?>
-    <li class="nav-item">
-      <a class="nav-link <?php if ($namePage === "Login") echo "active"; ?>" href="login.php">Login</a>
-    </li>
-  <?php endif; ?>
-</ul>
-        </div>
-        <div>
-          <a href="cart.php">
-            <i class="bi bi-cart" style="color: white; font-size:16px"></i>
-          </a>
-        </div>
+  <?php if (isset($_SESSION['email'])): ?>
+            <?php $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="avatar-circle"><?php echo $firstChar; ?></div>
+                <span style="color: white;"><?php echo htmlspecialchars($_SESSION['email']); ?></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="personal_info.php">Profile</a></li>
+                <li><a class="dropdown-item" href="cart.php">My Orders</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+              </ul>
+            </li>
+          <?php else: ?>
+            <li class="nav-item">
+              <a class="nav-link <?php if ($namePage === "Login") echo "active"; ?>" href="login.php">Login</a>
+            </li>
+          <?php endif; ?>
+        </ul>
       </div>
-    </nav>
 
-  </header>
+      <div>
+        <a href="cart.php">
+          <i class="bi bi-cart" style="color: white; font-size:16px"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
