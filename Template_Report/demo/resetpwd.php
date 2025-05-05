@@ -2,14 +2,42 @@
 session_start();
 $namePage = "Reset Password";
 include "view/header.php";
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verification_code'])) {
-    $code = $_POST['verification_code'];
-    if ($code != $_SESSION['verification_code']) {
-        echo "<div class='alert alert-danger text-center'>Incorrect verification code!</div>";
-        exit;
+    if (!$conn) {
+        die("Kết nối thất bại: " . mysqli_connect_error());
     }
-}
+
+    if(!isset($_SESSION['email_reset'])){
+        header('Location: fogotpwd.php');
+        exit();
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $password = trim($_POST['password']);
+        $confirm_pass = trim($_POST['confirm_pass']);
+        $email = $_SESSION['email_reset'];
+
+        if($password !== $confirm_pass){
+            $error = "Password don't match!";
+        }else{
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Băm password an toàn
+
+            $sql = "UPDATE account SET Password='$hashedPassword' WHERE Email='$email'";
+            if (mysqli_query($conn, $sql)) {
+                // Xóa session
+                unset($_SESSION['email_reset']);
+                unset($_SESSION['code_reset']);
+                unset($_SESSION['code_reset_time']);
+                
+                // Redirect về login
+                header('Location: login.php?message=reset_success');
+                exit();
+            } else {
+                $error = "Something went wrong. Please try again.";
+            }
+        }
+    }
 ?>
 
 <div class="container form-box-reset mt-5">
@@ -23,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verification_code'])) 
             <label for="confirm_password" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" name="confirm_password" required />
         </div>
-        <button type="submit" class="btn btn-outline-primary">Reset Password</button>
+        <button type="submit" class="btn btn-outline-primary">Changing Password</button>
     </form>
 </div>
 

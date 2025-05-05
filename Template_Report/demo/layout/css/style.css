@@ -65,6 +65,9 @@
   --z-index-modal: 1000;
   --z-index-tooltip: 10000;
 }
+body{
+  flex:1;
+}
 
 /* Common Elements */
 ul {
@@ -393,8 +396,14 @@ footer .social-links a {
 }
 
 /* Sections */
-.product-section {
-  margin: 30px 0 0 80px;
+.product-section{
+  margin:50px 0 40px 70px;
+  color: #03423b;
+  font-weight: bold;
+}
+
+.blog-section{
+  margin:50px 0 0 70px;
   color: #03423b;
   font-weight: bold;
 }
@@ -418,9 +427,6 @@ button .btn-primary.fw-bold {
   font-family: "Gravitas One", serif;
 }
 
-.product-section {
-  margin-top: -70px;
-}
 
 .about-us h3 {
   font-size: 1.5rem;

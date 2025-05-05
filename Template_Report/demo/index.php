@@ -17,10 +17,11 @@ $product_query = "SELECT
             GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
             product.Usefor
           FROM product
-          JOIN productingredient ON product.ProductId = productingredient.ProductId
-          JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
+          LEFT JOIN productingredient ON product.ProductId = productingredient.ProductId
+          LEFT JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
           WHERE product.IsShow = 'Yes'
-          GROUP BY product.ProductId";
+          GROUP BY product.ProductId
+          LIMIT 6";
 
 $about_query = "SELECT 
             about.AboutId,
@@ -97,54 +98,35 @@ if (!$result || !$blog_result || !$about_result) {
       </div>
 
       <div class="col-lg-7">
-        <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-          <?php while ($about = mysqli_fetch_assoc($about_result)) { ?>
-            <div class="carousel-item active">
-              <div class="d-flex gap-3">
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
-                  <p class="fw-bold m-0">Green Tea</p>
-                </div>
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
-                  <p class="fw-bold m-0">Chai Teas</p>
-                </div>
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
-                  <p class="fw-bold m-0">Single Estate</p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item active">
-              <div class="d-flex gap-3">
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
-                  <p class="fw-bold m-0">Green Tea</p>
-                </div>
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
-                  <p class="fw-bold m-0">Chai Teas</p>
-                </div>
-                <div class="card border-0">
-                  <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
-                  <p class="fw-bold m-0">Single Estate</p>
-                </div>
-              </div>
-            </div>
+      <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <?php 
+    $isFirst = true;
+    while ($about = mysqli_fetch_assoc($about_result)) { ?>
+      <div class="carousel-item <?php if ($isFirst) { echo 'active'; $isFirst = false; } ?>">
+        <div class="d-flex gap-3">
+          <div class="card border-0">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
           </div>
-          <?php } ?>
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-          
+          <div class="card border-0">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
+          </div>
+          <div class="card border-0">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
+          </div>
         </div>
+      </div>
+    <?php } ?>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
       </div>
     </div>
   </div>
@@ -152,79 +134,60 @@ if (!$result || !$blog_result || !$about_result) {
   <a href="product.php" style="text-decoration: none; color: inherit;">Products</a>
 </h1>
         <div class="container-p-0">
-          <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-    
-        <div class="carousel-item active">
-          <div class="container">
-            <div class="row">
-            <?php while ($product = mysqli_fetch_assoc($result)) { 
-            $useCategory = 'energy'; 
-            $useforLower = strtolower($product['Usefor']);
-            if (strpos($useforLower, 'relax') !== false || strpos($useforLower, 'sleep') !== false || 
-                strpos($useforLower, 'unwind') !== false || strpos($useforLower, 'calm') !== false || 
-                strpos($useforLower, 'soothe') !== false) {
-                $useCategory = 'relax';
-            } elseif (strpos($useforLower, 'warm') !== false || strpos($useforLower, 'digestion') !== false || 
-                     strpos($useforLower, 'cozy') !== false || strpos($useforLower, 'healthy') !== false) {
-                $useCategory = 'digestion';
+        <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <?php 
+    $i = 0;
+    while ($product = mysqli_fetch_assoc($result)) {
+        if ($i % 3 === 0) {
+            if ($i === 0) {
+                echo '<div class="carousel-item active"><div class="container"><div class="row g-4">';
+            } else {
+                echo '</div></div></div>';
+                echo '<div class="carousel-item"><div class="container"><div class="row g-4">';
             }
-          ?>
-              <div class="col-md-4 product-card-home" data-type="<?php 
-                $type = strtolower($product['Type']);
-                if (strpos($type, 'green') !== false) echo 'green';
-                elseif (strpos($type, 'herbal') !== false) echo 'herbal';
-                elseif (strpos($type, 'black tea (spiced)') !== false) echo 'black';
-                elseif (strpos($type, 'black tea') !== false) echo 'blacktea';
-                elseif (strpos($type, 'oolong') !== false) echo 'oolong';
-              ?>"
-              data-price="<?php 
-                echo ($product['Price'] < 30 ? 'low' : ($product['Price'] <= 40 ? 'mid' : 'high')); 
-              ?>"
-              data-use="<?php echo $useCategory; ?>"
-            >
-              <div class="card">
-                <img
-                  src="<?php echo $product['img_product']; ?>"
-                  class="card-img-top"
-                  alt="<?php echo $product['Name']; ?>"
-                />
-                <div class="card-body">
-                  <h5 class="card-title"><?php echo $product['Name']; ?></h5>
-                  <p class="card-text">
-                    <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
-                    <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
-                  </p>
-                  <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">View Details</a>
-                </div>
-              </div>
-            </div>
-          <?php } ?>
+        }
+    ?>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="<?php echo $product['img_product']; ?>" class="card-img-top" alt="<?php echo $product['Name']; ?>" />
+            <div class="card-body">
+              <h5 class="card-title"><?php echo $product['Name']; ?></h5>
+              <p class="card-text">
+                <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
+                <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
+              </p>
+              <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">View Details</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselProduct" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+    <?php 
+        $i++;
+    }
+    if ($i > 0) echo '</div></div></div>'; 
+    ?>
   </div>
-  <h1 class="blogs-section">
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselProduct" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+  </div>
+  <h1 class="blog-section">
   <a href="blog.php" style="text-decoration: none; color: inherit;">Blogs</a>
 </h1>
 
-<div class="container my-5" style="margin-left: 100px;">
+<div class="container my-5">
   <div class="row g-4">
     <?php while ($blog = mysqli_fetch_assoc($blog_result)) { ?>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
-          <a href="blog.php?id=>?<?php echo $blog['BlogId']; ?>"> 
+        <a href="blog.php?id=<?php echo $blog['BlogId']; ?>">
           <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['Title']; ?>" /></a>
           <div class="card-body">
             <div class="mb-2">
@@ -254,6 +217,5 @@ if (!$result || !$blog_result || !$about_result) {
     include "view/footer.php";
 ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/jquery.js"></script>
   </body>
 </html>

@@ -2,6 +2,8 @@
 $namePage = "Product Details";
 include "view/header.php";
 
+session_start();
+
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
 if (!$conn) {
@@ -9,21 +11,56 @@ if (!$conn) {
 }
 
 $productId = isset($_GET['id']) ? $_GET['id'] : null;
-
 if (!$productId) {
     die("Lỗi: Không tìm thấy ID sản phẩm.");
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $product_price = floatval($_POST['product_price']);
+    $product_image = $_POST['product_image'];
+
+    $product = [
+        'id' => $product_id,
+        'name' => $product_name,
+        'price' => $product_price,
+        'quantity' => 1,
+        'image' => $product_image
+    ];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $found = false;
+    foreach ($_SESSION['cart'] as &$item) {
+        if ($item['id'] == $product['id']) {
+            $item['quantity'] += 1;
+            $found = true;
+            break;
+        }
+    }
+
+    if (!$found) {
+        $_SESSION['cart'][] = $product;
+    }
+
+    // Quay lại trang hiện tại
+    header("Location: detail-product.php?id=$product_id&added=1");
+    exit;
+}
+
 $query = "SELECT 
-            product.ProductId AS id,
-            product.Name AS name,
-            product.Price AS price,
-            product.ImgUrl AS image,
-            product.Type AS type,
+            product.ProductId,
+            product.Name,
+            product.Price,
+            product.ImgUrl,
+            product.Type,
             GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
-            product.Usefor AS usefor, 
-            product.Description AS description, 
-            product.Quantity AS quantity 
+            product.Usefor, 
+            product.Description, 
+            product.Quantity
           FROM product 
           JOIN productingredient ON product.ProductId = productingredient.ProductId
           JOIN ingredients ON productingredient.IngredientId = ingredients.IngredientId
@@ -45,20 +82,20 @@ $product = mysqli_fetch_assoc($result);
 <main>
   <section class="product-detail py-5">
     <div class="container">
-      <h1 class="text-center mb-4"><?php echo htmlspecialchars($product['name']); ?></h1>
+      <h1 class="text-center mb-4"><?php echo htmlspecialchars($product['Name']); ?></h1>
       <div class="row">
         <div class="col-md-6">
           <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
                     </div>
                     <div class="carousel-item">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" class="d-block w-100" alt="<?php echo $product['name']; ?>">
+                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -77,20 +114,31 @@ $product = mysqli_fetch_assoc($result);
           </div>
           
           <h3>Details</h3>
-          <p><strong>Price:</strong> $<?php echo number_format($product['price'], 2); ?></p>
-          <p><strong>Quantity:</strong> <?php echo $product['quantity']; ?></p>
-          <p><strong>Type:</strong> <?php echo ucfirst(htmlspecialchars($product['type'])); ?></p>
+          <p><strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?></p>
+          <p><strong>Quantity:</strong> <?php echo $product['Quantity']; ?></p>
+          <p><strong>Type:</strong> <?php echo ucfirst(htmlspecialchars($product['Type'])); ?></p>
           <p><strong>Ingredients:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>
-          <p><strong>Uses:</strong> <?php echo htmlspecialchars($product['usefor']); ?></p>
-          <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
+          <p><strong>Uses:</strong> <?php echo htmlspecialchars($product['Usefor']); ?></p>
+          <p><strong>Description:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
+          
           
           <div class="d-flex gap-2 mb-4">
             <div class="quantity-selector d-flex align-items-center mb-3">
                 <div class="input-group" style="width: 130px">
-                    <input type="number" id="quantity" class="form-control text-center" value="1" min="0" max="<?php echo $product['quantity']; ?>" step="1">
+                    <input type="number" id="quantity" class="form-control text-center" value="1" min="0" max="<?php echo $product['Quantity']; ?>" step="1">
                 </div>
             </div>
-            <button class="add-to-cart" id="addItem" data-product-id="<?php echo htmlspecialchars($product['id']); ?>">Add to cart</button>
+            <form method="post" action="detail-product.php?id=<?= $product['ProductId'] ?>">
+              <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
+              <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['Name']) ?>">
+              <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
+              <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['ImgUrl']) ?>">
+              <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Add to Cart</button>
+             </form>
+
+              <?php if (isset($_GET['added']) && $_GET['added'] == 1): ?>
+                  <div id="addedAlert" class="alert alert-success mt-2">Added to cart</div>
+              <?php endif; ?>
           </div>
           <a href="product.php" class="back">Back to Products</a>
         </div>
