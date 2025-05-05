@@ -118,7 +118,6 @@ $product = mysqli_fetch_assoc($result);
           <p><strong>Quantity:</strong> <?php echo $product['Quantity']; ?></p>
           <p><strong>Type:</strong> <?php echo ucfirst(htmlspecialchars($product['Type'])); ?></p>
           <p><strong>Ingredients:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>
-          <p><strong>Uses:</strong> <?php echo htmlspecialchars($product['Usefor']); ?></p>
           <p><strong>Description:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
           
           
@@ -137,7 +136,7 @@ $product = mysqli_fetch_assoc($result);
              </form>
 
               <?php if (isset($_GET['added']) && $_GET['added'] == 1): ?>
-                  <div id="addedAlert" class="alert alert-success mt-2">Added to cart</div>
+                  <div id="addedAlert" class="alert mt-2"></div>
               <?php endif; ?>
           </div>
           <a href="product.php" class="back">Back to Products</a>

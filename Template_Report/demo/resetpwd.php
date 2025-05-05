@@ -21,7 +21,7 @@ $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
         if($password !== $confirm_pass){
             $error = "Password don't match!";
         }else{
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Băm password an toàn
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
             $sql = "UPDATE account SET Password='$hashedPassword' WHERE Email='$email'";
             if (mysqli_query($conn, $sql)) {
