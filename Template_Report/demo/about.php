@@ -1,6 +1,4 @@
-  
-<!-- Header/Navbar -->
-    <?php 
+<?php 
         $namePage = "About";
         include "view/header.php";
         
@@ -36,18 +34,31 @@ $about = mysqli_fetch_assoc($about_result);
           </div>
         </div>
         <div class="container">
-          <div class="row py-5">
+          <div class="row py-5" id="row1">
             <div class="col">
-              <h3>Our History</h3>
+              <h3>History</h3>
               <p>
                 TeaV was founded in 2015 with a deep passion for tea, born
                 from the lush green tea fields of Vietnam. Our journey is rooted in
                 tradition, craftsmanship, and a love for nature's simplest
                 pleasures.
               </p>
-            </div>
+            </div>           
             <div class="col">
               <img src="layout/images/about-1.jpg" alt="">
+            </div>
+          </div>  
+          <div class="row py-5" id="row2">
+            <div class="col">
+              <img src="layout/images/about-1.jpg" alt="">
+            </div>
+            <div class="col">
+            <h3>Mission</h3>
+              <p>
+                To bring the essence of premium tea to
+                every cup, connecting tea lovers with the rich heritage and
+                flavors of Vietnam and beyond.
+              </p>
             </div>
           </div>
         </div>
