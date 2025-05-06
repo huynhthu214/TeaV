@@ -1,8 +1,23 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/20/2025 6:31:05 PM                         */
+/* Created on:     5/6/2025 11:18:28 PM                         */
 /*==============================================================*/
 
+
+/*==============================================================*/
+/* Table: About                                                 */
+/*==============================================================*/
+create table About
+(
+   AboutId              varchar(10) not null,
+   Email                varchar(100),
+   ImgUrl               text,
+   Content              text,
+   Title                text,
+   DateUpload           datetime,
+   IsShow               text,
+   primary key (AboutId)
+);
 
 /*==============================================================*/
 /* Table: Account                                               */
@@ -17,6 +32,7 @@ create table Account
    Email                varchar(100) not null,
    OrderId              varchar(10),
    PhoneNumber          varchar(10),
+   Address              text,
    primary key (Email)
 );
 
@@ -36,7 +52,6 @@ create table Blog
    primary key (BlogId)
 );
 
-
 /*==============================================================*/
 /* Table: BlogTag                                               */
 /*==============================================================*/
@@ -47,8 +62,6 @@ create table BlogTag
    primary key (BlogId, TagId)
 );
 
-
-
 /*==============================================================*/
 /* Table: CalculationUnit                                       */
 /*==============================================================*/
@@ -58,7 +71,6 @@ create table CalculationUnit
    Name                 text,
    primary key (UnitId)
 );
-
 
 /*==============================================================*/
 /* Table: Categories                                            */
@@ -71,8 +83,6 @@ create table Categories
    primary key (CategoryId)
 );
 
-
-
 /*==============================================================*/
 /* Table: Ingredients                                           */
 /*==============================================================*/
@@ -84,8 +94,6 @@ create table Ingredients
    primary key (IngredientId)
 );
 
-
-
 /*==============================================================*/
 /* Table: OrderProduct                                          */
 /*==============================================================*/
@@ -96,7 +104,6 @@ create table OrderProduct
    Quantity             int,
    primary key (OrderId, ProductId)
 );
-
 
 /*==============================================================*/
 /* Table: Orders                                                */
@@ -111,8 +118,6 @@ create table Orders
    primary key (OrderId)
 );
 
-
-
 /*==============================================================*/
 /* Table: Payment                                               */
 /*==============================================================*/
@@ -124,7 +129,6 @@ create table Payment
    PaymentMethod        varchar(100),
    primary key (PaymentId)
 );
-
 
 /*==============================================================*/
 /* Table: Product                                               */
@@ -142,10 +146,9 @@ create table Product
    Price                float,
    Usefor               text,
    IsShow               text,
+   Type                 text,
    primary key (ProductId)
 );
-
-
 
 /*==============================================================*/
 /* Table: ProductIngredient                                     */
@@ -156,8 +159,6 @@ create table ProductIngredient
    IngredientId         varchar(10) not null,
    primary key (ProductId, IngredientId)
 );
-
-
 
 /*==============================================================*/
 /* Table: Reaction                                              */
@@ -172,7 +173,6 @@ create table Reaction
    primary key (ReactionId)
 );
 
-
 /*==============================================================*/
 /* Table: ReviewProduct                                         */
 /*==============================================================*/
@@ -186,7 +186,6 @@ create table ReviewProduct
    primary key (Email, ProductId)
 );
 
-
 /*==============================================================*/
 /* Table: Tag                                                   */
 /*==============================================================*/
@@ -195,6 +194,21 @@ create table Tag
    TagId                varchar(10) not null,
    Name                 text,
    primary key (TagId)
+);
+
+/*==============================================================*/
+/* Table: Term                                                  */
+/*==============================================================*/
+create table Term
+(
+   TermId               varchar(10) not null,
+   Email                varchar(100),
+   Title                text,
+   Content              text,
+   ImgUrl               text,
+   DateUpload           datetime,
+   IsShow               text,
+   primary key (TermId)
 );
 
 /*==============================================================*/
@@ -211,7 +225,8 @@ create table Vouchers
    primary key (VoucherId)
 );
 
-
+alter table About add constraint FK_ABOUT_WRITEABOU_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
 
 alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
@@ -263,4 +278,7 @@ alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_ACCOUNT foreign k
 
 alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
+
+alter table Term add constraint FK_TERM_WRITETERM_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
 

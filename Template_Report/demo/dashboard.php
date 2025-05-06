@@ -4,87 +4,80 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeaV - Dashboard</title>
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    rel="stylesheet"
-  />
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="layout/css/style_admin.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 <body>
 
 <div class="sidebar">
-    <div class="brand">
-      <div class="brand-text">ADMIN</div>
-    </div>
-
-    <hr>
-
-    <a href="#" class="nav-item active">
-      <i class="fa-solid fa-gauge-high"></i> Dashboard
-    </a>
-
-    <h6>Interface</h6>
-    <a href="#" class="nav-item">
-      <i class="fa-solid fa-gear"></i> Components
-      <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
-    </a>
-    <a href="#" class="nav-item">
-      <i class="fa-solid fa-screwdriver-wrench"></i> Utilities
-      <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
-    </a>
-
-    <hr>
-
-    <h6>Addons</h6>
-    <a href="#" class="nav-item">
-      <i class="fa-solid fa-folder"></i> Pages
-      <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
-    </a>
-    <a href="#" class="nav-item">
-      <i class="fa-solid fa-chart-column"></i> Charts
-    </a>
-    <a href="#" class="nav-item active">
-      <i class="fa-solid fa-table-cells"></i> Tables
-    </a>
-
-    <hr>
-
-    <div class="toggle-btn">
-      <div class="toggle-circle">
-        <i class="fa-solid fa-chevron-left"></i>
-      </div>
-    </div>
+  <div class="brand">
+    <div class="brand-text">ADMIN</div>
   </div>
 
-  <div class="content-wrapper">
+  <hr>
 
-  <div class="header">
-  <div class="search-bar">
-    <input type="text" placeholder="Search for...">
-    <button><i class="fas fa-search"></i></button>
-  </div>
+  <a href="#" class="nav-item active">
+    <i class="fa-solid fa-gauge-high"></i> Dashboard
+  </a>
 
-  <div class="header-actions">
-    <div class="icon-button">
-      <i class="fas fa-bell"></i>
-      <span class="badge">3+</span>
-    </div>
-    <div class="icon-button">
-      <i class="fas fa-envelope"></i>
-      <span class="badge">7</span>
-    </div>
-    <div class="user-info">
-      <span class="user-name">Douglas McGee</span>
-      <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Avatar">
+  <h6>Interface</h6>
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-gear"></i> Components
+    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
+  </a>
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-screwdriver-wrench"></i> Utilities
+    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
+  </a>
+
+  <hr>
+
+  <h6>Addons</h6>
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-folder"></i> Pages
+    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
+  </a>
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-chart-column"></i> Charts
+  </a>
+  <a href="#" class="nav-item active">
+    <i class="fa-solid fa-table-cells"></i> Tables
+  </a>
+
+  <hr>
+
+  <div class="toggle-btn">
+    <div class="toggle-circle">
+      <i class="fa-solid fa-chevron-left"></i>
     </div>
   </div>
 </div>
+
+<div class="content-wrapper">
+
+  <div class="header">
+    <div class="search-bar">
+      <input type="text" placeholder="Search for...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="header-actions">
+      <div class="icon-button">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3+</span>
+      </div>
+      <div class="icon-button">
+        <i class="fas fa-envelope"></i>
+        <span class="badge">7</span>
+      </div>
+      <div class="user-info">
+        <span class="user-name">Douglas McGee</span>
+        <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Avatar">
+      </div>
+    </div>
+  </div>
 
   <div class="page-title">
     <h1>Tables</h1>
@@ -95,18 +88,18 @@
   </div>
 
   <div class="card">
-    <div class="table-header">
+    <div class="table-header d-flex justify-content-between align-items-center p-3">
       <h2>DataTables Example</h2>
       <div>
         <label>Search:
-          <input type="text" style="margin-left:5px;">
+          <input type="text" class="form-control d-inline-block w-auto ms-2">
         </label>
       </div>
     </div>
 
-    <div class="entries-control">
+    <div class="entries-control px-3 pb-2">
       Show
-      <select>
+      <select class="form-select d-inline-block w-auto mx-2">
         <option>10</option>
         <option>25</option>
         <option>50</option>
@@ -115,8 +108,8 @@
       entries
     </div>
 
-    <div class="table-wrapper">
-      <table>
+    <div class="table-wrapper p-3">
+      <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Name</th>
@@ -168,13 +161,12 @@
             <td>2011/06/07</td>
             <td>$206,850</td>
           </tr>
-          <!-- Thêm nhiều dòng nếu cần -->
         </tbody>
       </table>
     </div>
-
   </div>
 
 </div>
+
 </body>
 </html>

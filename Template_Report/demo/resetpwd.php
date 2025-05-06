@@ -4,27 +4,34 @@ $namePage = "Reset Password";
 include "view/header.php";
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
-    if (!$conn) {
-        die("Kết nối thất bại: " . mysqli_connect_error());
-    }
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
 
-    if(!isset($_SESSION['email_reset'])){
-        header('Location: fogotpwd.php');
-        exit();
-    }
+if(!isset($_SESSION['email_reset'])){
+    header('Location: forgotpwd.php');
+    exit();
+}
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $password = trim($_POST['password']);
-        $confirm_pass = trim($_POST['confirm_pass']);
-        $email = $_SESSION['email_reset'];
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $password = trim($_POST['new_password']); 
+    $confirm_pass = trim($_POST['confirm_password']); 
+    $email = $_SESSION['email_reset'];
 
-        if($password !== $confirm_pass){
-            $error = "Password don't match!";
-        }else{
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
+    if($password !== $confirm_pass){
+        $error = "Passwords don't match!";
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
-            $sql = "UPDATE account SET Password='$hashedPassword' WHERE Email='$email'";
-            if (mysqli_query($conn, $sql)) {
+        $sql = "UPDATE account SET Password = ? WHERE Email = ?";
+        $stm = $conn->prepare($sql);
+        
+        if (!$stm) {
+            $error = "Something went wrong. Please try again.";
+        } else {
+            $stm->bind_param('ss', $hashedPassword, $email); 
+
+            if ($stm->execute()) {
                 // Xóa session
                 unset($_SESSION['email_reset']);
                 unset($_SESSION['code_reset']);
@@ -38,6 +45,7 @@ $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
             }
         }
     }
+}
 ?>
 
 <div class="container form-box-reset mt-5">

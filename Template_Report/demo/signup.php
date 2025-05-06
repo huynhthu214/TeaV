@@ -20,7 +20,7 @@ function generateRandomString($length = 10) {
   return $randomString;
 }
 
-function signup($full_name, $email, $phone, $pass) {
+function signup($full_name, $email, $phone, $pass, $dob) {
   global $conn;
 
   $sql = "SELECT COUNT(*) FROM Account WHERE Email = ?";
@@ -35,13 +35,12 @@ function signup($full_name, $email, $phone, $pass) {
       return "Email already exists";
   }
   $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
-  $token = generateRandomString();
 
   $insert_sql = "INSERT INTO account 
-            (FullName, Email, PhoneNumber, Password, CreatedDate, Type, IsActive)
+            (FullName, Email, PhoneNumber, Password, DateOfBirth, CreatedDate, Type, IsActive)
             VALUES (?, ?, ?, ?, NOW(), 'Customer', 'Yes')";
         $stmt = $conn->prepare($insert_sql);
-        $stmt->bind_param('ssss', $full_name, $email, $phone, $hashed_pass);
+        $stmt->bind_param('sssss', $full_name, $email, $phone, $hashed_pass, $dob);
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -88,9 +87,9 @@ function signup($full_name, $email, $phone, $pass) {
         else if (empty($pass)) {
             $error = 'Please enter your password';
         }
-        // else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
-        //   $error = 'Password must be at least 8 characters and include lowercase, uppercase, number, and special character';
-        // }
+        else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
+          $error = 'Password must be at least 8 characters and include lowercase, uppercase, number, and special character';
+        }
         else if ($pass != $pass_confirm) {
             $error = 'Password does not match';
         }
@@ -98,7 +97,7 @@ function signup($full_name, $email, $phone, $pass) {
           $error = 'You must agree to the Terms & Conditions';
         }
         else {
-            $result = signup($full_name, $email, $phone, $pass);
+            $result = signup($full_name, $email, $phone, $pass, $dob);
             if(gettype($result) === 'boolean'){
                 header('Location: login.php');
             }else{

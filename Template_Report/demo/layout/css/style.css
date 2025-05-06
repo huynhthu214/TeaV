@@ -100,7 +100,6 @@ img {
 /* Header */
 header {
   width: 100%;
-  z-index: 5;
   background-color: var(--color-forest-green);
 }
 

@@ -12,75 +12,70 @@
     
     function login($email, $password) { 
       global $conn;
-  
-      $sql = "SELECT * FROM account WHERE email = ?";
+
+      $sql = "SELECT * FROM account WHERE Email = ?";
       $stm = $conn->prepare($sql);
       if (!$stm) {
-          return 'Can not login, please contact your admin (prepare failed)';
+          return false;
       }
-  
+
       $stm->bind_param('s', $email);
       if (!$stm->execute()) {
-          return 'Can not login, please contact your admin (execute failed)';
+          return false;
       }
-  
+
       $result = $stm->get_result();
       if ($result->num_rows !== 1) {
-          return 'Can not login, invalid username or password';
+          return false;
       }
-  
+
       $data = $result->fetch_assoc();
-      $hashed = $data['password'];
-  
-      if (!password_verify($password, $hashed)) {
-          return 'Can not login, invalid password';
+      if (!isset($data['Password'])) {
+          return false;
       }
-  
+      $hashed = $data['Password'];
+
+      if (!password_verify($password, $hashed)) {
+          return false;
+      }
+
       return $data; 
   }
-  
 
-    $error = '';
-    $email = '';
-    $pass = '';
 
-    if (isset($_POST['email']) && isset($_POST['pass'])) {
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        
-        if (empty($email)) {
-            // echo 'email error';
-            $error = 'Please enter your email';
-        }
-        else if (empty($pass)) {
-            // echo 'password error';
-            $error = 'Please enter your password';
-        }
-        else if (strlen($pass) < 8) {
-            // echo 'length pass error';
-            $error = 'Password must have at least 8 characters';
-        }else if (login($email, $pass)) {
-          $email = $conn->real_escape_string($email);
-          $sql = "SELECT * FROM account WHERE Email = '$email' LIMIT 1";
-          $result = $conn->query($sql);
-        
-          if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-        
-            // Thiết lập session
-            $_SESSION['email'] = $row['Email'];
-            $_SESSION['avatar'] = $row['Avatar']; // Phải đúng tên cột Avatar trong DB
-        
-            // Điều hướng
-            if ($row['Type'] === 'Admin') {
-              header('Location: dashboard.php');
-            } else {
-              header('Location: index.php');
-            }
-            exit();
+  $error = '';
+  $email = '';
+  $pass = '';
+
+  if (isset($_POST['email']) && isset($_POST['pass'])) {
+      $email = trim($_POST['email']);
+      $pass = trim($_POST['pass']);
+      
+      if (empty($email)) {
+          $error = 'Please enter your email';
+      }
+      else if (empty($pass)) {
+          $error = 'Please enter your password';
+      }
+      else if (strlen($pass) < 8) {
+          $error = 'Password must have at least 8 characters';
+      } else {
+          $userData = login($email, $pass);
+          if ($userData) {  // Nếu trả về dữ liệu người dùng
+              // Thiết lập session
+              $_SESSION['email'] = $userData['Email'];
+
+              if ($userData['Type'] === 'Admin') {
+                  header('Location: dashboard.php');
+              } else {
+                  header('Location: index.php');
+              }
+              exit();
+          } else {
+              $error = 'Invalid email or password';  // Nếu đăng nhập không thành công
           }
-        }
-    }
+      }
+  }
 ?>
 
 
