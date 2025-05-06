@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/3/2025 4:12:53 PM                          */
+/* Created on:     5/6/2025 11:18:28 PM                         */
 /*==============================================================*/
 
 
@@ -32,7 +32,7 @@ create table Account
    Email                varchar(100) not null,
    OrderId              varchar(10),
    PhoneNumber          varchar(10),
-   Avatar               text,
+   Address              text,
    primary key (Email)
 );
 
