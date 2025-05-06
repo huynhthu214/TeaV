@@ -1,4 +1,8 @@
    <?php
+   if(session_status() === PHP_SESSION_NONE){
+    session_start();
+   }
+
       $namePage = "Home";
       include "view/header.php";
 
@@ -26,9 +30,9 @@ $product_query = "SELECT
 $about_query = "SELECT 
             about.AboutId,
             about.ImgUrl AS img_about,
-            about.Title,
-            about.Content,
-            about.DateUpload
+            about.Title AS title_about,
+            about.Content AS content_about,
+            about.DateUpload AS date_about
         FROM about
         WHERE about.IsShow = 'Yes'
         ORDER BY DateUpload DESC";
@@ -36,9 +40,9 @@ $about_query = "SELECT
 $blog_query = "SELECT 
             blog.BlogId,
             blog.ImgLink AS img_blog,
-            blog.Title,
-            blog.Content,
-            blog.DateUpload,
+            blog.Title AS title_blog,
+            blog.Content AS content_blog,
+            blog.DateUpload AS date_blog,
             GROUP_CONCAT(tag.Name SEPARATOR ', ') AS tag_names
         FROM blog
         JOIN blogtag ON blog.BlogId = blogtag.BlogId
@@ -55,6 +59,11 @@ if (!$result || !$blog_result || !$about_result) {
     die("Kết nối thất bại: " . mysqli_error($conn));
 }
 
+$about_list = [];
+while ($row = mysqli_fetch_assoc($about_result)) {
+    $about_list[] = $row;
+}
+$first_about = $about_list[0];
 ?>
 
     <main>
@@ -88,10 +97,8 @@ if (!$result || !$blog_result || !$about_result) {
             <div class="row align-items-center">
    
             <div class="col-lg-5">
-        <h2 class="fw-bold mb-3">The Story Behind Our Ocha House</h2>
-        <p class="mb-4">
-          We also specialize in bubble tea, a beverage originating from Taiwan that combines freshly brewed teas with a large variety of exotic natural fruit concentrates, served cold with delicious chewy tapioca pearls.
-        </p>
+        <h2 class="fw-bold mb-3"><?php echo $first_about['title_about']; ?></h2>
+        <p class="mb-4"><?php echo $first_about['content_about'];?></p>
         <a href="about.php" target="_blank">
           <button class="btn btn-primary fw-bold" id="learnMoreButton" type="button">Learn more</button>
         </a>
@@ -100,23 +107,21 @@ if (!$result || !$blog_result || !$about_result) {
       <div class="col-lg-7">
       <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <?php 
-    $isFirst = true;
-    while ($about = mysqli_fetch_assoc($about_result)) { ?>
-      <div class="carousel-item <?php if ($isFirst) { echo 'active'; $isFirst = false; } ?>">
+    <?php  foreach ($about_list as $index => $about) {?>
+      <div class="carousel-item <?php echo $index === 0 ? 'active': ''; ?>">
         <div class="d-flex gap-3">
           <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Green Tea">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
           </div>
           <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Chai Teas">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
           </div>
           <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="Single Estate">
+            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
           </div>
         </div>
       </div>
-    <?php } ?>
+      <?php } ?>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -188,18 +193,18 @@ if (!$result || !$blog_result || !$about_result) {
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
         <a href="blog.php?id=<?php echo $blog['BlogId']; ?>">
-          <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['Title']; ?>" /></a>
+          <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['title_blog']; ?>" /></a>
           <div class="card-body">
             <div class="mb-2">
               <?php if (!empty($blog['tag_names'])) { ?>
                 <span class="badge bg-success"><?php echo $blog['tag_names']; ?></span>
               <?php } ?>
             </div>
-            <h5 class="card-title"><?php echo $blog['Title']; ?></h5>
-            <p class="card-text"><?php echo $blog['Content']; ?></p>
+            <h5 class="card-title"><?php echo $blog['title_blog']; ?></h5>
+            <p class="card-text"><?php echo $blog['content_blog']; ?></p>
           </div>
           <div class="card-footer text-muted small">
-            <?php echo $blog['DateUpload']; ?>
+            <?php echo $blog['date_blog']; ?>
           </div>
         </div>
       </div> 

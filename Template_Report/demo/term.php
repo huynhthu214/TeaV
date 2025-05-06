@@ -35,8 +35,8 @@
              while($term = mysqli_fetch_assoc($result)){
               echo "<h1 style='text-align: center;'>" .$term['Title'] . "</h1>";
               echo "<p>" .$term['Content'] . "</p>";
-              echo "<img src='" .$term['img_term'] . "' alt='" . $term['Title'] . "' />";
-              echo "<p><small>Uploaded on: " . $term['DateUpload'] . "</small></p>";
+              // echo "<img src='" .$term['img_term'] . "' alt='" . $term['Title'] . "' />";
+              // echo "<p><small>Uploaded on: " . $term['DateUpload'] . "</small></p>";
               echo "<p><strong>Contact us:</strong> " . $term['Email'] . "</p>";
         }
         ?>

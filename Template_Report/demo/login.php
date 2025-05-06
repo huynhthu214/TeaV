@@ -1,5 +1,6 @@
 
 <?php 
+    session_start();
     $namePage = "Login";
     include "view/header.php";
     
@@ -60,17 +61,25 @@
             $error = 'Password must have at least 8 characters';
         }else if (login($email, $pass)) {
           $email = $conn->real_escape_string($email);
-          $sql = "SELECT Type FROM account WHERE Email = '$email' AND Type = 'Admin' LIMIT 1";
+          $sql = "SELECT * FROM account WHERE Email = '$email' LIMIT 1";
           $result = $conn->query($sql);
-      
+        
           if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        
+            // Thiết lập session
+            $_SESSION['email'] = $row['Email'];
+            $_SESSION['avatar'] = $row['Avatar']; // Phải đúng tên cột Avatar trong DB
+        
+            // Điều hướng
+            if ($row['Type'] === 'Admin') {
               header('Location: dashboard.php');
-              exit();
-          } else {
+            } else {
               header('Location: index.php');
-              exit();
+            }
+            exit();
           }
-      }
+        }
     }
 ?>
 

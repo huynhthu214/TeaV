@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
     $product_price = floatval($_POST['product_price']);
-    $product_image = $_POST['product_image']; // Dùng ảnh từ form, không truy vấn nữa
+    $product_image = $_POST['product_image']; 
 
     $product = [
         'id' => $product_id,
