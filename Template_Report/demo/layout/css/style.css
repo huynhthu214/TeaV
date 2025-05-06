@@ -65,8 +65,8 @@
   --z-index-modal: 1000;
   --z-index-tooltip: 10000;
 }
-body{
-  flex:1;
+body {
+  flex: 1;
 }
 
 /* Common Elements */
@@ -396,14 +396,14 @@ footer .social-links a {
 }
 
 /* Sections */
-.product-section{
-  margin:50px 0 40px 70px;
+.product-section {
+  margin: 50px 0 40px 70px;
   color: #03423b;
   font-weight: bold;
 }
 
-.blog-section{
-  margin:50px 0 0 70px;
+.blog-section {
+  margin: 50px 0 0 70px;
   color: #03423b;
   font-weight: bold;
 }
@@ -426,7 +426,6 @@ button .btn-primary.fw-bold {
   color: var(--color-forest-green);
   font-family: "Gravitas One", serif;
 }
-
 
 .about-us h3 {
   font-size: 1.5rem;
@@ -453,9 +452,10 @@ button .btn-primary.fw-bold {
 
 .text {
   position: relative;
-  animation-name: wipe;
-  animation-duration: 2.5s;
-  animation-delay: 0s;
+}
+
+.animate {
+  animation: wipe 3s ease-in forwards;
 }
 
 @keyframes wipe {
@@ -481,6 +481,58 @@ button .btn-primary.fw-bold {
   margin: 10px 400px;
 }
 
+.carousel-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Định dạng ảnh */
+.d-block-about {
+  width: 100%;
+  max-width: 640px; /* Giới hạn chiều rộng */
+  height: auto;
+  aspect-ratio: 16 / 9; /* Tỷ lệ 16:9 */
+  object-fit: cover; /* Lấp đầy khung */
+  border-radius: 8px; /* Bo góc nhẹ */
+  display: block;
+  margin: 0 auto; /* Căn giữa */
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 20px; /* Khoảng cách từ đáy ảnh */
+  left: 50%;
+  transform: translateX(-50%); /* Căn giữa ngang */
+  max-width: 90%; /* Giới hạn chiều rộng để không tràn */
+  background: rgba(0, 0, 0, 0.7); /* Nền mờ */
+  border-radius: 8px;
+  padding: 10px 15px;
+  text-align: center;
+  color: #fff;
+}
+
+.carousel-caption p {
+  margin: 0;
+  font-size: 1rem; /* Cỡ chữ phù hợp */
+  line-height: 1.4;
+}
+
+.carousel-caption h6 {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .d-block-about {
+    max-width: 100%; /* Đầy đủ chiều rộng trên mobile */
+  }
+  .carousel-caption {
+    font-size: 0.9rem; /* Giảm cỡ chữ trên mobile */
+  }
+}
+
 .container-about {
   display: flex;
   justify-content: center;
@@ -496,6 +548,15 @@ button .btn-primary.fw-bold {
   object-fit: cover;
 }
 
+.about-us li {
+  text-overflow: none;
+}
+
+.text-1 {
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  margin: auto;
+}
 /* Product Cards Home */
 .product-card-home {
   margin-top: 20px;
