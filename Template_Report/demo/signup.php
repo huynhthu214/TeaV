@@ -20,7 +20,7 @@ function generateRandomString($length = 10) {
   return $randomString;
 }
 
-function signup($full_name, $email, $phone, $pass, $dob) {
+function signup($full_name, $email, $phone, $pass, $dob, $address) {
   global $conn;
 
   $sql = "SELECT COUNT(*) FROM Account WHERE Email = ?";
@@ -37,10 +37,10 @@ function signup($full_name, $email, $phone, $pass, $dob) {
   $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
   $insert_sql = "INSERT INTO account 
-            (FullName, Email, PhoneNumber, Password, DateOfBirth, CreatedDate, Type, IsActive)
-            VALUES (?, ?, ?, ?, NOW(), 'Customer', 'Yes')";
+            (FullName, Email, PhoneNumber, Password, DateOfBirth, Address, CreatedDate, Type, IsActive)
+            VALUES (?, ?, ?, ?, ?, ?, NOW(), 'Customer', 'Yes')";
         $stmt = $conn->prepare($insert_sql);
-        $stmt->bind_param('sssss', $full_name, $email, $phone, $hashed_pass, $dob);
+        $stmt->bind_param('ssssss', $full_name, $email, $phone, $hashed_pass, $dob, $address);
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -59,13 +59,15 @@ function signup($full_name, $email, $phone, $pass, $dob) {
     $dob = '';
     $pass = '';
     $pass_confirm = '';
+    $address = '';
 
-    if (isset($_POST['full']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['dob']) && isset($_POST['pass']) && isset($_POST['pass-confirm']))
+    if (isset($_POST['full']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['dob']) && isset($_POST['address']) && isset($_POST['pass']) && isset($_POST['pass-confirm']))
     {
         $full_name = $_POST['full'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $dob = $_POST['dob'];
+        $address = $_POST['address'];
         $pass = $_POST['pass'];
         $pass_confirm = $_POST['pass-confirm'];
 
@@ -86,8 +88,11 @@ function signup($full_name, $email, $phone, $pass, $dob) {
         }
         else if (empty($pass)) {
             $error = 'Please enter your password';
-        }
-        else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
+        }else if (empty($address)){
+            $error = 'Please enter your address';
+        }else if (strlen($address) > 300) {
+              $error = 'Address must not exceed 300 characters';
+        }else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
           $error = 'Password must be at least 8 characters and include lowercase, uppercase, number, and special character';
         }
         else if ($pass != $pass_confirm) {
@@ -97,7 +102,7 @@ function signup($full_name, $email, $phone, $pass, $dob) {
           $error = 'You must agree to the Terms & Conditions';
         }
         else {
-            $result = signup($full_name, $email, $phone, $pass, $dob);
+            $result = signup($full_name, $email, $phone, $pass, $dob, $address);
             if(gettype($result) === 'boolean'){
                 header('Location: login.php');
             }else{
@@ -130,6 +135,11 @@ function signup($full_name, $email, $phone, $pass, $dob) {
       <div class="mb-3">
         <label for="date-of-birth" class="form-label">Date of birth</label>
         <input type="date" class="form-control" id="date-of-birth" name="dob" value="<?php echo htmlspecialchars($dob); ?>"/>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" name="address" maxlength="300" value="<?php echo htmlspecialchars($address); ?>"/>
       </div>
 
       <div class="mb-3">

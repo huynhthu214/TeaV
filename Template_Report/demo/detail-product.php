@@ -18,6 +18,7 @@ if (!isset($_SESSION['email'])) {
     header("Location: login.php?msg=login_required");
     exit();
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];

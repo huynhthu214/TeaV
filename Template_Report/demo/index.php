@@ -35,8 +35,7 @@ $about_query = "SELECT
             about.DateUpload AS date_about
         FROM about
         WHERE about.IsShow = 'Yes'
-        ORDER BY DateUpload DESC
-        LIMIT 1";
+        ORDER BY DateUpload DESC";
 
 $blog_query = "SELECT 
             blog.BlogId,
