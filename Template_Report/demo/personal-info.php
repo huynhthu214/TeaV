@@ -6,12 +6,12 @@
       die("Kết nối thất bại: " . mysqli_connect_error());
   }
 
-  if (!isset($_SESSION['user_email'])) {
+  if (!isset($_SESSION['email'])) {
     header("Location: login.php");
     exit();
 }
 
-$email = $_SESSION['user_email'];
+$email = $_SESSION['email'];
 
 $sql = "SELECT * FROM account WHERE Email = ?";
 $stmt = $conn->prepare($sql);
@@ -20,6 +20,38 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
+
+$isEditing = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['edit'])) {
+        $isEditing = true;
+    }
+
+    if (isset($_POST['update'])) {
+        $fullname = $_POST['fullname'];
+        $phone = $_POST['phone'];
+        $dob = $_POST['dob'];
+        $address = $_POST['address'];
+
+        $updateSql = "UPDATE account SET FullName=?, PhoneNumber=?, DateOfBirth=?, Address=? WHERE Email=?";
+        $updateStmt = $conn->prepare($updateSql);
+        $updateStmt->bind_param("sssss", $fullname, $phone, $dob, $address, $email);
+
+        if ($updateStmt->execute()) {
+            // Cập nhật dữ liệu lại để hiển thị
+            $sql = "SELECT * FROM account WHERE Email = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+            $stmt->close();
+        }
+
+        $updateStmt->close();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,12 +68,30 @@ $stmt->close();
       left: 0;
       width: 220px;
       height: 100%;
-      background-color:rgb(249, 250, 248);
+      background-color:#0d511d;
       padding: 20px;
       border-right: 1px solid #ddd;
+      color:rgb(188, 240, 58);
     }
     .main-content {
       margin-left: 220px;
+    }
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      background-color: #3a813b;
+      border-radius: 50%;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      line-height: 36px;
+      display: inline-block;
+      margin-right: 8px;
+    }
+    * {
+      box-sizing: border-box;
+      font-family: "Lora", sans-serif;
     }
   </style>
 </head>
@@ -51,15 +101,33 @@ $stmt->close();
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4 py-2">
     <div class="container-fluid">
       <div class="d-flex align-items-center ms-auto gap-3">
-      <a href="index.html" class="text-dark position-relative" aria-label="Home">
+      <a href="index.php" class="text-dark position-relative" aria-label="Home">
           <i class="bi bi-house-door-fill fs-5" aria-hidden="true"></i>
         </a>
         <a href="cart.php" class="text-dark position-relative" aria-label="Shopping Cart">
           <i class="bi bi-cart3 fs-5" aria-hidden="true"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
+            <?php
+                $cartCount = 0;
+                if (isset($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $item) {
+                        $cartCount += $item['quantity'];
+                    }
+                }
+                ?>
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+  <?php echo $cartCount; ?>
+</span>
         </a>
-        <span class="text-primary fw-semibold">Douglas McGee</span>
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User avatar" width="32" height="32" class="rounded-circle">
+            <?php if (isset($_SESSION['email'])): ?>
+          <?php 
+            $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); 
+            $userEmail = htmlspecialchars($_SESSION['email']);
+          ?>
+          <div class="d-flex align-items-center">
+            <div class="avatar-circle"><?php echo $firstChar; ?></div>
+            <span class="text-dark fw-semibold"><?php echo $userEmail; ?></span>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </nav>
@@ -76,11 +144,6 @@ $stmt->close();
     </a>
   </li>
   <li class="mb-3">
-    <a href="vouchers.php" class="text-decoration-none text-dark">
-      <i class="bi bi-ticket-perforated me-2" aria-hidden="true"></i>My Vouchers
-    </a>
-  </li>
-  <li class="mb-3">
     <a href="logout.php" class="text-decoration-none text-danger">
       <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout
     </a>
@@ -94,27 +157,51 @@ $stmt->close();
         <!-- Account Details -->
         <h3 class="mb-4">Account Details</h3>
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Full Name</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['FullName']); ?>" readonly>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Phone</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['PhoneNumber']); ?>" readonly>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">Birthday</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['DateOfBirth']); ?>" readonly>
-          </div>
-          <div class="col-12 mb-3">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['DateOfBirth']); ?>" readonly>
-          </div>
-        </div>
+        <form method="post">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-control" name="fullname"
+             value="<?php echo htmlspecialchars($user['FullName']); ?>"
+             <?php echo $isEditing ? '' : 'readonly'; ?>>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control"
+             value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Phone</label>
+      <input type="text" class="form-control" name="phone"
+             value="<?php echo htmlspecialchars($user['PhoneNumber']); ?>"
+             <?php echo $isEditing ? '' : 'readonly'; ?>>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Birthday</label>
+      <input type="date" class="form-control" name="dob"
+             value="<?php echo htmlspecialchars($user['DateOfBirth']); ?>"
+             <?php echo $isEditing ? '' : 'readonly'; ?>>
+    </div>
+    <div class="col-12 mb-3">
+      <label class="form-label">Address</label>
+      <input type="text" class="form-control" name="address"
+             value="<?php echo htmlspecialchars($user['Address']); ?>"
+             <?php echo $isEditing ? '' : 'readonly'; ?>>
+    </div>
+  </div>
+
+  <?php if ($isEditing): ?>
+  <div class="d-flex justify-content-end">
+    <button type="submit" name="update" class="btn btn-success">Update</button>
+  </div>
+<?php else: ?>
+  <div class="d-flex justify-content-start">
+    <button type="submit" name="edit" class="btn btn-primary">Edit</button>
+  </div>
+<?php endif; ?>
+</form>
+
+        
       </main>
     </div>
   </div>
