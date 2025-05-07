@@ -52,18 +52,12 @@ $about = mysqli_fetch_assoc($about_result);
             </div>
             <div class="col-4">
               <h3>Mission</h3>
-              <tr>
-                At Tea Heritage, our mission is threefold:
-                <li>
-                  Preserve: To safeguard traditional tea cultivation practices that have shaped Vietnam's agricultural landscape for centuries, ensuring these methods continue to thrive in a modern world.
-                </li>
-                <li>
-                  Connect: To build meaningful bridges between our tea-growing communities and tea lovers worldwide, fostering cultural understanding and appreciation through the universal language of tea.
-                </li>
-                <li>
-                  Elevate: To continuously refine our craft, pushing the boundaries of what tea can be while honoring its rich history and tradition.
-                </li>
-              </tr>              
+              <p>
+                At Tea Heritage, our mission is threefold: </br>
+                  Preserve: To safeguard traditional tea cultivation practices that have shaped Vietnam's agricultural landscape for centuries, ensuring these methods continue to thrive in a modern world. </br>
+                  Connect: To build meaningful bridges between our tea-growing communities and tea lovers worldwide, fostering cultural understanding and appreciation through the universal language of tea. </br>
+                  Elevate: To continuously refine our craft, pushing the boundaries of what tea can be while honoring its rich history and tradition.             </br>
+              </p>
             </div>
           </div>
           <div class="row py-5" id="row2">
