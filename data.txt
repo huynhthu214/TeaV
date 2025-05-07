@@ -186,4 +186,15 @@ INSERT INTO Reaction (ReactionId, Email, BlogId, Comment, IsShow) VALUES
 ('R002', 'anna.nguyen@email.com', 'B002', 'Mình đã thử cách này, hiệu quả thật!', 'Yes'),
 ('R003', 'anna.nguyen@email.com', 'B003', 'Đọc xong muốn uống trà liền luôn!', 'Yes');
 
+INSERT INTO `about` (`AboutId`, `Email`, `ImgUrl`, `Content`, `Title`, `DateUpload`, `IsShow`) VALUES
+('1', 'anna.nguyen@email.com', 'layout/images/about-0.jpg', 'Tea Heritage began in the misty mountains of Vietnam when founder Mai Nguyen discovered her grandmother\'s ancient tea recipes in 2008. These treasured family techniques, passed down through generations, inspired our mission to preserve authentic tea traditions.', 'History', '2024-01-10 00:00:00', 'Yes'),
+('2', 'anna.nguyen@email.com', 'layout/images/about-1.jpg', 'Our mission is to Preserve tradition, Connect people, and Elevate the tea experience through cultural appreciation and sustainable practices.', 'Mission', '2024-02-15 00:00:00', 'Yes'),
+('3', 'anna.nguyen@email.com', 'layout/images/about-2.jpg', 'Our commitment to the environment guides everything we do—from organic farming practices and biodegradable packaging to fair compensation for farmers and investment in local communities.', 'Sustainability', '2024-03-05 00:00:00', 'Yes'),
+('4', 'anna.nguyen@email.com', 'layout/images/about-3.jpg', 'While we respect tradition, we also embrace thoughtful innovation. We continuously explore new techniques and flavor profiles that enhance the tea experience.', 'Innovation', '2024-03-10 00:00:00', 'Yes'),
+('5', 'anna.nguyen@email.com', 'layout/images/about-4.jpg', 'We honor traditional methods and authentic flavors. Each product reflects genuine practices refined over generations.', 'Authenticity', '2024-03-20 00:00:00', 'Yes'),
+('6', 'anna.nguyen@email.com', 'layout/images/about-5.jpg', 'We believe in the power of tea to bring people together. Tea creates connections that transcend borders.', 'Community', '2024-04-01 00:00:00', 'Yes'),
+('7', 'anna.nguyen@email.com', './layout/images/quote-1.jpg', 'In the leaf\'s unfurling, we witness the dance between human hands and nature\'s bounty. This dance is what we call tea.', 'Quote: Traditional Vietnamese saying', '2024-01-10 10:00:00', 'Yes'),
+('8', 'anna.nguyen@email.com', './layout/images/quote-2.jpg', 'Tea reminds us to slow down. In a world of instant gratification, the patient art of brewing teaches us that the most rewarding experiences cannot be rushed.', 'Quote: The ?TeaV Philosophy', '2024-02-15 10:00:00', 'Yes'),
+('9', 'anna.nguyen@email.com', './layout/images/quote-3.jpg', 'Each tea leaf carries the memory of the soil that nourished it, the rain that fed it, the sun that warmed it, and the hands that tenderly harvested it. When you drink our tea, you taste this entire journey.', 'Quote: From \"The Tea Heritage Story\"', '2024-03-05 10:00:00', 'Yes');
+
 
