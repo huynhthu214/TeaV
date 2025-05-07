@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/6/2025 11:18:28 PM                         */
+/* Created on:     5/7/2025 3:24:18 PM                          */
 /*==============================================================*/
 
 
@@ -33,6 +33,7 @@ create table Account
    OrderId              varchar(10),
    PhoneNumber          varchar(10),
    Address              text,
+   DateOfBirth          datetime,
    primary key (Email)
 );
 
@@ -111,7 +112,6 @@ create table OrderProduct
 create table Orders
 (
    OrderId              varchar(10) not null,
-   VoucherId            varchar(10),
    PaymentId            varchar(10),
    OrderDate            datetime,
    TotalAmount          float,
@@ -147,6 +147,7 @@ create table Product
    Usefor               text,
    IsShow               text,
    Type                 text,
+   SaleOff              float,
    primary key (ProductId)
 );
 
@@ -211,20 +212,6 @@ create table Term
    primary key (TermId)
 );
 
-/*==============================================================*/
-/* Table: Vouchers                                              */
-/*==============================================================*/
-create table Vouchers
-(
-   VoucherId            varchar(10) not null,
-   Name                 varchar(50),
-   Description          text,
-   DiscountPercent      float,
-   StartDate            datetime,
-   EndDate              datetime,
-   primary key (VoucherId)
-);
-
 alter table About add constraint FK_ABOUT_WRITEABOU_ACCOUNT foreign key (Email)
       references Account (Email) on delete restrict on update restrict;
 
@@ -245,9 +232,6 @@ alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_ORDERS foreign key
 
 alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
-
-alter table Orders add constraint FK_ORDERS_APPLY_VOUCHERS foreign key (VoucherId)
-      references Vouchers (VoucherId) on delete restrict on update restrict;
 
 alter table Orders add constraint FK_ORDERS_PAY_PAYMENT foreign key (PaymentId)
       references Payment (PaymentId) on delete restrict on update restrict;

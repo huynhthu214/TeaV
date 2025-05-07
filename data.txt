@@ -1,5 +1,3 @@
-INSERT INTO Vouchers (VoucherId, Name, Description, DiscountPercent, StartDate, EndDate) VALUES
-('V001', 'TET50', 'Giảm 50% dịp Tết', 50, '2025-01-01', '2025-01-31');
 
 INSERT INTO CalculationUnit (UnitId, Name) VALUES
 ('U001', '250g'),
@@ -16,21 +14,21 @@ INSERT INTO Categories (`CategoryId`, `Name`, `Description`) VALUES
 ('C004', 'Black Tea', 'Robust and bold black teas'),
 ('C005', 'Black Tea (Spiced)', 'Black teas with aromatic spices');
 
-INSERT INTO Orders (`OrderId`, `VoucherId`, `OrderDate`, `TotalAmount`) VALUES
-('ORD001', 'V001', '2025-04-12', 86),
-('ORD002', null, '2025-04-13', 83),
-('ORD003', null, '2025-04-14', 70),
-('ORD004', null, '2025-04-15', 105);
+INSERT INTO Orders (`OrderId`, `OrderDate`, `TotalAmount`) VALUES
+('ORD001', '2025-04-12', 86),
+('ORD002', '2025-04-13', 83),
+('ORD003', '2025-04-14', 70),
+('ORD004', '2025-04-15', 105);
 
 INSERT INTO Payment (PaymentId, OrderId, TotalPrice, PaymentMethod) VALUES
 ('PM001', 'ORD001', 55000, 'MOMO');
 
-INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber, Address) VALUES
-('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL, NULL),
-('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL, NULL),
-('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL, NULL),
-('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL, NULL),
-('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, NULL);
+INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber, Address, DateOfBirth) VALUES
+('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL, NULL, NULL),
+('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL, NULL, NULL),
+('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL, NULL, NULL),
+('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL, NULL, NULL),
+('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, NULL, NULL);
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
 ('P001', 'C001', 'U001', 'Premium Green Tea', 'This high-quality green tea is carefully harvested', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Pure green tea leaves', 'Yes'),
@@ -78,8 +76,9 @@ INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
 ('ORD004', 'P022', 1);
 
 INSERT INTO About (AboutId, Email, ImgUrl, Content, Title, DateUpload, IsShow) VALUES
-('A001', 'anna.nguyen@email.com', 'img/about.jpg',  'Our History\nTeaV was founded in 2015 with a deep passion for tea, born from the lush green tea fields of VietCraftsmanship\nTransportation tea involves collecting high-quality leaves and processing them through drying and rolling. After packaging in airtight containers, logistics ensure timely delivery to retailers or consumers while maintaining quality control throughout the journey.\n\nDiscover the soul of tea with TeaV - where tradition meets taste.', 'Mission', NOW(), 'Yes'),
-('A002', 'anna.nguyen@email.com', 'img/about1.jpg',  'Mission: To bring the essence of premium tea to every cup, connecting tea lovers with the rich heritage and flavors of Vietnam and beyond.\nVision: To become a globally recognized tea brand that celebrates scontrol throughout the journey.\n\nDiscover the soul of tea with TeaV - where tradition meets taste.', 'Mission', NOW(), 'Yes');
+('A001', 'anna.nguyen@email.com', 'img/about.jpg',  'At Tea Heritage, our mission is threefold:
+Preserve: To safeguard traditional tea cultivation practices that have shaped Vietnam''s agricultural landscape for centuries, ensuring these methods continue to thrive in a modern world.', 'Mission', NOW(), 'Yes'),
+('A002', 'anna.nguyen@email.com', 'img/about1.jpg',  'Tea Heritage began in the misty mountains of Vietnam when founder Mai Nguyen discovered her grandmother''s ancient tea recipes in 2008. These treasured family techniques, passed down through generations, inspired our mission to preserve authentic tea traditions.', 'History', NOW(), 'Yes');
 
 INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) 
 VALUES
