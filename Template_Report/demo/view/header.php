@@ -44,13 +44,13 @@ if(session_status() === PHP_SESSION_NONE){
           class="collapse navbar-collapse justify-content-end"
           id="navbarNav">
           <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link <?php if ($namePage === "Home") echo "active"; ?>" href="index.php">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link <?php if ($namePage === "About") echo "active"; ?>" href="about.php">About</a>
-              </li>
-              <li class="nav-item dropdown">
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Home") echo "active"; ?>" href="index.php">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "About") echo "active"; ?>" href="about.php">About</a>
+  </li>
+  <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle <?php if ($namePage === 'Products') echo 'active'; ?>" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Products
                 </a>
@@ -83,6 +83,26 @@ if(session_status() === PHP_SESSION_NONE){
                     mysqli_close($conn);
                     ?>
                 </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Blog") echo "active"; ?>" href="blog.php">Blog</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if ($namePage === "Terms & Conditions") echo "active"; ?>" href="term.php">Terms & Conditions</a>
+  </li>
+  <?php if (isset($_SESSION['email'])): ?>
+            <?php $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="avatar-circle"><?php echo $firstChar; ?></div>
+                <span style="color: white;"><?php echo htmlspecialchars($_SESSION['email']); ?></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="personal-info.php">Profile</a></li>
+                <li><a class="dropdown-item" href="cart.php">My Orders</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+              </ul>
             </li>
               <li class="nav-item">
                 <a class="nav-link <?php if ($namePage === "Blog") echo "active"; ?>" href="blog.php">Blog</a>
