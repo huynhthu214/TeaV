@@ -67,9 +67,11 @@ if (session_status() === PHP_SESSION_NONE) {
                             if (mysqli_num_rows($result) > 0):
                                 while ($row = mysqli_fetch_assoc($result)):
                             ?>
-                                    <li><a class="dropdown-item" href="products.php?category_id=<?php echo htmlspecialchars($row['Categoryid']); ?>">
-                                        <?php echo htmlspecialchars($row['Name']); ?>
-                                    </a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="products.php?category_id=<?php echo htmlspecialchars($row['Categoryid']); ?>">
+                                            <?php echo htmlspecialchars($row['Name']); ?>
+                                        </a>
+                                    </li>
                             <?php
                                 endwhile;
                             else:
@@ -81,6 +83,9 @@ if (session_status() === PHP_SESSION_NONE) {
                             mysqli_free_result($result);
                             mysqli_close($conn);
                             ?>
+                            <li>
+                                <a class="dropdown-item" href="products.php">All Products</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

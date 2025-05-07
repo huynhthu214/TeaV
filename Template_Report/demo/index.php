@@ -218,9 +218,8 @@ $first_about = $about_list[0];
 
       </section>
     </main>
-<?php 
+    <?php 
     include "view/footer.php";
 ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
