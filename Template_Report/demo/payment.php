@@ -9,20 +9,20 @@ $couponCode = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
 $finalTotal = $totalFromCart;
 
 $errors = [];
-$fullName = '';
+$Name = '';
 $email = '';
 $address = '';
 $phone_number = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_type']) && $_POST['form_type'] === 'payment') {
-    $fullName = trim($_POST['fullName'] ?? '');
+    $Name = trim($_POST['Name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $address = trim($_POST['address'] ?? '');
     $phone_number = trim($_POST['phone_number'] ?? '');
 
     // Validation
-    if (empty($fullName)) {
-        $errors[] = 'Please enter your full name';
+    if (empty($Name)) {
+        $errors[] = 'Please enter your name';
     }
     if (empty($email)) {
         $errors[] = 'Please enter your email';
@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_type']) && $_POS
             
             <!-- Customer Information -->
             <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" value="<?php echo htmlspecialchars($fullName); ?>" required>
+                <label for="Name">Name</label>
+                <input type="text" id="Name" name="Name" value="<?php echo htmlspecialchars($Name); ?>" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
