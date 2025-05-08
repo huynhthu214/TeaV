@@ -147,7 +147,7 @@ $product = mysqli_fetch_assoc($result);
                         </form>
 
                         <?php if (isset($_GET['added']) && $_GET['added'] == 1): ?>
-                            <div class="alert alert-success mt-2">Sản phẩm đã được thêm vào giỏ hàng!</div>
+                            <div class="alert alert-success mt-2">Product has been added to cart!</div>
                         <?php endif; ?>
                     </div>
                     <a href="product.php" class="back">Back to Products</a>

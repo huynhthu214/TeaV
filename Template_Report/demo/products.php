@@ -167,9 +167,9 @@ $query_string = http_build_query([
                     <h5 class="card-title"><?php echo htmlspecialchars($product['Name']); ?></h5>
                     <p class="card-text">
                       <strong>Ingredient:</strong> <?php echo htmlspecialchars($product['ingredients']); ?><br />
-                      <strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?>
+                      <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
                     </p>
-                    <a href="detail-product.php?id=<?php echo htmlspecialchars($product['ProductId']); ?>" class="btn btn-success">Xem chi tiết</a>
+                    <a href="detail-product.php?id=<?php echo htmlspecialchars($product['ProductId']); ?>" class="btn btn-success">View detail</a>
                   </div>
                 </div>
               </div>
@@ -186,7 +186,7 @@ $query_string = http_build_query([
               <!-- Nút trước -->
               <li class="page-item <?php echo $page <= 1 ? 'disabled' : ''; ?>">
                 <a class="page-link" href="?page=<?php echo $page - 1; ?><?php echo $query_string ? '&' . $query_string : ''; ?>" aria-label="Previous">
-                  <span aria-hidden="true">«</span>
+                  <span aria-hidden="true" style="color:rgb(9, 65, 7)">«</span>
                 </a>
               </li>
               <!-- Số trang -->
@@ -198,7 +198,7 @@ $query_string = http_build_query([
               <!-- Nút sau -->
               <li class="page-item <?php echo $page >= $total_pages ? 'disabled' : ''; ?>">
                 <a class="page-link" href="?page=<?php echo $page + 1; ?><?php echo $query_string ? '&' . $query_string : ''; ?>" aria-label="Next">
-                  <span aria-hidden="true">»</span>
+                  <span aria-hidden="true" style="color:rgb(9, 65, 7)">»</span>
                 </a>
               </li>
             </ul>
