@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/7/2025 3:24:18 PM                          */
+/* Created on:     5/7/2025 3:54:17 PM                          */
 /*==============================================================*/
 
 
@@ -33,7 +33,7 @@ create table Account
    OrderId              varchar(10),
    PhoneNumber          varchar(10),
    Address              text,
-   DateOfBirth          datetime,
+   DateOfBirth          date,
    primary key (Email)
 );
 
