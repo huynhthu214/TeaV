@@ -1,3 +1,6 @@
+<?php session_start(); 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,40 +13,36 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-
 <div class="sidebar">
   <div class="brand">
-    <div class="brand-text">ADMIN</div>
+    <div class="brand-text">Admin</div>
   </div>
 
   <hr>
 
   <a href="#" class="nav-item active">
-    <i class="fa-solid fa-gauge-high"></i> Dashboard
+    <i class="fa-solid fa-gauge-high"></i>
+    <span class="nav-text">Dashboard</span>
   </a>
 
-  <h6>Interface</h6>
-  <button class="nav-item d-block btn text-start w-100" data-bs-toggle="collapse" data-bs-target="#componentsCollapse" aria-expanded="false" aria-controls="componentsCollapse">
-  <i class="fa-solid fa-gear"></i> Components
-  <span style="float:right;"><i class="fa-solid fa-chevron-down"></i></span>
-</button>
-<div class="collapse" id="componentsCollapse">
-  <a class="nav-item ps-4" href="#">Buttons</a>
-  <a class="nav-item ps-4" href="#">Cards</a>
-</div>
-
-  <hr>
-
-  <h6>Addons</h6>
   <a href="#" class="nav-item">
-    <i class="fa-solid fa-folder"></i> Pages
-    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
+    <i class="fa-solid fa-box"></i>
+    <span class="nav-text">Order</span>
   </a>
+
   <a href="#" class="nav-item">
-    <i class="fa-solid fa-chart-column"></i> Charts
+    <i class="fa-solid fa-newspaper"></i>
+    <span class="nav-text">Post</span>
   </a>
-  <a href="#" class="nav-item active">
-    <i class="fa-solid fa-table-cells"></i> Tables
+
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-mug-hot"></i>
+    <span class="nav-text">Product</span>
+  </a>
+
+  <a href="#" class="nav-item">
+    <i class="fa-solid fa-store"></i>
+    <span class="nav-text">Information</span>
   </a>
 
   <hr>
@@ -57,34 +56,21 @@
 
 <div class="content-wrapper">
 
-  <div class="header">
-    <div class="search-bar">
-      <input type="text" placeholder="Search for...">
-      <button><i class="fas fa-search"></i></button>
+<div class="header d-flex justify-content-end align-items-center px-3" style="height: 60px;">
+  <?php if (isset($_SESSION['email'])): ?>
+    <?php 
+      $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); 
+      $userEmail = htmlspecialchars($_SESSION['email']);
+    ?>
+    <div class="d-flex align-items-center gap-2">
+      <div class="avatar-circle"><?php echo $firstChar; ?></div>
+      <span class="text-dark fw-semibold"><?php echo $userEmail; ?></span>
     </div>
-
-    <div class="header-actions">
-      <div class="icon-button">
-        <i class="fas fa-bell"></i>
-        <span class="badge">3+</span>
-      </div>
-      <div class="icon-button">
-        <i class="fas fa-envelope"></i>
-        <span class="badge">7</span>
-      </div>
-      <div class="user-info">
-        <span class="user-name">Douglas McGee</span>
-        <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="User Avatar">
-      </div>
-    </div>
-  </div>
+  <?php endif; ?>
+</div>
 
   <div class="page-title">
-    <h1>Tables</h1>
-    <p>DataTables is a third party plugin that is used to generate the demo table below.
-      For more information about DataTables, please visit the
-      <a href="#" style="color:#4e73df;">official DataTables documentation</a>.
-    </p>
+    <h2><strong>Dashboard</strong></h2>
   </div>
 
   <div class="card">

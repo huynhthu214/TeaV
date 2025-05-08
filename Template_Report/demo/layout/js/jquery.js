@@ -3,6 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebar = document.querySelector(".sidebar");
 
     toggleBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("collapsed");
+        sidebar.classList.toggle("collapsed");
     });
-  });
+});
