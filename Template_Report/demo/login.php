@@ -2,7 +2,6 @@
 <?php 
     session_start();
     $namePage = "Login";
-    include "view/header.php";
     
     $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -76,6 +75,7 @@
           }
       }
   }
+  include "view/header.php";
 ?>
 
 
