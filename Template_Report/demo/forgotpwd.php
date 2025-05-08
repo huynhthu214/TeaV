@@ -1,7 +1,5 @@
 <?php
 session_start();
-$namePage = "Forgot Password";
-include "view/header.php";
 
 require "PHPMailer-master/src/PHPMailer.php";
 require "PHPMailer-master/src/SMTP.php"; 
@@ -15,14 +13,18 @@ if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     
     if (empty($email)) {
         $error = 'Please enter your email';
     } else {
-        $query = "SELECT * FROM account WHERE Email='$email'";
-        $result = mysqli_query($conn, $query);
+        // Sử dụng prepared statement để tránh SQL Injection
+        $query = "SELECT * FROM account WHERE Email=?";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "s", $email);  // "s" cho kiểu dữ liệu string
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($result) == 0) {
             $error = 'Email does not exist in the system';
@@ -61,6 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         }
     }
 }
+$namePage = "Forgot Password";
+include "view/header.php";
 ?>
 
 <div class="container form-box-forgot mt-5">
@@ -68,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         <h1 class="forgotpwd text-center mb-4">Forgot Password</h1>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required />
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" />
         </div>
         <?php
            if (!empty($error)) {
