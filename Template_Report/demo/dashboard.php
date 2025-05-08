@@ -23,14 +23,14 @@
   </a>
 
   <h6>Interface</h6>
-  <a href="#" class="nav-item">
-    <i class="fa-solid fa-gear"></i> Components
-    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
-  </a>
-  <a href="#" class="nav-item">
-    <i class="fa-solid fa-screwdriver-wrench"></i> Utilities
-    <span style="margin-left:auto;"><i class="fa-solid fa-chevron-right"></i></span>
-  </a>
+  <button class="nav-item d-block btn text-start w-100" data-bs-toggle="collapse" data-bs-target="#componentsCollapse" aria-expanded="false" aria-controls="componentsCollapse">
+  <i class="fa-solid fa-gear"></i> Components
+  <span style="float:right;"><i class="fa-solid fa-chevron-down"></i></span>
+</button>
+<div class="collapse" id="componentsCollapse">
+  <a class="nav-item ps-4" href="#">Buttons</a>
+  <a class="nav-item ps-4" href="#">Cards</a>
+</div>
 
   <hr>
 
@@ -167,6 +167,7 @@
   </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

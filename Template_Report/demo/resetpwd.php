@@ -8,10 +8,6 @@ if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
 
-if(!isset($_SESSION['email_reset'])){
-    header('Location: forgotpwd.php');
-    exit();
-}
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $password = trim($_POST['new_password']); 

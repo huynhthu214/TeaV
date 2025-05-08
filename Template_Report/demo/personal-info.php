@@ -68,10 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       left: 0;
       width: 220px;
       height: 100%;
-      background-color:#0d511d;
+      background-color: beige;
       padding: 20px;
       border-right: 1px solid #ddd;
-      color:rgb(188, 240, 58);
     }
     .main-content {
       margin-left: 220px;
@@ -79,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .avatar-circle {
       width: 36px;
       height: 36px;
-      background-color: #3a813b;
+      background-color:rgb(17, 101, 36);
       border-radius: 50%;
       color: white;
       font-weight: bold;
@@ -89,22 +88,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       display: inline-block;
       margin-right: 8px;
     }
-    * {
-      box-sizing: border-box;
+    body {
       font-family: "Lora", sans-serif;
     }
+    
+    nav.navbar {
+    background-color: #0d371e; 
+     }
+
+   input.form-control{
+    border-color:rgb(34, 131, 158);
+   }
   </style>
 </head>
 <body>
   
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4 py-2">
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm px-4 py-2">
     <div class="container-fluid">
       <div class="d-flex align-items-center ms-auto gap-3">
-      <a href="index.php" class="text-dark position-relative" aria-label="Home">
+      <a href="index.php" class="text-light position-relative" aria-label="Home">
           <i class="bi bi-house-door-fill fs-5" aria-hidden="true"></i>
         </a>
-        <a href="cart.php" class="text-dark position-relative" aria-label="Shopping Cart">
+        <a href="cart.php" class="text-light position-relative" aria-label="Shopping Cart">
           <i class="bi bi-cart3 fs-5" aria-hidden="true"></i>
             <?php
                 $cartCount = 0;
@@ -125,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           ?>
           <div class="d-flex align-items-center">
             <div class="avatar-circle"><?php echo $firstChar; ?></div>
-            <span class="text-dark fw-semibold"><?php echo $userEmail; ?></span>
+            <span class="text-light fw-semibold"><?php echo $userEmail; ?></span>
           </div>
         <?php endif; ?>
       </div>
@@ -140,9 +146,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul class="list-unstyled">
   <li class="mb-3">
     <a href="#" class="text-decoration-none text-dark">
-      <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Account Details
+      <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Account Infomation
     </a>
   </li>
+  <li class="mb-3">
+  <a href="resetpwd.php" class="text-decoration-none text-dark">
+    <i class="bi bi-shield-lock me-2" aria-hidden="true"></i>Change Password
+  </a>
+</li>
   <li class="mb-3">
     <a href="logout.php" class="text-decoration-none text-danger">
       <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout
@@ -155,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <main class="col main-content p-5">
 
         <!-- Account Details -->
-        <h3 class="mb-4">Account Details</h3>
+        <h3 class="mb-4"><strong>Account Infomation</strong></h3>
         <div class="row">
         <form method="post">
   <div class="row">
@@ -171,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="form-label">Phone</label>
+      <label class="form-label">Phone Number</label>
       <input type="text" class="form-control" name="phone"
              value="<?php echo htmlspecialchars($user['PhoneNumber']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
@@ -188,6 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              value="<?php echo htmlspecialchars($user['Address']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
     </div>
+    
   </div>
 
   <?php if ($isEditing): ?>
@@ -196,12 +208,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 <?php else: ?>
   <div class="d-flex justify-content-start">
-    <button type="submit" name="edit" class="btn btn-primary">Edit</button>
+    <button type="submit" name="edit" class="btn" style="background-color:rgb(202, 199, 194); width: 10%;">Edit</button>
   </div>
 <?php endif; ?>
-</form>
-
-        
+</form> 
       </main>
     </div>
   </div>
