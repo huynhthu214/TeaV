@@ -1,7 +1,6 @@
 <?php
 session_start();
-$namePage = "Reset Password";
-include "view/header.php";
+
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
 if (!$conn) {
@@ -42,6 +41,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
+$namePage = "Reset Password";
+include "view/header.php";
 ?>
 
 <div class="container form-box-reset mt-5">

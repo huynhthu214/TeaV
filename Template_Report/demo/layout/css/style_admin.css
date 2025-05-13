@@ -78,12 +78,6 @@ body {
   display: inline-block;
 }
 
-.sidebar .collapse .nav-item {
-  padding-left: 2rem;
-  font-size: 0.9rem;
-  display: none;
-}
-
 .sidebar.collapsed {
   width: 80px;
 }
@@ -258,4 +252,8 @@ body {
   line-height: 36px;
   display: inline-block;
   margin-right: 8px;
+}
+
+#userDropdown {
+  background-color: #e9e8e8;
 }
