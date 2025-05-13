@@ -15,34 +15,34 @@
 <body>
 <div class="sidebar">
   <div class="brand">
-    <div class="brand-text">Admin</div>
+    <div class="brand-text">Quản trị</div>
   </div>
 
   <hr>
 
   <a href="#" class="nav-item active">
     <i class="fa-solid fa-gauge-high"></i>
-    <span class="nav-text">Dashboard</span>
+    <span class="nav-text">Thống kê</span>
   </a>
 
   <a href="#" class="nav-item">
     <i class="fa-solid fa-box"></i>
-    <span class="nav-text">Order</span>
+    <span class="nav-text">Đơn hàng</span>
   </a>
 
   <a href="#" class="nav-item">
     <i class="fa-solid fa-newspaper"></i>
-    <span class="nav-text">Post</span>
+    <span class="nav-text">Bài đăng</span>
   </a>
 
   <a href="#" class="nav-item">
     <i class="fa-solid fa-mug-hot"></i>
-    <span class="nav-text">Product</span>
+    <span class="nav-text">Sản phẩm</span>
   </a>
 
   <a href="#" class="nav-item">
     <i class="fa-solid fa-store"></i>
-    <span class="nav-text">Information</span>
+    <span class="nav-text">Thông tin</span>
   </a>
 
   <hr>
@@ -62,15 +62,19 @@
       $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); 
       $userEmail = htmlspecialchars($_SESSION['email']);
     ?>
-    <div class="d-flex align-items-center gap-2">
-      <div class="avatar-circle"><?php echo $firstChar; ?></div>
-      <span class="text-dark fw-semibold"><?php echo $userEmail; ?></span>
+    <div class="dropdown">
+      <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="avatar-circle"><?php echo $firstChar; ?></div>
+        <span class="fw-semibold text-dark"><?php echo $userEmail; ?></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+      </ul>
     </div>
   <?php endif; ?>
 </div>
-
   <div class="page-title">
-    <h2><strong>Dashboard</strong></h2>
+    <h2><strong>Thống kê</strong></h2>
   </div>
 
   <div class="card">

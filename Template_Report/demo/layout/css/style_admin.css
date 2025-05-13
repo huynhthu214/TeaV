@@ -1,6 +1,7 @@
 
 body {
   font-family: 'Lora', sans-serif;
+  background-color:rgb(214, 218, 214);
 }
 
 /* Sidebar styles */
@@ -115,8 +116,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #e3e6f0;
+  background-color: #e9e8e8;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   position: sticky;
@@ -127,8 +127,8 @@ body {
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #f8f9fc;
-  border: 1px solid #d1d3e2;
+  background-color: #e9e8e8;
+  border: 1px solid #e9e8e8;
   border-radius: 5px;
   overflow: hidden;
 }

@@ -1,6 +1,5 @@
 <?php 
-    $namePage = "Sign up";
-    include "view/header.php";
+    session_start();
 
     $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -110,7 +109,8 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
             }
         }
     }
-    
+        $namePage = "Sign up";
+        include "view/header.php";
 ?>
 
     <div class="container form-box-sign mt-5">
