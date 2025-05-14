@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/7/2025 3:54:17 PM                          */
+/* Created on:     5/14/2025 9:36:17 PM                         */
 /*==============================================================*/
 
 
@@ -85,6 +85,30 @@ create table Categories
 );
 
 /*==============================================================*/
+/* Table: Import                                                */
+/*==============================================================*/
+create table Import
+(
+   ImportId             varchar(10) not null,
+   ImportDate           datetime,
+   Note                 text,
+   primary key (ImportId)
+);
+
+/*==============================================================*/
+/* Table: ImportProduct                                         */
+/*==============================================================*/
+create table ImportProduct
+(
+   ProductId            varchar(10) not null,
+   ImportId             varchar(10) not null,
+   DetailId             varchar(10),
+   Quantity             int,
+   UnitPrice            float,
+   primary key (ProductId, ImportId)
+);
+
+/*==============================================================*/
 /* Table: Ingredients                                           */
 /*==============================================================*/
 create table Ingredients
@@ -137,6 +161,7 @@ create table Product
 (
    ProductId            varchar(10) not null,
    CategoryId           varchar(10),
+   SupplierId           varchar(10),
    UnitId               varchar(10),
    Name                 varchar(50),
    Description          text,
@@ -188,6 +213,20 @@ create table ReviewProduct
 );
 
 /*==============================================================*/
+/* Table: Suppliers                                             */
+/*==============================================================*/
+create table Suppliers
+(
+   SupplierId           varchar(10) not null,
+   SupplierName         text,
+   Phone                text,
+   Email                text,
+   Address              text,
+   Note                 text,
+   primary key (SupplierId)
+);
+
+/*==============================================================*/
 /* Table: Tag                                                   */
 /*==============================================================*/
 create table Tag
@@ -227,6 +266,12 @@ alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG_BLOG foreign key (BlogId)
 alter table BlogTag add constraint FK_BLOGTAG_BLOGTAG2_TAG foreign key (TagId)
       references Tag (TagId) on delete restrict on update restrict;
 
+alter table ImportProduct add constraint FK_IMPORTPR_IMPORTPRO_PRODUCT foreign key (ProductId)
+      references Product (ProductId) on delete restrict on update restrict;
+
+alter table ImportProduct add constraint FK_IMPORTPR_IMPORTPRO_IMPORT foreign key (ImportId)
+      references Import (ImportId) on delete restrict on update restrict;
+
 alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_ORDERS foreign key (OrderId)
       references Orders (OrderId) on delete restrict on update restrict;
 
@@ -244,6 +289,9 @@ alter table Product add constraint FK_PRODUCT_CATEGORY_CATEGORI foreign key (Cat
 
 alter table Product add constraint FK_PRODUCT_PRODUCTUN_CALCULAT foreign key (UnitId)
       references CalculationUnit (UnitId) on delete restrict on update restrict;
+
+alter table Product add constraint FK_PRODUCT_PROVIDE_SUPPLIER foreign key (SupplierId)
+      references Suppliers (SupplierId) on delete restrict on update restrict;
 
 alter table ProductIngredient add constraint FK_PRODUCTI_PRODUCTIN_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;

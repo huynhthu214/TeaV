@@ -14,6 +14,16 @@ INSERT INTO Categories (`CategoryId`, `Name`, `Description`) VALUES
 ('C004', 'Black Tea', 'Robust and bold black teas'),
 ('C005', 'Black Tea (Spiced)', 'Black teas with aromatic spices');
 
+INSERT INTO Import (ImportId, ImportDate, Note) VALUES
+('IMP01', '2024-12-15 10:00:00', 'Nhập lô trà xanh đầu tiên'),
+('IMP02', '2025-01-05 14:30:00', 'Nhập hàng từ nhà cung cấp Thái Nguyên'),
+('IMP03', '2025-03-10 09:00:00', 'Nhập hàng tháng 3');
+
+INSERT INTO Suppliers (SupplierId, SupplierName, Phone, Email, Address, Note) VALUES
+('SUP01', 'Công ty Trà Xanh Việt', '0909123456', 'contact@traxanhviet.vn', 'Hà Nội', 'Chuyên cung cấp trà xanh'),
+('SUP02', 'Trà Thái Nguyên Hảo Hạng', '0988777666', 'sales@trathainguyen.vn', 'Thái Nguyên', 'Trà nguyên chất'),
+('SUP03', 'Trà Organic TeaFarm', '0966123456', 'info@teafarm.vn', 'Lâm Đồng', 'Cung cấp nguyên liệu hữu cơ');
+
 INSERT INTO Orders (`OrderId`, `OrderDate`, `TotalAmount`) VALUES
 ('ORD001', '2025-04-12', 86),
 ('ORD002', '2025-04-13', 83),
@@ -74,6 +84,12 @@ INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
 ('ORD004', 'P017', 1),
 ('ORD004', 'P019', 1),
 ('ORD004', 'P022', 1);
+
+INSERT INTO ImportProduct (ProductId, ImportId, DetailId, Quantity, UnitPrice) VALUES
+('P001', 'IMP01', 'D001', 100, 15000),
+('P002', 'IMP01', 'D002', 200, 13000),
+('P001', 'IMP02', 'D003', 150, 14000),
+('P003', 'IMP03', 'D004', 300, 12000);
 
 INSERT INTO About (AboutId, Email, ImgUrl, Content, Title, DateUpload, IsShow) VALUES
 ('A001', 'anna.nguyen@email.com', 'img/about.jpg',  'At Tea Heritage, our mission is threefold:
@@ -165,9 +181,6 @@ VALUES
   'images/terms.jpg',
   NOW(),
   'Yes');
-
-
-
 
 INSERT INTO `blog` (`Title`, `DateUpload`, `ImgLink`, `Summary`, `BlogId`, `Email`, `Content`, `IsShow`) VALUES
 ('The Art of Tea Brewing: Essential Techniques for Perfect Tea', '2025-04-01 00:00:00', './layout/images/blog-1.jpg', 'Discover the time-honored methods and best practices for brewing different types of tea, from delicate white teas to robust black varieties. This guide will elevate your tea-drinking experience.', 'B01', 'anna.nguyen@email.com', '<div class=\"blog-full-content\">\r\n        <p>Tea brewing is both an art and a science, combining tradition, technique, and personal preference to create the perfect cup. Whether you\'re new to the world of tea or looking to refine your brewing methods, this guide will help you unlock the full potential of your favorite teas.</p>\r\n        \r\n        <h3>Understanding Tea Types and Their Ideal Brewing Conditions</h3>\r\n        \r\n        <p>Each tea variety has unique characteristics that shine when brewed correctly. Here\'s how to approach the major tea categories:</p>\r\n        \r\n        <p><strong>White Tea</strong>: These delicate, minimally processed teas require gentle treatment. Use water that\'s cooled to about 175-185°F (80-85°C) and steep for 4-5 minutes. The result should be a pale, subtle brew with sweet, floral notes.</p>\r\n        \r\n        <p><strong>Green Tea</strong>: Fresh and vibrant green teas can become bitter when over-extracted. Brew with water at 160-180°F (70-82°C) for just 1-3 minutes. Japanese green teas generally prefer cooler temperatures than Chinese varieties.</p>\r\n        \r\n        <p><strong>Oolong Tea</strong>: These semi-oxidized teas span a spectrum of flavors. Brew lighter oolongs like water around 185-195°F (85-90°C) and darker ones closer to boiling. They can usually be steeped multiple times, with each infusion revealing new dimensions of flavor.</p>\r\n        \r\n        <p><strong>Black Tea</strong>: Fully oxidized and robust, black teas stand up to boiling water (212°F/100°C) and need 3-5 minutes to fully develop their rich, malty characteristics.</p>\r\n        \r\n        <p><strong>Pu-erh Tea</strong>: These aged, fermented teas from Yunnan, China are unique in that they improve with age. Use boiling water and allow 3-4 minutes for younger sheng pu-erhs, while aged shou varieties can handle longer steeping times.</p>\r\n        \r\n        <p><strong>Herbal Infusions</strong>: Not technically tea (as they don\'t contain Camellia sinensis leaves), these botanicals generally do well with boiling water and longer steep times of 5-7 minutes to extract their full flavor and wellness benefits.</p>\r\n        \r\n        <h3>The Importance of Water Quality</h3>\r\n        \r\n        <p>The often-overlooked hero of great tea is the water itself. After all, your cup is mostly water! Use fresh, filtered water with a balanced mineral content for the best results. Heavily chlorinated tap water or distilled water lacking minerals will produce flat, lifeless tea.</p>\r\n        \r\n        <h3>Measuring Matters</h3>\r\n        \r\n        <p>For consistency, measure both your tea and water. A general guideline is 2-3 grams of tea (roughly a teaspoon for most varieties) per 8 ounces (240ml) of water. Adjust to your taste preference, keeping in mind that some teas, like rolled oolongs, expand significantly when steeped.</p>\r\n        \r\n        <h3>Brewing Vessels: Choose Wisely</h3>\r\n        \r\n        <p>Your brewing vessel affects more than aesthetics:</p>\r\n        \r\n        <ul>\r\n            <li><strong>Glass or porcelain teapots</strong> are excellent all-purpose choices that don\'t impart flavors to the tea</li>\r\n            <li><strong>Yixing clay teapots</strong> absorb tea oils over time and are traditionally dedicated to specific tea types</li>\r\n            <li><strong>Gaiwans</strong> (lidded Chinese bowls) offer precision control for gong fu style brewing</li>\r\n            <li><strong>Cast iron teapots</strong> retain heat well but can sometimes be too intense for delicate teas</li>\r\n        </ul>\r\n        \r\n        <h3>Eastern vs. Western Brewing Approaches</h3>\r\n        \r\n        <p><strong>Western-style brewing</strong> typically uses more water, less tea, and longer steep times. It\'s convenient for everyday drinking and produces larger quantities.</p>\r\n        \r\n        <p><strong>Eastern-style (Gong Fu) brewing</strong> employs more tea leaves, less water, and very short infusions, often in small vessels. This method highlights the evolving character of tea through multiple infusions and is excellent for appreciating fine teas.</p>\r\n        \r\n        <h3>Mindfulness in Tea Preparation</h3>\r\n        \r\n        <p>Beyond the technical aspects, tea preparation can be a meditative practice that encourages presence and mindfulness. Take time to observe the leaves unfurling, inhale the aroma, and notice how the flavor evolves with each sip.</p>\r\n        \r\n        <p>Remember that these guidelines are just starting points. As you explore the vast world of tea, you\'ll develop your own preferences and techniques that bring you the most joy in your tea journey.</p>\r\n    </div>', 'Yes'),
