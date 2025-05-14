@@ -41,7 +41,7 @@ $blog_query = "SELECT
             blog.BlogId,
             blog.ImgLink AS img_blog,
             blog.Title AS title_blog,
-            blog.Content AS content_blog,
+            LEFT(blog.Content, 150) AS content_blog,
             blog.DateUpload AS date_blog,
             GROUP_CONCAT(tag.Name SEPARATOR ', ') AS tag_names
         FROM blog
@@ -49,7 +49,8 @@ $blog_query = "SELECT
         JOIN tag ON blogtag.TagId = tag.TagId
         WHERE blog.IsShow = 'Yes'
         GROUP BY blog.BlogId
-        ORDER BY DateUpload DESC";
+        ORDER BY DateUpload DESC
+        LIMIT 3";
 
 $result = mysqli_query($conn, $product_query);
 $about_result = mysqli_query($conn, $about_query);
@@ -191,10 +192,11 @@ $first_about = $about_list[0];
   <div class="row g-4">
     <?php while ($blog = mysqli_fetch_assoc($blog_result)) { ?>
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-        <a href="blog.php?id=<?php echo $blog['BlogId']; ?>">
-          <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['title_blog']; ?>" /></a>
-          <div class="card-body">
+        <div class="card h-100 d-flex flex-column shadow-sm">
+          <a href="blog.php?id=<?php echo $blog['BlogId']; ?>">
+            <img src="<?php echo $blog['img_blog']; ?>" class="card-img-top" alt="<?php echo $blog['title_blog']; ?>" />
+          </a>
+          <div class="card-body flex-grow-1">
             <div class="mb-2">
               <?php if (!empty($blog['tag_names'])) { ?>
                 <span class="badge bg-success"><?php echo $blog['tag_names']; ?></span>
@@ -203,13 +205,14 @@ $first_about = $about_list[0];
             <h5 class="card-title"><?php echo $blog['title_blog']; ?></h5>
             <p class="card-text"><?php echo $blog['content_blog']; ?></p>
           </div>
-          <div class="card-footer text-muted small">
+          <div class="card-footer text-muted small mt-auto">
             <?php echo $blog['date_blog']; ?>
           </div>
         </div>
       </div> 
     <?php } ?>
   </div> 
+</div>
 
   <div class="d-flex justify-content-center my-4">
     <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>

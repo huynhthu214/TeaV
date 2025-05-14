@@ -1,4 +1,22 @@
-<?php session_start(); 
+<?php 
+session_start(); 
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+//doanh thu hàng tháng
+$query1 = $conn->query("SELECT SUM(TotalAmount) AS TotalRevenue FROM Orders WHERE MONTH(OrderDate) = MONTH(CURDATE()) AND YEAR(OrderDate) = YEAR(CURDATE())");
+$total_amount = $query1->fetch_assoc()['TotalRevenue'] ?? 0;
+//đơn hàng
+$query2 = $conn->query("SELECT COUNT(*) AS TotalCustomers FROM Account WHERE Type='Customer'");
+$total_customers = $query2->fetch_assoc()['TotalCustomers'] ?? 0;
+//khách hàng
+$query3 = $conn->query("SELECT COUNT(*) AS TotalOrders FROM Orders");
+$total_orders = $query3->fetch_assoc()['TotalOrders'] ?? 0;
+//giá trị trung bình
+$query4 = $conn->query("SELECT AVG(TotalAmount) AS AvgOrders FROM Orders");
+$avg_orders = $query4->fetch_assoc()['AvgOrders'] ?? 0;
 
 ?>
 <!DOCTYPE html>
@@ -30,15 +48,21 @@
     <span class="nav-text">Đơn hàng</span>
   </a>
 
+    <a href="#" class="nav-item">
+    <i class="fa-solid fa-mug-hot"></i>
+    <span class="nav-text">Sản phẩm</span>
+  </a>
+
+    <a href="#" class="nav-item">
+    <i class="fa-solid fa-users"></i>
+    <span class="nav-text">Khách hàng</span>
+  </a>
+
   <a href="#" class="nav-item">
     <i class="fa-solid fa-newspaper"></i>
     <span class="nav-text">Bài đăng</span>
   </a>
 
-  <a href="#" class="nav-item">
-    <i class="fa-solid fa-mug-hot"></i>
-    <span class="nav-text">Sản phẩm</span>
-  </a>
 
   <a href="#" class="nav-item">
     <i class="fa-solid fa-store"></i>
@@ -54,8 +78,6 @@
   </div>
 </div>
 
-<div class="content-wrapper">
-
 <div class="header d-flex justify-content-end align-items-center px-3" style="height: 60px;">
   <?php if (isset($_SESSION['email'])): ?>
     <?php 
@@ -68,96 +90,139 @@
         <span class="fw-semibold text-dark"><?php echo $userEmail; ?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
       </ul>
     </div>
   <?php endif; ?>
 </div>
-  <div class="page-title">
-    <h2><strong>Thống kê</strong></h2>
-  </div>
-
-  <div class="card">
-    <div class="table-header d-flex justify-content-between align-items-center p-3">
-      <h2>DataTables Example</h2>
-      <div>
-        <label>Search:
-          <input type="text" class="form-control d-inline-block w-auto ms-2">
-        </label>
-      </div>
-    </div>
-
-    <div class="entries-control px-3 pb-2">
-      Show
-      <select class="form-select d-inline-block w-auto mx-2">
-        <option>10</option>
-        <option>25</option>
-        <option>50</option>
-        <option>100</option>
-      </select>
-      entries
-    </div>
-
-    <div class="table-wrapper p-3">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Airi Satou</td>
-            <td>Accountant</td>
-            <td>Tokyo</td>
-            <td>33</td>
-            <td>2008/11/28</td>
-            <td>$162,700</td>
-          </tr>
-          <tr>
-            <td>Angelica Ramos</td>
-            <td>Chief Executive Officer (CEO)</td>
-            <td>London</td>
-            <td>47</td>
-            <td>2009/10/09</td>
-            <td>$1,200,000</td>
-          </tr>
-          <tr>
-            <td>Ashton Cox</td>
-            <td>Junior Technical Author</td>
-            <td>San Francisco</td>
-            <td>66</td>
-            <td>2009/01/12</td>
-            <td>$86,000</td>
-          </tr>
-          <tr>
-            <td>Bradley Greer</td>
-            <td>Software Engineer</td>
-            <td>London</td>
-            <td>41</td>
-            <td>2012/10/13</td>
-            <td>$132,000</td>
-          </tr>
-          <tr>
-            <td>Brenden Wagner</td>
-            <td>Software Engineer</td>
-            <td>San Francisco</td>
-            <td>28</td>
-            <td>2011/06/07</td>
-            <td>$206,850</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
+<div class="content-wrapper">
+<div class="page-title d-flex justify-content-between align-items-center mb-4">
+  <h2 class="m-0" style="color:rgb(10, 119, 52)"><strong>Thống kê</strong></h2>
+  
+  <form class="d-flex align-items-center gap-2" role="search" method="GET" action="#">
+    <input class="form-control" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+    <button class="btn btn-primary" type="button" onclick="exportData()">
+      <i class="bi bi-download me-1"></i>
+    </button>
+  </form>
 </div>
+
+    <div class="row">
+               <!-- Earnings (Monthly) Card Example -->
+         <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Doanh thu hàng tháng</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($total_amount, 0, ',', '.'); ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-coins fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                           
+
+          <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                  Đơn hàng</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_orders; ?></div>
+                          </div>
+                          <div class="col-auto">
+                              <i class="fa-solid fa-box-open fa-2x text-gray-300"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Khách hàng
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $total_customers?></div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa-solid fa-users fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+              <!-- Pending Requests Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="card border-left-warning shadow h-100 py-2">
+                      <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                      Lợi nhuận</div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($avg_orders, 0, ',', '.'); ?></div>
+                              </div>
+                              <div class="col-auto">
+                                  <i class="fa-solid fa-chart-line fa-2x text-gray-300"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      <div class="row-chart">
+        <!-- Biểu đồ đường -->
+        <div class="chart-card">
+          <h5>Earnings Overview</h5>
+          <canvas id="lineChart"></canvas>
+        </div>
+
+        <!-- Biểu đồ tròn -->
+        <div class="chart-card">
+          <h5>Revenue Sources</h5>
+          <canvas id="donutChart"></canvas>
+          <div class="legend">
+            <span><span class="dot dot-direct"></span>Direct</span>
+            <span><span class="dot dot-social"></span>Social</span>
+            <span><span class="dot dot-referral"></span>Referral</span>
+              </div>
+            </div>
+          </div>
+  </div>
+<footer>
+          <div class="text-center mt-3">
+          <p class="mb-0">
+            &copy; <span id="year"></span> 2025 TeaV. All rights reserved.
+          </p>
+        </div>
+</footer>
+    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="layout/js/jquery.js"></script>
 </body>
 </html>
