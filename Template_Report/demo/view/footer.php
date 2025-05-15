@@ -4,18 +4,16 @@
           <div class="col-md-4">
             <h4>🍃TeaV</h4>
             <p>
-              Connecting tea lovers with global traditions, we explore the art
-              of brewing and the rich stories behind every carefully selected
-              leaf.
+             Kết nối những người yêu trà với truyền thống toàn cầu, chúng tôi khám phá nghệ thuật pha trà và những câu chuyện phong phú ẩn sau mỗi chiếc lá được tuyển chọn kỹ lưỡng.
             </p>
           </div>
           <div class="col-md-4">
-            <h5>Contact</h5>
+            <h5>Liên hệ</h5>
             <p>Email: teavshop@gmail.com</p>
-            <p>Phone: +123 456 7890</p>
+            <p>Số điện thoại: +123 456 7890</p>
           </div>
           <div class="col-md-4">
-            <h5>Follow Us</h5>
+            <h5>Theo dõi chúng tôi</h5>
             <a href="https://www.facebook.com/profile.php?id=61574969201523" class="text-light me-2">Facebook</a>
             <a href="https://www.instagram.com/" class="text-light me-2">Instagram</a>
             <a href="https://www.youtube.com/watch?v=_uns7Nm2d2c" class="text-light">YouTube</a>
@@ -31,6 +29,4 @@
     <link rel="stylesheet" href="layout/css/style_footer.css"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="layout/js/jquery.js"></script>
-  </body>
 </html>

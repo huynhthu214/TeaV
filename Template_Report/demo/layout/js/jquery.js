@@ -1,79 +1,87 @@
+let donutChartInstance = null;
+let lineChartInstance = null;
+
 document.addEventListener("DOMContentLoaded", function () {
   const toggleBtn = document.querySelector(".toggle-btn");
-  const sidebar = document.querySelector(".sidebar");
+  const sidebar = document.getElementById("sidebar");
+  const body = document.getElementById("mainBody");
 
   toggleBtn.addEventListener("click", function () {
     sidebar.classList.toggle("collapsed");
+    body.classList.toggle("sidebar-collapsed");
   });
 
-  // Biểu đồ line
-  const ctxLine = document.getElementById('lineChart').getContext('2d');
-  const lineChart = new Chart(ctxLine, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-        label: 'Earnings',
-        data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-        borderColor: '#4e73df',
-        backgroundColor: 'rgba(78, 115, 223, 0.05)',
-        tension: 0.3,
-        fill: true,
-        pointRadius: 3,
-        pointBackgroundColor: '#4e73df',
-        pointBorderColor: '#4e73df'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: function(value) {
-              return '$' + value.toLocaleString();
-            }
+  const donutCtx = document.getElementById('donutChart');
+  const lineCtx = document.getElementById('lineChart');
+
+  // Donut Chart
+  if (donutCtx && donutChartInstance) {
+    donutChartInstance.destroy();
+  }
+
+  if (donutCtx && typeof donutChartData !== 'undefined') {
+    const pieLabels = donutChartData.map(item => item.name);
+    const pieValues = donutChartData.map(item => item.quantity);
+    const pieColors = ['#4CAF50', '#FFC107', '#03A9F4', '#E91E63', '#9C27B0'];
+
+    donutChartInstance = new Chart(donutCtx, {
+      type: 'doughnut',
+      data: {
+        labels: pieLabels,
+        datasets: [{
+          data: pieValues,
+          backgroundColor: pieColors
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom'
           }
         }
+      }
+    });
+  }
+
+  // Line Chart
+  if (lineCtx && lineChartInstance) {
+    lineChartInstance.destroy();
+  }
+
+  if (lineCtx && typeof lineChartData !== 'undefined') {
+    const months = lineChartData.map(item => 'Tháng ' + item.month);
+    const revenues = lineChartData.map(item => item.revenue);
+
+    lineChartInstance = new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Doanh thu',
+          data: revenues,
+          borderColor: '#28a745',
+          fill: false,
+          tension: 0.3
+        }]
       },
-      plugins: {
-        legend: {
-          display: false
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { autoSkip: false } },
+          y: { beginAtZero: true }
         }
       }
-    }
-  });
-
-  // Biểu đồ donut
-  const ctxDonut = document.getElementById('donutChart').getContext('2d');
-  const donutChart = new Chart(ctxDonut, {
-    type: 'doughnut',
-    data: {
-      labels: ['Direct', 'Social', 'Referral'],
-      datasets: [{
-        data: [55, 30, 15],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-        hoverOffset: 10
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      cutout: '70%' // Donut effect
-    }
-  });
+    });
+  }
 });
 
-  function exportData() {
-    // Ví dụ: chuyển hướng đến file export
-    window.location.href = 'export.php'; // Thay bằng đường dẫn thực tế của bạn
-  }
+// Các hàm bổ sung
+function exportData() {
+  window.location.href = 'export.php';
+}
 
 function togglePassword(inputId, iconId) {
   const input = document.getElementById(inputId);

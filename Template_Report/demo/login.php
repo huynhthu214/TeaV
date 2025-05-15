@@ -82,17 +82,17 @@
 <!-- Login -->
 <div class="container form-box mt-5">
     <form method="post">
-      <h1 class="login text-center mb-4">Login</h1>
+      <h1 class="login text-center mb-4">Đăng nhập</h1>
 
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Enter your email" />
+        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Nhập email" />
       </div>
 
     <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
+    <label for="password" class="form-label">Mật khẩu</label>
     <div class="input-group">
-        <input type="password" class="form-control" id="password" name="pass" placeholder="Enter your password">
+        <input type="password" class="form-control" id="password" name="pass" placeholder="Nhập mật khẩu">
         <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('password', 'toggleEye')">
         <i class="fa fa-eye text-muted small" id="toggleEye"></i>
         </span>
@@ -100,17 +100,17 @@
     </div>
 
       <div class="mb-3 text-end">
-        <a href="forgotpwd.php" id="forgotPassword" class="text-decoration-none">Forgot Password?</a>
+        <a href="forgotpwd.php" id="forgotPassword" class="text-decoration-none">Quên mật khẩu?</a>
       </div>
       <?php
            if (!empty($error)) {
               echo "<div class='alert alert-danger'>$error</div>";
            }
       ?>
-      <button type="submit" class="btn btn-outline-primary">Login</button>
+      <button type="submit" class="btn btn-outline-primary">Đăng xuất</button>
 
       <div class="text-center mt-3">
-        <p>Don't have an account? <a href="signup.php" id="openRegisterModal">Sign Up</a></p>
+        <p>Chưa có tài khoản?<a href="signup.php" id="openRegisterModal">Đăng ký ngay</a></p>
       </div>
     </form>
   </div>

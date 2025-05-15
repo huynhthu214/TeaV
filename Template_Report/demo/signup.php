@@ -115,38 +115,38 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
 
     <div class="container form-box-sign mt-5">
     <form method="post">
-      <h1 class="signup text-center mb-4">Sign up</h1>
+      <h1 class="signup text-center mb-4">Đăng ký</h1>
 
       <div class="mb-3">
-        <label for="full-name" class="form-label">Full name</label>
-        <input type="text" class="form-control" id="full-name" name="full" value="<?php echo htmlspecialchars($full_name); ?>" placeholder="Enter your full name" />
+        <label for="full-name" class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" id="full-name" name="full" value="<?php echo htmlspecialchars($full_name); ?>" placeholder="Nhập họ và tên" />
       </div>
 
       <div class="mb-3">
         <label for="new-email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="new-email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Enter your email" />
+        <input type="email" class="form-control" id="new-email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Nhập email" />
       </div>
 
       <div class="mb-3">
-        <label for="phone-number" class="form-label">Phone</label>
-        <input type="text" class="form-control" id="phone-number" name="phone" value="<?php echo htmlspecialchars($phone); ?>" placeholder="Enter your phone number" />
+        <label for="phone-number" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" id="phone-number" name="phone" value="<?php echo htmlspecialchars($phone); ?>" placeholder="Nhập số điện thoại" />
       </div>
 
       <div class="mb-3">
-        <label for="date-of-birth" class="form-label">Date of birth</label>
+        <label for="date-of-birth" class="form-label">Ngày sinh</label>
         <input type="date" class="form-control" id="date-of-birth" name="dob" value="<?php echo htmlspecialchars($dob); ?>"/>
       </div>
 
       <div class="mb-3">
-        <label for="address" class="form-label">Address</label>
-        <input type="text" class="form-control" id="address" name="address" maxlength="300" value="<?php echo htmlspecialchars($address); ?>"/>
+        <label for="address" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" id="address" name="address" maxlength="300" value="<?php echo htmlspecialchars($address); ?>" placeholder="Nhập địa chỉ"/>
       </div>
 
       <!-- New Password -->
       <div class="mb-3">
-        <label for="new-password" class="form-label">Password</label>
+        <label for="new-password" class="form-label">Mật khẩu</label>
         <div class="input-group">
-          <input type="password" class="form-control" id="new-password" name="pass" placeholder="Create a password">
+          <input type="password" class="form-control" id="new-password" name="pass" placeholder="Nhập mật khẩu">
           <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('new-password', 'toggleNewEye')">
             <i class="fa fa-eye text-muted small" id="toggleNewEye"></i>
           </span>
@@ -155,9 +155,9 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
 
       <!-- Confirm Password -->
       <div class="mb-3">
-        <label for="confirm-password" class="form-label">Confirm password</label>
+        <label for="confirm-password" class="form-label">Nhập lại mật khẩu</label>
         <div class="input-group">
-          <input type="password" class="form-control" id="confirm-password" name="pass-confirm" placeholder="Confirm password">
+          <input type="password" class="form-control" id="confirm-password" name="pass-confirm" placeholder="Nhập lại mật khẩu">
           <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('confirm-password', 'toggleConfirmEye')">
             <i class="fa fa-eye text-muted small" id="toggleConfirmEye"></i>
           </span>
@@ -167,8 +167,8 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
       <div class="form-check mb-3">
         <input type="checkbox" class="form-check-input" id="terms" name="terms" />
         <label class="form-check-label" for="terms">
-          By continuing to sign up, I confirm that I have read and agree to
-          <a href="term.php" target="_blank" style="color:rgb(3, 184, 54); text-decoration: underline">Terms & Conditions</a> of TeaV.
+         Bằng cách tiếp tục đăng ký, tôi xác nhận rằng tôi đã đọc và đồng ý với
+          <a href="term.php" target="_blank" style="color:rgb(3, 184, 54); text-decoration: underline">Chính sách & Điều khoản</a> của TeaV.
         </label>
       </div>
       <?php
@@ -176,10 +176,10 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
               echo "<div class='alert alert-danger'>$error</div>";
            }
       ?>
-      <button type="submit" class="btn btn-outline-primary">Sign up</button>
+      <button type="submit" class="btn btn-outline-primary">Đăng ký</button>
 
       <div class="text-center mt-3">
-      <p>Already have an account? <a href="login.php">Login</a></p>
+      <p>Đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
       </div>
     </form>
   </div>

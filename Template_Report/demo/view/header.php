@@ -48,10 +48,10 @@ if (session_status() === PHP_SESSION_NONE) {
                 id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'Home') echo 'active'; ?>" href="index.php">Home</a>
+                        <a class="nav-link <?php if ($namePage === 'Home') echo 'active'; ?>" href="index.php">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'About') echo 'active'; ?>" href="about.php">About</a>
+                        <a class="nav-link <?php if ($namePage === 'About') echo 'active'; ?>" href="about.php">Về chúng tôi</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php if ($namePage === 'Products') echo 'active'; ?>" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,7 +80,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 endwhile;
                             else:
                             ?>
-                                    <li><a class="dropdown-item" href="#">No categories available</a></li>
+                                    <li><a class="dropdown-item" href="#">Chưa có danh mục được hiển thị.</a></li>
                             <?php
                             endif;
 
@@ -88,7 +88,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             mysqli_close($conn);
                             ?>
                             <li>
-                                <a class="dropdown-item" href="products.php">All Products</a>
+                                <a class="dropdown-item" href="products.php">Tất cả sản phẩm</a>
                             </li>
                         </ul>
                     </li>
@@ -96,7 +96,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <a class="nav-link <?php if ($namePage === 'Blog') echo 'active'; ?>" href="blog.php">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'Terms & Conditions') echo 'active'; ?>" href="term.php">Terms & Conditions</a>
+                        <a class="nav-link <?php if ($namePage === 'Terms & Conditions') echo 'active'; ?>" href="term.php">Chính sách và điều khoản</a>
                     </li>
                     <?php if (isset($_SESSION['email'])): ?>
                         <?php $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); ?>
@@ -106,15 +106,15 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <span style="color: white;"><?php echo htmlspecialchars($_SESSION['email']); ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="personal-info.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="cart.php">My Orders</a></li>
+                                <li><a class="dropdown-item" href="personal-info.php">Hồ sơ của tôi</a></li>
+                                <li><a class="dropdown-item" href="cart.php">Đơn hàng của tôi</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+                                <li><a class="dropdown-item text-danger" href="logout.php">Đăng xuất</a></li>
                             </ul>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if ($namePage === 'Login') echo 'active'; ?>" href="login.php">Login</a>
+                            <a class="nav-link <?php if ($namePage === 'Login') echo 'active'; ?>" href="login.php">Đăng nhập</a>
                         </li>
                     <?php endif; ?>
                 </ul>

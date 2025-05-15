@@ -74,20 +74,18 @@ $first_about = $about_list[0];
             src="layout/images/video-home.mp4"
             type="video/mp4"
           />
-          Your browser does not support the video tag.
         </video>
         <div class="section-content">
           <div class="hero-details">
             <h2 class="title">Best Tea</h2>
-            <h3 class="subtitle">Make your day great with our special tea!</h3>
+            <h3 class="subtitle">Hãy làm cho ngày của bạn tuyệt vời hơn với loại trà đặc biệt của chúng tôi!</h3>
             <p class="description">
-              Discover a world of traditional tea, where each carefully selected
-              leaf tells a story of heritage and passion. From misty mountain
-              gardens to time-honored brewing techniques, our teas are a journey
-              of flavor, culture, and pure delight.
+                Khám phá thế giới trà truyền thống, nơi mỗi lá trà được lựa chọn cẩn thận kể một câu chuyện về di sản và niềm đam mê. Từ những khu vườn trên núi
+                mù sương đến các kỹ thuật pha chế lâu đời, trà của chúng tôi là một hành trình
+                của hương vị, văn hóa và niềm vui thuần khiết.
             </p>
             <div class="buttons">
-              <a href="products.php" class="button-order-now">Order Now</a>
+              <a href="products.php" class="button-order-now">Đặt hàng ngay</a>
             </div>
           </div>
         </div>
@@ -100,7 +98,7 @@ $first_about = $about_list[0];
               <h2 class="fw-bold mb-3"><?php echo $first_about['title_about']; ?></h2>
               <p class="mb-4"><?php echo $first_about['content_about'];?></p>
               <a href="about.php" target="_blank">
-                <button class="btn btn-primary fw-bold" type="button">Learn more</button>
+                <button class="btn btn-primary fw-bold" type="button">Xem thêm</button>
               </a>
             </div>
 
@@ -146,60 +144,60 @@ $first_about = $about_list[0];
         </div>
       </section>
       
-      <section class="py-5 text-center bg-white">
+      <section class="py-5 text-center bg-white commit-section">
   <div class="container">
     <div class="mb-4">
       <img src="layout/images/leaf.jpg" alt="Leaf icon" style="height: 60px; width: 50px;">
-      <h2 class="fw-bold mt-3">Our Guarantee</h2>
+      <h2 class="fw-bold mt-3">Cam kết của chúng tôi</h2>
       <p class="text-muted">
-        Integer quis tempor orci. Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+       "Chất lượng là ưu tiên hàng đầu – từ lá trà đến trải nghiệm của bạn."
       </p>
     </div>
 
     <div class="row text-center mt-5">
       <div class="col-md-4">
         <img src="layout/images/tea-field-1.jpg" alt="Handmade" class="mb-3" style="height: 150px; width: 250px;">
-        <h5 class="fw-bold">Handmade Products</h5>
+        <h5 class="fw-bold">Sản phẩm thủ công</h5>
         <p class="text-muted">
-          We create healthy artisan loose leaf teas, bath and body products, and infused sugars in small batches to ensure quality and freshness.
+         Chúng tôi tạo ra các loại trà lá rời thủ công tốt cho sức khỏe, sản phẩm tắm và chăm sóc cơ thể, cùng với đường hương vị, tất cả đều được sản xuất theo mẻ nhỏ để đảm bảo chất lượng và độ tươi mới.
         </p>
       </div>
 
       <div class="col-md-4">
         <img src="layout/images/coffee.jpg" alt="Customer service" class="mb-3" style="height: 150px; width: 200px;">
-        <h5 class="fw-bold">Great customer service</h5>
+        <h5 class="fw-bold">Dịch vụ khách hàng tốt</h5>
         <p class="text-muted">
-          Finding companies that genuinely care about their customers is hard these days. We are here for you. We truly care about your health.
+         Ngày nay, thật khó để tìm được những công ty thực sự quan tâm đến khách hàng. Nhưng chúng tôi luôn ở đây vì bạn. Chúng tôi thật sự quan tâm đến sức khỏe của bạn.
         </p>
       </div>
 
       <div class="col-md-4">
         <img src="layout/images/natural.jpg" alt="Natural" class="mb-3" style="height: 140px; width: 250px;">
-        <h5 class="fw-bold">Natural Ingredients</h5>
+        <h5 class="fw-bold">Thành phần tự nhiên</h5>
         <p class="text-muted">
-          We use ingredients made from the earth. Protect yourself and those you love. We don’t use any artificial flavors or preservatives in our tea blends.
+         Chúng tôi sử dụng các nguyên liệu có nguồn gốc từ thiên nhiên. Hãy bảo vệ bản thân bạn và những người thân yêu. Trong các loại trà pha trộn của chúng tôi, hoàn toàn không sử dụng hương liệu nhân tạo hay chất bảo quản.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-      <section class="py-5" style="background-color: #264c3d;">
+      <section class="py-5 select-section" style="background-color: #264c3d;">
   <div class="container-fluid">
     <div class="row align-items-center">
       <!-- Nội dung bên trái -->
       <div class="col-md-6 text-white px-5 py-4">
-        <p class="text-warning fw-bold text-uppercase mb-2">Sourced with care</p>
-        <h2 class="fw-bold mb-4">Sustainability and the Environment</h2>
+        <p class="text-warning fw-bold text-uppercase mb-2">Được chọn lọc kỹ lưỡng</p>
+        <h2 class="fw-bold mb-4">Bền vững và Môi trường</h2>
         <p class="mb-4" style="color: #ddd;">
-          We're concerned about the use of plastics and are taking action to improve the sustainability of our products and reduce their impact on the environment.
+         Chúng tôi quan tâm đến việc sử dụng nhựa và đang thực hiện các hành động nhằm cải thiện tính bền vững của sản phẩm, đồng thời giảm thiểu tác động đến môi trường.
         </p>
 
-        <h5 class="fw-bold">100% Organic</h5>
-        <p style="color: #ccc;">Et malesuada fames ac turpis egestas maecenas pharetra convallis met nisl purus.</p>
+        <h5 class="fw-bold">100% Hữu cơ</h5>
+        <p style="color: #ccc;">Nguyên liệu được chọn lọc kỹ lưỡng, đảm bảo chất lượng tự nhiên và lành mạnh cho sức khỏe.</p>
 
-        <h5 class="fw-bold">Always Fresh</h5>
-        <p style="color: #ccc;">Et malesuada fames ac turpis egestas maecenas pharetra convallis met nisl purus.</p>
+        <h5 class="fw-bold">Luôn luôn tươi mới</h5>
+        <p style="color: #ccc;">Sản phẩm luôn được chế biến tươi mới theo từng đợt nhỏ để đảm bảo hương vị và chất lượng tốt nhất.</p>
       </div>
 
       <!-- Hình ảnh bên phải -->
@@ -211,7 +209,7 @@ $first_about = $about_list[0];
     </section>
 
   <h1 class="product-section">
-  <a href="product.php" style="text-decoration: none; color: inherit;">Products</a>
+  <a href="product.php" style="text-decoration: none; color: inherit;">Sản phẩm trà</a>
 </h1>
         <div class="container-p-0">
         <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
@@ -295,7 +293,7 @@ $first_about = $about_list[0];
 </div>
 
   <div class="d-flex justify-content-center my-4">
-    <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>
+    <a href="blog.php" class="btn btn-primary fw-bold">XEM TẤT CẢ</a>
   </div>
 </div>
       </section>
