@@ -89,10 +89,15 @@
         <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Enter your email" />
       </div>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="pass" placeholder="Enter your password" />
-      </div>
+    <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="password" name="pass" placeholder="Enter your password">
+        <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('password', 'toggleEye')">
+        <i class="fa fa-eye text-muted small" id="toggleEye"></i>
+        </span>
+    </div>
+    </div>
 
       <div class="mb-3 text-end">
         <a href="forgotpwd.php" id="forgotPassword" class="text-decoration-none">Forgot Password?</a>

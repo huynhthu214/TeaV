@@ -41,7 +41,7 @@ $blog_query = "SELECT
             blog.BlogId,
             blog.ImgLink AS img_blog,
             blog.Title AS title_blog,
-            LEFT(blog.Content, 150) AS content_blog,
+            blog.Content AS content_blog,
             blog.DateUpload AS date_blog,
             GROUP_CONCAT(tag.Name SEPARATOR ', ') AS tag_names
         FROM blog
@@ -203,7 +203,13 @@ $first_about = $about_list[0];
               <?php } ?>
             </div>
             <h5 class="card-title"><?php echo $blog['title_blog']; ?></h5>
-            <p class="card-text"><?php echo $blog['content_blog']; ?></p>
+           <p class="card-text">
+            <?php 
+              $snippet = strip_tags($blog['content_blog']); 
+              $snippet = mb_substr($snippet, 0, 100); 
+              echo $snippet . (mb_strlen($snippet) >= 100 ? '...' : '');
+            ?>
+          </p>
           </div>
           <div class="card-footer text-muted small mt-auto">
             <?php echo $blog['date_blog']; ?>
