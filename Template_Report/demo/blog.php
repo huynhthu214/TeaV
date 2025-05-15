@@ -163,12 +163,12 @@ if (!$conn) {
                 <li>
                   <div class="row">
                     <div class="col-4">
-                      <a href="sblog_detail.php?id=<?php echo $post['BlogId']; ?>">
+                      <a href="sblog-detail.php?id=<?php echo $post['BlogId']; ?>">
                         <img src="<?php echo htmlspecialchars($post['ImgLink']); ?>" alt="" class="img-fluid-blog-min mb-3">
                       </a>
                     </div>
                     <div class="col-8">
-                      <a href="sblog_detail.php?id=<?php echo $post['BlogId']; ?>" class="min-title">
+                      <a href="sblog-detail.php?id=<?php echo $post['BlogId']; ?>" class="min-title">
                         <?php echo htmlspecialchars($post['Title']); ?>
                       </a>
                     </div>

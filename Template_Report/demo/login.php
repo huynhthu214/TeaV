@@ -107,7 +107,7 @@
               echo "<div class='alert alert-danger'>$error</div>";
            }
       ?>
-      <button type="submit" class="btn btn-outline-primary">Đăng xuất</button>
+      <button type="submit" class="btn btn-outline-primary">Đăng nhập</button>
 
       <div class="text-center mt-3">
         <p>Chưa có tài khoản?<a href="signup.php" id="openRegisterModal">Đăng ký ngay</a></p>

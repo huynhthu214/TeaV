@@ -78,14 +78,14 @@ while($row = $query_pie->fetch_assoc()){
 }
 
   $namePage = "Thống kê";
-  include "view/header_admin.php";
+  include "view/header-admin.php";
 ?>
 
 <div class="content-wrapper">
-<div class="page-title d-flex justify-content-between align-items-center mb-4">
-  <h2 class="m-0" style="color:rgb(10, 119, 52)"><strong>Thống kê</strong></h2>
+<div class="page-title d-flex justify-content-between align-items-start mb-4">
+  <h2 style="color:rgb(10, 119, 52); margin-top:-10px;"><strong>Thống kê</strong></h2>
   
-  <form class="d-flex align-items-center gap-2" role="search" method="GET" action="#">
+  <form class="d-flex align-items-center gap-2 mt-4" role="search" method="GET" action="#">
     <input class="form-control" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">
       <i class="bi bi-search"></i>
@@ -201,7 +201,7 @@ while($row = $query_pie->fetch_assoc()){
                       <table class="table table-striped table-bordered align-middle">
                           <thead class="table-success text-center">
                               <tr>
-                                  <th>#</th>
+                                  <th>STT</th>
                                   <th>Mã sản phẩm</th>
                                   <th>Tên sản phẩm</th>
                                   <th>Số lượng đã bán</th>
@@ -229,5 +229,5 @@ while($row = $query_pie->fetch_assoc()){
   </div>
 
 <?php 
-  include "view/footer_admin.php";
+  include "view/footer-admin.php";
 ?>

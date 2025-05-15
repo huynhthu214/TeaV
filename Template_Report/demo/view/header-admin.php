@@ -7,6 +7,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="layout/css/style_admin.css"/>
+  <link rel="stylesheet" href="layout/css/style_footer_admin.css"/>
+  <link rel="stylesheet" href="layout/css/style_header_admin.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body id="mainBody">
@@ -17,38 +19,37 @@
 
   <hr>
 
-  <a href="#" class="nav-item active">
+  <a href="dashboard.php" class="nav-item <?php if($namePage === 'Thống kê') echo 'active'; ?>">
     <i class="fa-solid fa-gauge-high"></i>
-    <span class="nav-text <?php if($namePage === 'Thống kê') echo 'active'; ?>">Thống kê</span>
+    <span class="nav-text">Thống kê</span>
   </a>
 
-  <a href="order.php" class="nav-item">
+  <a href="order-admin.php" class="nav-item <?php if($namePage === 'Quản lý đơn hàng') echo 'active'; ?>">
     <i class="fa-solid fa-box"></i>
-    <span class="nav-text">Đơn hàng</span>
+    <span class="nav-text">Quản lý đơn hàng</span>
   </a>
 
-  <a href="#" class="nav-item">
+  <a href="import.php" class="nav-item <?php if($namePage === 'Quản lý nhập hàng') echo 'active'; ?>">
    <i class="fa-solid fa-truck-loading"></i>
-    <span class="nav-text">Nhập hàng</span>
+    <span class="nav-text">Quản lý nhập hàng</span>
   </a>
 
-    <a href="#" class="nav-item">
+    <a href="products-admin.php" class="nav-item <?php if($namePage === 'Quản lý sản phẩm') echo 'active'; ?>">
     <i class="fa-solid fa-mug-hot"></i>
-    <span class="nav-text">Sản phẩm</span>
+    <span class="nav-text">Quản lý sản phẩm</span>
   </a>
 
-    <a href="#" class="nav-item">
+    <a href="#" class="nav-item <?php if($namePage === 'Quản lý khách hàng') echo 'active'; ?>">
     <i class="fa-solid fa-users"></i>
-    <span class="nav-text">Khách hàng</span>
+    <span class="nav-text">Quản lý khách hàng</span>
   </a>
 
-  <a href="#" class="nav-item">
+  <a href="#" class="nav-item <?php if($namePage === 'Quản lý bài đăng') echo 'active'; ?>">
     <i class="fa-solid fa-newspaper"></i>
-    <span class="nav-text">Bài đăng</span>
+    <span class="nav-text">Quản lý bài đăng</span>
   </a>
 
-
-  <a href="#" class="nav-item">
+  <a href="#" class="nav-item <?php if($namePage === 'Thông tin') echo 'active'; ?>">
     <i class="fa-solid fa-store"></i>
     <span class="nav-text">Thông tin</span>
   </a>
