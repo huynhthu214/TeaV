@@ -1,5 +1,5 @@
 <?php
-$namePage = "Payment";
+$namePage = "Thanh toán";
 include "view/header.php";
 
 $totalFromCart = isset($_GET['total']) ? floatval($_GET['total']) : 100.00;

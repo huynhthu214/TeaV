@@ -3,7 +3,7 @@
     session_start();
    }
 
-      $namePage = "Home";
+      $namePage = "Trang chủ";
       include "view/header.php";
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");

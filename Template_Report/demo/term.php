@@ -1,7 +1,7 @@
 
 <!-- Header/Navbar -->
 <?php 
-        $namePage = "Terms & Conditions";
+        $namePage = "Chính sách & Điều khoản";
         include "view/header.php";
 
         $conn = mysqli_connect("localhost", "root", "", "teav_shop1");

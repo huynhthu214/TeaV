@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
-$namePage = "Reset Password";
+$namePage = "Đổi mật khẩu";
 include "view/header.php";
 ?>
 

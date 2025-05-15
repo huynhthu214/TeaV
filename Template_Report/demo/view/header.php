@@ -48,14 +48,14 @@ if (session_status() === PHP_SESSION_NONE) {
                 id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'Home') echo 'active'; ?>" href="index.php">Trang chủ</a>
+                        <a class="nav-link <?php if ($namePage === 'Trang chủ') echo 'active'; ?>" href="index.php">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'About') echo 'active'; ?>" href="about.php">Về chúng tôi</a>
+                        <a class="nav-link <?php if ($namePage === 'Về chúng tôi') echo 'active'; ?>" href="about.php">Về chúng tôi</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle <?php if ($namePage === 'Products') echo 'active'; ?>" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Products
+                        <a class="nav-link dropdown-toggle <?php if ($namePage === 'Sản phẩm') echo 'active'; ?>" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản phẩm
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="productsDropdown">
                             <?php
@@ -96,7 +96,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <a class="nav-link <?php if ($namePage === 'Blog') echo 'active'; ?>" href="blog.php">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'Terms & Conditions') echo 'active'; ?>" href="term.php">Chính sách và điều khoản</a>
+                        <a class="nav-link <?php if ($namePage === 'Chính sách & Điều khoản') echo 'active'; ?>" href="term.php">Chính sách & điều khoản</a>
                     </li>
                     <?php if (isset($_SESSION['email'])): ?>
                         <?php $firstChar = strtoupper(substr($_SESSION['email'], 0, 1)); ?>

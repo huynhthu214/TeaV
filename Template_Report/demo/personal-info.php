@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TeaV - My Profile</title>
+  <title>TeaV - Hồ sơ của tôi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
   <style>
@@ -142,22 +142,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="row min-vh-100">
       <!-- Sidebar -->
       <div class="sidebar col-auto">
-        <h4 class="mb-4"><i class="bi bi-person-circle" aria-hidden="true"></i> My Profile</h4>
+        <h4 class="mb-4"><i class="bi bi-person-circle" aria-hidden="true"></i> Hồ sơ của tôi</h4>
         <ul class="list-unstyled">
   <li class="mb-3">
     <a href="#" class="text-decoration-none text-dark">
-      <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Account Infomation
+      <i class="bi bi-info-circle me-2" aria-hidden="true"></i> Thông tin tài khoản
     </a>
   </li>
   <li class="mb-3">
   <a href="resetpwd.php" class="text-decoration-none text-dark">
-    <i class="bi bi-shield-lock me-2" aria-hidden="true"></i>Change Password
+    <i class="bi bi-shield-lock me-2" aria-hidden="true"></i> Đổi mật khẩu
   </a>
 </li>
   <li class="mb-3">
     <a href="logout.php" class="text-decoration-none text-danger">
-      <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout
-    </a>
+      <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i> Đăng xuất
   </li>
 </ul>
       </div>
@@ -166,12 +165,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <main class="col main-content p-5">
 
         <!-- Account Details -->
-        <h3 class="mb-4"><strong>Account Infomation</strong></h3>
+        <h3 class="mb-4"><strong> Thông tin tài khoản</strong></h3>
         <div class="row">
         <form method="post">
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">Full Name</label>
+      <label class="form-label">Họ và tên</label>
       <input type="text" class="form-control" name="fullname"
              value="<?php echo htmlspecialchars($user['FullName']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
@@ -182,19 +181,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="form-label">Phone Number</label>
+      <label class="form-label">Số điện thoại</label>
       <input type="text" class="form-control" name="phone"
              value="<?php echo htmlspecialchars($user['PhoneNumber']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="form-label">Birthday</label>
+      <label class="form-label">Ngày sinh</label>
       <input type="date" class="form-control" name="dob"
              value="<?php echo htmlspecialchars($user['DateOfBirth']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
     </div>
     <div class="col-12 mb-3">
-      <label class="form-label">Address</label>
+      <label class="form-label">Địa chỉ</label>
       <input type="text" class="form-control" name="address"
              value="<?php echo htmlspecialchars($user['Address']); ?>"
              <?php echo $isEditing ? '' : 'readonly'; ?>>
@@ -204,11 +203,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <?php if ($isEditing): ?>
   <div class="d-flex justify-content-end">
-    <button type="submit" name="update" class="btn btn-success">Update</button>
+    <button type="submit" name="update" class="btn btn-success">Cập nhật</button>
   </div>
 <?php else: ?>
   <div class="d-flex justify-content-start">
-    <button type="submit" name="edit" class="btn" style="background-color:rgb(202, 199, 194); width: 10%;">Edit</button>
+    <button type="submit" name="edit" class="btn" style="background-color:rgb(202, 199, 194); width: 10%;">Chỉnh sửa</button>
   </div>
 <?php endif; ?>
 </form> 

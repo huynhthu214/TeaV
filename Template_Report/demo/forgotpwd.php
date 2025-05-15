@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-$namePage = "Forgot Password";
+$namePage = "Quên mật khẩu";
 include "view/header.php";
 ?>
 

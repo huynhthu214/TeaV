@@ -1,5 +1,5 @@
 <?php 
-$namePage = "About";
+$namePage = "Về chúng tôi";
 include "view/header.php";
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");

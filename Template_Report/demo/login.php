@@ -1,7 +1,7 @@
 
 <?php 
     session_start();
-    $namePage = "Login";
+    $namePage = "Đăng nhập";
     
     $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 

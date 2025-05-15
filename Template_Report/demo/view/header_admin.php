@@ -19,12 +19,17 @@
 
   <a href="#" class="nav-item active">
     <i class="fa-solid fa-gauge-high"></i>
-    <span class="nav-text">Thống kê</span>
+    <span class="nav-text <?php if($namePage === 'Thống kê') echo 'active'; ?>">Thống kê</span>
+  </a>
+
+  <a href="order.php" class="nav-item">
+    <i class="fa-solid fa-box"></i>
+    <span class="nav-text">Đơn hàng</span>
   </a>
 
   <a href="#" class="nav-item">
-    <i class="fa-solid fa-box"></i>
-    <span class="nav-text">Đơn hàng</span>
+   <i class="fa-solid fa-truck-loading"></i>
+    <span class="nav-text">Nhập hàng</span>
   </a>
 
     <a href="#" class="nav-item">

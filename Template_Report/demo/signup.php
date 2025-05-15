@@ -109,7 +109,7 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
             }
         }
     }
-        $namePage = "Sign up";
+        $namePage = "Đăng ký";
         include "view/header.php";
 ?>
 

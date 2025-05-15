@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$namePage = "Cart";
+$namePage = "Giỏ hàng";
 include "view/header.php";
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");

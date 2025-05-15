@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$namePage = "Confirm Email";
+$namePage = "Xác nhận email";
 include "view/header.php";
 ?>
 

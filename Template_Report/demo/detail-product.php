@@ -1,6 +1,6 @@
 <?php
 session_start();
-$namePage = "Product Details";
+$namePage = "Chi tiết sản phẩm";
 include "view/header.php";
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");

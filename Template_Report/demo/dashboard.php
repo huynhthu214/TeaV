@@ -77,7 +77,7 @@ while($row = $query_pie->fetch_assoc()){
   ];
 }
 
-  $namePage = "Dashboard";
+  $namePage = "Thống kê";
   include "view/header_admin.php";
 ?>
 
@@ -196,7 +196,7 @@ while($row = $query_pie->fetch_assoc()){
             </div>
           </div>
             <div class="mt-5 mb-5">
-                  <h4 class="text-success fw-bold mb-4">Sản phẩm bán chạy</h4>
+                  <h2 class="text-success fw-bold mb-4">Sản phẩm bán chạy</h2>
                   <div class="table-responsive">
                       <table class="table table-striped table-bordered align-middle">
                           <thead class="table-success text-center">
