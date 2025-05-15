@@ -60,3 +60,11 @@
   margin-top: 20px;
   justify-items: center;
 }
+
+#aboutCarousel .carousel-inner {
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+.carousel-item {
+  transition: transform 0.5s ease-in-out;
+}

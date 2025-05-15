@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="text-center mt-3">
-          <p class="mb-0">
+          <p class="mb-0">Copyright
             &copy; <span id="year"></span> 2025 TeaV. All rights reserved.
           </p>
         </div>

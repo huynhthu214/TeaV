@@ -87,55 +87,129 @@ $first_about = $about_list[0];
               of flavor, culture, and pure delight.
             </p>
             <div class="buttons">
-              <a href="#" class="button-order-now">Order Now</a>
+              <a href="products.php" class="button-order-now">Order Now</a>
             </div>
           </div>
         </div>
       </section>
 
       <section>
-          <div class="container">
-            <div class="row align-items-center">
-   
+        <div class="container">
+          <div class="row align-items-center">
             <div class="col-lg-5">
-        <h2 class="fw-bold mb-3"><?php echo $first_about['title_about']; ?></h2>
-        <p class="mb-4"><?php echo $first_about['content_about'];?></p>
-        <a href="about.php" target="_blank">
-          <button class="btn btn-primary fw-bold" id="learnMoreButton" type="button">Learn more</button>
-        </a>
-      </div>
+              <h2 class="fw-bold mb-3"><?php echo $first_about['title_about']; ?></h2>
+              <p class="mb-4"><?php echo $first_about['content_about'];?></p>
+              <a href="about.php" target="_blank">
+                <button class="btn btn-primary fw-bold" type="button">Learn more</button>
+              </a>
+            </div>
 
-      <div class="col-lg-7">
-      <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <?php  foreach ($about_list as $index => $about) {?>
-      <div class="carousel-item <?php echo $index === 0 ? 'active': ''; ?>">
-        <div class="d-flex gap-3">
-          <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
-          </div>
-          <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
-          </div>
-          <div class="card border-0">
-            <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
+            <div class="col-lg-7">
+              <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <?php 
+                    $i = 0;
+                    foreach ($about_list as $about) {
+                        if ($i % 3 == 0) {
+                            if ($i == 0) {
+                                echo '<div class="carousel-item active"><div class="row">';
+                            } else {
+                                echo '</div></div>'; // Close previous group
+                                echo '<div class="carousel-item"><div class="row">';
+                            }
+                        }
+                  ?>
+                    <div class="col-md-4">
+                      <div class="card border-0">
+                        <img src="<?php echo $about['img_about']; ?>" class="card-img-top rounded" alt="">
+                      </div>
+                    </div>
+                  <?php 
+                        $i++;
+                    }
+                    if ($i > 0) echo '</div></div>'; // Close last group
+                  ?>
+                </div>
+
+                <!-- Nút điều hướng Bootstrap chuẩn -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
+      
+      <section class="py-5 text-center bg-white">
+  <div class="container">
+    <div class="mb-4">
+      <img src="layout/images/leaf.jpg" alt="Leaf icon" style="height: 60px; width: 50px;">
+      <h2 class="fw-bold mt-3">Our Guarantee</h2>
+      <p class="text-muted">
+        Integer quis tempor orci. Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+      </p>
+    </div>
+
+    <div class="row text-center mt-5">
+      <div class="col-md-4">
+        <img src="layout/images/tea-field-1.jpg" alt="Handmade" class="mb-3" style="height: 150px; width: 250px;">
+        <h5 class="fw-bold">Handmade Products</h5>
+        <p class="text-muted">
+          We create healthy artisan loose leaf teas, bath and body products, and infused sugars in small batches to ensure quality and freshness.
+        </p>
       </div>
-      <?php } ?>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+
+      <div class="col-md-4">
+        <img src="layout/images/coffee.jpg" alt="Customer service" class="mb-3" style="height: 150px; width: 200px;">
+        <h5 class="fw-bold">Great customer service</h5>
+        <p class="text-muted">
+          Finding companies that genuinely care about their customers is hard these days. We are here for you. We truly care about your health.
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <img src="layout/images/natural.jpg" alt="Natural" class="mb-3" style="height: 140px; width: 250px;">
+        <h5 class="fw-bold">Natural Ingredients</h5>
+        <p class="text-muted">
+          We use ingredients made from the earth. Protect yourself and those you love. We don’t use any artificial flavors or preservatives in our tea blends.
+        </p>
       </div>
     </div>
   </div>
+</section>
+
+      <section class="py-5" style="background-color: #264c3d;">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <!-- Nội dung bên trái -->
+      <div class="col-md-6 text-white px-5 py-4">
+        <p class="text-warning fw-bold text-uppercase mb-2">Sourced with care</p>
+        <h2 class="fw-bold mb-4">Sustainability and the Environment</h2>
+        <p class="mb-4" style="color: #ddd;">
+          We're concerned about the use of plastics and are taking action to improve the sustainability of our products and reduce their impact on the environment.
+        </p>
+
+        <h5 class="fw-bold">100% Organic</h5>
+        <p style="color: #ccc;">Et malesuada fames ac turpis egestas maecenas pharetra convallis met nisl purus.</p>
+
+        <h5 class="fw-bold">Always Fresh</h5>
+        <p style="color: #ccc;">Et malesuada fames ac turpis egestas maecenas pharetra convallis met nisl purus.</p>
+      </div>
+
+      <!-- Hình ảnh bên phải -->
+          <div class="col-md-6 p-0">
+            <img src="layout/images/thu-hoach.jpg" alt="Sustainability Image" class="img-fluid w-100 h-100" style="object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </section>
+
   <h1 class="product-section">
   <a href="product.php" style="text-decoration: none; color: inherit;">Products</a>
 </h1>
@@ -224,7 +298,6 @@ $first_about = $about_list[0];
     <a href="blog.php" class="btn btn-primary fw-bold">VIEW ALL ARTICLES</a>
   </div>
 </div>
-
       </section>
     </main>
     <?php 
