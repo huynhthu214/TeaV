@@ -1,0 +1,32 @@
+.product-detail h1 {
+  font-family: "Pacifico", serif;
+  font-size: 1.5cm;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.product-detail .carousel-item img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail .back {
+  color: #0d371e;
+  text-decoration: underline;
+  font-weight: var(--font-weight-bold);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.product-detail .back:hover {
+  color: rgb(215, 174, 26);
+  transform: translateY(-2px);
+}

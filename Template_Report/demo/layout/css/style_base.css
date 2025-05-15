@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&family=WindSong:wght@400;500&display=swap");
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lora", sans-serif;
+}
+
+:root {
+  /* Colors */
+  --color-dark-olive: #3e401f;
+  --color-forest-green: #0d371e;
+  --color-muted-green: #508e42;
+  --color-sage-green: #daff8f;
+  --color-light-mint: #fdf751;
+  --color-mint-green: #b5f4a6;
+  --color-lime-pastel: #e9f2a7;
+  --color-light-brown: #edfcdc;
+  --color-bg-light: #9ed6ba;
+  --color-bg-dark: #5a8279;
+
+  /* Typography */
+  --font-size-xs: 0.75rem;
+  --font-size-s: 0.9rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-size-xxxl: 2.5rem;
+
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Border Radius */
+  --border-radius-xs: 4px;
+  --border-radius-s: 8px;
+  --border-radius-m: 12px;
+  --border-radius-l: 16px;
+  --border-radius-xl: 24px;
+  --border-radius-xxl: 32px;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-s: 0.5rem;
+  --spacing-m: 1rem;
+  --spacing-l: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+
+  /* Site Width */
+  --site-max-width: 1300px;
+  --site-min-width: 320px;
+
+  /* Z-Index */
+  --z-index-base: 1;
+  --z-index-dropdown: 10;
+  --z-index-sticky: 100;
+  --z-index-modal: 1000;
+  --z-index-tooltip: 10000;
+}
+
+body {
+  flex: 1;
+}
+
+/* Common Elements */
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Layout */
+.section-content {
+  margin: -10px auto;
+  padding: 0 20px;
+  max-width: var(--site-max-width);
+}

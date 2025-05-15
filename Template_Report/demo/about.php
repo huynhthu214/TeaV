@@ -8,7 +8,6 @@ if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
 
-// Query for About table
 $about_query = "SELECT 
             about.AboutId,
             about.ImgUrl AS img_about,
@@ -26,7 +25,6 @@ if (!$about_result) {
     die("Kết nối thất bại: " . mysqli_error($conn));
 }
 
-// Store about records in arrays for sections and quotes
 $about_data = [];
 $quotes = [];
 while ($row = mysqli_fetch_assoc($about_result)) {
@@ -37,6 +35,9 @@ while ($row = mysqli_fetch_assoc($about_result)) {
     }
 }
 ?>
+
+<link rel="stylesheet" href="layout/css/style_about.css"/>
+
 <main>
   <section class="about-us">
     <div class="container-about">
@@ -48,67 +49,67 @@ while ($row = mysqli_fetch_assoc($about_result)) {
     <div class="container py-5">
       <div class="row py-5" id="row1">
         <div class="col-4">
-          <h3>History</h3>
+          <h3>Lịch sử</h3>
           <p>
-            <?php echo htmlspecialchars($about_data['History']['Content']); ?>
+            <?php echo htmlspecialchars($about_data['Lịch sử']['Content']); ?>
           </p>
         </div>           
         <div class="col-8">
-          <img src="<?php echo htmlspecialchars($about_data['History']['img_about']); ?>" alt="">
+          <img src="<?php echo htmlspecialchars($about_data['Lịch sử']['img_about']); ?>" alt="">
         </div>
       </div>  
       <div class="row py-5" id="row2">
         <div class="col-8">
-          <img src="<?php echo htmlspecialchars($about_data['Mission']['img_about']); ?>" alt="">
+          <img src="<?php echo htmlspecialchars($about_data['Sứ mệnh']['img_about']); ?>" alt="">
         </div>
         <div class="col-4">
-          <h3>Mission</h3>
+          <h3>Sứ mệnh</h3>
           <p>
-            <?php echo htmlspecialchars($about_data['Mission']['Content']); ?>
+            <?php echo htmlspecialchars($about_data['Sứ mệnh']['Content']); ?>
           </p>
         </div>
       </div>
       <div class="row py-5" id="row2">
         <div class="col-md-3">
           <div class="card" style="width: 18rem; height: auto; border: none">
-            <img src="<?php echo htmlspecialchars($about_data['Sustainability']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
+            <img src="<?php echo htmlspecialchars($about_data['Phát triển bền vững']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
-                <h5 class="text-1">Sustainability</h5> <br>
-                <?php echo htmlspecialchars($about_data['Sustainability']['Content']); ?>
+                <h5 class="text-1">Phát triển bền vững</h5> <br>
+                <?php echo htmlspecialchars($about_data['Phát triển bền vững']['Content']); ?>
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card" style="width: 18rem; height: auto; border: none">
-            <img src="<?php echo htmlspecialchars($about_data['Innovation']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
+            <img src="<?php echo htmlspecialchars($about_data['Sáng tạo']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
-                <h5 class="text-1">Innovation</h5> <br>
-                <?php echo htmlspecialchars($about_data['Innovation']['Content']); ?>
+                <h5 class="text-1">Sáng tạo</h5> <br>
+                <?php echo htmlspecialchars($about_data['Sáng tạo']['Content']); ?>
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card" style="width: 18rem; height: auto; border: none">
-            <img src="<?php echo htmlspecialchars($about_data['Authenticity']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
+            <img src="<?php echo htmlspecialchars($about_data['Tính xác thực']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
-                <h5 class="text-1">Authenticity</h5> <br>
-                <?php echo htmlspecialchars($about_data['Authenticity']['Content']); ?>
+                <h5 class="text-1">Tính xác thực</h5> <br>
+                <?php echo htmlspecialchars($about_data['Tính xác thực']['Content']); ?>
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card" style="width: 18rem; height: auto; border: none">
-            <img src="<?php echo htmlspecialchars($about_data['Community']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
+            <img src="<?php echo htmlspecialchars($about_data['Cộng đồng']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
-                <h5 class="text-1">Community</h5> <br>
-                <?php echo htmlspecialchars($about_data['Community']['Content']); ?>
+                <h5 class="text-1">Cộng đồng</h5> <br>
+                <?php echo htmlspecialchars($about_data['Cộng đồng']['Content']); ?>
               </p>
             </div>
           </div>
@@ -146,6 +147,6 @@ while ($row = mysqli_fetch_assoc($about_result)) {
   </section>
 </main>
 <?php 
-include "view/footer.php";
-mysqli_close($conn);
+  include "view/footer.php";
+  mysqli_close($conn);
 ?>

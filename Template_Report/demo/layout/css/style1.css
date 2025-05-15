@@ -568,7 +568,6 @@ button .btn-primary.fw-bold {
   justify-items: center;
 }
 
-
 .filter-section {
   margin-bottom: 30px;
   justify-items: center;
@@ -628,7 +627,6 @@ button .btn-primary.fw-bold {
   color: #6c757d;
   border-top: 1px solid #dee2e6;
 }
-
 
 .btn-success {
   background-color: #add4ae;
@@ -809,7 +807,8 @@ button .btn-primary.fw-bold {
   display: flex;
 }
 
-.quantity-selector .input-group, button.btn-btn-primary-mt-2 {
+.quantity-selector .input-group,
+button.btn-btn-primary-mt-2 {
   width: 150px;
   height: 48px;
   margin-right: 10px;
@@ -832,7 +831,6 @@ button.add-to-cart {
   line-height: 48px;
   padding: 0 24px;
 }
-
 
 @media (max-width: 576px) {
   .product-detail h1 {
@@ -912,7 +910,7 @@ button.add-to-cart {
 .cart-container {
   max-width: 800px;
   margin: 0 auto;
-  min-height: calc(100vh - 200px); 
+  min-height: calc(100vh - 200px);
 }
 
 .cart-container table {

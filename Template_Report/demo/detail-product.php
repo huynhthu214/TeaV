@@ -81,8 +81,14 @@ mysqli_stmt_bind_param($stmt, "s", $productId);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
+if (!$result) {
+    die("Lỗi truy vấn: " . mysqli_error($conn));
+}
+
 if (mysqli_num_rows($result) == 0) {
     die("Lỗi: Sản phẩm không tồn tại hoặc không có sẵn.");
+    mysqli_close($conn);
+    include "view/footer.php";
 }
 
 $product = mysqli_fetch_assoc($result);
@@ -149,7 +155,7 @@ $product = mysqli_fetch_assoc($result);
                             <div class="alert alert-success mt-2">Product has been added to cart!</div>
                         <?php endif; ?>
                     </div>
-                    <a href="product.php" class="back">Back to Products</a>
+                    <a href="products.php" class="back">Back to Products</a>
                 </div>
             </div>
         </div>

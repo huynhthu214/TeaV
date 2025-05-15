@@ -1,0 +1,62 @@
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-section .section-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  color: var(--color-light-brown);
+}
+
+.hero-video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  filter: brightness(60%);
+}
+
+.hero-details .title {
+  font-size: 5rem;
+  color: var(--color-light-mint);
+  margin-bottom: var(--spacing-m);
+  font-family: "Pacifico", serif;
+}
+
+.hero-details .subtitle {
+  font-size: var(--font-size-xxl);
+  margin-bottom: var(--spacing-s);
+}
+
+.hero-details .description {
+  font-size: var(--font-size-l);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-l);
+}
+
+.hero-details .buttons .button-order-now {
+  font-size: var(--font-size-l);
+  color: var(--color-bg-light);
+  transition: color 0.3s ease;
+}
+
+.hero-details .buttons .button-order-now:hover {
+  color: var(--color-light-mint);
+}
+
+/* Product Cards Home */
+.product-card-home {
+  margin-top: 20px;
+  justify-items: center;
+}

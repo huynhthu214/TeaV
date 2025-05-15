@@ -1,0 +1,46 @@
+/* --- Terms --- */
+.term h1 {
+  font-size: 2.5rem;
+  color: var(--color-forest-green);
+  font-family: "Gravitas One", serif;
+}
+
+.term h5 {
+  font-family: "Pacifico", serif;
+  font-size: var(--font-size-xxl);
+  color: var(--color-forest-green);
+}
+
+.term h4 {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-forest-green);
+}
+
+.term p,
+.term li {
+  font-size: var(--font-size-l);
+}
+
+.term li {
+  padding-left: var(--spacing-l);
+}
+
+/* --- Table of Contents --- */
+.table-of-contents {
+  margin: 20px 0;
+}
+
+.table-of-contents a {
+  font-size: var(--font-size-m);
+  color: var(--color-dark-olive);
+  transition: color 0.3s;
+}
+
+.table-of-contents a:hover {
+  color: #86f71d;
+  text-decoration: underline;
+}
+
+.table-of-contents a:active {
+  color: #14a600;
+}

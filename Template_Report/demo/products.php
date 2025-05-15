@@ -105,6 +105,8 @@ $query_string = http_build_query([
 ]);
 ?>
 
+<link rel="stylesheet" href="layout/css/style_products.css"/>
+
 <main>
     <section class="products py-5">
       <div class="container">
@@ -113,7 +115,6 @@ $query_string = http_build_query([
           <p class="text-center mb-4"><?php echo htmlspecialchars($category['Description']); ?></p>
         <?php endif; ?>
 
-        <!-- Phần tìm kiếm và lọc -->
         <form method="GET" action="">
           <?php if ($category_id): ?>
             <input type="hidden" name="category_id" value="<?php echo htmlspecialchars($category_id); ?>">
@@ -176,7 +177,7 @@ $query_string = http_build_query([
             <?php } ?>
           </div>
         <?php else: ?>
-          <p class="text-center mt-4">No products found.</p>
+          <p class="text-center mt-4">Không tìm thấy sản phẩm.</p>
         <?php endif; ?>
 
         <!-- Phân trang -->
@@ -208,8 +209,7 @@ $query_string = http_build_query([
     </section>
 </main>
 <!-- footer -->
-<?php
-mysqli_free_result($result);
-mysqli_free_result($count_result);
-mysqli_close($conn);
+<?php 
+  include "view/footer.php";
+  mysqli_close($conn);
 ?>

@@ -1,0 +1,68 @@
+/* Header */
+header {
+  width: 100%;
+  background-color: var(--color-forest-green);
+}
+
+header .navbar {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .navbar-item {
+  display: flex;
+  gap: 10px;
+  margin-right: -40px;
+}
+
+.navbar .nav-logo .logo-text {
+  color: var(--color-sage-green);
+  font-family: "Playwrite US Trad", cursive;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-link {
+  padding: 10px 18px;
+  color: var(--color-bg-light);
+  border-radius: var(--border-radius-m);
+  font-size: var(--font-size-l);
+  transition: color 0.3s ease;
+}
+
+.nav-link.active,
+.nav-link:focus {
+  color: #fcfcfc !important;
+}
+
+.nav-link:hover {
+  color: var(--color-light-mint);
+}
+
+button i.bi-cart {
+  font-size: 20px;
+  color: white;
+}
+
+span#cartCount.badge {
+  color: white;
+  padding: 3px 0.5px;
+  font-size: 10px;
+}
+
+span#cartCount.badge:empty {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  button i.bi-cart {
+    font-size: 16;
+  }
+}
