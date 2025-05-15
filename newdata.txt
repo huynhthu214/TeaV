@@ -4,15 +4,38 @@ INSERT INTO CalculationUnit (UnitId, Name) VALUES
 ('U002', '500g');
 
 INSERT INTO Ingredients (IngredientId, IngreName, Origin) VALUES
-('I001', 'Green Tea', 'Việt Nam'),
-('I002', 'Black Tea', 'Đà Lạt');
+('I001', 'Trà xanh', 'Việt Nam'),
+('I002', 'Hoa nhài', 'Việt Nam'),
+('I003', 'Trà ô long', 'Đài Loan'),
+('I004', 'Hoa cúc', 'Trung Quốc'),
+('I005', 'Gừng', 'Việt Nam'),
+('I006', 'Cam thảo', 'Việt Nam'),
+('I007', 'Quế', 'Ấn Độ'),
+('I008', 'Bạc hà', 'Mỹ'),
+('I009', 'Chanh', 'Việt Nam'),
+('I010', 'Hibiscus', 'Ai Cập'),
+('I011', 'Hoa cúc la mã', 'Đức'),
+('I012', 'Matcha', 'Nhật Bản'),
+('I013', 'Sencha', 'Nhật Bản'),
+('I014', 'Dragonwell', 'Trung Quốc'),
+('I015', 'Rooibos', 'Nam Phi'),
+('I016', 'Lemon Verbena', 'Tây Ban Nha'),
+('I017', 'Tie Guan Yin', 'Trung Quốc'),
+('I018', 'Phoenix Dan Cong', 'Trung Quốc'),
+('I019', 'Assam', 'Ấn Độ'),
+('I020', 'Ceylon', 'Sri Lanka'),
+('I021', 'Bergamot', 'Ý'),
+('I022', 'Táo', 'Việt Nam'),
+('I023', 'Vanilla', 'Madagascar'),
+('I024', 'Nghệ', 'Ấn Độ'),
+('I025', 'Hạt nhục đậu khấu', 'Indonesia');
 
 INSERT INTO Categories (`CategoryId`, `Name`, `Description`) VALUES
-('C001', 'Green Tea', 'Fresh and antioxidant-rich green teas'),
-('C002', 'Herbal Tea', 'Soothing teas made from herbs'),
-('C003', 'Oolong Tea', 'Semi-oxidized teas with complex flavors'),
-('C004', 'Black Tea', 'Robust and bold black teas'),
-('C005', 'Black Tea (Spiced)', 'Black teas with aromatic spices');
+('C001', 'Trà Xanh', 'Trà xanh tươi, giàu chất chống oxy hóa'),
+('C002', 'Trà Thảo Mộc', 'Trà dịu nhẹ từ các loại thảo mộc thiên nhiên'),
+('C003', 'Trà Ô Long', 'Trà bán lên men với hương vị phức hợp'),
+('C004', 'Trà Đen', 'Trà đậm đà, hương vị mạnh mẽ'),
+('C005', 'Trà Đen (Gia Vị)', 'Trà đen kết hợp với các loại gia vị thơm');
 
 INSERT INTO Import (ImportId, ImportDate, Note) VALUES
 ('IMP01', '2024-12-15 10:00:00', 'Nhập lô trà xanh đầu tiên'),
@@ -41,38 +64,94 @@ INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, Ord
 ('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, NULL, NULL);
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
-('P001', 'C001', 'U001', 'Premium Green Tea', 'This high-quality green tea is carefully harvested', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Pure green tea leaves', 'Yes'),
-('P002', 'C002', 'U002', 'Chamomile Bliss', 'A soothing herbal tea made from dried chamomile', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 22, 'Dried chamomile flowers', 'Yes'),
-('P003', 'C002', 'U002', 'Herbal Serenity', 'This calming blend features a variety of herbs', 100, 'layout/images/herbal-serenity.jpg', '2025-04-11', 27, 'Lemon balm, lavender, and other calming herbs', 'Yes'),
-('P004', 'C003', 'U001', 'Mystic Oolong', 'Mystic Oolong is a semi-oxidized tea that combines', 100, 'layout/images/mystic-oolong.jpg', '2025-04-11', 38, 'Oolong tea leaves', 'Yes'),
-('P005', 'C004', 'U002', 'Royal Darjeeling', 'Often referred to as the "Champagne of teas"', 100, 'layout/images/royal-darjeeling.jpg', '2025-04-11', 45, 'Black tea leaves from the Darjeeling region', 'Yes'),
-('P006', 'C005', 'U002', 'Golden Chai Delight', 'This traditional spiced tea blend features robust', 100, 'layout/images/golden-chai-delight.jpg', '2025-04-11', 22, 'Black tea, cinnamon, cardamom, ginger', 'Yes'),
-('P007', 'C002', 'U002', 'Elderflower Essence', 'Elderflower Essence is a light herbal tea', 100, 'layout/images/elderflower-essence.jpg', '2025-04-11', 30, 'Dried elderflowers', 'Yes'),
-('P008', 'C005', 'U002', 'Traditional Masala Tea', 'A classic Indian brew, Traditional Masala Tea', 100, 'layout/images/traditional-masala-tea.jpg', '2025-04-11', 22, 'Black tea, cloves, cinnamon, ginger, black pepper', 'Yes'),
-('P009', 'C001', 'U001', 'Jasmine Pearl Elegance', 'Jasmine Pearl Elegance features hand-rolled green', 100, 'layout/images/jasmine-pearl-elegance.jpg', '2025-04-11', 55, 'Green tea leaves, jasmine blossoms', 'Yes'),
-('P010', 'C001', 'U001', 'Matcha Supreme', 'A vibrant green tea powder with a rich umami taste', 80, 'layout/images/matcha-supreme.jpg', '2025-04-11', 48, 'Matcha green tea powder', 'Yes'),
-('P011', 'C001', 'U001', 'Sencha Delight', 'A classic Japanese green tea with a grassy flavor', 90, 'layout/images/sencha-delight.jpg', '2025-04-11', 35, 'Sencha green tea leaves', 'Yes'),
-('P012', 'C001', 'U001', 'Dragonwell Bliss', 'A Chinese green tea with a nutty and sweet taste', 85, 'layout/images/dragonwell-bliss.jpg', '2025-04-11', 40, 'Dragonwell green tea leaves', 'Yes'),
-('P013', 'C002', 'U002', 'Peppermint Glow', 'A refreshing herbal tea with a cool minty taste', 100, 'layout/images/peppermint-glow.jpg', '2025-04-11', 20, 'Dried peppermint leaves', 'Yes'),
-('P014', 'C002', 'U002', 'Rooibos Harmony', 'A caffeine-free herbal tea with a sweet earthy fla', 95, 'layout/images/rooibos-harmony.jpg', '2025-04-11', 25, 'Rooibos leaves', 'Yes'),
-('P015', 'C002', 'U002', 'Lemon Verbena', 'A citrusy herbal tea with a bright and zesty flavo', 90, 'layout/images/lemon-verbena.jpg', '2025-04-11', 23, 'Dried lemon verbena leaves', 'Yes'),
-('P016', 'C002', 'U002', 'Hibiscus Dream', 'A tart and floral herbal tea with a vibrant red co', 85, 'layout/images/hibiscus-dream.jpg', '2025-04-11', 28, 'Dried hibiscus flowers', 'Yes'),
-('P017', 'C003', 'U001', 'Tie Guan Yin', 'A floral oolong tea with a smooth and creamy finis', 75, 'layout/images/tie-guan-yin.jpg', '2025-04-11', 42, 'Tie Guan Yin oolong leaves', 'Yes'),
-('P018', 'C003', 'U001', 'Phoenix Dan Cong', 'A fruity oolong tea with a honey-like sweetness', 70, 'layout/images/phoenix-dan-cong.jpg', '2025-04-11', 50, 'Phoenix Dan Cong oolong leaves', 'Yes'),
-('P019', 'C004', 'U002', 'Assam Gold', 'A bold black tea with a malty and robust flavor', 90, 'layout/images/assam-gold.jpg', '2025-04-11', 38, 'Assam black tea leaves', 'Yes'),
-('P020', 'C004', 'U002', 'Ceylon Star', 'A bright and brisk black tea from Sri Lanka', 85, 'layout/images/ceylon-star.jpg', '2025-04-11', 35, 'Ceylon black tea leaves', 'Yes'),
-('P021', 'C004', 'U002', 'Earl Grey Classic', 'A black tea infused with bergamot for a citrusy no', 80, 'layout/images/earl-grey-classic.jpg', '2025-04-11', 30, 'Black tea, bergamot oil', 'Yes'),
-('P022', 'C005', 'U002', 'Spiced Apple Chai', 'A cozy black tea with apple and warm spices', 90, 'layout/images/spiced-apple-chai.jpg', '2025-04-11', 24, 'Black tea, apple, cinnamon, cloves', 'Yes'),
-('P023', 'C005', 'U002', 'Vanilla Spice Blend', 'A black tea with vanilla and spicy notes', 85, 'layout/images/vanilla-spice-blend.jpg', '2025-04-11', 26, 'Black tea, vanilla, cardamom, nutmeg', 'Yes'),
-('P024', 'C005', 'U002', 'Ginger Turmeric Chai', 'A warming black tea with ginger and turmeric', 80, 'layout/images/ginger-turmeric-chai.jpg', '2025-04-11', 28, 'Black tea, ginger, turmeric, black pepper', 'Yes');
+('P001', 'C001', 'U001', 'Trà Xanh Hảo Hạng', 'Trà xanh chất lượng cao được thu hoạch cẩn thận', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Lá trà xanh nguyên chất', 'Yes'),
+('P002', 'C002', 'U002', 'Chamomile Thư Giãn', 'Một loại trà thảo mộc dịu nhẹ từ hoa cúc khô', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 22, 'Hoa cúc khô', 'Yes'),
+('P003', 'C002', 'U002', 'Thảo Mộc Thanh Bình', 'Sự kết hợp nhẹ nhàng từ nhiều loại thảo mộc', 100, 'layout/images/herbal-serenity.jpg', '2025-04-11', 27, 'Lemon balm, oải hương và các loại thảo mộc khác', 'Yes'),
+('P004', 'C003', 'U001', 'Ô Long Huyền Bí', 'Ô long bán lên men với hương vị cân bằng', 100, 'layout/images/mystic-oolong.jpg', '2025-04-11', 38, 'Lá trà ô long', 'Yes'),
+('P005', 'C004', 'U002', 'Darjeeling Hoàng Gia', 'Được mệnh danh là "Champagne của các loại trà"', 100, 'layout/images/royal-darjeeling.jpg', '2025-04-11', 45, 'Lá trà đen từ vùng Darjeeling', 'Yes'),
+('P006', 'C005', 'U002', 'Chai Vàng Truyền Thống', 'Hỗn hợp trà cay nồng đậm đà truyền thống', 100, 'layout/images/golden-chai-delight.jpg', '2025-04-11', 22, 'Trà đen, quế, bạch đậu khấu, gừng', 'Yes'),
+('P007', 'C002', 'U002', 'Tinh Chất Hoa Cơm Cháy', 'Trà thảo mộc nhẹ từ hoa cơm cháy khô', 100, 'layout/images/elderflower-essence.jpg', '2025-04-11', 30, 'Hoa cơm cháy khô', 'Yes'),
+('P008', 'C005', 'U002', 'Masala Truyền Thống', 'Cách pha trà Ấn Độ cổ điển đậm đà gia vị', 100, 'layout/images/traditional-masala-tea.jpg', '2025-04-11', 22, 'Trà đen, đinh hương, quế, gừng, tiêu đen', 'Yes'),
+('P009', 'C001', 'U001', 'Ngọc Trà Hoa Nhài', 'Trà xanh viên tròn ướp hương hoa nhài thủ công', 100, 'layout/images/jasmine-pearl-elegance.jpg', '2025-04-11', 55, 'Lá trà xanh, hoa nhài', 'Yes'),
+('P010', 'C001', 'U001', 'Matcha Thượng Hạng', 'Bột trà xanh đậm vị umami, sắc xanh tươi sáng', 80, 'layout/images/matcha-supreme.jpg', '2025-04-11', 48, 'Bột trà xanh matcha', 'Yes'),
+('P011', 'C001', 'U001', 'Sencha Tươi Mát', 'Trà xanh Nhật Bản với vị cỏ non đặc trưng', 90, 'layout/images/sencha-delight.jpg', '2025-04-11', 35, 'Lá trà sencha', 'Yes'),
+('P012', 'C001', 'U001', 'Long Tỉnh Dịu Êm', 'Trà xanh Trung Quốc với vị ngọt và hương hạt', 85, 'layout/images/dragonwell-bliss.jpg', '2025-04-11', 40, 'Lá trà long tỉnh', 'Yes'),
+('P013', 'C002', 'U002', 'Bạc Hà Mát Lạnh', 'Trà thảo mộc bạc hà sảng khoái và tươi mới', 100, 'layout/images/peppermint-glow.jpg', '2025-04-11', 20, 'Lá bạc hà khô', 'Yes'),
+('P014', 'C002', 'U002', 'Rooibos Dịu Nhẹ', 'Trà thảo mộc không caffeine với hương ngọt dịu', 95, 'layout/images/rooibos-harmony.jpg', '2025-04-11', 25, 'Lá rooibos', 'Yes'),
+('P015', 'C002', 'U002', 'Chanh Thơm Mát', 'Trà thảo mộc với hương vị cam chanh tươi sáng', 90, 'layout/images/lemon-verbena.jpg', '2025-04-11', 23, 'Lá chanh thơm khô', 'Yes'),
+('P016', 'C002', 'U002', 'Giấc Mộng Dâm Bụt', 'Trà hoa dâm bụt chua nhẹ, màu đỏ rực rỡ', 85, 'layout/images/hibiscus-dream.jpg', '2025-04-11', 28, 'Hoa dâm bụt khô', 'Yes'),
+('P017', 'C003', 'U001', 'Thiết Quan Âm', 'Trà ô long hoa thanh nhẹ, hậu vị kem mượt mà', 75, 'layout/images/tie-guan-yin.jpg', '2025-04-11', 42, 'Lá trà Thiết Quan Âm', 'Yes'),
+('P018', 'C003', 'U001', 'Phượng Đơn Tùng', 'Trà ô long trái cây ngọt dịu như mật ong', 70, 'layout/images/phoenix-dan-cong.jpg', '2025-04-11', 50, 'Lá trà Phượng Đơn Tùng', 'Yes'),
+('P019', 'C004', 'U002', 'Assam Vàng', 'Trà đen đậm đà, vị mạch nha đặc trưng', 90, 'layout/images/assam-gold.jpg', '2025-04-11', 38, 'Lá trà đen Assam', 'Yes'),
+('P020', 'C004', 'U002', 'Ceylon Ngôi Sao', 'Trà đen sáng vị, xuất xứ từ Sri Lanka', 85, 'layout/images/ceylon-star.jpg', '2025-04-11', 35, 'Lá trà đen Ceylon', 'Yes'),
+('P021', 'C004', 'U002', 'Earl Grey Cổ Điển', 'Trà đen hương cam bergamot nhẹ nhàng', 80, 'layout/images/earl-grey-classic.jpg', '2025-04-11', 30, 'Trà đen, tinh dầu cam bergamot', 'Yes'),
+('P022', 'C005', 'U002', 'Chai Táo Gia Vị', 'Trà đen ấm áp với táo và gia vị truyền thống', 90, 'layout/images/spiced-apple-chai.jpg', '2025-04-11', 24, 'Trà đen, táo, quế, đinh hương', 'Yes'),
+('P023', 'C005', 'U002', 'Hỗn Hợp Vanilla Cay', 'Trà đen với hương vanilla và gia vị nhẹ', 85, 'layout/images/vanilla-spice-blend.jpg', '2025-04-11', 26, 'Trà đen, vanilla, bạch đậu khấu, nhục đậu khấu', 'Yes'),
+('P024', 'C005', 'U002', 'Chai Gừng Nghệ', 'Trà đen ấm nóng với gừng và nghệ vàng', 80, 'layout/images/ginger-turmeric-chai.jpg', '2025-04-11', 28, 'Trà đen, gừng, nghệ, tiêu đen', 'Yes');
 
 INSERT INTO ReviewProduct (Email, ProductId, Rating, Comment, ReviewDate) VALUES
 ('anna.nguyen@email.com', 'P001', 4.5, 'Trà ngon, đậm vị', NOW());
 
 INSERT INTO ProductIngredient (ProductId, IngredientId) VALUES
 ('P001', 'I001'),
-('P002', 'I002'),
-('P003', 'I001');
+('P001', 'I003'),
+('P002', 'I006'),
+('P002', 'I014'),
+('P003', 'I004'),
+('P003', 'I024'),
+('P003', 'I025'),
+('P004', 'I021'),
+('P004', 'I023'),
+('P005', 'I004'),
+('P005', 'I014'),
+('P006', 'I006'),
+('P006', 'I011'),
+('P006', 'I018'),
+('P007', 'I002'),
+('P007', 'I025'),
+('P008', 'I002'),
+('P008', 'I003'),
+('P008', 'I020'),
+('P009', 'I004'),
+('P009', 'I013'),
+('P009', 'I017'),
+('P010', 'I006'),
+('P010', 'I014'),
+('P011', 'I003'),
+('P011', 'I016'),
+('P011', 'I025'),
+('P012', 'I014'),
+('P012', 'I020'),
+('P012', 'I021'),
+('P013', 'I010'),
+('P013', 'I011'),
+('P014', 'I004'),
+('P014', 'I017'),
+('P014', 'I023'),
+('P015', 'I008'),
+('P015', 'I014'),
+('P015', 'I021'),
+('P016', 'I002'),
+('P016', 'I017'),
+('P017', 'I002'),
+('P017', 'I004'),
+('P018', 'I001'),
+('P018', 'I007'),
+('P019', 'I011'),
+('P019', 'I021'),
+('P020', 'I006'),
+('P020', 'I015'),
+('P021', 'I015'),
+('P021', 'I016'),
+('P022', 'I008'),
+('P022', 'I020'),
+('P022', 'I021'),
+('P023', 'I003'),
+('P023', 'I017'),
+('P023', 'I022'),
+('P024', 'I005'),
+('P024', 'I006'),
+('P024', 'I019');
 
 INSERT INTO OrderProduct (OrderId, ProductId, Quantity) VALUES
 ('ORD001', 'P001', 2),
@@ -92,101 +171,102 @@ INSERT INTO ImportProduct (ProductId, ImportId, DetailId, Quantity, UnitPrice) V
 ('P003', 'IMP03', 'D004', 300, 12000);
 
 INSERT INTO About (`AboutId`, `Email`, `ImgUrl`, `Content`, `Title`, `DateUpload`, `IsShow`) VALUES
-('1', 'anna.nguyen@email.com', 'layout/images/about-0.jpg', 'Tea Heritage began in the misty mountains of Vietnam when founder Mai Nguyen discovered her grandmother\'s ancient tea recipes in 2008. These treasured family techniques, passed down through generations, inspired our mission to preserve authentic tea traditions.', 'History', '2024-01-10 00:00:00', 'Yes'),
-('2', 'anna.nguyen@email.com', 'layout/images/about-1.jpg', 'Our mission is to Preserve tradition, Connect people, and Elevate the tea experience through cultural appreciation and sustainable practices.', 'Mission', '2024-02-15 00:00:00', 'Yes'),
-('3', 'anna.nguyen@email.com', 'layout/images/about-2.jpg', 'Our commitment to the environment guides everything we do—from organic farming practices and biodegradable packaging to fair compensation for farmers and investment in local communities.', 'Sustainability', '2024-03-05 00:00:00', 'Yes'),
-('4', 'anna.nguyen@email.com', 'layout/images/about-3.jpg', 'While we respect tradition, we also embrace thoughtful innovation. We continuously explore new techniques and flavor profiles that enhance the tea experience.', 'Innovation', '2024-03-10 00:00:00', 'Yes'),
-('5', 'anna.nguyen@email.com', 'layout/images/about-4.jpg', 'We honor traditional methods and authentic flavors. Each product reflects genuine practices refined over generations.', 'Authenticity', '2024-03-20 00:00:00', 'Yes'),
-('6', 'anna.nguyen@email.com', 'layout/images/about-5.jpg', 'We believe in the power of tea to bring people together. Tea creates connections that transcend borders.', 'Community', '2024-04-01 00:00:00', 'Yes'),
-('7', 'anna.nguyen@email.com', './layout/images/quote-1.jpg', 'In the leaf\'s unfurling, we witness the dance between human hands and nature\'s bounty. This dance is what we call tea.', 'Quote: Traditional Vietnamese saying', '2024-01-10 10:00:00', 'Yes'),
-('8', 'anna.nguyen@email.com', './layout/images/quote-2.jpg', 'Tea reminds us to slow down. In a world of instant gratification, the patient art of brewing teaches us that the most rewarding experiences cannot be rushed.', 'Quote: The ?TeaV Philosophy', '2024-02-15 10:00:00', 'Yes'),
-('9', 'anna.nguyen@email.com', './layout/images/quote-3.jpg', 'Each tea leaf carries the memory of the soil that nourished it, the rain that fed it, the sun that warmed it, and the hands that tenderly harvested it. When you drink our tea, you taste this entire journey.', 'Quote: From \"The Tea Heritage Story\"', '2024-03-05 10:00:00', 'Yes');
+('1', 'anna.nguyen@email.com', 'layout/images/about-0.jpg', 'Tea Heritage bắt đầu từ những ngọn núi mù sương của Việt Nam khi nhà sáng lập Mai Nguyễn khám phá ra các công thức trà cổ truyền của bà mình vào năm 2008. Những kỹ thuật gia truyền quý giá này, được truyền qua nhiều thế hệ, đã truyền cảm hứng cho sứ mệnh bảo tồn truyền thống trà thật.', 'Lịch sử', '2024-01-10 00:00:00', 'Yes'),
+('2', 'anna.nguyen@email.com', 'layout/images/about-1.jpg', 'Sứ mệnh của chúng tôi là Bảo tồn truyền thống, Kết nối con người và Nâng tầm trải nghiệm trà qua việc trân trọng văn hóa và thực hành bền vững.', 'Sứ mệnh', '2024-02-15 00:00:00', 'Yes'),
+('3', 'anna.nguyen@email.com', 'layout/images/about-2.jpg', 'Cam kết bảo vệ môi trường là kim chỉ nam cho mọi hoạt động của chúng tôi — từ canh tác hữu cơ, bao bì phân hủy sinh học đến trả công công bằng cho nông dân và đầu tư vào cộng đồng địa phương.', 'Phát triển bền vững', '2024-03-05 00:00:00', 'Yes'),
+('4', 'anna.nguyen@email.com', 'layout/images/about-3.jpg', 'Chúng tôi tôn trọng truyền thống, đồng thời luôn đón nhận sự đổi mới sáng tạo có suy nghĩ. Luôn khám phá các kỹ thuật và hương vị mới nhằm nâng cao trải nghiệm trà.', 'Sáng tạo', '2024-03-10 00:00:00', 'Yes'),
+('5', 'anna.nguyen@email.com', 'layout/images/about-4.jpg', 'Chúng tôi trân trọng phương pháp truyền thống và hương vị chân thật. Mỗi sản phẩm phản ánh những thực hành nguyên bản được hoàn thiện qua nhiều thế hệ.', 'Tính xác thực', '2024-03-20 00:00:00', 'Yes'),
+('6', 'anna.nguyen@email.com', 'layout/images/about-5.jpg', 'Chúng tôi tin vào sức mạnh của trà trong việc kết nối con người. Trà tạo nên những kết nối vượt qua mọi ranh giới.', 'Cộng đồng', '2024-04-01 00:00:00', 'Yes'),
+('7', 'anna.nguyen@email.com', './layout/images/quote-1.jpg', 'Trong từng chiếc lá hé mở, ta chứng kiến điệu múa giữa bàn tay con người và ân huệ của thiên nhiên. Điệu múa ấy chính là trà.', 'Trích: Tục ngữ Việt Nam', '2024-01-10 10:00:00', 'Yes'),
+('8', 'anna.nguyen@email.com', './layout/images/quote-2.jpg', 'Trà nhắc nhở ta hãy chậm lại. Trong thế giới của sự thỏa mãn tức thì, nghệ thuật pha trà kiên nhẫn dạy ta rằng những trải nghiệm quý giá nhất không thể vội vã.', 'Trích: Triết lý TeaV', '2024-02-15 10:00:00', 'Yes'),
+('9', 'anna.nguyen@email.com', './layout/images/quote-3.jpg', 'Mỗi chiếc lá trà mang trong mình ký ức của đất mẹ đã nuôi dưỡng, của mưa đã tưới, của ánh nắng đã sưởi ấm, và của bàn tay thu hoạch ân cần. Khi bạn thưởng thức trà của chúng tôi, bạn đang nếm trọn hành trình ấy.', 'Trích: Từ "Câu chuyện di sản trà"', '2024-03-05 10:00:00', 'Yes');
 
 INSERT INTO Term (TermId, Email, Title, Content, ImgUrl, DateUpload, IsShow) 
 VALUES
 (
   'TE001',
   'anna.nguyen@email.com',
-  'Terms and Conditions',
+  'Điều khoản và Điều kiện',
   '
-  <h5>Welcome to TeaV!</h5>
-  <p>The following Terms and Conditions govern your use of our website and the purchase of tea products. By accessing or placing an order on this website, you agree to be bound by these terms. If you do not agree, please refrain from using the site.</p>
+  <h5>Chào mừng bạn đến với TeaV!</h5>
+  <p>Các Điều khoản và Điều kiện sau đây điều chỉnh việc sử dụng trang web của chúng tôi và việc mua các sản phẩm trà. Bằng cách truy cập hoặc đặt hàng trên trang web này, bạn đồng ý tuân thủ các điều khoản này. Nếu bạn không đồng ý, vui lòng không sử dụng trang web.</p>
   <div class="table-of-contents">
             <ul>
-              <li><a href="#definitions">1. Definitions</a></li>
-              <li><a href="#ordering-payment">2. Ordering and Payment</a></li>
-              <li><a href="#shipping-delivery">3. Shipping and Delivery</a></li>
-              <li><a href="#returns-refunds">4. Returns and Refunds</a></li>
-              <li><a href="#intellectual-property">5. Intellectual Property</a></li>
-              <li><a href="#limitation-liability">6. Limitation of Liability</a></li>
-              <li><a href="#privacy">7. Privacy</a></li>
-              <li><a href="#changes-terms">8. Changes to Terms</a></li>
-              <li><a href="#governing-law">9. Governing Law</a></li>
-              <li><a href="#contact-us">10. Contact Us</a></li>
+              <li><a href="#definitions">1. Định nghĩa</a></li>
+              <li><a href="#ordering-payment">2. Đặt hàng và Thanh toán</a></li>
+              <li><a href="#shipping-delivery">3. Vận chuyển và Giao hàng</a></li>
+              <li><a href="#returns-refunds">4. Trả hàng và Hoàn tiền</a></li>
+              <li><a href="#intellectual-property">5. Sở hữu trí tuệ</a></li>
+              <li><a href="#limitation-liability">6. Giới hạn Trách nhiệm</a></li>
+              <li><a href="#privacy">7. Quyền riêng tư</a></li>
+              <li><a href="#changes-terms">8. Thay đổi Điều khoản</a></li>
+              <li><a href="#governing-law">9. Luật áp dụng</a></li>
+              <li><a href="#contact-us">10. Liên hệ</a></li>
             </ul>
           </div>
-  <h4 id="definitions">1. Definitions</h4>
+  <h4 id="definitions">1. Định nghĩa</h4>
   <ul>
-    <li>"We," "Us," "Our": TeaV, the entity operating the website TeaV.</li>
-    <li>"You," "Customer": Any individual accessing or purchasing from the website.</li>
-    <li>"Products": Teas and related items sold on the website.</li>
+    <li>"Chúng tôi", "Của chúng tôi": TeaV, đơn vị vận hành trang web TeaV.</li>
+    <li>"Bạn", "Khách hàng": Bất kỳ cá nhân nào truy cập hoặc mua hàng trên trang web.</li>
+    <li>"Sản phẩm": Các loại trà và sản phẩm liên quan được bán trên trang web.</li>
   </ul>
 
-  <h4 id="ordering-payment">2. Ordering and Payment</h4>
+  <h4 id="ordering-payment">2. Đặt hàng và Thanh toán</h4>
   <ul>
-    <li>All orders are subject to product availability. We reserve the right to refuse or cancel an order if items are out of stock or for any other reason, without prior notice.</li>
-    <li>Product prices are displayed in USD and include/exclude taxes as specified. Shipping costs will be clearly indicated at checkout.</li>
-    <li>Payment is accepted via credit card, PayPal, cash on delivery. Orders will only be processed after payment is confirmed (except for cash-on-delivery options).</li>
+    <li>Tất cả đơn hàng phụ thuộc vào tình trạng hàng tồn kho. Chúng tôi có quyền từ chối hoặc hủy đơn hàng nếu sản phẩm hết hàng hoặc vì lý do khác mà không cần báo trước.</li>
+    <li>Giá sản phẩm được hiển thị bằng USD và có/không bao gồm thuế theo quy định. Phí vận chuyển sẽ được thông báo rõ ràng khi thanh toán.</li>
+    <li>Thanh toán được chấp nhận qua thẻ tín dụng, PayPal, hoặc thanh toán khi nhận hàng. Đơn hàng chỉ được xử lý sau khi xác nhận thanh toán (trừ hình thức thanh toán khi nhận).</li>
   </ul>
 
-  <h4 id="shipping-delivery">3. Shipping and Delivery</h4>
+  <h4 id="shipping-delivery">3. Vận chuyển và Giao hàng</h4>
   <ul>
-    <li>We ship to Vietnam and neighboring countries. Estimated delivery time is 7 to 10 business days, though delays may occur due to unforeseen circumstances (weather, carrier issues, etc.)</li>
-    <li>You are responsible for providing an accurate delivery address. We are not liable for failed deliveries due to incorrect information.</li>
+    <li>Chúng tôi giao hàng tới Việt Nam và các nước lân cận. Thời gian giao hàng dự kiến từ 7 đến 10 ngày làm việc, có thể bị trễ do các lý do bất khả kháng (thời tiết, vận chuyển,...)</li>
+    <li>Bạn chịu trách nhiệm cung cấp địa chỉ giao hàng chính xác. Chúng tôi không chịu trách nhiệm với các đơn hàng không giao được do thông tin sai lệch.</li>
   </ul>
 
-  <h4 id="returns-refunds">4. Returns and Refunds</h4>
+  <h4 id="returns-refunds">4. Trả hàng và Hoàn tiền</h4>
   <ul>
-    <li>Returns are accepted within 7 days of receipt if the product is defective or not as described.</li>
-    <li>Returned items must be unused, unopened (except to verify defects), and accompanied by proof of purchase.</li>
-    <li>Return shipping costs are borne by the customer unless the error is ours, in which case we will cover the cost.</li>
+    <li>Chấp nhận trả hàng trong vòng 7 ngày kể từ ngày nhận nếu sản phẩm bị lỗi hoặc không đúng mô tả.</li>
+    <li>Sản phẩm trả lại phải chưa sử dụng, còn nguyên bao bì (ngoại trừ kiểm tra lỗi), và kèm theo hóa đơn mua hàng.</li>
+    <li>Phí vận chuyển trả hàng do khách chịu trừ khi lỗi thuộc về chúng tôi, trong trường hợp đó chúng tôi sẽ chịu phí.</li>
   </ul>
 
-  <h4 id="intellectual-property">5. Intellectual Property</h4>
+  <h4 id="intellectual-property">5. Sở hữu trí tuệ</h4>
   <ul>
-    <li>All content on the TeaV website (images, logos, product descriptions) is the property of TeaV. You may not copy, distribute, or use this content without our written permission.</li>
+    <li>Tất cả nội dung trên trang web TeaV (hình ảnh, logo, mô tả sản phẩm) là tài sản của TeaV. Bạn không được sao chép, phân phối hoặc sử dụng nội dung này khi chưa có sự cho phép bằng văn bản của chúng tôi.</li>
   </ul>
 
-  <h4 id="limitation-liability">6. Limitation of Liability</h4>
+  <h4 id="limitation-liability">6. Giới hạn Trách nhiệm</h4>
   <ul>
-    <li>We strive to provide high-quality tea products but are not responsible for damages arising from improper use or individual allergic reactions to ingredients.</li>
-    <li>The website is provided "as is," and we do not guarantee uninterrupted or error-free access.</li>
+    <li>Chúng tôi cố gắng cung cấp sản phẩm trà chất lượng cao nhưng không chịu trách nhiệm về các thiệt hại do sử dụng không đúng cách hoặc phản ứng dị ứng cá nhân với thành phần sản phẩm.</li>
+    <li>Trang web được cung cấp "nguyên trạng", không bảo đảm truy cập liên tục hoặc không lỗi.</li>
   </ul>
 
-  <h4 id="privacy">7. Privacy</h4>
+  <h4 id="privacy">7. Quyền riêng tư</h4>
   <ul>
-    <li>We collect personal information (name, address, email, phone number) to process orders. Your data is protected under our Privacy Policy and will not be shared with third parties except as necessary for delivery or legal requirements.</li>
+    <li>Chúng tôi thu thập thông tin cá nhân (tên, địa chỉ, email, số điện thoại) để xử lý đơn hàng. Dữ liệu của bạn được bảo mật theo Chính sách Quyền riêng tư và sẽ không được chia sẻ với bên thứ ba trừ khi cần thiết cho giao hàng hoặc yêu cầu pháp lý.</li>
   </ul>
 
-  <h4 id="changes-terms">8. Changes to Terms</h4>
+  <h4 id="changes-terms">8. Thay đổi Điều khoản</h4>
   <ul>
-    <li>We may update these Terms and Conditions at any time without prior notice. The latest version will be posted on the website and take effect immediately upon posting.</li>
+    <li>Chúng tôi có thể cập nhật các Điều khoản và Điều kiện này bất cứ lúc nào mà không cần báo trước. Phiên bản mới nhất sẽ được đăng trên trang web và có hiệu lực ngay khi đăng tải.</li>
   </ul>
 
-  <h4 id="governing-law">9. Governing Law</h4>
+  <h4 id="governing-law">9. Luật áp dụng</h4>
   <ul>
-    <li>These terms are governed by the laws of Vietnam. Any disputes will be resolved in Vietnam.</li>
+    <li>Các điều khoản này được điều chỉnh bởi luật pháp Việt Nam. Mọi tranh chấp sẽ được giải quyết tại Việt Nam.</li>
   </ul>
 
-  <h4 id="contact-us">10. Contact Us</h4>
+  <h4 id="contact-us">10. Liên hệ</h4>
   <ul>
     <li>Email: teavshop@gmail.com</li>
-    <li>Phone: +123 456 7890</li>
+    <li>Điện thoại: +123 456 7890</li>
   </ul>
   ',
   'images/terms.jpg',
   NOW(),
-  'Yes');
+  'Yes'
+);
 
 INSERT INTO `blog` (`Title`, `DateUpload`, `ImgLink`, `Summary`, `BlogId`, `Email`, `Content`, `IsShow`) VALUES
 ('The Art of Tea Brewing: Essential Techniques for Perfect Tea', '2025-04-01 00:00:00', './layout/images/blog-1.jpg', 'Discover the time-honored methods and best practices for brewing different types of tea, from delicate white teas to robust black varieties. This guide will elevate your tea-drinking experience.', 'B01', 'anna.nguyen@email.com', '<div class=\"blog-full-content\">\r\n        <p>Tea brewing is both an art and a science, combining tradition, technique, and personal preference to create the perfect cup. Whether you\'re new to the world of tea or looking to refine your brewing methods, this guide will help you unlock the full potential of your favorite teas.</p>\r\n        \r\n        <h3>Understanding Tea Types and Their Ideal Brewing Conditions</h3>\r\n        \r\n        <p>Each tea variety has unique characteristics that shine when brewed correctly. Here\'s how to approach the major tea categories:</p>\r\n        \r\n        <p><strong>White Tea</strong>: These delicate, minimally processed teas require gentle treatment. Use water that\'s cooled to about 175-185°F (80-85°C) and steep for 4-5 minutes. The result should be a pale, subtle brew with sweet, floral notes.</p>\r\n        \r\n        <p><strong>Green Tea</strong>: Fresh and vibrant green teas can become bitter when over-extracted. Brew with water at 160-180°F (70-82°C) for just 1-3 minutes. Japanese green teas generally prefer cooler temperatures than Chinese varieties.</p>\r\n        \r\n        <p><strong>Oolong Tea</strong>: These semi-oxidized teas span a spectrum of flavors. Brew lighter oolongs like water around 185-195°F (85-90°C) and darker ones closer to boiling. They can usually be steeped multiple times, with each infusion revealing new dimensions of flavor.</p>\r\n        \r\n        <p><strong>Black Tea</strong>: Fully oxidized and robust, black teas stand up to boiling water (212°F/100°C) and need 3-5 minutes to fully develop their rich, malty characteristics.</p>\r\n        \r\n        <p><strong>Pu-erh Tea</strong>: These aged, fermented teas from Yunnan, China are unique in that they improve with age. Use boiling water and allow 3-4 minutes for younger sheng pu-erhs, while aged shou varieties can handle longer steeping times.</p>\r\n        \r\n        <p><strong>Herbal Infusions</strong>: Not technically tea (as they don\'t contain Camellia sinensis leaves), these botanicals generally do well with boiling water and longer steep times of 5-7 minutes to extract their full flavor and wellness benefits.</p>\r\n        \r\n        <h3>The Importance of Water Quality</h3>\r\n        \r\n        <p>The often-overlooked hero of great tea is the water itself. After all, your cup is mostly water! Use fresh, filtered water with a balanced mineral content for the best results. Heavily chlorinated tap water or distilled water lacking minerals will produce flat, lifeless tea.</p>\r\n        \r\n        <h3>Measuring Matters</h3>\r\n        \r\n        <p>For consistency, measure both your tea and water. A general guideline is 2-3 grams of tea (roughly a teaspoon for most varieties) per 8 ounces (240ml) of water. Adjust to your taste preference, keeping in mind that some teas, like rolled oolongs, expand significantly when steeped.</p>\r\n        \r\n        <h3>Brewing Vessels: Choose Wisely</h3>\r\n        \r\n        <p>Your brewing vessel affects more than aesthetics:</p>\r\n        \r\n        <ul>\r\n            <li><strong>Glass or porcelain teapots</strong> are excellent all-purpose choices that don\'t impart flavors to the tea</li>\r\n            <li><strong>Yixing clay teapots</strong> absorb tea oils over time and are traditionally dedicated to specific tea types</li>\r\n            <li><strong>Gaiwans</strong> (lidded Chinese bowls) offer precision control for gong fu style brewing</li>\r\n            <li><strong>Cast iron teapots</strong> retain heat well but can sometimes be too intense for delicate teas</li>\r\n        </ul>\r\n        \r\n        <h3>Eastern vs. Western Brewing Approaches</h3>\r\n        \r\n        <p><strong>Western-style brewing</strong> typically uses more water, less tea, and longer steep times. It\'s convenient for everyday drinking and produces larger quantities.</p>\r\n        \r\n        <p><strong>Eastern-style (Gong Fu) brewing</strong> employs more tea leaves, less water, and very short infusions, often in small vessels. This method highlights the evolving character of tea through multiple infusions and is excellent for appreciating fine teas.</p>\r\n        \r\n        <h3>Mindfulness in Tea Preparation</h3>\r\n        \r\n        <p>Beyond the technical aspects, tea preparation can be a meditative practice that encourages presence and mindfulness. Take time to observe the leaves unfurling, inhale the aroma, and notice how the flavor evolves with each sip.</p>\r\n        \r\n        <p>Remember that these guidelines are just starting points. As you explore the vast world of tea, you\'ll develop your own preferences and techniques that bring you the most joy in your tea journey.</p>\r\n    </div>', 'Yes'),
@@ -197,11 +277,11 @@ INSERT INTO `blog` (`Title`, `DateUpload`, `ImgLink`, `Summary`, `BlogId`, `Emai
 
 
 INSERT INTO `tag` (`TagId`, `Name`) VALUES
-('T01', 'Health'),
-('T02', 'Tips'),
-('T03', 'Relaxation'),
-('T04', 'Seasonal'),
-('T05', 'Lifestyle');
+('T01', 'Sức khỏe'),
+('T02', 'Mẹo hay'),
+('T03', 'Thư giãn'),
+('T04', 'Theo mùa'),
+('T05', 'Phong cách sống');
 
 INSERT INTO `blogtag` (`BlogId`, `TagId`) VALUES
 ('B01', 'T01'),
@@ -211,18 +291,18 @@ INSERT INTO `blogtag` (`BlogId`, `TagId`) VALUES
 ('B05', 'T05');
 
 INSERT INTO `reaction` (`ReactionId`, `Email`, `BlogId`, `Comment`, `IsShow`) VALUES
-('R001', 'anna.nguyen@email.com', 'B01', 'This guide completely transformed my tea brewing technique! I never realized the importance of water temperature before. My white teas taste so much better now that I\'m not scalding them with boiling water.', 'Yes'),
-('R002', 'anna.nguyen@email.com', 'B01', 'Great overview! Could you please do a follow-up article specifically on brewing oolongs? I find them the trickiest to get right.', 'Yes'),
-('R003', 'anna.nguyen@email.com', 'B01', 'Tea is just hot leaf juice anyway. Who cares about all this fuss?', 'No'),
-('R004', 'anna.nguyen@email.com', 'B02', 'I\'ve been following a seasonal tea routine for years and can confirm it makes such a difference! Hojicha has become my autumn go-to, just as you suggested.', 'Yes'),
-('R005', 'anna.nguyen@email.com', 'B02', 'I never thought about matching teas to seasons before. Will definitely try your summer recommendations as the weather warms up!', 'Yes'),
-('R006', 'anna.nguyen@email.com', 'B03', 'As a nutritionist, I appreciate how this article balances traditional wisdom with modern research. Well done on not making exaggerated health claims while still highlighting tea\'s genuine benefits.', 'Yes'),
-('R007', 'anna.nguyen@email.com', 'B03', 'Interesting read, but I\'d like to see more specific citations from peer-reviewed research. Which studies specifically showed the L-theanine effects?', 'Yes'),
-('R008', 'anna.nguyen@email.com', 'B03', 'Check out our miracle tea supplement that cures everything! Link: www.scamtea.com', 'No'),
-('R009', 'anna.nguyen@email.com', 'B04', 'Having participated in a tea ceremony in Kyoto, I can attest to how transformative the experience is. The focus on being present in the moment is something we could all benefit from in our daily lives.', 'Yes'),
-('R010', 'anna.nguyen@email.com', 'B04', 'Excellent overview of these diverse traditions. I\'d love to see a follow-up piece on how these ceremonies have evolved over time, particularly how British tea culture was influenced by Chinese traditions.', 'Yes'),
-('R011', 'anna.nguyen@email.com', 'B05', 'I was fortunate enough to try authentic Da Hong Pao once in my life, and it truly was a transcendent experience. The price tag is enormous, but for serious tea enthusiasts, it\'s worth trying at least once.', 'Yes'),
-('R012', 'anna.nguyen@email.com', 'B05', 'These all sound amazing but completely out of my price range! Could you do an article on exceptional.', 'Yes');
+('R001', 'anna.nguyen@email.com', 'B01', 'Hướng dẫn này hoàn toàn thay đổi cách tôi pha trà! Trước đây tôi không nhận ra nhiệt độ nước lại quan trọng như vậy. Trà trắng của tôi giờ ngon hơn hẳn vì không bị đun sôi quá mức.', 'Yes'),
+('R002', 'anna.nguyen@email.com', 'B01', 'Tổng quan rất hay! Bạn có thể viết thêm một bài riêng về cách pha trà ô long không? Tôi thấy loại này khó pha đúng nhất.', 'Yes'),
+('R003', 'anna.nguyen@email.com', 'B01', 'Trà chỉ là nước lá nóng thôi mà. Ai mà quan tâm mấy chuyện này?', 'No'),
+('R004', 'anna.nguyen@email.com', 'B02', 'Tôi đã theo thói quen uống trà theo mùa trong nhiều năm và có thể xác nhận rằng điều này tạo nên sự khác biệt rõ rệt! Hojicha đúng là lựa chọn hoàn hảo cho mùa thu, như bạn gợi ý.', 'Yes'),
+('R005', 'anna.nguyen@email.com', 'B02', 'Tôi chưa từng nghĩ đến việc kết hợp trà với mùa. Sẽ thử ngay những gợi ý cho mùa hè khi thời tiết bắt đầu nóng lên!', 'Yes'),
+('R006', 'anna.nguyen@email.com', 'B03', 'Là một chuyên gia dinh dưỡng, tôi đánh giá cao cách bài viết này kết hợp giữa kiến thức truyền thống và nghiên cứu hiện đại. Rất tốt vì không đưa ra các tuyên bố phóng đại mà vẫn nêu bật lợi ích thực sự của trà.', 'Yes'),
+('R007', 'anna.nguyen@email.com', 'B03', 'Bài viết thú vị, nhưng tôi muốn thấy thêm trích dẫn cụ thể từ các nghiên cứu khoa học. Những nghiên cứu nào cụ thể nói về tác dụng của L-theanine vậy?', 'Yes'),
+('R008', 'anna.nguyen@email.com', 'B03', 'Hãy xem sản phẩm trà thần kỳ của chúng tôi chữa được mọi bệnh! Link: www.scamtea.com', 'No'),
+('R009', 'anna.nguyen@email.com', 'B04', 'Tôi đã từng tham gia một buổi trà đạo ở Kyoto và có thể nói đó là một trải nghiệm đầy cảm hứng. Sự tập trung vào hiện tại thực sự là điều mà ai cũng nên học hỏi.', 'Yes'),
+('R010', 'anna.nguyen@email.com', 'B04', 'Tổng quan tuyệt vời về những truyền thống đa dạng. Tôi rất muốn xem một bài viết tiếp theo về cách các nghi thức trà này đã phát triển theo thời gian, đặc biệt là cách văn hóa trà Anh bị ảnh hưởng từ Trung Quốc.', 'Yes'),
+('R011', 'anna.nguyen@email.com', 'B05', 'Tôi đã may mắn được thử trà Da Hong Pao chính gốc một lần, và đó thực sự là một trải nghiệm siêu việt. Giá rất đắt nhưng với những người đam mê trà, nên thử một lần trong đời.', 'Yes'),
+('R012', 'anna.nguyen@email.com', 'B05', 'Nghe tuyệt vời đấy nhưng giá quá cao so với tôi! Bạn có thể viết bài về những loại trà ngon mà giá cả hợp lý không?', 'Yes');
 
 
 
