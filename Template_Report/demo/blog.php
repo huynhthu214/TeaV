@@ -48,26 +48,6 @@ if (!$conn) {
       <h1 class="text-center mb-4">Blog</h1>
       <div class="row" style="justify-content: center">
         <div class="col-sm-10 px-5">
-          <!-- Filter Form -->
-          <div class="filter-section mb-4">
-            <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-              <div class="row g-3">
-                <div class="col-md-4">
-                  <select class="form-select" id="tagFilter" name="tag">
-                    <option value="">All categories</option>
-                    <?php foreach ($tags as $tag): ?>
-                      <option value="<?php echo $tag['TagId']; ?>" <?php echo ($tagFilter === $tag['TagId']) ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($tag['Name']); ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <button class="btn btn-primary" type="submit">Filter</button>
-                </div>
-              </div>
-            </form>
-          </div>
           
           <?php 
           // Hiển thị các bài viết blog

@@ -137,7 +137,6 @@ $product = mysqli_fetch_assoc($result);
                                     <input type="number" name="quantity" class="form-control text-center" value="1" min="1" max="<?php echo $product['Quantity']; ?>" step="1">
                                 </div>
                             </div>
-                            
                             <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
                             <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['Name']) ?>">
                             <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
