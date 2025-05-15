@@ -201,6 +201,8 @@ button#addItem:hover,
   color: #03423d;
   border: none;
   transition: background-color 0.5s;
+  margin-left: 0;
+  align-self: start;
 }
 
 .btn-success:hover {

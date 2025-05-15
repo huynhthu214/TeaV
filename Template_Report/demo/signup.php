@@ -142,14 +142,26 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
         <input type="text" class="form-control" id="address" name="address" maxlength="300" value="<?php echo htmlspecialchars($address); ?>"/>
       </div>
 
+      <!-- New Password -->
       <div class="mb-3">
         <label for="new-password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="new-password" name="pass" placeholder="Create a password" />
+        <div class="input-group">
+          <input type="password" class="form-control" id="new-password" name="pass" placeholder="Create a password">
+          <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('new-password', 'toggleNewEye')">
+            <i class="fa fa-eye text-muted small" id="toggleNewEye"></i>
+          </span>
+        </div>
       </div>
 
+      <!-- Confirm Password -->
       <div class="mb-3">
         <label for="confirm-password" class="form-label">Confirm password</label>
-        <input type="password" class="form-control" id="confirm-password" name="pass-confirm" placeholder="Confirm password" />
+        <div class="input-group">
+          <input type="password" class="form-control" id="confirm-password" name="pass-confirm" placeholder="Confirm password">
+          <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword('confirm-password', 'toggleConfirmEye')">
+            <i class="fa fa-eye text-muted small" id="toggleConfirmEye"></i>
+          </span>
+        </div>
       </div>
 
       <div class="form-check mb-3">

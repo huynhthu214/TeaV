@@ -19,6 +19,8 @@ if (session_status() === PHP_SESSION_NONE) {
     />
     <link rel="stylesheet" href="layout/css/style.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
 </head>
 <body>
 <header>
