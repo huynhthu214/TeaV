@@ -39,17 +39,17 @@
     <span class="nav-text">Quản lý sản phẩm</span>
   </a>
 
-    <a href="#" class="nav-item <?php if($namePage === 'Quản lý khách hàng') echo 'active'; ?>">
+    <a href="customer-admin.php" class="nav-item <?php if($namePage === 'Quản lý khách hàng') echo 'active'; ?>">
     <i class="fa-solid fa-users"></i>
     <span class="nav-text">Quản lý khách hàng</span>
   </a>
 
-  <a href="#" class="nav-item <?php if($namePage === 'Quản lý bài đăng') echo 'active'; ?>">
+  <a href="blog-admin.php" class="nav-item <?php if($namePage === 'Quản lý bài đăng') echo 'active'; ?>">
     <i class="fa-solid fa-newspaper"></i>
     <span class="nav-text">Quản lý bài đăng</span>
   </a>
 
-  <a href="#" class="nav-item <?php if($namePage === 'Thông tin') echo 'active'; ?>">
+  <a href="info-admin.php" class="nav-item <?php if($namePage === 'Thông tin') echo 'active'; ?>">
     <i class="fa-solid fa-store"></i>
     <span class="nav-text">Thông tin</span>
   </a>
