@@ -1,7 +1,15 @@
 <?php
+ob_start();
 session_start();
+
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php?msg=login_required");
+    exit();
+}
+
 $namePage = "Chi tiết sản phẩm";
 include "view/header.php";
+ob_end_flush();
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -13,12 +21,6 @@ $productId = isset($_GET['id']) ? $_GET['id'] : null;
 if (!$productId) {
     die("Lỗi: Không tìm thấy ID sản phẩm.");
 }
-
-if (!isset($_SESSION['email'])) {
-    header("Location: login.php?msg=login_required");
-    exit();
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
@@ -27,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
     $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
     $max_quantity = isset($_POST['max_quantity']) ? intval($_POST['max_quantity']) : 1;
-    
     $quantity = max(1, min($quantity, $max_quantity));
 
     $product = [
@@ -55,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][] = $product;
     }
 
-    header("Location: detail-product.php?id=$product_id&added=1");
+    $_SESSION['success_message'] = "Sản phẩm đã được thêm vào giỏ hàng!";
+    header("Location: detail-product.php?id=$product_id"); // quay lại trang chi tiết
     exit;
 }
 
@@ -126,15 +128,16 @@ $product = mysqli_fetch_assoc($result);
                         </div>
                 <div class="col-md-6">
                     <div class="delivery-notice mb-3 p-2 bg-light text-success fw-bold">
-                        Free Vietnam Delivery on Vietnam Orders Over $35
+                        Giao hàng miễn phí với đơn hàng trên $35
                     </div>
                     
-                    <h3>Details</h3>
-                    <p><strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?></p>
-                    <p><strong>Quantity Available:</strong> <?php echo $product['Quantity']; ?></p>
-                    <p><strong>Category:</strong> <?php echo htmlspecialchars($product['CategoryName']); ?></p>
-                    <p><strong>Ingredients:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>
-                    <p><strong>Description:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
+                    <h3>Chi tiết</h3>
+                    <p><strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?></p>
+                    <p><strong>Số lượng sẵn có:</strong> <?php echo $product['Quantity']; ?></p>
+                    <p><strong>Loại:</strong> <?php echo htmlspecialchars($product['CategoryName']); ?></p>
+                    <p><strong>Thành phần:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>
+                    <p><strong>Công dụng:</strong> <?php echo htmlspecialchars($product['Usefor']); ?></p>
+                    <p><strong>Mô tả:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
 
                     <div class="d-flex gap-2 mb-4">
                         <form method="post" action="detail-product.php?id=<?= $product['ProductId'] ?>">
@@ -148,14 +151,17 @@ $product = mysqli_fetch_assoc($result);
                             <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
                             <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['ImgUrl']) ?>">
                             <input type="hidden" name="max_quantity" value="<?= $product['Quantity'] ?>">
-                            <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Add to Cart</button>
+                            <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Thêm vào giỏ hàng</button>
                         </form>
 
-                        <?php if (isset($_GET['added']) && $_GET['added'] == 1): ?>
-                            <div class="alert alert-success mt-2">Product has been added to cart!</div>
+                        <?php if (isset($_SESSION['success_message'])): ?>
+                            <div class="alert alert-success mt-2">
+                                <?= $_SESSION['success_message']; ?>
+                            </div>
+                            <?php unset($_SESSION['success_message']); ?>
                         <?php endif; ?>
                     </div>
-                    <a href="products.php" class="back">Back to Products</a>
+                    <a href="products.php" class="back">Trở về trang sản phẩm</a>
                 </div>
             </div>
         </div>

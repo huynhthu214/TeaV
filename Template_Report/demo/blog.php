@@ -45,7 +45,7 @@ if (!$conn) {
 <main>
   <section class="blog py-5">
     <div class="container">
-      <h1 class="text-center mb-4">Blog</h1>
+      <h1 class="text-center mb-4">Bài báo</h1>
       <div class="row" style="justify-content: center">
         <div class="col-sm-10 px-5">
           
@@ -71,7 +71,7 @@ if (!$conn) {
           ?>
           <article class="blog-post">
             <h2><?php echo htmlspecialchars($blog['Title']); ?></h2>
-            <p class="text-muted">Posted date <?php echo $formattedDate; ?> by <?php echo htmlspecialchars($blog['Email']); ?></p>
+            <p class="text-muted">Đăng ngày <?php echo $formattedDate; ?> bởi <?php echo htmlspecialchars($blog['Email']); ?></p>
             
             <?php if (!empty($blogTags)): ?>
             <div class="tags mb-2">
@@ -87,14 +87,14 @@ if (!$conn) {
               alt="<?php echo htmlspecialchars($blog['Title']); ?>"
             />
             <p><?php echo htmlspecialchars($blog['Summary']); ?></p>
-            <a href="blog_detail.php?id=<?php echo $blog['BlogId']; ?>" class="read-more">Read more</a>
+            <a href="blog_detail.php?id=<?php echo $blog['BlogId']; ?>" class="read-more">Đọc thêm</a>
             
             <div class="share-buttons">
               <a
                 href="https://facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . '/sblog_detail.php?id=' . $blog['BlogId']); ?>"
                 target="_blank"
                 class="btn btn-sm btn-primary-blog"
-                ><i class="fab fa-facebook-f"></i>Share</a
+                ><i class="fab fa-facebook-f"></i>Chia sẻ</a
               >
               <a
                 href="https://x.com/intent/tweet?url=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . '/sblog_detail.php?id=' . $blog['BlogId']); ?>&text=<?php echo urlencode($blog['Title']); ?>"
@@ -105,7 +105,7 @@ if (!$conn) {
             </div>
             
             <div class="comment-section">
-              <h5>Comments</h5>
+              <h5>Bình luận</h5>
               <div id="comments-<?php echo $blog['BlogId']; ?>" class="mb-3"></div>
               <form class="comment-form" data-post="<?php echo $blog['BlogId']; ?>">
                 <div class="mb-3">
@@ -117,7 +117,7 @@ if (!$conn) {
                   ></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">
-                  Post a comment
+                  Đăng bình luận
                 </button>
               </form>
             </div>
@@ -132,7 +132,7 @@ if (!$conn) {
         
         <div class="col-sm-2 ps-5">
           <div class="sidebar">
-            <h3>Category</h3>
+            <h3>Loại bài viết</h3>
             <ul>
               <?php foreach ($tags as $tag): ?>
                 <li>
@@ -143,7 +143,7 @@ if (!$conn) {
               <?php endforeach; ?>
             </ul>
             
-            <h3>Recent posts</h3>
+            <h3>Các bài viết gần đây</h3>
             <ul>
               <?php
               // Reset con trỏ kết quả để sử dụng lại $blogResult
@@ -157,7 +157,7 @@ if (!$conn) {
               ?>
             </ul>
             
-            <h3>Popular post</h3>
+            <h3>Bài viết phổ biến</h3>
             <ul>
               <?php foreach ($popularPosts as $post): ?>
                 <li>
