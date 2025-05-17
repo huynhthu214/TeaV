@@ -72,7 +72,6 @@ if (!empty($where_clauses)) {
 
 $query .= " GROUP BY product.ProductId";
 
-// Đếm tổng số sản phẩm cho phân trang
 $count_query = "SELECT COUNT(DISTINCT product.ProductId) AS total 
                 FROM product 
                 LEFT JOIN productingredient ON product.ProductId = productingredient.ProductId
@@ -110,7 +109,7 @@ $query_string = http_build_query([
 <main>
     <section class="products py-5">
       <div class="container">
-        <h1 class="text-center mb-4"><?php echo $category ? htmlspecialchars($category['Name']) : 'Our Products'; ?></h1>
+        <h1 class="text-center mb-4"><?php echo $category ? htmlspecialchars($category['Name']) : 'Tất cả sản phẩm'; ?></h1>
         <?php if ($category): ?>
           <p class="text-center mb-4"><?php echo htmlspecialchars($category['Description']); ?></p>
         <?php endif; ?>
@@ -121,39 +120,38 @@ $query_string = http_build_query([
           <?php endif; ?>
           <div class="filter-section">
             <div class="row g-3">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input
                   type="text"
                   class="form-control"
                   name="search"
-                  placeholder="Search by name..."
+                  placeholder="Tìm kiếm theo tên..."
                   value="<?php echo htmlspecialchars($search); ?>"
                 />
               </div>
               <div class="col-md-3">
                 <select class="form-select" name="price">
-                  <option value="">Filter by price</option>
-                  <option value="low" <?php echo $price_filter === 'low' ? 'selected' : ''; ?>>Under $30</option>
+                  <option value="">Lọc theo giá tiền</option>
+                  <option value="low" <?php echo $price_filter === 'low' ? 'selected' : ''; ?>>Dưới $30</option>
                   <option value="mid" <?php echo $price_filter === 'mid' ? 'selected' : ''; ?>>$30 - $40</option>
-                  <option value="high" <?php echo $price_filter === 'high' ? 'selected' : ''; ?>>Over $40</option>
+                  <option value="high" <?php echo $price_filter === 'high' ? 'selected' : ''; ?>>Trên $40</option>
                 </select>
               </div>
               <div class="col-md-3">
                 <select class="form-select" name="use">
-                  <option value="">Filter by use</option>
-                  <option value="relax" <?php echo $use_filter === 'relax' ? 'selected' : ''; ?>>Relax</option>
-                  <option value="energy" <?php echo $use_filter === 'energy' ? 'selected' : ''; ?>>Energy</option>
-                  <option value="digestion" <?php echo $use_filter === 'digestion' ? 'selected' : ''; ?>>Digestion</option>
+                  <option value="">Lọc theo công dụng</option>
+                  <option value="relax" <?php echo $use_filter === 'relax' ? 'selected' : ''; ?>>Thư giãn</option>
+                  <option value="energy" <?php echo $use_filter === 'energy' ? 'selected' : ''; ?>>Năng lượng</option>
+                  <option value="digestion" <?php echo $use_filter === 'digestion' ? 'selected' : ''; ?>>Tiêu hóa</option>
                 </select>
               </div>
-              <div class="col-md-12 text-center mt-3">
-                <button class="btn btn-primary" type="submit">Apply filter</button>
+              <div class="col-md-2 text-center mt-3">
+                <button class="btn btn-primary" type="submit">Lọc</button>
               </div>
             </div>
           </div>
         </form>
 
-        <!-- Danh sách sản phẩm -->
         <?php if ($total_products > 0): ?>
           <div class="row" id="productList">
             <?php while ($product = mysqli_fetch_assoc($result)) { ?>
@@ -167,10 +165,10 @@ $query_string = http_build_query([
                   <div class="card-body">
                     <h5 class="card-title"><?php echo htmlspecialchars($product['Name']); ?></h5>
                     <p class="card-text">
-                      <strong>Ingredient:</strong> <?php echo htmlspecialchars($product['ingredients']); ?><br />
-                      <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
+                      <strong>Thành phần:</strong> <?php echo htmlspecialchars($product['ingredients']); ?><br />
+                      <strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?>
                     </p>
-                    <a href="detail-product.php?id=<?php echo htmlspecialchars($product['ProductId']); ?>" class="btn btn-success">View detail</a>
+                    <a href="detail-product.php?id=<?php echo htmlspecialchars($product['ProductId']); ?>" class="btn btn-success">Xem chi tiết</a>
                   </div>
                 </div>
               </div>

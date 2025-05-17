@@ -94,7 +94,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($namePage === 'Blog') echo 'active'; ?>" href="blog.php">Blog</a>
+                        <a class="nav-link <?php if ($namePage === 'Blog') echo 'active'; ?>" href="blog.php">Bài báo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($namePage === 'Chính sách & Điều khoản') echo 'active'; ?>" href="term.php">Chính sách & điều khoản</a>

@@ -59,16 +59,16 @@ if (isset($_GET['delete'])) {
 
 <body>
     <div class="cart-container py-5">
-    <h2>Your Cart</h2>
+    <h2>Giỏ hàng của bạn</h2>
     <?php if (!empty($_SESSION['cart'])): ?>
     <table border="1" cellpadding="10">
         
             <tr>
-                <th>Product</th>
-                <th>Price (USD)</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Operation</th>
+                <th>Sản phẩm</th>
+                <th>Giá (USD)</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền</th>
+                <th>Thao tác</th>
             </tr>
         
             <?php
@@ -89,7 +89,7 @@ if (isset($_GET['delete'])) {
                <td><?= $quantity ?></td>
                <td>$<?= number_format($subtotal, 2) ?></td>
                <td>
-                   <a href="cart.php?delete=<?= $item['id'] ?>" class="btn btn-danger">Delete</a>
+                   <a href="cart.php?delete=<?= $item['id'] ?>" class="btn btn-danger">Xóa</a>
                </td>
            </tr>
            <?php endforeach; ?>
@@ -100,10 +100,10 @@ if (isset($_GET['delete'])) {
            </tr>
     </table>
     <div class="col mt-3">
-    <a href="payment.php" class="checkout-btn">Proceed to Payment</a>
+    <a href="payment.php" class="checkout-btn">Thanh toán</a>
     </div>
     <?php else: ?>
-        <p>Your cart is currently empty.</p>
+        <p>Giỏ hàng của bạn đang trống.</p>
     <?php endif; ?>
 </div>
 <?php 
