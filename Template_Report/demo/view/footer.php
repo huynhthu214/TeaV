@@ -29,4 +29,6 @@
     <link rel="stylesheet" href="layout/css/style_footer.css"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="layout/js/jquery.js"></script>
+    
 </html>

@@ -12,6 +12,6 @@
     const donutChartData = <?php echo json_encode($donut_data); ?>;
     const lineChartData = <?php echo json_encode($monthly_data); ?>;
 </script>
-<script src="layout/js/jquery.js"></script>
+<script src="layout/js/jquery-admin.js"></script>
 </body>
 </html>

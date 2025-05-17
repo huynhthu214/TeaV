@@ -47,16 +47,16 @@ include "view/header.php";
 
 <div class="container form-box-reset mt-5">
     <form method="post">
-        <h1 class="reset text-center mb-4">Reset Password</h1>
+        <h1 class="reset text-center mb-4">Đổi mật khẩu</h1>
         <div class="mb-3">
-            <label for="new_password" class="form-label">New Password</label>
+            <label for="new_password" class="form-label">Mật khẩu mới</label>
             <input type="password" class="form-control" name="new_password" required />
         </div>
         <div class="mb-3">
-            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
             <input type="password" class="form-control" name="confirm_password" required />
         </div>
-        <button type="submit" class="btn btn-outline-primary">Changing Password</button>
+        <button type="submit" class="btn btn-outline-primary">Đổi mật khẩu</button>
     </form>
 </div>
 

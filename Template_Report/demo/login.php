@@ -51,13 +51,13 @@
       $pass = trim($_POST['pass']);
       
       if (empty($email)) {
-          $error = 'Please enter your email';
+          $error = 'Vui lòng nhập email.';
       }
       else if (empty($pass)) {
-          $error = 'Please enter your password';
+          $error = 'Vui lòng nhập mật khẩu.';
       }
       else if (strlen($pass) < 8) {
-          $error = 'Password must have at least 8 characters';
+          $error = 'Mật khẩu phải có ít nhất 8 ký tự';
       } else {
           $userData = login($email, $pass);
           if ($userData) {  // Nếu trả về dữ liệu người dùng
@@ -71,7 +71,7 @@
               }
               exit();
           } else {
-              $error = 'Invalid email or password';  // Nếu đăng nhập không thành công
+              $error = 'Email hoặc mật khẩu không đúng.';  // Nếu đăng nhập không thành công
           }
       }
   }

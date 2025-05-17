@@ -14,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Kiểm tra mã xác nhận
     if (empty($user_code)) {
-        $error = "Please enter the verification code.";
+        $error = "Vui lòng nhập mã xác thực.";
     } elseif ($current_time - $_SESSION['code_reset_time'] > 60) {
-        $error = "Verification code has expired. Please request a new one.";
+        $error = "Mã xác thực đã hết hạn. Vui lòng yêu cầu mã mới.";
         unset($_SESSION['code_reset']);
         unset($_SESSION['code_reset_time']);
         unset($_SESSION['email_reset']);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: resetpwd.php');
         exit();
     } else {
-        $error = "Verification code is incorrect. Please try again.";
+        $error = "Mã xác thực không đúng. Vui lòng thử lại";
     }
 }
 

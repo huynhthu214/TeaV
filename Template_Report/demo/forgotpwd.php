@@ -69,7 +69,7 @@ include "view/header.php";
 
 <div class="container form-box-forgot mt-5">
     <form id="sendCodeForm" method="post">
-        <h1 class="forgotpwd text-center mb-4">Forgot Password</h1>
+        <h1 class="forgotpwd text-center mb-4">Quên mật khẩu</h1>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" />
@@ -79,9 +79,9 @@ include "view/header.php";
               echo "<div class='alert alert-danger'>$error</div>";
            }
       ?>
-        <button type="submit" class="btn btn-outline-primary w-100">Send Code</button>
+        <button type="submit" class="btn btn-outline-primary w-100">Gửi mã</button>
         <div class="text-center mt-3">
-            <a href="login.php" class="text-decoration-none">Back to login</a>
+            <a href="login.php" class="text-decoration-none">Quay lại đăng nhâpj</a>
         </div>
     </form>
 </div>

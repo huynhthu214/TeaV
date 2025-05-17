@@ -1,0 +1,9 @@
+.readonly-input {
+    pointer-events: none; /* Không thể click vào */
+    caret-color: transparent; /* Ẩn con trỏ */
+    background-color: #f8f9fa; /* Màu nền nhẹ hơn */
+}
+
+.readonly-input:focus {
+    outline: none;
+}
