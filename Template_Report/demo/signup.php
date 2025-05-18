@@ -71,34 +71,34 @@ function signup($full_name, $email, $phone, $pass, $dob, $address) {
         $pass_confirm = $_POST['pass-confirm'];
 
         if (empty($full_name)) {
-            $error = 'Please enter your full name';
+            $error = 'Vui lòng nhập họ và tên.';
         }
         else if (empty($email)) {
-            $error = 'Please enter your email';
+            $error = 'Vui lòng nhập email.';
         }
         else if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-          $error = 'This is not a valid email address';
+          $error = 'Email không hợp lệ.';
         }
         else if (empty($phone)) {
-            $error = 'Please enter your phone';
+            $error = 'Vui lòng nhập số điện thoại.';
         }
         else if (empty($dob)) {
-            $error = 'Please choose your date of birth';
+            $error = 'Vui lòng chọn ngày sinh.';
         }
         else if (empty($pass)) {
-            $error = 'Please enter your password';
+            $error = 'Vui lòng nhập mật khẩu';
         }else if (empty($address)){
-            $error = 'Please enter your address';
+            $error = 'Vui lòng nhập địa chỉ.';
         }else if (strlen($address) > 300) {
-              $error = 'Address must not exceed 300 characters';
+              $error = 'Địa chỉ không được quá 300 ký tự.';
         }else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
-          $error = 'Password must be at least 8 characters and include lowercase, uppercase, number, and special character';
+          $error = 'Mật khẩu phải có ít nhất 8 ký tự và bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt.';
         }
         else if ($pass != $pass_confirm) {
-            $error = 'Password does not match';
+            $error = 'Mật khẩu không khớp.';
         }
         else if (!isset($_POST['terms'])) {
-          $error = 'You must agree to the Terms & Conditions';
+          $error = 'Bạn phải đồng ý các Chính sách & Điều khoản.';
         }
         else {
             $result = signup($full_name, $email, $phone, $pass, $dob, $address);

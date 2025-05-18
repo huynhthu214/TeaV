@@ -1,6 +1,21 @@
 <?php
+ob_start();
 $namePage = "Thanh toán";
 include "view/header.php";
+
+if (!empty($_SESSION['update_success'])): ?>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+    <div id="liveToast" class="toast show align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Cập nhật thông tin thành công!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php unset($_SESSION['update_success']); ?>
+<?php endif; 
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -8,8 +23,15 @@ if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
 
-$totalFromCart = isset($_GET['total']) ? floatval($_GET['total']) : 100.00;
-$discount = 0;
+$totalFromCart = 0;
+
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $product_id => $item) {
+        $quantity = $item['quantity'];
+        $price = floatval($item['price']);
+        $totalFromCart += $price * $quantity;
+    }
+}
 $finalTotal = $totalFromCart;
 
 $errors = [];
@@ -18,7 +40,6 @@ $email = '';
 $address = '';
 $phone_number = '';
 $step = $_POST['step'] ?? 'info';
-
 
 if (isset($_SESSION['email'])) {
     $userEmail = $_SESSION['email'];
@@ -37,42 +58,67 @@ if (isset($_SESSION['email'])) {
         $phone_number = $user['PhoneNumber'];
     }
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['field'])) {
-    $field = $_POST['field'];
-    $updateField = '';
-    $newValue = '';
 
-    switch ($field) {
-        case 'name':
-            $updateField = 'FullName';
-            $newValue = trim($_POST['name']);
-            break;
-        case 'email':
-            $updateField = 'Email';
-            $newValue = trim($_POST['email']);
-            break;
-        case 'address':
-            $updateField = 'Address';
-            $newValue = trim($_POST['address']);
-            break;
-        case 'phone_number':
-            $updateField = 'PhoneNumber';
-            $newValue = trim($_POST['phone_number']);
-            break;
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info') {
+    $field = $_POST['field'] ?? '';
 
-    if ($updateField && isset($_SESSION['email'])) {
-        $sql = "UPDATE account SET $updateField = ? WHERE Email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $newValue, $_SESSION['email']);
-        $stmt->execute();
-        $stmt->close();
+    if (!empty($field)) {
+        // ✅ Xử lý cập nhật từng trường thông tin
+        $updateField = '';
+        $newValue = '';
 
-        $_SESSION['update_' . $field] = true;
-        header("Location: payment.php?total=" . $totalFromCart);
+        switch ($field) {
+            case 'name':
+                $updateField = 'FullName';
+                $newValue = trim($_POST['name']);
+                break;
+            case 'email':
+                $updateField = 'Email';
+                $newValue = trim($_POST['email']);
+                break;
+            case 'address':
+                $updateField = 'Address';
+                $newValue = trim($_POST['address']);
+                break;
+            case 'phone_number':
+                $updateField = 'PhoneNumber';
+                $newValue = trim($_POST['phone_number']);
+                break;
+        }
+
+        if ($updateField && isset($_SESSION['email'])) {
+            // Lấy giá trị hiện tại
+            $sqlCheck = "SELECT $updateField FROM account WHERE Email = ?";
+            $stmtCheck = $conn->prepare($sqlCheck);
+            $stmtCheck->bind_param("s", $_SESSION['email']);
+            $stmtCheck->execute();
+            $resultCheck = $stmtCheck->get_result();
+            $row = $resultCheck->fetch_assoc();
+            $stmtCheck->close();
+
+            $currentValue = $row[$updateField];
+
+            // Nếu có thay đổi mới cập nhật
+            if ($newValue !== $currentValue) {
+                $sql = "UPDATE account SET $updateField = ? WHERE Email = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ss", $newValue, $_SESSION['email']);
+                $stmt->execute();
+                $stmt->close();
+
+                $_SESSION['update_success'] = true;
+                header("Location: payment.php?total=" . $totalFromCart);
+                exit;
+            }
+        }
+
+    } else {
+        // ✅ Xử lý khi bấm nút "Xác nhận thanh toán"
+        header("Location: payment-qr.php?total=" . $finalTotal);
         exit;
     }
 }
+ob_end_flush();
 ?>
 
 <div class="payment-container py-5">
@@ -87,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
         </div>
     <?php endif; ?>
 
-        <!-- BƯỚC 1: Nhập thông tin -->
-        <?php if ($step === 'info'): ?>
-            <form method="POST" action="payment.php?total=<?php echo $totalFromCart; ?>" id="mainForm">
+    <!-- BƯỚC 1: Nhập thông tin -->
+    <?php if ($step === 'info'): ?>
+        <form method="POST" action="payment.php" id="mainForm">
             <input type="hidden" name="step" value="info">
             <input type="hidden" name="field" id="fieldInput">
 
@@ -100,10 +146,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
                     <input type="text" name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($name); ?>" readonly onblur="submitField('name')">
                     <button type="button" class="btn btn-secondary" onclick="enableEdit('name')"><i class="fas fa-pen"></i></button>
                 </div>
-                <?php if (!empty($_SESSION['update_name'])): ?>
-                    <div class="alert alert-success mt-2">Cập nhật họ tên thành công</div>
-                    <?php unset($_SESSION['update_name']); ?>
-                <?php endif; ?>
             </div>
 
             <!-- Email -->
@@ -113,10 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo htmlspecialchars($email); ?>" readonly onblur="submitField('email')">
                     <button type="button" class="btn btn-secondary" onclick="enableEdit('email')"><i class="fas fa-pen"></i></button>
                 </div>
-                <?php if (!empty($_SESSION['update_email'])): ?>
-                    <div class="alert alert-success mt-2">Cập nhật email thành công</div>
-                    <?php unset($_SESSION['update_email']); ?>
-                <?php endif; ?>
             </div>
 
             <!-- Địa chỉ -->
@@ -126,10 +164,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
                     <input type="text" name="address" id="address" class="form-control" value="<?php echo htmlspecialchars($address); ?>" readonly onblur="submitField('address')">
                     <button type="button" class="btn btn-secondary" onclick="enableEdit('address')"><i class="fas fa-pen"></i></button>
                 </div>
-                <?php if (!empty($_SESSION['update_address'])): ?>
-                    <div class="alert alert-success mt-2">Cập nhật địa chỉ thành công</div>
-                    <?php unset($_SESSION['update_address']); ?>
-                <?php endif; ?>
             </div>
 
             <!-- Số điện thoại -->
@@ -139,13 +173,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
                     <input type="text" name="phone_number" id="phone_number" class="form-control" value="<?php echo htmlspecialchars($phone_number); ?>" readonly onblur="submitField('phone_number')">
                     <button type="button" class="btn btn-secondary" onclick="enableEdit('phone_number')"><i class="fas fa-pen"></i></button>
                 </div>
-                <?php if (!empty($_SESSION['update_phone_number'])): ?>
-                    <div class="alert alert-success mt-2">Cập nhật số điện thoại thành công</div>
-                    <?php unset($_SESSION['update_phone_number']); ?>
-                <?php endif; ?>
             </div>
 
-            <!-- Các phần còn lại -->
+            <!-- Tổng tiền -->
             <div class="order-summary mt-4">
                 <p><strong>Tổng tiền:</strong> $<?php echo number_format($finalTotal, 2); ?></p>
             </div>
@@ -155,29 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 'info' && isset($_POST['f
                 <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
             </div>
         </form>
-
-        <!-- BƯỚC 2: Hiển thị mã QR -->
-        <?php elseif ($step === 'qr'): ?>
-            <div class="alert alert-success">
-                <strong> Thông tin hợp lệ! </strong> Vui lòng quét mã QR để thanh toán đơn hàng trị giá <strong>$<?php echo number_format($finalTotal, 2); ?></strong>
-            </div>
-            <div class="text-center">
-                <img src="./layout/images/qrcode.png" alt="QR Code" style="max-width: 250px; border: 1px solid #ccc; padding: 10px;">
-                <p class="text-muted mt-2">Sau khi thanh toán thành công, nhấn nút bên dưới để tiếp tục</p>
-            </div>
-
-            <!-- Giữ thông tin người dùng để gửi tiếp -->
-            <input type="hidden" name="Name" value="<?php echo htmlspecialchars($name); ?>">
-            <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
-            <input type="hidden" name="address" value="<?php echo htmlspecialchars($address); ?>">
-            <input type="hidden" name="phone_number" value="<?php echo htmlspecialchars($phone_number); ?>">
-            <input type="hidden" name="finalTotal" value="<?php echo $finalTotal; ?>">
-
-            <div class="form-buttons mt-4">
-                <button type="submit" class="btn btn-success">Tôi đã thanh toán</button>
-            </div>
-        <?php endif; ?>
-    </form>
+    <?php endif; ?>
 </div>
 
 <?php include "view/footer.php"; ?>

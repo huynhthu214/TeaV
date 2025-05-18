@@ -13,15 +13,30 @@ function togglePassword(inputId, iconId) {
   }
 }
 function enableEdit(fieldId) {
-    const input = document.getElementById(fieldId);
-    input.removeAttribute('readonly');
-    input.focus();
+    document.getElementById(fieldId).removeAttribute('readonly');
+    document.getElementById(fieldId).focus();
 }
 
-function submitField(fieldName) {
-    const input = document.getElementById(fieldName);
-    if (!input.hasAttribute('readonly')) {
-        document.getElementById('fieldInput').value = fieldName;
-        document.getElementById('mainForm').submit();
+function submitField(field) {
+    const input = document.getElementById(field);
+    const originalValue = input.defaultValue; // Giá trị ban đầu của input
+    const currentValue = input.value;
+
+    if (originalValue === currentValue) {
+        // Không thay đổi gì, không gửi form
+        input.readOnly = true;
+        return;
     }
+
+    document.getElementById("fieldInput").value = field;
+    document.getElementById("mainForm").submit();
+    document.getElementById("fieldInput").remove();
 }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const toastEl = document.querySelector('#liveToast');
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+        }
+    });

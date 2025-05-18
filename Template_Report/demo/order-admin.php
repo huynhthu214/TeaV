@@ -2,6 +2,37 @@
     session_start();
     $namePage = "Quản lý đơn hàng";
     include "view/header-admin.php";
+$conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+
+// Lấy danh sách đơn hàng với thông tin khách hàng và sản phẩm
+$sql = "
+    SELECT 
+        o.OrderId,
+        o.OrderDate,
+        o.TotalAmount,
+        o.PaymentId,
+        a.FullName AS CustomerName,
+        a.Email AS CustomerEmail,
+        a.IsShow
+        GROUP_CONCAT(CONCAT(p.Name, ' (x', op.Quantity, ')') SEPARATOR '<br>') AS Products
+    FROM Orders o
+    LEFT JOIN OrderProduct op ON o.OrderId = op.OrderId
+    LEFT JOIN Product p ON op.ProductId = p.ProductId
+    LEFT JOIN Account a ON a.OrderId = o.OrderId
+    GROUP BY o.OrderId
+    ORDER BY o.OrderDate DESC
+";
+
+$result = mysqli_query($conn, $sql);
+$orders = [];
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $orders[] = $row;
+    }
+}
 ?>
 
 <div class="content-wrapper">

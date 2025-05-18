@@ -235,7 +235,7 @@ $first_about = $about_list[0];
                 <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
                 <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
               </p>
-              <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">View Details</a>
+              <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">Xem chi tiết</a>
             </div>
           </div>
         </div>

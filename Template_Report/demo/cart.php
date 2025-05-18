@@ -94,7 +94,7 @@ if (isset($_GET['delete'])) {
            </tr>
            <?php endforeach; ?>
            <tr>
-               <td colspan="3"><strong>Total</strong></td>
+               <td colspan="3"><strong>Tổng tiền</strong></td>
                <td><strong>$<?= number_format($total, 2) ?></strong></td>
                <td></td>
            </tr>
