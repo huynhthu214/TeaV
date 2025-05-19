@@ -9,7 +9,6 @@ if (!isset($_SESSION['email'])) {
 
 $namePage = "Chi tiết sản phẩm";
 include "view/header.php";
-ob_end_flush();
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 
@@ -21,6 +20,8 @@ $productId = isset($_GET['id']) ? $_GET['id'] : null;
 if (!$productId) {
     die("Lỗi: Không tìm thấy ID sản phẩm.");
 }
+
+// Xử lý thêm vào giỏ hàng
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
@@ -57,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     }
 
     $_SESSION['success_message'] = "Sản phẩm đã được thêm vào giỏ hàng!";
-    header("Location: detail-product.php?id=$product_id"); // quay lại trang chi tiết
-    exit;
+    header("Location: detail-product.php?id=$product_id");
+    exit();
 }
 
 $query = "SELECT 
@@ -88,14 +89,28 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) == 0) {
-    die("Lỗi: Sản phẩm không tồn tại hoặc không có sẵn.");
+    echo "Lỗi: Sản phẩm không tồn tại hoặc không có sẵn.";
     mysqli_close($conn);
     include "view/footer.php";
+    exit();
 }
 
 $product = mysqli_fetch_assoc($result);
-
 ?>
+
+<?php if (isset($_SESSION['success_message'])): ?>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+    <div id="successToast" class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <?= $_SESSION['success_message']; ?>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
 
 <main>
     <section class="product-detail py-5">
@@ -103,29 +118,28 @@ $product = mysqli_fetch_assoc($result);
             <h1 class="text-center mb-4"><?php echo htmlspecialchars($product['Name']); ?></h1>
             <div class="row">
                 <div class="col-md-6">
-                <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo $product['Name']; ?>">
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($product['Name']); ?>">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($product['Name']); ?>">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="<?php echo htmlspecialchars($product['ImgUrl']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($product['Name']); ?>">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-                        </div>
                 <div class="col-md-6">
                     <div class="delivery-notice mb-3 p-2 bg-light text-success fw-bold">
                         Giao hàng miễn phí với đơn hàng trên $35
@@ -133,35 +147,28 @@ $product = mysqli_fetch_assoc($result);
                     
                     <h3>Chi tiết</h3>
                     <p><strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?></p>
-                    <p><strong>Số lượng sẵn có:</strong> <?php echo $product['Quantity']; ?></p>
+                    <p><strong>Số lượng sẵn có:</strong> <?php echo htmlspecialchars($product['Quantity']); ?></p>
                     <p><strong>Loại:</strong> <?php echo htmlspecialchars($product['CategoryName']); ?></p>
                     <p><strong>Thành phần:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>
                     <p><strong>Công dụng:</strong> <?php echo htmlspecialchars($product['Usefor']); ?></p>
                     <p><strong>Mô tả:</strong> <?php echo htmlspecialchars($product['Description']); ?></p>
 
                     <div class="d-flex gap-2 mb-4">
-                        <form method="post" action="detail-product.php?id=<?= $product['ProductId'] ?>">
+                        <form method="post" action="detail-product.php?id=<?= htmlspecialchars($product['ProductId']) ?>">
                             <div class="quantity-selector d-flex align-items-center mb-3">
                                 <div class="input-group" style="width: 130px">
-                                    <input type="number" name="quantity" class="form-control text-center" value="1" min="1" max="<?php echo $product['Quantity']; ?>" step="1">
+                                    <input type="number" name="quantity" class="form-control text-center" value="1" min="1" max="<?php echo htmlspecialchars($product['Quantity']); ?>" step="1">
                                 </div>
                             </div>
-                            <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
+                            <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['ProductId']) ?>">
                             <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['Name']) ?>">
                             <input type="hidden" name="product_price" value="<?= floatval($product['Price']) ?>">
                             <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['ImgUrl']) ?>">
-                            <input type="hidden" name="max_quantity" value="<?= $product['Quantity'] ?>">
-                            <button type="submit" name="add_to_cart" class="btn btn-primary mt-2">Thêm vào giỏ hàng</button>
+                            <input type="hidden" name="max_quantity" value="<?= htmlspecialchars($product['Quantity']) ?>">
+                            <button type="submit" name="add_to_cart" class="btn btn-primary">Thêm vào giỏ hàng</button>
                         </form>
-
-                        <?php if (isset($_SESSION['success_message'])): ?>
-                            <div class="alert alert-success mt-2">
-                                <?= $_SESSION['success_message']; ?>
-                            </div>
-                            <?php unset($_SESSION['success_message']); ?>
-                        <?php endif; ?>
                     </div>
-                    <a href="products.php" class="back">Trở về trang sản phẩm</a>
+                    <a href="products.php" class="btn btn-secondary">Trở về trang sản phẩm</a>
                 </div>
             </div>
         </div>
@@ -172,4 +179,5 @@ $product = mysqli_fetch_assoc($result);
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 include "view/footer.php";
+ob_end_flush();
 ?>
