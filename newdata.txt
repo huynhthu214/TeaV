@@ -60,12 +60,11 @@ INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod) VALUES
 ('PM003', 57000, 'MOMO'),
 ('PM004', 58000, 'MOMO');
 
-INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, Status) VALUES
-('ORD001','anna.nguyen@email.com', '2025-04-12', 86, 'Hoạt động'),
-('ORD002', 'john.smith@email.com', '2025-04-13', 83, 'Hoạt động'),
-('ORD003', 'linh.tran@email.com', '2025-04-14', 70, 'Hoạt động'),
-('ORD004', 'emma.brown@email.com', '2025-04-15', 105, 'Hoạt động');
-
+INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, StatusOrder, PaymentStatus) VALUES
+('ORD001','anna.nguyen@email.com', '2025-04-12', 86, 'Chưa xử lý', 'Chưa thanh toán'),
+('ORD002', 'john.smith@email.com', '2025-04-13', 83, 'Đã xử lý', 'Đã thanh toán'),
+('ORD003', 'linh.tran@email.com', '2025-04-14', 70, 'Đã xử lý', 'Đã thanh toán'),
+('ORD004', 'emma.brown@email.com', '2025-04-15', 105, 'Chưa xử lý', 'Chưa thanh toán');
 
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
