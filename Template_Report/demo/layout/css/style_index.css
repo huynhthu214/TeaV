@@ -68,33 +68,3 @@
 .carousel-item {
   transition: transform 0.5s ease-in-out;
 }
-
-/* Hiệu ứng khi cuộn vào (dùng animation fadeInUp) */
-/* Animation từ dưới lên */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Cơ bản cho section */
-.commit-section .col-md-4,
-.select-section .col-md-6 {
-  opacity: 0;
-  transform: translateY(50px);
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.2s;
-}
-
-/* Hover khi rê chuột vào */
-.commit-section .col-md-4:hover,
-.select-section .col-md-6:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}

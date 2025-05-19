@@ -108,7 +108,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <span style="color: white;"><?php echo htmlspecialchars($_SESSION['email']); ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="personal-info.php">Hồ sơ của tôi</a></li>
+                                <li><a class="dropdown-item" href="profile.php">Hồ sơ của tôi</a></li>
                                 <li><a class="dropdown-item" href="cart.php">Đơn hàng của tôi</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="logout.php">Đăng xuất</a></li>

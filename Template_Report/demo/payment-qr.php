@@ -4,8 +4,10 @@ session_start();
 $namePage = "Mã QR";
 include "view/header.php";
 
-
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
 
 $totalFromCart = 0;
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
@@ -49,7 +51,7 @@ if (isset($_SESSION['email'])) {
         <p class="text-muted mt-2">Sau khi thanh toán thành công, nhấn nút bên dưới để tiếp tục</p>
     </div>
 
-    <form method="POST" action="success.php">
+    <form method="POST" action="payment-process.php">
         <input type="hidden" name="name" value="<?php echo htmlspecialchars($name); ?>">
         <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
         <input type="hidden" name="address" value="<?php echo htmlspecialchars($address); ?>">
@@ -58,7 +60,7 @@ if (isset($_SESSION['email'])) {
 
        <div class="form-buttons mt-4 d-flex justify-content-between">
             <a href="payment.php" class="btn btn-secondary">Quay lại</a>
-            <button type="submit" class="btn btn-success">Tôi đã thanh toán</button>
+           <button type="submit" class="btn btn-success">Tôi đã thanh toán</button>
         </div>
     </form>
 </div>

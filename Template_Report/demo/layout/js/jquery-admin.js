@@ -103,3 +103,31 @@ function enableEdit(fieldId) {
     input.removeAttribute('readonly');
     input.focus();
 }
+
+function deleteSelected() {
+  const checkboxes = document.querySelectorAll('input[name="select[]"]:checked');
+
+  if (checkboxes.length === 0) {
+    alert("Vui lòng chọn ít nhất một đơn hàng để xóa.");
+    return;
+  }
+
+  const orderIds = Array.from(checkboxes).map(cb => cb.value);
+  const confirmDelete = confirm("Bạn có chắc chắn muốn hủy đơn hàng sau:\n" + orderIds.join(", "));
+
+  if (confirmDelete) {
+    window.location.href = "cancel-order.php?ids=" + encodeURIComponent(orderIds.join(","));
+  }
+}
+
+function generateNewOrderId($conn) {
+    $result = mysqli_query($conn, "SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1");
+    $row = mysqli_fetch_assoc($result);
+    if ($row) {
+        $lastId = $row['OrderId'];
+        $number = (int)substr($lastId, 3) + 1;
+    } else {
+        $number = 1;
+    }
+    return 'ORD' . str_pad($number, 5, '0', STR_PAD_LEFT);
+}
