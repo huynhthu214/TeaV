@@ -34,12 +34,10 @@ try {
 
     // Lấy danh sách đơn hàng của khách hàng
     $sqlOrders = "
-        SELECT O.OrderId, O.OrderDate, O.TotalAmount, O.PaymentId
-        FROM Orders O
-        LEFT JOIN Account A ON A.OrderId = O.OrderId
-        WHERE A.Email = ?
-        GROUP BY O.OrderId
-        ORDER BY O.OrderDate DESC
+      SELECT OrderId, OrderDate, TotalAmount, PaymentId
+      FROM Orders
+      WHERE Email = ?
+      ORDER BY OrderDate DESC
     ";
 
     $stmtOrders = $pdo->prepare($sqlOrders);

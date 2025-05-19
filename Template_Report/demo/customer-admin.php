@@ -33,12 +33,34 @@ if ($result && mysqli_num_rows($result) > 0) {
     }
 }
 
+// Xử lý chuyển đổi trạng thái IsActive
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_status'])) {
+    $email = $_POST['email'] ?? '';
+    $currentStatus = $_POST['current_status'] ?? '';
+
+    if (!empty($email)) {
+        $newStatus = ($currentStatus === 'Yes') ? 'No' : 'Yes';
+        $updateSql = "UPDATE Account SET IsActive = ? WHERE Email = ?";
+        $stmt = mysqli_prepare($conn, $updateSql);
+        mysqli_stmt_bind_param($stmt, "ss", $newStatus, $email);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        // Reload lại để tránh submit lại
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
+
 // Xử lý xuất CSV
-if (isset($_GET['export']) && $_GET['export'] == '1') {
+if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=khach_hang.csv');
 
     $output = fopen('php://output', 'w');
+
+    fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
+
     fputcsv($output, ['Họ tên', 'Email', 'Số điện thoại', 'Ngày đăng ký', 'Tổng đơn hàng', 'Tổng chi tiêu', 'Trạng thái']);
 
     foreach ($customers as $row) {
@@ -46,9 +68,9 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
             $row['FullName'],
             $row['Email'],
             $row['PhoneNumber'],
-            $row['CreatedDate'],
+            date("d/m/Y", strtotime($row['CreatedDate'])),
             $row['TotalOrders'],
-            $row['TotalSpent'],
+            number_format($row['TotalSpent'], 0, ',', '.'),
             $row['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng'
         ]);
     }
@@ -56,6 +78,7 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
     fclose($output);
     exit;
 }
+
 
 ?>
 
@@ -69,7 +92,7 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
     <button class="btn btn-outline-success" type="submit">
       <i class="bi bi-search"></i>
     </button>
-    <button class="btn btn-primary" type="button" onclick="exportData()">
+    <button class="btn btn-primary" type="submit" name="export" value="csv">
       <i class="bi bi-download me-1"></i>
     </button>
   </form>
@@ -105,9 +128,13 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
                 <td><?= $customer['TotalOrders']; ?></td>
                 <td><?= number_format($customer['TotalSpent'], 0, ',', '.'); ?> đ</td>
                 <td>
-                  <span class="badge bg-<?= $customer['IsActive'] === 'Yes' ? 'success' : 'secondary'; ?>">
-                    <?= $customer['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng'; ?>
-                  </span>
+                  <form method="POST" action="" style="display:inline;">
+                    <input type="hidden" name="email" value="<?= htmlspecialchars($customer['Email']) ?>">
+                    <input type="hidden" name="current_status" value="<?= $customer['IsActive'] ?>">
+                    <button type="submit" name="toggle_status" class="btn btn-sm <?= $customer['IsActive'] === 'Yes' ? 'btn-success' : 'btn-secondary' ?>">
+                        <?= $customer['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng' ?>
+                    </button>
+                  </form>
                 </td>
                 <td>
                   <a href="view-customer.php?email=<?= urlencode($customer['Email']); ?>" class="btn btn-sm btn-info">Xem</a>
