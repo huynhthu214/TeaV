@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
         rel="stylesheet"
     />
     <link rel="stylesheet" href="layout/css/style_base.css"/>
-    <link rel="stylesheet" href="layout/css/style1.css"/>
+    <link rel="stylesheet" href="layout/css/style1.css?v=2"/>
     <link rel="stylesheet" href="layout/css/style_header.css"/>
      <link rel="stylesheet" href="layout/css/style_payment.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
