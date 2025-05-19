@@ -36,14 +36,14 @@ while ($row = mysqli_fetch_assoc($about_result)) {
 }
 ?>
 
-<link rel="stylesheet" href="layout/css/style_about.css"/>
+<!-- <link rel="stylesheet" href="layout/css/style_about.css"/> -->
 
 <main>
   <section class="about-us">
     <div class="container-about">
       <div class="text">
-        <h1>About us</h1>
-        <p>Tea has a complex positive effect on the body. Daily use of a cup of tea is good for your health.</p>
+        <h1>Về chúng tôi</h1>
+        <p>Trà không chỉ đơn thuần là một thức uống - mỗi tách trà mỗi ngày đều góp phần nuôi dưỡng sức khỏe và mang lại nhiều lợi ích tuyệt vời cho cơ thể.</p>
       </div>
     </div>
     <div class="container py-5">
@@ -71,7 +71,7 @@ while ($row = mysqli_fetch_assoc($about_result)) {
       </div>
       <div class="row py-5" id="row2">
         <div class="col-md-3">
-          <div class="card" style="width: 18rem; height: auto; border: none">
+          <div class="card" style="width: 18rem; height: 40rem; border: none">
             <img src="<?php echo htmlspecialchars($about_data['Phát triển bền vững']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_assoc($about_result)) {
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card" style="width: 18rem; height: auto; border: none">
+          <div class="card" style="width: 18rem; height: 40rem; border: none">
             <img src="<?php echo htmlspecialchars($about_data['Sáng tạo']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_assoc($about_result)) {
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card" style="width: 18rem; height: auto; border: none">
+          <div class="card" style="width: 18rem; height: 40rem; border: none">
             <img src="<?php echo htmlspecialchars($about_data['Tính xác thực']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">
@@ -104,7 +104,7 @@ while ($row = mysqli_fetch_assoc($about_result)) {
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card" style="width: 18rem; height: auto; border: none">
+          <div class="card" style="width: 18rem; height: 40rem; border: none">
             <img src="<?php echo htmlspecialchars($about_data['Cộng đồng']['img_about']); ?>" class="card-img-top-about" style="border-radius: 4px" alt="...">
             <div class="card-body">
               <p class="card-text-1">

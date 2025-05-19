@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Birthstone&family=Gravitas+One&family=Lora&family=Playwrite+US+Trad&family=Pacifico&family=WindSong:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&?family=Merriweather:opsz,wght@1,18..144,900&family=Playfair+Display:ital,wght@1,900&family=Pacifico&family=WindSong:wght@400;500&display=swap");
 
 /* Base Styles */
 * {
@@ -118,7 +118,7 @@ header .navbar {
 
 .navbar .nav-logo .logo-text {
   color: var(--color-sage-green);
-  font-family: "Playwrite US Trad", cursive;
+  font-family: "Merriweather", serif;
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-semibold);
 }
@@ -295,7 +295,7 @@ footer {
 }
 
 footer h4 {
-  font-family: "Playwrite US Trad", cursive;
+  font-family: "Merriweather", serif;
   color: var(--color-sage-green);
 }
 
@@ -357,7 +357,7 @@ footer .social-links a {
 .reset,
 .confirmmail {
   font-size: 2.5rem;
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
   color: #0d511d;
 }
 
@@ -424,7 +424,7 @@ button .btn-primary.fw-bold {
 .product-detail h1 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
 }
 
 .about-us h3 {
@@ -446,7 +446,7 @@ button .btn-primary.fw-bold {
 .about-us h1 {
   color: white;
   font-size: 3rem;
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
   text-align: center;
 }
 
@@ -474,10 +474,10 @@ button .btn-primary.fw-bold {
 .text p {
   color: white;
   padding: 10px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Merriweather", serif;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.38rem;
+  font-style: italic;
   margin: 10px 400px;
 }
 
@@ -648,7 +648,7 @@ button .btn-primary.fw-bold {
 .blog h1 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
 }
 
 .img-fluid-blog {
@@ -725,7 +725,7 @@ button .btn-primary.fw-bold {
 .term h1 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
 }
 
 .term h5 {
@@ -904,7 +904,7 @@ button.add-to-cart {
 .cart-container h2 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
   text-align: center;
 }
 
@@ -1027,7 +1027,7 @@ input[type="number"] {
 .payment-container h2 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Gravitas One", serif;
+  font-family: "Playfair Display", serif;
   text-align: center;
 }
 

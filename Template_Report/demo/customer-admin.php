@@ -4,61 +4,59 @@
     include "view/header-admin.php";
 
     // Kết nối CSDL
-    $dsn = 'mysql:host=localhost;dbname=teav_shop1;charset=utf8';
-    $username = 'root';
-    $password = '';
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
-    try {
-        $pdo = new PDO($dsn, $username, $password, $options);
-
-        $sql = "
-            SELECT 
-                A.FullName,
-                A.Email,
-                A.PhoneNumber,
-                A.CreatedDate,
-                A.IsActive,
-                COUNT(O.OrderId) AS TotalOrders,
-                COALESCE(SUM(O.TotalAmount), 0) AS TotalSpent
-            FROM Account A
-            LEFT JOIN Orders O ON A.OrderId = O.OrderId
-            WHERE A.Type = 'Customer'
-            GROUP BY A.Email
-        ";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    } catch (PDOException $e) {
-        die("Lỗi kết nối CSDL: " . $e->getMessage());
+    $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
+    if (!$conn) {
+      die("Kết nối thất bại: " . mysqli_connect_error());
     }
-?>
 
-<?php
-    if (isset($_GET['export']) && $_GET['export'] == '1') {
-        header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=khach_hang.csv');
+    $sql = "
+        SELECT 
+        A.FullName,
+        A.Email,
+        A.PhoneNumber,
+        A.CreatedDate,
+        A.IsActive,
+        COUNT(O.OrderId) AS TotalOrders,
+        COALESCE(SUM(O.TotalAmount), 0) AS TotalSpent
+    FROM Account A
+    LEFT JOIN Orders O ON A.Email = O.Email
+    WHERE A.Type = 'Customer'
+    GROUP BY A.FullName, A.Email, A.PhoneNumber, A.CreatedDate, A.IsActive;
+  ";
 
-        $output = fopen('php://output', 'w');
-        fputcsv($output, ['Họ tên', 'Email', 'Số điện thoại', 'Ngày đăng ký', 'Tổng đơn hàng', 'Tổng chi tiêu', 'Trạng thái']);
+$result = mysqli_query($conn, $sql);
+$customers = [];
 
-        foreach ($customers as $row) {
-            fputcsv($output, [
-                $row['FullName'],
-                $row['Email'],
-                $row['PhoneNumber'],
-                $row['CreatedDate'],
-                $row['TotalOrders'],
-                $row['TotalSpent'],
-                $row['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng'
-            ]);
-        }
-
-        fclose($output);
-        exit;
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $customers[] = $row;
     }
+}
+
+// Xử lý xuất CSV
+if (isset($_GET['export']) && $_GET['export'] == '1') {
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename=khach_hang.csv');
+
+    $output = fopen('php://output', 'w');
+    fputcsv($output, ['Họ tên', 'Email', 'Số điện thoại', 'Ngày đăng ký', 'Tổng đơn hàng', 'Tổng chi tiêu', 'Trạng thái']);
+
+    foreach ($customers as $row) {
+        fputcsv($output, [
+            $row['FullName'],
+            $row['Email'],
+            $row['PhoneNumber'],
+            $row['CreatedDate'],
+            $row['TotalOrders'],
+            $row['TotalSpent'],
+            $row['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng'
+        ]);
+    }
+
+    fclose($output);
+    exit;
+}
+
 ?>
 
 
@@ -82,7 +80,6 @@
       <table class="table table-striped table-bordered align-middle">
         <thead class="table-success text-center">
           <tr>
-            <th></th>
             <th>STT</th>
             <th>Họ tên</th>
             <th>Email</th>
@@ -98,7 +95,6 @@
           <?php if (!empty($customers)): ?>
             <?php foreach ($customers as $index => $customer): ?>
               <tr class="text-center">
-                <td><input type="checkbox" name="select[]" value="<?= htmlspecialchars($customer['Email']); ?>"></td>
                 <td><?= $index + 1; ?></td>
                 <td class="text-start"><?= htmlspecialchars($customer['FullName']); ?></td>
                 <td><?= htmlspecialchars($customer['Email']); ?></td>
