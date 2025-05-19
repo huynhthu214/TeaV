@@ -80,6 +80,7 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
       <table class="table table-striped table-bordered align-middle">
         <thead class="table-success text-center">
           <tr>
+            <th><input type="checkbox" id="select-all"></th>
             <th>STT</th>
             <th>Họ tên</th>
             <th>Email</th>
@@ -95,6 +96,7 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
           <?php if (!empty($customers)): ?>
             <?php foreach ($customers as $index => $customer): ?>
               <tr class="text-center">
+                <td><input type="checkbox" name="select[]" value="<?php echo $customer['Email']; ?>"></td>
                 <td><?= $index + 1; ?></td>
                 <td class="text-start"><?= htmlspecialchars($customer['FullName']); ?></td>
                 <td><?= htmlspecialchars($customer['Email']); ?></td>
