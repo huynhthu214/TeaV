@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/17/2025 11:09:36 PM                        */
+/* Created on:     5/19/2025 2:09:38 PM                         */
 /*==============================================================*/
 
 
@@ -30,7 +30,6 @@ create table Account
    IsActive             text,
    FullName             varchar(100),
    Email                varchar(100) not null,
-   OrderId              varchar(10),
    PhoneNumber          varchar(10),
    Address              text,
    DateOfBirth          date,
@@ -136,6 +135,7 @@ create table OrderProduct
 create table Orders
 (
    OrderId              varchar(10) not null,
+   Email                varchar(100),
    PaymentId            varchar(10),
    OrderDate            datetime,
    TotalAmount          float,
@@ -149,7 +149,6 @@ create table Orders
 create table Payment
 (
    PaymentId            varchar(10) not null,
-   OrderId              varchar(10),
    TotalPrice           float,
    PaymentMethod        varchar(100),
    primary key (PaymentId)
@@ -255,9 +254,6 @@ create table Term
 alter table About add constraint FK_ABOUT_WRITEABOU_ACCOUNT foreign key (Email)
       references Account (Email) on delete restrict on update restrict;
 
-alter table Account add constraint FK_ACCOUNT_ACCOUNTOR_ORDERS foreign key (OrderId)
-      references Orders (OrderId) on delete restrict on update restrict;
-
 alter table Blog add constraint FK_BLOG_WRITE_ACCOUNT foreign key (Email)
       references Account (Email) on delete restrict on update restrict;
 
@@ -279,11 +275,11 @@ alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_ORDERS foreign key
 alter table OrderProduct add constraint FK_ORDERPRO_ORDERPROD_PRODUCT foreign key (ProductId)
       references Product (ProductId) on delete restrict on update restrict;
 
+alter table Orders add constraint FK_ORDERS_ACCOUNTOR_ACCOUNT foreign key (Email)
+      references Account (Email) on delete restrict on update restrict;
+
 alter table Orders add constraint FK_ORDERS_PAY_PAYMENT foreign key (PaymentId)
       references Payment (PaymentId) on delete restrict on update restrict;
-
-alter table Payment add constraint FK_PAYMENT_PAY2_ORDERS foreign key (OrderId)
-      references Orders (OrderId) on delete restrict on update restrict;
 
 alter table Product add constraint FK_PRODUCT_CATEGORY_CATEGORI foreign key (CategoryId)
       references Categories (CategoryId) on delete restrict on update restrict;

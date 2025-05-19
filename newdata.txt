@@ -42,26 +42,31 @@ INSERT INTO Import (ImportId, ImportDate, Note) VALUES
 ('IMP02', '2025-01-05 14:30:00', 'Nhập hàng từ nhà cung cấp Thái Nguyên'),
 ('IMP03', '2025-03-10 09:00:00', 'Nhập hàng tháng 3');
 
+INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, PhoneNumber, Address, DateOfBirth) VALUES
+('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL, NULL),
+('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL, NULL),
+('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL, NULL),
+('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL, NULL),
+('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, NULL);
+
 INSERT INTO Suppliers (SupplierId, SupplierName, Phone, Email, Address, Note) VALUES
 ('SUP01', 'Công ty Trà Xanh Việt', '0909123456', 'contact@traxanhviet.vn', 'Hà Nội', 'Chuyên cung cấp trà xanh'),
 ('SUP02', 'Trà Thái Nguyên Hảo Hạng', '0988777666', 'sales@trathainguyen.vn', 'Thái Nguyên', 'Trà nguyên chất'),
 ('SUP03', 'Trà Organic TeaFarm', '0966123456', 'info@teafarm.vn', 'Lâm Đồng', 'Cung cấp nguyên liệu hữu cơ');
 
-INSERT INTO Orders (`OrderId`, `OrderDate`, `TotalAmount`, Status) VALUES
-('ORD001', '2025-04-12', 86, 'Hoạt động'),
-('ORD002', '2025-04-13', 83, 'Hoạt động'),
-('ORD003', '2025-04-14', 70, 'Hoạt động'),
-('ORD004', '2025-04-15', 105, 'Hoạt động');
+INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod) VALUES
+('PM001', 55000, 'MOMO'),
+('PM002', 56000, 'MOMO'),
+('PM003', 57000, 'MOMO'),
+('PM004', 58000, 'MOMO');
 
-INSERT INTO Payment (PaymentId, OrderId, TotalPrice, PaymentMethod) VALUES
-('PM001', 'ORD001', 55000, 'MOMO');
+INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, Status) VALUES
+('ORD001','anna.nguyen@email.com', '2025-04-12', 86, 'Hoạt động'),
+('ORD002', 'john.smith@email.com', '2025-04-13', 83, 'Hoạt động'),
+('ORD003', 'linh.tran@email.com', '2025-04-14', 70, 'Hoạt động'),
+('ORD004', 'emma.brown@email.com', '2025-04-15', 105, 'Hoạt động');
 
-INSERT INTO Account (Password, CreatedDate, Type, IsActive, FullName, Email, OrderId, PhoneNumber, Address, DateOfBirth) VALUES
-('hashedpassword1', '2025-04-01', 'Customer', 'Yes', 'Anna Nguyen', 'anna.nguyen@email.com', NULL, NULL, NULL, NULL),
-('hashedpassword2', '2025-04-02', 'Customer', 'Yes', 'John Smith', 'john.smith@email.com', NULL, NULL, NULL, NULL),
-('hashedpassword3', '2025-04-03', 'Customer', 'Yes', 'Linh Tran', 'linh.tran@email.com', NULL, NULL, NULL, NULL),
-('hashedpassword4', '2025-04-04', 'Customer', 'Yes', 'Emma Brown', 'emma.brown@email.com', NULL, NULL, NULL, NULL),
-('hashedpassword5', '2025-04-05', 'Customer', 'Yes', 'Hiroshi Tanaka', 'hiroshi.tanaka@email.com', NULL, NULL, NULL, NULL);
+
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
 ('P001', 'C001', 'U001', 'Trà Xanh Hảo Hạng', 'Trà xanh chất lượng cao được thu hoạch cẩn thận', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Lá trà xanh nguyên chất', 'Yes'),
