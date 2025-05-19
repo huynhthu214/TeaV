@@ -17,7 +17,6 @@ $product_query = "SELECT
             product.Name,
             product.Price,
             product.ImgUrl AS img_product,
-            product.Type,
             GROUP_CONCAT(ingredients.IngreName SEPARATOR ', ') AS ingredients,
             product.Usefor
           FROM product
