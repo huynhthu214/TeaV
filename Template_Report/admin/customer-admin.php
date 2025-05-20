@@ -327,7 +327,7 @@
                 <td><?= htmlspecialchars($customer['PhoneNumber']); ?></td>
                 <td><?= date("d/m/Y", strtotime($customer['CreatedDate'])); ?></td>
                 <td><?= $customer['TotalOrders']; ?></td>
-                <td><?= number_format($customer['TotalSpent'], 0, ',', '.'); ?> VND</td>
+                <td><?= number_format($customer['TotalSpent'], 3); ?> VND</td>
                 <td>
                   <form method="POST" action="" style="display:inline;">
                     <input type="hidden" name="email" value="<?= htmlspecialchars($customer['Email']) ?>">
@@ -362,52 +362,6 @@
       </table>
     </div>
   </form>
-</div>
-
-<!-- Modal Xem Chi Tiết Khách Hàng -->
-<div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title" id="viewCustomerModalLabel">Chi tiết khách hàng</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <p><strong>Họ tên:</strong> <span id="view-fullName"></span></p>
-            <p><strong>Email:</strong> <span id="view-email"></span></p>
-            <p><strong>Số điện thoại:</strong> <span id="view-phoneNumber"></span></p>
-            <p><strong>Ngày đăng ký:</strong> <span id="view-createdDate"></span></p>
-          </div>
-          <div class="col-md-6">
-            <p><strong>Trạng thái:</strong> <span id="view-isActive"></span></p>
-            <p><strong>Tổng đơn hàng:</strong> <span id="view-totalOrders"></span></p>
-            <p><strong>Tổng chi tiêu:</strong> <span id="view-totalSpent"></span></p>
-          </div>
-        </div>
-        <h6 class="border-bottom pb-2 mb-3">Đơn hàng gần đây</h6>
-        <div class="table-responsive">
-          <table class="table table-sm table-bordered">
-            <thead class="table-light">
-              <tr class="text-center">
-                <th>Mã đơn</th>
-                <th>Ngày đặt</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
-              </tr>
-            </thead>
-            <tbody id="recent-orders">
-              <!-- Dữ liệu đơn hàng sẽ được thêm vào đây bằng JavaScript -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Modal Thêm Khách Hàng -->
