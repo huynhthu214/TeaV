@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 $namePage = "Quản lý bài đăng";
@@ -123,29 +122,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
 <div class="content-wrapper">
 <div class="page-title d-flex justify-content-between align-items-center mb-4">
   <h2 style="color:rgb(10, 119, 52); margin-top:-10px;"><strong> Quản lý bài đăng</strong></h2>
-  
-  <div class="d-flex gap-2">
-    <a href="add-blog-admin.php" class="btn btn-success">
-      <i class="bi bi-plus-circle me-1"></i>Thêm bài đăng
-    </a>
-    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
-      <i class="bi bi-trash me-1"></i>Xóa bài đăng
-    </button>
-  </div>
 </div>
 
 <form class="d-flex align-items-center gap-2 mb-4" method="GET" action="">
-  <input class="form-control" type="search" placeholder="Tìm theo tiêu đề hoặc người viết..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
-  
-  <select class="form-select" name="isshow">
-    <option value=""> Tất cả trạng thái </option>
-    <option value="Yes" <?= (($_GET['isshow'] ?? '') === 'Yes') ? 'selected' : '' ?>>Hiển thị</option>
-    <option value="No" <?= (($_GET['isshow'] ?? '') === 'No') ? 'selected' : '' ?>>Ẩn</option>
-  </select>
+  <div class="col-md">
+    <input class="form-control" type="search" placeholder="Tìm theo tiêu đề hoặc người viết..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+  </div>
 
-  <button class="btn btn-outline-success" type="submit">
-    <i class="bi bi-search"></i>
-  </button>
+  <div class="col-md-auto">
+    <select class="form-select" name="isshow">
+      <option value=""> Tất cả trạng thái </option>
+      <option value="Yes" <?= (($_GET['isshow'] ?? '') === 'Yes') ? 'selected' : '' ?>>Hiển thị</option>
+      <option value="No" <?= (($_GET['isshow'] ?? '') === 'No') ? 'selected' : '' ?>>Ẩn</option>
+    </select>
+  </div>
+
+  <div class="col-md-auto">
+    <button class="btn btn-outline-success" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+  <div class="col-md-auto">
+    <a href="add-blog-admin.php" class="btn btn-success">
+      <i class="bi bi-plus-circle"></i>Thêm
+    </a>
+  </div>
+
+  <div class="col-md-auto">
+    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
+      <i class="bi bi-trash"></i>Xóa
+    </button>  
+  </div>
+  
 </form>
 
 <form id="posts-form" method="POST" action="">
@@ -175,23 +184,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
                 <form method="POST" action="" style="display:inline;">
                   <input type="hidden" name="blogid" value="<?= htmlspecialchars($blog['BlogId']) ?>">
                   <input type="hidden" name="current_status" value="<?= $blog['IsShow'] ?>">
-                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $blog['IsShow'] === 'Yes' ? 'btn-outline-primary' : 'btn-outline-secondary' ?>" title="<?= $blog['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
-                      <i class="fa fa-<?= $blog['IsShow'] === 'Yes' ? 'eye' : 'eye-slash' ?>" aria-hidden="true"></i>
+                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $blog['IsShow'] === 'Yes' ? 'btn-success' : 'btn-secondary' ?>" title="<?= $blog['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
+                      <?= $blog['IsShow'] === 'Yes' ? "Hiển thị" : "Ẩn" ?>
                   </button>
                 </form>
               </td>
               <td>
                 <!-- Xem bình luận -->
-                <a href="comment-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-warning">
-                  <i class="bi bi-chat-dots me-1"></i>
+                <a href="comment-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-primary text-white" title="Xem bình luận">
+                  <i class="bi bi-chat-dots"></i>
                 </a>
                 <!-- Chỉnh sửa bài đăng -->
-                <a href="edit-blog-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-primary">
-                  <i class="bi bi-pencil me-1"></i>
+                <a href="edit-blog-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
+                  <i class="bi bi-pencil-square"></i>
                 </a>
                 <!-- Xóa bài đăng -->
-                <button type="button" class="btn btn-sm btn-danger delete-single" data-bs-toggle="modal" data-bs-target="#deleteModal" data-blog-id="<?= $blog['BlogId'] ?>">
-                  <i class="bi bi-trash me-1"></i>
+                <button type="button" class="btn btn-sm btn-danger text-white" title="Xóa" data-bs-toggle="modal" data-bs-target="#deleteModal" data-blog-id="<?= $blog['BlogId'] ?>">
+                  <i class="bi bi-trash"></i>
                 </button>
               </td>
             </tr>

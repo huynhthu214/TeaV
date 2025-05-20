@@ -138,9 +138,9 @@ if (count($importList) > 0):
             <td class="text-center">
                 <a href="#" class="btn btn-sm btn-info text-white" title="Xem"
                   onclick="showImportDetail('<?= $row['ImportId'] ?>')" data-bs-toggle="modal" data-bs-target="#importDetailModal">
-                  <i class="bi bi-eye"></i>
+                  <i class="fa fa-eye"></i>
                 </a>
-                <a href="#" class="btn btn-sm btn-warning text-white"ntitle="Sửa" onclick="editImport('<?= $row['ImportId'] ?>')">
+                <a href="#" class="btn btn-sm btn-warning text-white" title="Sửa" onclick="editImport('<?= $row['ImportId'] ?>')">
                   <i class="bi bi-pencil-square"></i>
                 </a>
                   <a href="#" class="btn btn-sm btn-danger text-white" title="Xoá" onclick="confirmDelete('<?= $row['ImportId'] ?>')">

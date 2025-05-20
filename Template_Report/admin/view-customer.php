@@ -52,6 +52,7 @@ try {
 <div class="content-wrapper">
   <h2 class="mb-4" style="color:rgb(10, 119, 52);"><strong>Thông tin khách hàng</strong></h2>
 
+  
   <div class="card mb-4 p-3">
     <h5 class="mb-3">Thông tin cá nhân</h5>
     <div><strong>Họ tên:</strong> <?= htmlspecialchars($customer['FullName']) ?></div>
@@ -94,6 +95,7 @@ try {
       <p class="text-muted">Khách hàng chưa có đơn hàng nào.</p>
     <?php endif; ?>
   </div>
+  <a href="customer-admin.php" class="btn btn-secondary mb-3">Quay lại</a>
 </div>
 
 <?php include "view/footer-admin.php"; ?>
