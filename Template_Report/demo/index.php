@@ -208,7 +208,7 @@ $first_about = $about_list[0];
     </section>
 
   <h1 class="product-section">
-  <a href="product.php" style="text-decoration: none; color: inherit;">Sản phẩm trà</a>
+  <a href="products.php" style="text-decoration: none; color: inherit;">Sản phẩm trà</a>
 </h1>
         <div class="container-p-0">
         <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
@@ -256,7 +256,7 @@ $first_about = $about_list[0];
 </div>
   </div>
   <h1 class="blog-section">
-  <a href="blog.php" style="text-decoration: none; color: inherit;">Blogs</a>
+  <a href="blog.php" style="text-decoration: none; color: inherit;">Bài báo</a>
 </h1>
 
 <div class="container my-5">

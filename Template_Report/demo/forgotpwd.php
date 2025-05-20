@@ -81,7 +81,7 @@ include "view/header.php";
       ?>
         <button type="submit" class="btn btn-outline-primary w-100">Gửi mã</button>
         <div class="text-center mt-3">
-            <a href="login.php" class="text-decoration-none">Quay lại đăng nhâpj</a>
+            <a href="login.php" class="text-decoration-none">Quay lại đăng nhập</a>
         </div>
     </form>
 </div>
