@@ -77,3 +77,4 @@ function confirmDelete(productId) {
       bsAlert.close();
     }
   }, 3000);
+

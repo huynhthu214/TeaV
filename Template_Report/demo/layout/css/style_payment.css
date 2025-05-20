@@ -7,3 +7,11 @@
 .readonly-input:focus {
     outline: none;
 }
+
+.back-home-btn {
+    position: fixed;
+    right: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+}

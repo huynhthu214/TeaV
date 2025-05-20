@@ -256,7 +256,7 @@ if (!$conn) {
             </div>
             <div class="cart-actions">
                 <a href="products.php" class="continue-shopping">Tiếp tục mua sắm</a>
-                <a href="payment.php" class="checkout-btn">Thanh toán</a>
+                <a href="order-detail.php" class="checkout-btn">Đặt hàng</a>
             </div>
         <?php else: ?>
             <div class="empty-cart">
