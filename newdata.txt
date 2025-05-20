@@ -66,7 +66,6 @@ INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, StatusOrder, Payment
 ('ORD003', 'linh.tran@email.com', '2025-04-14', 310, 'Đã xử lý', 'Đã thanh toán'),
 ('ORD004', 'emma.brown@email.com', '2025-04-15', 150, 'Chưa xử lý', 'Chưa thanh toán');
 
-
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
 ('P001', 'C001', 'U001', 'Trà Xanh Hảo Hạng', 'Trà xanh chất lượng cao được thu hoạch cẩn thận', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 260, 'Lá trà xanh nguyên chất', 'Yes'),
 ('P002', 'C002', 'U002', 'Chamomile Thư Giãn', 'Một loại trà thảo mộc dịu nhẹ từ hoa cúc khô', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 150, 'Hoa cúc khô', 'Yes'),

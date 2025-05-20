@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/19/2025 3:07:21 PM                         */
+/* Created on:     5/19/2025 9:29:54 PM                         */
 /*==============================================================*/
 
 
@@ -172,7 +172,6 @@ create table Product
    Price                float,
    Usefor               text,
    IsShow               text,
-   Type                 text,
    SaleOff              float,
    primary key (ProductId)
 );
