@@ -54,11 +54,11 @@ INSERT INTO Suppliers (SupplierId, SupplierName, Phone, Email, Address, Note) VA
 ('SUP02', 'Trà Thái Nguyên Hảo Hạng', '0988777666', 'sales@trathainguyen.vn', 'Thái Nguyên', 'Trà nguyên chất'),
 ('SUP03', 'Trà Organic TeaFarm', '0966123456', 'info@teafarm.vn', 'Lâm Đồng', 'Cung cấp nguyên liệu hữu cơ');
 
-INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod) VALUES
-('PM001', 55000, 'MOMO'),
-('PM002', 56000, 'MOMO'),
-('PM003', 57000, 'MOMO'),
-('PM004', 58000, 'MOMO');
+INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod, DeliveryMethod, DeliveryTime, Note) VALUES
+('PM001', 55000, 'MOMO', 'Giao hàng tiêu chuẩn', '2025-05-25', 'Không có ghi chú'),
+('PM002', 56000, 'ZALOPAY', 'Giao hàng tiêu chuẩn', '2025-05-25', 'Giao buổi sáng'),
+('PM003', 57000, 'VNPAY', 'Giao hàng nhanh', '2025-05-21', 'Liên hệ trước khi giao'),
+('PM004', 58000, 'MOMO', 'Giao hàng nhanh', '2025-05-21', 'Đóng gói cẩn thận');
 
 INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, StatusOrder, PaymentStatus) VALUES
 ('ORD001','anna.nguyen@email.com', '2025-04-12', 490, 'Chưa xử lý', 'Chưa thanh toán'),
