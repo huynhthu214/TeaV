@@ -60,16 +60,22 @@
           $error = 'Mật khẩu phải có ít nhất 8 ký tự';
       } else {
           $userData = login($email, $pass);
-          if ($userData) {  // Nếu trả về dữ liệu người dùng
-              // Thiết lập session
-              $_SESSION['email'] = $userData['Email'];
+            if ($userData) {
+                $_SESSION['email'] = $userData['Email'];
 
-              if ($userData['Type'] === 'Admin') {
-                  header('Location: dashboard.php');
-              } else {
-                  header('Location: index.php');
-              }
-              exit();
+                // Nếu có giá trị return, chuyển hướng về lại trang đó
+                if (isset($_GET['return'])) {
+                    $returnUrl = urldecode($_GET['return']);
+                    header("Location: $returnUrl");
+                } else {
+                    // Không có return thì xử lý như bình thường
+                    if ($userData['Type'] === 'Admin') {
+                        header('Location: dashboard.php');
+                    } else {
+                        header('Location: index.php');
+                    }
+                }
+                exit();
           } else {
               $error = 'Email hoặc mật khẩu không đúng.';  // Nếu đăng nhập không thành công
           }

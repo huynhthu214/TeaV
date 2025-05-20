@@ -99,7 +99,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </form>
 
     <button class="btn btn-primary" type="button" onclick="exportData()">
-      <i class="bi bi-download me-1"></i> Xuất
+      <i class="bi bi-download me-1"></i>
     </button>
     <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
       <i class="bi bi-plus-circle me-1"></i> Thêm

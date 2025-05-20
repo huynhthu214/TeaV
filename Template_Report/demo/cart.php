@@ -255,13 +255,13 @@ if (!$conn) {
                 </table>
             </div>
             <div class="cart-actions">
-                <a href="index.php" class="continue-shopping">Tiếp tục mua sắm</a>
+                <a href="products.php" class="continue-shopping">Tiếp tục mua sắm</a>
                 <a href="payment.php" class="checkout-btn">Thanh toán</a>
             </div>
         <?php else: ?>
             <div class="empty-cart">
                 <p>Giỏ hàng của bạn đang trống.</p>
-                <a href="index.php" class="continue-shopping">Quay lại mua sắm</a>
+                <a href="products.php" class="continue-shopping">Quay lại mua sắm</a>
             </div>
         <?php endif; ?>
     </div>

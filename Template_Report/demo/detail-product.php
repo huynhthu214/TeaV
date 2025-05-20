@@ -3,7 +3,8 @@ ob_start();
 session_start();
 
 if (!isset($_SESSION['email'])) {
-    header("Location: login.php?msg=login_required");
+    $returnUrl = urlencode($_SERVER['REQUEST_URI']); // ví dụ: detail-product.php?id=5
+    header("Location: login.php?msg=login_required&return=" . $returnUrl);
     exit();
 }
 
