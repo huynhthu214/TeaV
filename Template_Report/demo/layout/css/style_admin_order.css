@@ -6,29 +6,6 @@
 
 .table-order th:first-child,
 .table-order td:first-child {
-  width: 10px;
+  width: 30px;
   text-align: center;
-}
-
-.col-order {
-  width: 80px !important;
-}
-.col-product {
-  width: 180px !important;
-}
-.col-customer {
-  width: 150px !important;
-}
-.col-date {
-  width: 110px !important;
-}
-.col-total {
-  width: 80px !important;
-  text-align: right;
-}
-.col-payment {
-  width: 110px !important;
-}
-.col-status {
-  width: 100px !important;
 }

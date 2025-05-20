@@ -54,102 +54,114 @@ if ($result && mysqli_num_rows($result) > 0) {
 ?>
 
 <!---->
-<div class="content-wrapper container-fluid px-4">
+<div class="content-wrapper">
   <div class="page-title d-flex justify-content-between align-items-start mb-4">
-    <h2 style="color:rgb(10, 119, 52); margin-top: 0;"><strong>Quản lý đơn hàng</strong></h2>
+    <h2 style="color:rgb(10, 119, 52); margin-top: -10px;"><strong>Quản lý đơn hàng</strong></h2>
   </div>
 
-  <div class="d-flex justify-content-end align-items-center gap-2 flex-wrap mb-3">
-    <form class="d-flex align-items-center gap-2" role="search" method="GET" action="#">
-      <input class="form-control" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">
-        <i class="bi bi-search"></i>
-      </button>
-    </form>
-    <button class="btn btn-primary" type="button" onclick="exportData()">
-      <i class="bi bi-download me-1"></i>
+ <!-- Thanh điều khiển trên bảng -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <!-- Tìm kiếm -->
+  <form class="d-flex" role="search" method="GET" action="#">
+    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">
+      <i class="bi bi-search"></i>
     </button>
-    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">Thêm</button>
-    <button class="btn btn-danger" type="button" onclick="deleteSelected()"> Hủy</button>
-  </div>
-
-  <!-- Bộ chọn limit -->
-  <form method="GET" class="mb-3 d-flex align-items-center gap-2">
-    <label for="limit">Hiển thị:</label>
-    <select name="limit" id="limit" class="form-select w-auto" onchange="this.form.submit()">
-      <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
-      <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-      <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
-      <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-    </select>
-    <input type="hidden" name="page" value="1">
   </form>
+
+  <!-- Các nút bên phải -->
+  <div class="d-flex gap-2">
+    <form method="GET" class="d-flex align-items-center">
+      <label for="limit" class="me-2">Hiển thị:</label>
+      <select name="limit" id="limit" class="form-select w-auto me-3" onchange="this.form.submit()">
+        <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
+        <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+        <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
+        <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+      </select>
+      <input type="hidden" name="page" value="1">
+    </form>
+
+    <button class="btn btn-primary" type="button" onclick="exportData()">
+      <i class="bi bi-download me-1"></i> Xuất
+    </button>
+    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+      <i class="bi bi-plus-circle me-1"></i> Thêm
+    </button>
+  </div>
+</div>
 
 <!-- Bảng đơn hàng -->
 <div class="table-responsive">
-  <table class="table table-striped table-bordered align-middle table-order">
-    <thead class="table-success text-center">
-      <tr>
-        <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
-        <th class="col-order">Đơn hàng</th>
-        <th class="col-product">Sản phẩm</th>
-        <th class="col-customer">Khách hàng</th>
-        <th class="col-date">Ngày đặt</th>
-        <th class="col-total">Tổng tiền</th>
-        <th class="col-payment">Hình thức <br> thanh toán</th>
-        <th class="col-status">Trạng thái</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php if (!empty($orders)): ?>
-        <?php foreach ($orders as $order): ?>
-          <tr class="text-center">
-            <td><input type="checkbox" name="select[]" value="<?= $order['OrderId']; ?>"></td>
-            <td class="text-start text-truncate"><?= htmlspecialchars($order['OrderId']); ?></td>
-            <td class="text-start"><?= $order['Products']; ?></td>
-            <td class="text-start text-truncate">
-              <?= htmlspecialchars($order['CustomerName']); ?><br>
-              <small class="text-muted"><?= htmlspecialchars($order['CustomerEmail']); ?></small>
-            </td>
-            <td class="text-start">
-              <?php
-                $parts = explode(' ', $order['OrderDate']);
-                echo $parts[0] . '<br><small class="text-muted">' . ($parts[1] ?? '') . '</small>';
-              ?>
-            </td>
-            <td class="text-start text-truncate"><?= number_format($order['TotalAmount'], 0, ',', '.'); ?> đ</td>
-            <td class="text-start text-truncate"><?= $order['PaymentId'] ?? '<i>Chưa có</i>'; ?></td>
-            <td class="text-start text-truncate"><?= $order['StatusOrder']; ?></td>
+  <form method="POST" action="">
+    <table class="table table-hover table-bordered align-middle">
+      <thead class="table-success text-center align-middle">
+        <tr>
+          <th><input type="checkbox" id="select-all"></th>
+          <th>Mã đơn</th>
+          <th>Khách hàng</th>
+          <th>Sản phẩm</th>
+          <th>Ngày đặt</th>
+          <th>Tổng tiền</th>
+          <th>Thanh toán</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!empty($orders)): ?>
+          <?php foreach ($orders as $order): ?>
+            <tr>
+              <td class="text-center">
+                <input type="checkbox" name="select[]" value="<?= $order['OrderId']; ?>">
+              </td>
+              <td><strong><?= htmlspecialchars($order['OrderId']); ?></strong></td>
+              <td>
+                <?= htmlspecialchars($order['CustomerName']); ?><br>
+                <small class="text-muted"><?= htmlspecialchars($order['CustomerEmail']); ?></small>
+              </td>
+              <td><?= $order['Products']; ?></td>
+              <td>
+                <?php
+                  $parts = explode(' ', $order['OrderDate']);
+                  echo $parts[0] . '<br><small class="text-muted">' . ($parts[1] ?? '') . '</small>';
+                ?>
+              </td>
+              <td><?= number_format($order['TotalAmount'], 0, ',', '.'); ?> VND</td>
+              <td><?= $order['PaymentId'] ?? '<i>Chưa có</i>'; ?></td>
+              <td>
+                <?php
+                  $status = $order['StatusOrder'];
+                  $badgeClass = match ($status) {
+                    'Đã giao' => 'bg-success',
+                    'Đang xử lý' => 'bg-warning text-dark',
+                    'Đã hủy' => 'bg-danger',
+                    default => 'bg-secondary'
+                  };
+                ?>
+                <span class="badge <?= $badgeClass; ?>"><?= $status; ?></span>
+              </td>
+              <td class="text-center">
+                <a href="order-detail.php?id=<?= $order['OrderId']; ?>" class="btn btn-sm btn-info text-white" title="Xem">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a href="edit-order.php?id=<?= $order['OrderId']; ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('<?= $order['OrderId']; ?>')" title="Xóa">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="9" class="text-center text-muted">Không có dữ liệu</td>
           </tr>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <tr><td colspan="8" class="text-center text-muted">Không có dữ liệu</td></tr>
-      <?php endif; ?>
-    </tbody>
-  </table>
-</div>
-
-
-  <!-- PHÂN TRANG -->
-  <?php if ($total_pages > 1): ?>
-    <nav class="mt-3">
-      <ul class="pagination justify-content-center">
-        <?php if ($page > 1): ?>
-          <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>">«</a></li>
         <?php endif; ?>
-
-        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-          <li class="page-item <?= ($i == $page ? 'active' : '') ?>">
-            <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>"><?= $i ?></a>
-          </li>
-        <?php endfor; ?>
-
-        <?php if ($page < $total_pages): ?>
-          <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>">»</a></li>
-        <?php endif; ?>
-      </ul>
-    </nav>
-  <?php endif; ?>
+      </tbody>
+    </table>
+  </form>
 </div>
 
 <!-- Modal thêm đơn hàng -->

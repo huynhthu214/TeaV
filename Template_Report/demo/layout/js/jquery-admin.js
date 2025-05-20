@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     body.classList.toggle("sidebar-collapsed");
   });
 
+
   const donutCtx = document.getElementById('donutChart');
   const lineCtx = document.getElementById('lineChart');
 
@@ -120,14 +121,32 @@ function deleteSelected() {
   }
 }
 
-function generateNewOrderId($conn) {
-    $result = mysqli_query($conn, "SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1");
-    $row = mysqli_fetch_assoc($result);
-    if ($row) {
-        $lastId = $row['OrderId'];
-        $number = (int)substr($lastId, 3) + 1;
-    } else {
-        $number = 1;
-    }
-    return 'ORD' . str_pad($number, 5, '0', STR_PAD_LEFT);
+document.getElementById('select-all').addEventListener('change', function () {
+  const isChecked = this.checked;
+  const checkboxes = document.querySelectorAll('input[name="select[]"]');
+  checkboxes.forEach(cb => cb.checked = isChecked);
+});
+
+function showImportDetail(importId) {
+    var content = document.getElementById('import-detail-' + importId).innerHTML;
+    document.getElementById('importDetailContent').innerHTML = content;
+}
+
+function editImport(importId) {
+  const detailBox = document.getElementById('import-detail-' + importId);
+  if (!detailBox) return;
+
+  const note = detailBox.querySelector('p:nth-child(3)').innerText.replace('Ghi chú: ', '');
+  const productName = detailBox.querySelector('table tbody tr td:first-child').innerText.split(' (')[0];
+  const quantity = detailBox.querySelector('table tbody tr td:nth-child(2)').innerText;
+  const unitPrice = detailBox.querySelector('table tbody tr td:nth-child(3)').innerText.replace(/\D/g, '');
+
+  document.getElementById('editImportId').value = importId;
+  document.getElementById('editNote').value = note;
+  document.getElementById('editProductName').value = productName;
+  document.getElementById('editQuantity').value = quantity;
+  document.getElementById('editPrice').value = unitPrice;
+
+  const modal = new bootstrap.Modal(document.getElementById('editImportModal'));
+  modal.show();
 }
