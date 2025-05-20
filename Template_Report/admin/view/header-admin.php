@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeaV - <?php echo $namePage ?></title>
-  <link rel="icon" type="image/png" href="/admin/layout/images/tea2.png">
+  <link rel="icon" type="image/png" href="../demo/layout/images/tea2.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="layout/css/style_admin.css"/>
@@ -72,7 +72,7 @@
         <span class="fw-semibold text-dark"><?php echo $userEmail; ?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+        <li><a class="dropdown-item text-danger" href="../demo/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
       </ul>
     </div>
   <?php endif; ?>

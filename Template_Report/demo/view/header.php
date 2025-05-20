@@ -30,7 +30,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <header>
     <nav class="navbar section-content navbar-expand-lg">
         <div class="container-fluid">
-            <a href="#" class="nav-logo">
+            <a href="#" class="nav-logo" style="text-decoration: none;">
                 <h2 class="logo-text">🍃TeaV</h2>
             </a>
             <button
@@ -122,9 +122,20 @@ if (session_status() === PHP_SESSION_NONE) {
                 </ul>
             </div>
             <div>
-                <a href="cart.php">
-                    <i class="bi bi-cart" style="color: white; font-size:16px"></i>
-                </a>
+                <a href="cart.php" class="text-light position-relative" aria-label="Shopping Cart">
+                    <i class="bi bi-cart fs-5" aria-hidden="true"></i>
+                    <?php
+                        $orderCount = 0;
+                        if (isset($_SESSION['cart'])) {
+                            $orderCount = count($_SESSION['cart']);
+                        }
+                        if ($orderCount > 0) {
+                            echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">'
+                                . $orderCount . '</span>';
+                        }
+                    ?>
+</a>
+
             </div>
         </div>
     </nav>
