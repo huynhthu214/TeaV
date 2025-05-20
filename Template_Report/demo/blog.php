@@ -64,15 +64,12 @@ if (!$conn) {
                       $blogTags[] = $blogTag['Name'];
                   }
                   
-                  // Format ngày
-                  $date = new DateTime($blog['DateUpload']);
-                  $formattedDate = $date->format('F j, Y');
-                  
+                  $timestamp = strtotime($blog['DateUpload']);
+                  $formattedDate = strftime('%d/%m/%Y', $timestamp);
           ?>
           <article class="blog-post">
             <h2><?php echo htmlspecialchars($blog['Title']); ?></h2>
             <p class="text-muted">Đăng ngày <?php echo $formattedDate; ?> bởi <?php echo htmlspecialchars($blog['Email']); ?></p>
-            
             <?php if (!empty($blogTags)): ?>
             <div class="tags mb-2">
               <?php foreach ($blogTags as $tag): ?>
@@ -87,8 +84,7 @@ if (!$conn) {
               alt="<?php echo htmlspecialchars($blog['Title']); ?>"
             />
             <p><?php echo htmlspecialchars($blog['Summary']); ?></p>
-            <a href="blog_detail.php?id=<?php echo $blog['BlogId']; ?>" class="read-more">Đọc thêm</a>
-            
+            <a href="blog-detail.php?id=<?php echo $blog['BlogId']; ?>" class="read-more">Đọc thêm</a>  
             <div class="share-buttons">
               <a
                 href="https://facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . '/sblog_detail.php?id=' . $blog['BlogId']); ?>"
@@ -104,7 +100,7 @@ if (!$conn) {
               >
             </div>
             
-            <div class="comment-section">
+            <div class="comment-section py-4">
               <h5>Bình luận</h5>
               <div id="comments-<?php echo $blog['BlogId']; ?>" class="mb-3"></div>
               <form class="comment-form" data-post="<?php echo $blog['BlogId']; ?>">

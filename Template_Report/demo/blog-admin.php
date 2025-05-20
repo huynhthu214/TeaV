@@ -154,7 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
       <thead class="table-success text-center">
         <tr>
           <th><input type="checkbox" id="select-all" class="form-check-input"></th>
-          <th>STT</th>
           <th>Tiêu đề</th>
           <th>Người viết</th>
           <th>Ngày đăng</th>
@@ -168,7 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
           <?php foreach ($blogs as $index => $blog): ?>
             <tr class="text-center">
               <td><input type="checkbox" name="selected_posts[]" class="form-check-input post-checkbox" value="<?php echo $blog['BlogId']; ?>"></td>
-              <td><?= $index + 1 ?></td>
               <td class="text-start"><?= htmlspecialchars($blog['Title']) ?></td>
               <td><?= htmlspecialchars($blog['Author']) ?></td>
               <td><?= date('d/m/Y', strtotime($blog['DateUpload'])) ?></td>
@@ -177,18 +175,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
                 <form method="POST" action="" style="display:inline;">
                   <input type="hidden" name="blogid" value="<?= htmlspecialchars($blog['BlogId']) ?>">
                   <input type="hidden" name="current_status" value="<?= $blog['IsShow'] ?>">
-                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $blog['IsShow'] === 'Yes' ? 'btn-success' : 'btn-secondary' ?>">
-                    <?= $blog['IsShow'] === 'Yes' ? 'Hiển thị' : 'Ẩn' ?>
+                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $blog['IsShow'] === 'Yes' ? 'btn-outline-primary' : 'btn-outline-secondary' ?>" title="<?= $blog['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
+                      <i class="fa fa-<?= $blog['IsShow'] === 'Yes' ? 'eye' : 'eye-slash' ?>" aria-hidden="true"></i>
                   </button>
                 </form>
               </td>
               <td>
+                <!-- Xem bình luận -->
                 <a href="comment-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-warning">
                   <i class="bi bi-chat-dots me-1"></i>
                 </a>
+                <!-- Chỉnh sửa bài đăng -->
                 <a href="edit-blog-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-primary">
                   <i class="bi bi-pencil me-1"></i>
                 </a>
+                <!-- Xóa bài đăng -->
                 <button type="button" class="btn btn-sm btn-danger delete-single" data-bs-toggle="modal" data-bs-target="#deleteModal" data-blog-id="<?= $blog['BlogId'] ?>">
                   <i class="bi bi-trash me-1"></i>
                 </button>
@@ -213,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Bạn có chắc chắn muốn xóa (các) bài đăng đã chọn không? Hành động này không thể hoàn tác và sẽ xóa cả các bình luận liên quan.
+          Bạn có chắc chắn muốn xóa bài đăng đã chọn không? Hành động này không thể hoàn tác và sẽ xóa cả các bình luận liên quan.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
