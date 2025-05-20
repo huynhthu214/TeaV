@@ -52,11 +52,11 @@ if ($search) {
     $where_clauses[] = "product.Name LIKE '%$search%'";
 }
 if ($price_filter === 'low') {
-    $where_clauses[] = "product.Price < 30";
+    $where_clauses[] = "product.Price < 150";
 } elseif ($price_filter === 'mid') {
-    $where_clauses[] = "product.Price BETWEEN 30 AND 40";
+    $where_clauses[] = "product.Price BETWEEN 150 AND 300";
 } elseif ($price_filter === 'high') {
-    $where_clauses[] = "product.Price > 40";
+    $where_clauses[] = "product.Price > 300";
 }
 if ($use_filter === 'relax') {
     $where_clauses[] = "LOWER(product.Usefor) REGEXP 'relax|sleep|unwind|calm|soothe'";
@@ -132,9 +132,9 @@ $query_string = http_build_query([
               <div class="col-md-3">
                 <select class="form-select" name="price">
                   <option value="">Lọc theo giá tiền</option>
-                  <option value="low" <?php echo $price_filter === 'low' ? 'selected' : ''; ?>>Dưới $30</option>
-                  <option value="mid" <?php echo $price_filter === 'mid' ? 'selected' : ''; ?>>$30 - $40</option>
-                  <option value="high" <?php echo $price_filter === 'high' ? 'selected' : ''; ?>>Trên $40</option>
+                  <option value="low" <?php echo $price_filter === 'low' ? 'selected' : ''; ?>>Dưới 150.000 VND</option>
+                  <option value="mid" <?php echo $price_filter === 'mid' ? 'selected' : ''; ?>>150.000 VND - 300.000 VND</option>
+                  <option value="high" <?php echo $price_filter === 'high' ? 'selected' : ''; ?>>Trên 300.000 VND</option>
                 </select>
               </div>
               <div class="col-md-3">
@@ -166,7 +166,7 @@ $query_string = http_build_query([
                     <h5 class="card-title"><?php echo htmlspecialchars($product['Name']); ?></h5>
                     <p class="card-text">
                       <strong>Thành phần:</strong> <?php echo htmlspecialchars($product['ingredients']); ?><br />
-                      <strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?>
+                      <strong>Giá:</strong> <?php echo number_format($product['Price'], 3); ?> VND
                     </p>
                     <a href="detail-product.php?id=<?php echo htmlspecialchars($product['ProductId']); ?>" class="btn btn-success">Xem chi tiết</a>
                   </div>

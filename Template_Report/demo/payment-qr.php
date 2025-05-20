@@ -51,8 +51,7 @@ if (empty($payment_id)) {
     <h2>Xác nhận thanh toán</h2>
 
     <div class="alert alert-success">
-        <strong>Thông tin hợp lệ!</strong> Vui lòng quét mã QR để thanh toán đơn hàng trị giá 
-        <strong><?php echo number_format($finalTotal, 0, ',', '.') ?>₫</strong>
+        <strong>Thông tin hợp lệ!</strong> Vui lòng quét mã QR để thanh toán đơn hàng trị giá <strong><?php echo number_format($finalTotal, 3); ?> VND</strong>
     </div>
 
     <div class="text-center">

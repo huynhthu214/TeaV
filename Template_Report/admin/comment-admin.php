@@ -89,7 +89,6 @@ $result = mysqli_stmt_get_result($stmt);
                 <h2 style="color:rgb(10, 119, 52); margin-top:-10px;"><strong>Bình luận</strong></h2>
                 <p class="text-muted mb-0">Bài viết: <strong><?= htmlspecialchars($title) ?></strong></p>
             </div>
-            <a href="blog-admin.php" class="btn btn-secondary mb-3">Quay lại danh sách bài đăng</a>
         </div>
     <?php else: ?>
         <div class="page-title mb-4">
@@ -149,8 +148,8 @@ $result = mysqli_stmt_get_result($stmt);
                                 <form method="POST" action="" style="display:inline;">
                                     <input type="hidden" name="commentid" value="<?= htmlspecialchars($comment['ReactionId']) ?>">
                                     <input type="hidden" name="current_status" value="<?= $comment['IsShow'] ?>">
-                                    <button type="submit" name="toggle_comment_status" class="btn btn-sm <?= $comment['IsShow'] === 'Yes' ? 'btn-outline-primary' : 'btn-outline-secondary' ?>" title="<?= $comment['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
-                                        <i class="fa fa-<?= $comment['IsShow'] === 'Yes' ? 'eye' : 'eye-slash' ?>" aria-hidden="true"></i>
+                                    <button type="submit" name="toggle_comment_status" class="btn btn-sm <?= $comment['IsShow'] === 'Yes' ? 'btn-success' : 'btn-secondary' ?>" title="<?= $comment['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
+                                        <?= $comment['IsShow'] === 'Yes' ? "Hiển thị" : "Ẩn" ?>
                                     </button>
                                 </form>
                             </td>
@@ -164,6 +163,7 @@ $result = mysqli_stmt_get_result($stmt);
                     <?php endwhile; ?>
                 </tbody>
             </table>
+            <a href="blog-admin.php" class="btn btn-secondary mb-3">Quay lại</a>
         </div>
     <?php endif; ?>
 </div>
@@ -187,9 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.nav-link').forEach(tab => tab.classList.remove('active'));
         this.classList.add('active');
         allRows.forEach(row => {
-            // Kiểm tra biểu tượng eye-slash (ẩn)
-            const eyeIcon = row.querySelector('button[name="toggle_comment_status"] i');
-            row.style.display = (eyeIcon && eyeIcon.classList.contains('fa-eye-slash')) ? '' : 'none';
+            const btn = row.querySelector('button[name="toggle_comment_status"]');
+            row.style.display = (btn && btn.textContent.trim() === 'Ẩn') ? '' : 'none';
         });
     });
 
@@ -198,11 +197,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.nav-link').forEach(tab => tab.classList.remove('active'));
         this.classList.add('active');
         allRows.forEach(row => {
-            // Kiểm tra biểu tượng eye (hiển thị)
-            const eyeIcon = row.querySelector('button[name="toggle_comment_status"] i');
-            row.style.display = (eyeIcon && eyeIcon.classList.contains('fa-eye')) ? '' : 'none';
+            const btn = row.querySelector('button[name="toggle_comment_status"]');
+            row.style.display = (btn && btn.textContent.trim() === 'Hiển thị') ? '' : 'none';
         });
     });
+
     <?php endif; ?>
 });
 </script>

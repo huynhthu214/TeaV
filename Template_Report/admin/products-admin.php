@@ -180,7 +180,7 @@
                 $product['SupplierName'],
                 $product['Quantity'],
                 $product['Unit'],
-                number_format($product['Price'], 0, ',', '.'),
+                number_format($product['Price'], 3),
                 $discount,
                 $status
             ]);
@@ -194,37 +194,50 @@
 <div class="content-wrapper">
 <div class="page-title d-flex justify-content-between align-items-center mb-4">
   <h2 style="color:rgb(10, 119, 52); margin-top:-10px;"><strong> Quản lý sản phẩm</strong></h2>
-  
-  <div class="d-flex gap-2">
-    <a href="add-product.php" class="btn btn-success">
-      <i class="bi bi-plus-circle me-1"></i>Thêm sản phẩm
-    </a>
-    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
-      <i class="bi bi-trash me-1"></i>Xóa sản phẩm
-    </button>
-    <form action="?" method="GET" class="d-inline">
-      <button class="btn btn-primary" type="submit" name="export" value="csv">
-        <i class="bi bi-download me-1"></i>Xuất CSV
-      </button>
-    </form>
-  </div>
 </div>
 
 <form class="d-flex align-items-center gap-2 mb-4" method="GET" action="">
-  <input class="form-control" type="search" placeholder="Tìm theo tên hoặc mã sản phẩm..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+  <div class="col-md">
+    <input class="form-control" type="search" placeholder="Tìm theo tên hoặc mã sản phẩm..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+  </div>
   
-  <select class="form-select" name="category">
-    <option value=""> Tất cả danh mục </option>
-    <?php foreach ($categories as $category): ?>
-      <option value="<?= htmlspecialchars($category['CategoryId']) ?>" <?= (($_GET['category'] ?? '') === $category['CategoryId']) ? 'selected' : '' ?>>
-        <?= htmlspecialchars($category['Name']) ?>
-      </option>
-    <?php endforeach; ?>
-  </select>
+  <div class="col-md-auto">
+    <select class="form-select" name="category">
+      <option value=""> Tất cả danh mục </option>
+      <?php foreach ($categories as $category): ?>
+        <option value="<?= htmlspecialchars($category['CategoryId']) ?>" <?= (($_GET['category'] ?? '') === $category['CategoryId']) ? 'selected' : '' ?>>
+          <?= htmlspecialchars($category['Name']) ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+  </div>
+  
+  <div class="col-md-auto">
+    <button class="btn btn-outline-success" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+  
+  <div class="col-md-auto">
+    <a href="add-product.php" class="btn btn-success">
+      <i class="bi bi-plus-circle me-1"></i>Thêm 
+    </a>
+  </div>
 
-  <button class="btn btn-outline-success" type="submit">
-    <i class="bi bi-search"></i>
-  </button>
+  <div class="col-md-auto">
+    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
+      <i class="bi bi-trash me-1"></i>Xóa
+    </button>
+  </div>
+    
+  <div class="col-md-auto">
+    <form action="?" method="GET" class="d-inline">
+      <button class="btn btn-primary" type="submit" name="export" value="csv">
+        <i class="bi bi-download me-1"></i>
+      </button>
+    </form>
+  </div>
+
 </form>
 
 <form id="products-form" method="POST" action="">
@@ -254,25 +267,25 @@
               <td><?= htmlspecialchars($product['CategoryName']); ?></td>
               <td><?= $product['Quantity']; ?></td>
               <td><?= htmlspecialchars($product['Unit']); ?></td>
-              <td><?= number_format($product['Price'], 0, ',', '.'); ?> đ</td>
+              <td><?= number_format($product['Price'], 3); ?> VND</td>
               <td><?= !empty($product['SaleOff']) ? $product['SaleOff'] . '%' : '0%'; ?></td>
               <td>
                 <form method="POST" action="" style="display:inline;">
                   <input type="hidden" name="productid" value="<?= htmlspecialchars($product['ProductId']) ?>">
                   <input type="hidden" name="current_status" value="<?= $product['IsShow'] ?>">
-                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $product['IsShow'] === 'Yes' ? 'btn-outline-primary' : 'btn-outline-secondary' ?>" title="<?= $product['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
-                      <i class="fa fa-<?= $product['IsShow'] === 'Yes' ? 'eye' : 'eye-slash' ?>" aria-hidden="true"></i>
+                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $product['IsShow'] === 'Yes' ? 'btn-success text-white' : 'btn-secondary' ?>" title="<?= $product['IsShow'] === 'Yes' ? 'Đang hiển thị' : 'Đang ẩn' ?>">
+                    <?= $product['IsShow'] === 'Yes' ? "Hiển thị" : "Ẩn" ?>
                   </button>
                 </form>
               </td>
               <td>
-                <a href="view-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-info">
-                  <i class="bi bi-eye"></i>
+                <a href="view-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-info text-white" title="Xem">
+                  <i class="fa fa-eye"></i>
                 </a>
-                <a href="edit-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-primary">
-                  <i class="bi bi-pencil"></i>
+                <a href="edit-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
+                  <i class="bi bi-pencil-square"></i>
                 </a>
-                <button type="button" class="btn btn-sm btn-danger delete-single" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>">
+                <button type="button" class="btn btn-sm btn-danger text-white" title="Xoá" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>">
                   <i class="bi bi-trash"></i>
                 </button>
               </td>

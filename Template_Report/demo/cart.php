@@ -89,7 +89,6 @@ if (isset($_GET['decrease'])) {
     exit;
 }
 
-// Bây giờ mới bắt đầu xuất nội dung HTML
 include "view/header.php"; 
 
 $conn = mysqli_connect("localhost", "root", "", "teav_shop1"); 
@@ -125,7 +124,6 @@ if (!$conn) {
             }
         }
         
-        // Gửi request AJAX để cập nhật session
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'update-cart.php?action=' + action + '&id=' + productId, true);
         xhr.onload = function() {
@@ -227,7 +225,7 @@ if (!$conn) {
                             </td>
                             <td class="price">
                                 <span id="price-<?= $item['id'] ?>" data-price="<?= $price ?>">
-                                    $<?= number_format($price, 2) ?>
+                                    <?= number_format($price, 3) ?> VND
                                 </span>
                             </td>
                             <td class="quantity">
@@ -238,7 +236,7 @@ if (!$conn) {
                                 </div>
                             </td>
                             <td class="subtotal">
-                                <span id="subtotal-<?= $item['id'] ?>">$<?= number_format($subtotal, 2) ?></span>
+                                <span id="subtotal-<?= $item['id'] ?>"><?= number_format($subtotal, 3) ?> VND</span>
                             </td>
                             <td class="actions">
                                 <a href="cart.php?delete=<?= $item['id'] ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')">Xóa</a>
@@ -249,7 +247,7 @@ if (!$conn) {
                     <tfoot>
                         <tr>
                             <td colspan="3"><strong>Tổng tiền</strong></td>
-                            <td colspan="2"><strong class="cart-total" id="cart-total">$<?= number_format($total, 2) ?></strong></td>
+                            <td colspan="2"><strong class="cart-total" id="cart-total"><?= number_format($total, 3) ?> VND</strong></td>
                         </tr>
                     </tfoot>
                 </table>

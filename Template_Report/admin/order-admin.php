@@ -127,7 +127,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                   echo $parts[0] . '<br><small class="text-muted">' . ($parts[1] ?? '') . '</small>';
                 ?>
               </td>
-              <td><?= number_format($order['TotalAmount'], 0, ',', '.'); ?> VND</td>
+              <td><?= number_format($order['TotalAmount'], 3); ?> VND</td>
               <td><?= $order['PaymentId'] ?? '<i>Chưa có</i>'; ?></td>
               <td>
                 <?php
