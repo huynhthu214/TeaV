@@ -147,7 +147,7 @@ $product = mysqli_fetch_assoc($result);
                     </div>
                     
                     <h3>Chi tiết</h3>
-                    <p><strong>Giá:</strong> $<?php echo number_format($product['Price'], 2); ?></p>
+                    <p><strong>Giá:</strong> <?php echo number_format($product['Price'], 3); ?> VND</p>
                     <p><strong>Số lượng sẵn có:</strong> <?php echo htmlspecialchars($product['Quantity']); ?></p>
                     <p><strong>Loại:</strong> <?php echo htmlspecialchars($product['CategoryName']); ?></p>
                     <p><strong>Thành phần:</strong> <?php echo htmlspecialchars($product['ingredients']); ?></p>

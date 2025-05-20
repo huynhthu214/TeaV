@@ -44,7 +44,7 @@ if (isset($_SESSION['email'])) {
     <h2>Xác nhận thanh toán</h2>
 
     <div class="alert alert-success">
-        <strong>Thông tin hợp lệ!</strong> Vui lòng quét mã QR để thanh toán đơn hàng trị giá <strong>$<?php echo number_format($finalTotal, 2); ?></strong>
+        <strong>Thông tin hợp lệ!</strong> Vui lòng quét mã QR để thanh toán đơn hàng trị giá <strong><?php echo number_format($finalTotal, 3); ?> VND</strong>
     </div>
     <div class="text-center">
         <img src="./layout/images/qrcode.png" alt="QR Code" style="max-width: 250px; border: 1px solid #ccc; padding: 10px;">

@@ -133,7 +133,7 @@ if (count($importList) > 0):
             <td><?= $row['ImportDate'] ?></td>
             <td><?= $row['ProductName'] ?> (<?= $row['ProductId'] ?>)</td>
             <td><?= $row['Quantity'] ?></td>
-            <td><?= number_format($row['UnitPrice'], 0, ',', '.') ?> VND</td>
+            <td><?= number_format($row['UnitPrice'], 3) ?> VND</td>
             <td style="width:150px;"><?= nl2br(htmlspecialchars($row['Note'])) ?></td>
             <td class="text-center">
                 <a href="#" class="btn btn-sm btn-info text-white" title="Xem"

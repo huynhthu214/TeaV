@@ -177,7 +177,7 @@ ob_end_flush();
 
             <!-- Tổng tiền -->
             <div class="order-summary mt-4">
-                <p><strong>Tổng tiền:</strong> $<?php echo number_format($finalTotal, 2); ?></p>
+                <p><strong>Tổng tiền:</strong> <?php echo number_format($finalTotal, 3); ?> VND</p>
             </div>
 
             <div class="form-buttons mt-3">
