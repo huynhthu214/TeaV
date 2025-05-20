@@ -122,7 +122,7 @@ ob_end_flush();
 ?>
 
 <div class="payment-container py-5">
-    <h2>Thông tin </br> thanh toán</h2>
+    <h2>Thông tin thanh toán</h2>
 
     <!-- Hiển thị lỗi -->
     <?php if (!empty($errors)): ?>
