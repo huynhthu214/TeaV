@@ -201,19 +201,6 @@ create table Reaction
 );
 
 /*==============================================================*/
-/* Table: ReviewProduct                                         */
-/*==============================================================*/
-create table ReviewProduct
-(
-   Email                varchar(100) not null,
-   ProductId            varchar(10) not null,
-   Rating               float,
-   Comment              text,
-   ReviewDate           datetime,
-   primary key (Email, ProductId)
-);
-
-/*==============================================================*/
 /* Table: Suppliers                                             */
 /*==============================================================*/
 create table Suppliers
@@ -302,12 +289,6 @@ alter table Reaction add constraint FK_REACTION_REACT_ACCOUNT foreign key (Email
 
 alter table Reaction add constraint FK_REACTION_REACTBLOG_BLOG foreign key (BlogId)
       references Blog (BlogId) on delete restrict on update restrict;
-
-alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_ACCOUNT foreign key (Email)
-      references Account (Email) on delete restrict on update restrict;
-
-alter table ReviewProduct add constraint FK_REVIEWPR_REVIEWPRO_PRODUCT foreign key (ProductId)
-      references Product (ProductId) on delete restrict on update restrict;
 
 alter table Term add constraint FK_TERM_WRITETERM_ACCOUNT foreign key (Email)
       references Account (Email) on delete restrict on update restrict;

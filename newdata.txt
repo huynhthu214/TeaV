@@ -61,40 +61,37 @@ INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod) VALUES
 ('PM004', 58000, 'MOMO');
 
 INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, StatusOrder, PaymentStatus) VALUES
-('ORD001','anna.nguyen@email.com', '2025-04-12', 86, 'Chưa xử lý', 'Chưa thanh toán'),
-('ORD002', 'john.smith@email.com', '2025-04-13', 83, 'Đã xử lý', 'Đã thanh toán'),
-('ORD003', 'linh.tran@email.com', '2025-04-14', 70, 'Đã xử lý', 'Đã thanh toán'),
-('ORD004', 'emma.brown@email.com', '2025-04-15', 105, 'Chưa xử lý', 'Chưa thanh toán');
+('ORD001','anna.nguyen@email.com', '2025-04-12', 490, 'Chưa xử lý', 'Chưa thanh toán'),
+('ORD002', 'john.smith@email.com', '2025-04-13', 320, 'Đã xử lý', 'Đã thanh toán'),
+('ORD003', 'linh.tran@email.com', '2025-04-14', 310, 'Đã xử lý', 'Đã thanh toán'),
+('ORD004', 'emma.brown@email.com', '2025-04-15', 150, 'Chưa xử lý', 'Chưa thanh toán');
 
 
 INSERT INTO Product (`ProductId`, `CategoryId`, `UnitId`, `Name`, `Description`, `Quantity`, `ImgUrl`, `UpdatedAt`, `Price`, `Usefor`, `IsShow`) VALUES
-('P001', 'C001', 'U001', 'Trà Xanh Hảo Hạng', 'Trà xanh chất lượng cao được thu hoạch cẩn thận', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 32, 'Lá trà xanh nguyên chất', 'Yes'),
-('P002', 'C002', 'U002', 'Chamomile Thư Giãn', 'Một loại trà thảo mộc dịu nhẹ từ hoa cúc khô', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 22, 'Hoa cúc khô', 'Yes'),
-('P003', 'C002', 'U002', 'Thảo Mộc Thanh Bình', 'Sự kết hợp nhẹ nhàng từ nhiều loại thảo mộc', 100, 'layout/images/herbal-serenity.jpg', '2025-04-11', 27, 'Lemon balm, oải hương và các loại thảo mộc khác', 'Yes'),
-('P004', 'C003', 'U001', 'Ô Long Huyền Bí', 'Ô long bán lên men với hương vị cân bằng', 100, 'layout/images/mystic-oolong.jpg', '2025-04-11', 38, 'Lá trà ô long', 'Yes'),
-('P005', 'C004', 'U002', 'Darjeeling Hoàng Gia', 'Được mệnh danh là "Champagne của các loại trà"', 100, 'layout/images/royal-darjeeling.jpg', '2025-04-11', 45, 'Lá trà đen từ vùng Darjeeling', 'Yes'),
-('P006', 'C005', 'U002', 'Chai Vàng Truyền Thống', 'Hỗn hợp trà cay nồng đậm đà truyền thống', 100, 'layout/images/golden-chai-delight.jpg', '2025-04-11', 22, 'Trà đen, quế, bạch đậu khấu, gừng', 'Yes'),
-('P007', 'C002', 'U002', 'Tinh Chất Hoa Cơm Cháy', 'Trà thảo mộc nhẹ từ hoa cơm cháy khô', 100, 'layout/images/elderflower-essence.jpg', '2025-04-11', 30, 'Hoa cơm cháy khô', 'Yes'),
-('P008', 'C005', 'U002', 'Masala Truyền Thống', 'Cách pha trà Ấn Độ cổ điển đậm đà gia vị', 100, 'layout/images/traditional-masala-tea.jpg', '2025-04-11', 22, 'Trà đen, đinh hương, quế, gừng, tiêu đen', 'Yes'),
-('P009', 'C001', 'U001', 'Ngọc Trà Hoa Nhài', 'Trà xanh viên tròn ướp hương hoa nhài thủ công', 100, 'layout/images/jasmine-pearl-elegance.jpg', '2025-04-11', 55, 'Lá trà xanh, hoa nhài', 'Yes'),
-('P010', 'C001', 'U001', 'Matcha Thượng Hạng', 'Bột trà xanh đậm vị umami, sắc xanh tươi sáng', 80, 'layout/images/matcha-supreme.jpg', '2025-04-11', 48, 'Bột trà xanh matcha', 'Yes'),
-('P011', 'C001', 'U001', 'Sencha Tươi Mát', 'Trà xanh Nhật Bản với vị cỏ non đặc trưng', 90, 'layout/images/sencha-delight.jpg', '2025-04-11', 35, 'Lá trà sencha', 'Yes'),
-('P012', 'C001', 'U001', 'Long Tỉnh Dịu Êm', 'Trà xanh Trung Quốc với vị ngọt và hương hạt', 85, 'layout/images/dragonwell-bliss.jpg', '2025-04-11', 40, 'Lá trà long tỉnh', 'Yes'),
-('P013', 'C002', 'U002', 'Bạc Hà Mát Lạnh', 'Trà thảo mộc bạc hà sảng khoái và tươi mới', 100, 'layout/images/peppermint-glow.jpg', '2025-04-11', 20, 'Lá bạc hà khô', 'Yes'),
-('P014', 'C002', 'U002', 'Rooibos Dịu Nhẹ', 'Trà thảo mộc không caffeine với hương ngọt dịu', 95, 'layout/images/rooibos-harmony.jpg', '2025-04-11', 25, 'Lá rooibos', 'Yes'),
-('P015', 'C002', 'U002', 'Chanh Thơm Mát', 'Trà thảo mộc với hương vị cam chanh tươi sáng', 90, 'layout/images/lemon-verbena.jpg', '2025-04-11', 23, 'Lá chanh thơm khô', 'Yes'),
-('P016', 'C002', 'U002', 'Giấc Mộng Dâm Bụt', 'Trà hoa dâm bụt chua nhẹ, màu đỏ rực rỡ', 85, 'layout/images/hibiscus-dream.jpg', '2025-04-11', 28, 'Hoa dâm bụt khô', 'Yes'),
-('P017', 'C003', 'U001', 'Thiết Quan Âm', 'Trà ô long hoa thanh nhẹ, hậu vị kem mượt mà', 75, 'layout/images/tie-guan-yin.jpg', '2025-04-11', 42, 'Lá trà Thiết Quan Âm', 'Yes'),
-('P018', 'C003', 'U001', 'Phượng Đơn Tùng', 'Trà ô long trái cây ngọt dịu như mật ong', 70, 'layout/images/phoenix-dan-cong.jpg', '2025-04-11', 50, 'Lá trà Phượng Đơn Tùng', 'Yes'),
-('P019', 'C004', 'U002', 'Assam Vàng', 'Trà đen đậm đà, vị mạch nha đặc trưng', 90, 'layout/images/assam-gold.jpg', '2025-04-11', 38, 'Lá trà đen Assam', 'Yes'),
-('P020', 'C004', 'U002', 'Ceylon Ngôi Sao', 'Trà đen sáng vị, xuất xứ từ Sri Lanka', 85, 'layout/images/ceylon-star.jpg', '2025-04-11', 35, 'Lá trà đen Ceylon', 'Yes'),
-('P021', 'C004', 'U002', 'Earl Grey Cổ Điển', 'Trà đen hương cam bergamot nhẹ nhàng', 80, 'layout/images/earl-grey-classic.jpg', '2025-04-11', 30, 'Trà đen, tinh dầu cam bergamot', 'Yes'),
-('P022', 'C005', 'U002', 'Chai Táo Gia Vị', 'Trà đen ấm áp với táo và gia vị truyền thống', 90, 'layout/images/spiced-apple-chai.jpg', '2025-04-11', 24, 'Trà đen, táo, quế, đinh hương', 'Yes'),
-('P023', 'C005', 'U002', 'Hỗn Hợp Vanilla Cay', 'Trà đen với hương vanilla và gia vị nhẹ', 85, 'layout/images/vanilla-spice-blend.jpg', '2025-04-11', 26, 'Trà đen, vanilla, bạch đậu khấu, nhục đậu khấu', 'Yes'),
-('P024', 'C005', 'U002', 'Chai Gừng Nghệ', 'Trà đen ấm nóng với gừng và nghệ vàng', 80, 'layout/images/ginger-turmeric-chai.jpg', '2025-04-11', 28, 'Trà đen, gừng, nghệ, tiêu đen', 'Yes');
-
-INSERT INTO ReviewProduct (Email, ProductId, Rating, Comment, ReviewDate) VALUES
-('anna.nguyen@email.com', 'P001', 4.5, 'Trà ngon, đậm vị', NOW());
+('P001', 'C001', 'U001', 'Trà Xanh Hảo Hạng', 'Trà xanh chất lượng cao được thu hoạch cẩn thận', 100, 'layout/images/premium-green-tea.jpg', '2025-04-11', 260, 'Lá trà xanh nguyên chất', 'Yes'),
+('P002', 'C002', 'U002', 'Chamomile Thư Giãn', 'Một loại trà thảo mộc dịu nhẹ từ hoa cúc khô', 100, 'layout/images/chamomile-bliss.jpg', '2025-04-11', 150, 'Hoa cúc khô', 'Yes'),
+('P003', 'C002', 'U002', 'Thảo Mộc Thanh Bình', 'Sự kết hợp nhẹ nhàng từ nhiều loại thảo mộc', 100, 'layout/images/herbal-serenity.jpg', '2025-04-11', 160, 'Lemon balm, oải hương và các loại thảo mộc khác', 'Yes'),
+('P004', 'C003', 'U001', 'Ô Long Huyền Bí', 'Ô long bán lên men với hương vị cân bằng', 100, 'layout/images/mystic-oolong.jpg', '2025-04-11', 240, 'Lá trà ô long', 'Yes'),
+('P005', 'C004', 'U002', 'Darjeeling Hoàng Gia', 'Được mệnh danh là "Champagne của các loại trà"', 100, 'layout/images/royal-darjeeling.jpg', '2025-04-11', 220, 'Lá trà đen từ vùng Darjeeling', 'Yes'),
+('P006', 'C005', 'U002', 'Chai Vàng Truyền Thống', 'Hỗn hợp trà cay nồng đậm đà truyền thống', 100, 'layout/images/golden-chai-delight.jpg', '2025-04-11', 270, 'Trà đen, quế, bạch đậu khấu, gừng', 'Yes'),
+('P007', 'C002', 'U002', 'Tinh Chất Hoa Cơm Cháy', 'Trà thảo mộc nhẹ từ hoa cơm cháy khô', 100, 'layout/images/elderflower-essence.jpg', '2025-04-11', 280, 'Hoa cơm cháy khô', 'Yes'),
+('P008', 'C005', 'U002', 'Masala Truyền Thống', 'Cách pha trà Ấn Độ cổ điển đậm đà gia vị', 100, 'layout/images/traditional-masala-tea.jpg', '2025-04-11', 300, 'Trà đen, đinh hương, quế, gừng, tiêu đen', 'Yes'),
+('P009', 'C001', 'U001', 'Ngọc Trà Hoa Nhài', 'Trà xanh viên tròn ướp hương hoa nhài thủ công', 100, 'layout/images/jasmine-pearl-elegance.jpg', '2025-04-11', 320, 'Lá trà xanh, hoa nhài', 'Yes'),
+('P010', 'C001', 'U001', 'Matcha Thượng Hạng', 'Bột trà xanh đậm vị umami, sắc xanh tươi sáng', 80, 'layout/images/matcha-supreme.jpg', '2025-04-11', 330, 'Bột trà xanh matcha', 'Yes'),
+('P011', 'C001', 'U001', 'Sencha Tươi Mát', 'Trà xanh Nhật Bản với vị cỏ non đặc trưng', 90, 'layout/images/sencha-delight.jpg', '2025-04-11', 140, 'Lá trà sencha', 'Yes'),
+('P012', 'C001', 'U001', 'Long Tỉnh Dịu Êm', 'Trà xanh Trung Quốc với vị ngọt và hương hạt', 85, 'layout/images/dragonwell-bliss.jpg', '2025-04-11', 180, 'Lá trà long tỉnh', 'Yes'),
+('P013', 'C002', 'U002', 'Bạc Hà Mát Lạnh', 'Trà thảo mộc bạc hà sảng khoái và tươi mới', 100, 'layout/images/peppermint-glow.jpg', '2025-04-11', 200, 'Lá bạc hà khô', 'Yes'),
+('P014', 'C002', 'U002', 'Rooibos Dịu Nhẹ', 'Trà thảo mộc không caffeine với hương ngọt dịu', 95, 'layout/images/rooibos-harmony.jpg', '2025-04-11', 210, 'Lá rooibos', 'Yes'),
+('P015', 'C002', 'U002', 'Chanh Thơm Mát', 'Trà thảo mộc với hương vị cam chanh tươi sáng', 90, 'layout/images/lemon-verbena.jpg', '2025-04-11', 190, 'Lá chanh thơm khô', 'Yes'),
+('P016', 'C002', 'U002', 'Giấc Mộng Dâm Bụt', 'Trà hoa dâm bụt chua nhẹ, màu đỏ rực rỡ', 85, 'layout/images/hibiscus-dream.jpg', '2025-04-11', 190, 'Hoa dâm bụt khô', 'Yes'),
+('P017', 'C003', 'U001', 'Thiết Quan Âm', 'Trà ô long hoa thanh nhẹ, hậu vị kem mượt mà', 75, 'layout/images/tie-guan-yin.jpg', '2025-04-11', 230, 'Lá trà Thiết Quan Âm', 'Yes'),
+('P018', 'C003', 'U001', 'Phượng Đơn Tùng', 'Trà ô long trái cây ngọt dịu như mật ong', 70, 'layout/images/phoenix-dan-cong.jpg', '2025-04-11', 350, 'Lá trà Phượng Đơn Tùng', 'Yes'),
+('P019', 'C004', 'U002', 'Assam Vàng', 'Trà đen đậm đà, vị mạch nha đặc trưng', 90, 'layout/images/assam-gold.jpg', '2025-04-11', 120, 'Lá trà đen Assam', 'Yes'),
+('P020', 'C004', 'U002', 'Ceylon Ngôi Sao', 'Trà đen sáng vị, xuất xứ từ Sri Lanka', 85, 'layout/images/ceylon-star.jpg', '2025-04-11', 170, 'Lá trà đen Ceylon', 'Yes'),
+('P021', 'C004', 'U002', 'Earl Grey Cổ Điển', 'Trà đen hương cam bergamot nhẹ nhàng', 80, 'layout/images/earl-grey-classic.jpg', '2025-04-11', 240, 'Trà đen, tinh dầu cam bergamot', 'Yes'),
+('P022', 'C005', 'U002', 'Chai Táo Gia Vị', 'Trà đen ấm áp với táo và gia vị truyền thống', 90, 'layout/images/spiced-apple-chai.jpg', '2025-04-11', 150, 'Trà đen, táo, quế, đinh hương', 'Yes'),
+('P023', 'C005', 'U002', 'Hỗn Hợp Vanilla Cay', 'Trà đen với hương vanilla và gia vị nhẹ', 85, 'layout/images/vanilla-spice-blend.jpg', '2025-04-11', 340, 'Trà đen, vanilla, bạch đậu khấu, nhục đậu khấu', 'Yes'),
+('P024', 'C005', 'U002', 'Chai Gừng Nghệ', 'Trà đen ấm nóng với gừng và nghệ vàng', 80, 'layout/images/ginger-turmeric-chai.jpg', '2025-04-11', 130, 'Trà đen, gừng, nghệ, tiêu đen', 'Yes');
 
 INSERT INTO ProductIngredient (ProductId, IngredientId) VALUES
 ('P001', 'I001'),
@@ -468,8 +465,3 @@ INSERT INTO `reaction` (`ReactionId`, `Email`, `BlogId`, `Comment`, `IsShow`) VA
 ('R010', 'anna.nguyen@email.com', 'B04', 'Tổng quan tuyệt vời về những truyền thống đa dạng. Tôi rất muốn xem một bài viết tiếp theo về cách các nghi thức trà này đã phát triển theo thời gian, đặc biệt là cách văn hóa trà Anh bị ảnh hưởng từ Trung Quốc.', 'Yes'),
 ('R011', 'anna.nguyen@email.com', 'B05', 'Tôi đã may mắn được thử trà Da Hong Pao chính gốc một lần, và đó thực sự là một trải nghiệm siêu việt. Giá rất đắt nhưng với những người đam mê trà, nên thử một lần trong đời.', 'Yes'),
 ('R012', 'anna.nguyen@email.com', 'B05', 'Nghe tuyệt vời đấy nhưng giá quá cao so với tôi! Bạn có thể viết bài về những loại trà ngon mà giá cả hợp lý không?', 'Yes');
-
-
-
-
-
