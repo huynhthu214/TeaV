@@ -8,56 +8,60 @@ $conn = mysqli_connect("localhost", "root", "", "teav_shop1");
 if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }
+
 $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+
+// Lấy danh sách sản phẩm
 $products = [];
 $result = mysqli_query($conn, "SELECT * FROM Product");
 while ($row = mysqli_fetch_assoc($result)) {
     $products[] = $row;
 }
+
+// Thông báo cập nhật
 if (isset($_GET['update']) && $_GET['update'] == 'success') {
     echo '<div class="alert alert-success text-center">Cập nhật phiếu nhập thành công!</div>';
 }
-    // Xử lý thêm phiếu nhập
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_import'])) {
-        $importId = 'IMP' . time();
-        $importDate = date('Y-m-d H:i:s');
-        $note = mysqli_real_escape_string($conn, $_POST['Note'] ?? '');
+
+// Xử lý thêm phiếu nhập
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_import'])) {
+    $importId = 'IMP' . time();
+    $importDate = date('Y-m-d H:i:s');
+    $note = mysqli_real_escape_string($conn, $_POST['Note'] ?? '');
     $productName = mysqli_real_escape_string($conn, $_POST['ProductName']);
     $quantity = (int)$_POST['Quantity'];
     $unitPrice = (float)$_POST['Price'];
 
-    // Kiểm tra xem sản phẩm đã tồn tại chưa
+    // Kiểm tra sản phẩm có sẵn chưa
     $sqlCheck = "SELECT ProductId FROM Product WHERE Name = '$productName'";
     $resultCheck = mysqli_query($conn, $sqlCheck);
 
     if ($row = mysqli_fetch_assoc($resultCheck)) {
-        // Sản phẩm đã tồn tại
         $productId = $row['ProductId'];
-        $res0 = true; // Giả sử thành công vì không cần thêm mới
+        $res0 = true;
     } else {
-        // Thêm sản phẩm mới
-        $productId = 'PRD' . time(); // Hoặc có thể dùng UUID nếu sợ trùng
+        $productId = 'PRD' . time();
         $sqlProduct = "INSERT INTO Product (ProductId, Name) VALUES ('$productId', '$productName')";
         $res0 = mysqli_query($conn, $sqlProduct);
     }
 
-    // Thêm phiếu nhập
+    // Thêm vào bảng Import và ImportProduct
     $sqlImport = "INSERT INTO Import (ImportId, ImportDate, Note) VALUES ('$importId', '$importDate', '$note')";
     $res1 = mysqli_query($conn, $sqlImport);
 
-    // Thêm chi tiết phiếu nhập
     $sqlDetail = "INSERT INTO ImportProduct (ProductId, ImportId, Quantity, UnitPrice)
                   VALUES ('$productId', '$importId', $quantity, $unitPrice)";
     $res2 = mysqli_query($conn, $sqlDetail);
 
+    // Thông báo kết quả
     if ($res0 && $res1 && $res2) {
-        $message = "Nhập hàng và tạo sản phẩm mới thành công!";
+        echo '<div class="alert alert-success text-center">Nhập hàng và tạo sản phẩm mới thành công!</div>';
     } else {
-        $message = "Lỗi khi nhập hàng: " . mysqli_error($conn);
+        echo '<div class="alert alert-danger text-center">Lỗi khi nhập hàng: ' . mysqli_error($conn) . '</div>';
     }
 }
 
-// Lấy danh sách phiếu nhập và chi tiết
+// Lấy danh sách phiếu nhập
 $importList = [];
 $sql = "SELECT i.ImportId, i.ImportDate, i.Note, ip.ProductId, p.Name AS ProductName, ip.Quantity, ip.UnitPrice
         FROM Import i
@@ -71,9 +75,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
 <div class="content-wrapper">
-  <div class="page-title d-flex justify-content-between align-items-start mb-4">
-    <h2 style="color:rgb(10, 119, 52); margin-top: -10px;"><strong>Quản lý nhập hàng</strong></h2>
-  </div>
 
  <!-- Thanh điều khiển trên bảng -->
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -259,9 +260,137 @@ foreach ($importList as $row) {
         <!-- Nội dung chi tiết sẽ được load ở đây -->
       </div>
     </div>
-  </div>
-</div>
-<!-- Modal Chỉnh sửa Phiếu Nhập -->
+
+    <!-- Thanh điều khiển -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <form class="d-flex" method="GET" action="#">
+            <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q">
+            <button class="btn btn-outline-success" type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+
+        <div class="d-flex gap-2">
+            <form method="GET" class="d-flex align-items-center">
+                <label for="limit" class="me-2">Hiển thị:</label>
+                <select name="limit" id="limit" class="form-select w-auto me-3" onchange="this.form.submit()">
+                    <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
+                    <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+                    <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
+                    <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+                </select>
+                <input type="hidden" name="page" value="1">
+            </form>
+
+            <button class="btn btn-primary" type="button" onclick="exportData()">
+                <i class="bi bi-download me-1"></i>
+            </button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+                <i class="bi bi-plus-circle me-1"></i> Thêm
+            </button>
+        </div>
+    </div>
+
+    <!-- Bảng dữ liệu -->
+    <div class="table-responsive">
+        <form method="POST">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-success text-center">
+                    <tr>
+                        <th><input type="checkbox" id="select-all"></th>
+                        <th>Mã phiếu</th>
+                        <th>Ngày nhập</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá nhập</th>
+                        <th>Ghi chú</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($importList) > 0): ?>
+                        <?php foreach ($importList as $row): ?>
+                            <tr>
+                                <td><input type="checkbox" name="select[]" value="<?= $row['ImportId']; ?>"></td>
+                                <td><?= $row['ImportId'] ?></td>
+                                <td><?= $row['ImportDate'] ?></td>
+                                <td><?= $row['ProductName'] ?> (<?= $row['ProductId'] ?>)</td>
+                                <td><?= $row['Quantity'] ?></td>
+                                <td><?= number_format($row['UnitPrice'], 0, ',', '.') ?> VND</td>
+                                <td style="width:150px;"><?= nl2br(htmlspecialchars($row['Note'])) ?></td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#importDetailModal"
+                                       onclick="showImportDetail('<?= $row['ImportId'] ?>')">
+                                       <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-warning text-white" onclick="editImport('<?= $row['ImportId'] ?>')">
+                                       <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-danger text-white" onclick="confirmDelete('<?= $row['ImportId'] ?>')">
+                                       <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="8" class="text-center text-muted">Không có dữ liệu nhập hàng</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <!-- Modal: Thêm phiếu nhập -->
+    <div class="modal fade" id="addOrderModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <form method="POST" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">Thêm phiếu nhập hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body row g-3">
+                    <input type="hidden" name="add_import" value="1">
+                    <div class="col-md-12">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" name="Note"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tên sản phẩm mới</label>
+                        <input type="text" class="form-control" name="ProductName" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Số lượng</label>
+                        <input type="number" class="form-control" name="Quantity" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Giá nhập (VNĐ)</label>
+                        <input type="number" step="1000" class="form-control" name="Price" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu phiếu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Chi tiết phiếu nhập -->
+    <div class="modal fade" id="importDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:deepskyblue;">Chi tiết phiếu nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="importDetailContent">
+                    <!-- Nội dung chi tiết load bằng JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+<?php foreach ($importList as $import): ?>
+<!-- Modal: Chỉnh sửa phiếu nhập -->
 <div class="modal fade" id="editImportModal<?= $import['ImportId'] ?>" tabindex="-1" aria-labelledby="editImportLabel<?= $import['ImportId'] ?>" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <form action="update-import.php" method="POST">
@@ -270,6 +399,7 @@ foreach ($importList as $row) {
           <h5 class="modal-title">Chỉnh sửa Phiếu nhập #<?= $import['ImportId'] ?></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
         </div>
+
         <div class="modal-body">
           <input type="hidden" name="update_import" value="1">
           <input type="hidden" name="ImportId" value="<?= $import['ImportId'] ?>">
@@ -285,7 +415,7 @@ foreach ($importList as $row) {
             <tbody>
               <?php
               $importId = $import['ImportId'];
-              $sqlDetail = "SELECT ip.*, p.ProductName 
+              $sqlDetail = "SELECT ip.*, p.Name AS ProductName 
                             FROM ImportProduct ip 
                             JOIN Product p ON ip.ProductId = p.ProductId 
                             WHERE ip.ImportId = '$importId'";
@@ -301,7 +431,7 @@ foreach ($importList as $row) {
                     <input type="number" name="Quantity[]" value="<?= $row['Quantity'] ?>" class="form-control" required>
                   </td>
                   <td>
-                    <input type="number" name="UnitPrice[]" value="<?= $row['UnitPrice'] ?>" class="form-control" required step="0.01">
+                    <input type="number" name="UnitPrice[]" value="<?= $row['UnitPrice'] ?>" class="form-control" required step="1000">
                   </td>
                 </tr>
               <?php } ?>
@@ -313,6 +443,7 @@ foreach ($importList as $row) {
             <textarea name="Note" class="form-control" rows="3"><?= htmlspecialchars($import['Note']) ?></textarea>
           </div>
         </div>
+
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Cập nhật</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -321,5 +452,8 @@ foreach ($importList as $row) {
     </form>
   </div>
 </div>
+<?php endforeach; ?>
+
+</div> <!-- end content-wrapper -->
 
 <?php include "view/footer-admin.php"; ?>

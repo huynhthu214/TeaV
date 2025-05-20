@@ -129,15 +129,9 @@ function deleteSelected() {
   }
 }
 
-document.getElementById("select-all").addEventListener("change", function () {
-  const isChecked = this.checked;
-  const checkboxes = document.querySelectorAll('input[name="select[]"]');
-  checkboxes.forEach((cb) => (cb.checked = isChecked));
-});
-
 function showImportDetail(importId) {
-  var content = document.getElementById("import-detail-" + importId).innerHTML;
-  document.getElementById("importDetailContent").innerHTML = content;
+  const content = document.getElementById('import-detail-' + importId).innerHTML;
+  document.getElementById('importDetailContent').innerHTML = content;
 }
 
 function editImport(importId) {
@@ -166,3 +160,15 @@ function editImport(importId) {
   const modal = new bootstrap.Modal(document.getElementById("editImportModal"));
   modal.show();
 }
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectAll = document.getElementById('select-all');
+        const checkboxes = document.querySelectorAll('input[name="select[]"]');
+
+        if (selectAll) {
+            selectAll.addEventListener('change', function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAll.checked;
+                });
+            });
+        }
+    });
