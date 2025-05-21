@@ -65,7 +65,7 @@ if (!$conn) {
                   }
                   
                   $timestamp = strtotime($blog['DateUpload']);
-                  $formattedDate = strftime('%d/%m/%Y', $timestamp);
+                  $formattedDate = strftime('%d-%m-%Y', $timestamp);
           ?>
           <article class="blog-post">
             <h2><?php echo htmlspecialchars($blog['Title']); ?></h2>

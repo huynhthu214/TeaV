@@ -15,3 +15,33 @@
     font-weight: bold;
     border-radius: 8px;
 }
+
+@media (max-width: 576px) {
+  .payment-container {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .payment-container h2 {
+    font-size: 20px;
+  }
+
+  .payment-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #countdown {
+    font-size: 16px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-buttons a,
+  .form-buttons button {
+    width: 100%;
+  }
+}

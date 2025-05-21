@@ -143,7 +143,7 @@ $product = mysqli_fetch_assoc($result);
                 </div>
                 <div class="col-md-6">
                     <div class="delivery-notice mb-3 p-2 bg-light text-success fw-bold">
-                        Giao hàng miễn phí với đơn hàng trên $35
+                        Giao hàng miễn phí với đơn hàng trên 1.000.000 VND
                     </div>
                     
                     <h3>Chi tiết</h3>

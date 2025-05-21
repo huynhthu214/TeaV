@@ -181,7 +181,7 @@ $first_about = $about_list[0];
   </div>
 </section>
 
-      <section class="py-5 select-section" style="background-color: #264c3d;">
+<section class="py-5 select-section" style="background-color: #264c3d;">
   <div class="container-fluid">
     <div class="row align-items-center">
       <!-- Nội dung bên trái -->
@@ -283,7 +283,7 @@ $first_about = $about_list[0];
           </p>
           </div>
           <div class="card-footer text-muted small mt-auto">
-            <?php echo $blog['date_blog']; ?>
+           <?php echo date('d-m-Y H:i:s', strtotime($blog['date_blog'])); ?>
           </div>
         </div>
       </div> 
