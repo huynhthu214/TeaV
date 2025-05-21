@@ -34,10 +34,10 @@ include "view/header.php";
 
 <div class="container form-box-confirmmail mt-5">
     <form method="post">
-        <h1 class="confirmmail text-center mb-4">Please check your inbox</h1>
-        <p>Please enter the verification code we just sent to your email</p>
+        <h1 class="confirmmail text-center mb-4">Vui lòng kiểm tra hộp thư của bạn.</h1>
+        <p>Vui lòng nhập mã xác nhận.</p>
         <div class="mb-3">
-            <label for="code" class="form-label">Code</label>
+            <label for="code" class="form-label">Mã</label>
             <input type="text" class="form-control" id="code" name="code" />
         </div>
         <?php
@@ -49,9 +49,9 @@ include "view/header.php";
               echo "<div class='alert alert-success'>$success_message</div>";
            }
         ?>
-        <button type="submit" class="btn btn-outline-primary w-100">Continue</button>
+        <button type="submit" class="btn btn-outline-primary w-100">Tiếp tục</button>
         <div class="text-center mt-3">
-            <a href="#" class="text-decoration-none">Resend code</a>
+            <a href="#" class="text-decoration-none">Gửi lại mã</a>
         </div>
     </form>
 </div>

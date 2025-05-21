@@ -85,14 +85,16 @@ try {
             <tr>
               <td><?= htmlspecialchars($order['OrderId']) ?></td>
               <td><?= date("d/m/Y", strtotime($order['OrderDate'])) ?></td>
-              <td><?= number_format($order['TotalAmount'], 0, ',', '.') ?> đ</td>
+              <td><?= number_format($order['TotalAmount'], 3) ?> VND</td>
               <td><?= $order['PaymentId'] ? htmlspecialchars($order['PaymentId']) : 'Chưa có' ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
     <?php else: ?>
-      <p class="text-muted">Khách hàng chưa có đơn hàng nào.</p>
+      <div class="content-wrapper">
+        <p class="text-muted">Khách hàng chưa có đơn hàng nào.</p>
+      </div>
     <?php endif; ?>
   </div>
   <a href="customer-admin.php" class="btn btn-secondary mb-3">Quay lại</a>

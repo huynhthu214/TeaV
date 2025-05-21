@@ -272,85 +272,8 @@ foreach ($importList as $row) {
         <!-- Nội dung chi tiết sẽ được load ở đây -->
       </div>
     </div>
-
-    <!-- Thanh điều khiển -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <form class="d-flex" method="GET" action="#">
-            <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q">
-            <button class="btn btn-outline-success" type="submit">
-                <i class="bi bi-search"></i>
-            </button>
-        </form>
-
-        <div class="d-flex gap-2">
-            <form method="GET" class="d-flex align-items-center">
-                <label for="limit" class="me-2">Hiển thị:</label>
-                <select name="limit" id="limit" class="form-select w-auto me-3" onchange="this.form.submit()">
-                    <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
-                    <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-                    <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
-                    <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-                </select>
-                <input type="hidden" name="page" value="1">
-            </form>
-
-            <button class="btn btn-primary" type="button" onclick="exportData()">
-                <i class="bi bi-download me-1"></i>
-            </button>
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
-                <i class="bi bi-plus-circle me-1"></i> Thêm
-            </button>
-        </div>
-    </div>
-
-    <!-- Bảng dữ liệu -->
-    <div class="table-responsive">
-        <form method="POST">
-            <table class="table table-striped table-bordered align-middle">
-                <thead class="table-success text-center">
-                    <tr>
-                        <th><input type="checkbox" id="select-all"></th>
-                        <th>Mã phiếu</th>
-                        <th>Ngày nhập</th>
-                        <th>Sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Giá nhập</th>
-                        <th>Ghi chú</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (count($importList) > 0): ?>
-                        <?php foreach ($importList as $row): ?>
-                            <tr>
-                                <td><input type="checkbox" name="select[]" value="<?= $row['ImportId']; ?>"></td>
-                                <td><?= $row['ImportId'] ?></td>
-                                <td><?= $row['ImportDate'] ?></td>
-                                <td><?= $row['ProductName'] ?> (<?= $row['ProductId'] ?>)</td>
-                                <td><?= $row['Quantity'] ?></td>
-                                <td><?= number_format($row['UnitPrice'], 0, ',', '.') ?> VND</td>
-                                <td style="width:150px;"><?= nl2br(htmlspecialchars($row['Note'])) ?></td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#importDetailModal"
-                                       onclick="showImportDetail('<?= $row['ImportId'] ?>')">
-                                       <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-warning text-white" onclick="editImport('<?= $row['ImportId'] ?>')">
-                                       <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger text-white" onclick="confirmDelete('<?= $row['ImportId'] ?>')">
-                                       <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr><td colspan="8" class="text-center text-muted">Không có dữ liệu nhập hàng</td></tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </form>
-    </div>
+  </div>  
+  </div>
 
     <!-- Modal: Thêm phiếu nhập -->
     <div class="modal fade" id="addOrderModal" tabindex="-1">

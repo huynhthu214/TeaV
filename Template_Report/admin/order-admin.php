@@ -24,6 +24,28 @@ $count_result = mysqli_query($conn, $count_sql);
 $total_orders = mysqli_fetch_assoc($count_result)['total'];
 $total_pages = ceil($total_orders / $limit);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_status'])) {
+    // Lấy dữ liệu
+    $orderId = $conn->real_escape_string($_POST['order_id']);
+    $currentStatus = $_POST['current_status'];
+
+    // Toggle trạng thái
+    if ($currentStatus === 'Chưa xử lý') {
+        $newStatus = 'Đã xử lý';
+    } else {
+        $newStatus = 'Chưa xử lý';
+    }
+
+    // Câu lệnh update
+    $sqlUpdate = "UPDATE Orders SET StatusOrder = '$newStatus' WHERE OrderId = '$orderId'";
+    $conn->query($sqlUpdate);
+
+    // Quay lại trang admin
+    header("Location: order-admin.php");
+    exit;
+}
+
+
 // ==== Truy vấn danh sách đơn hàng có phân trang ====
 $search = isset($_GET['q']) ? trim($_GET['q']) : '';
 $search_safe = mysqli_real_escape_string($conn, $search); // luôn khai báo
@@ -165,16 +187,13 @@ if ($result && mysqli_num_rows($result) > 0) {
               <td><?= number_format($order['TotalAmount'], 3); ?> VND</td>
               <td><?= $order['PaymentStatus']?></td>
               <td>
-                <?php
-                  $status = $order['StatusOrder'];
-                  $badgeClass = match ($status) {
-                    'Đã giao' => 'bg-success',
-                    'Đang xử lý' => 'bg-warning text-dark',
-                    'Đã hủy' => 'bg-danger',
-                    default => 'bg-secondary'
-                  };
-                ?>
-                <span class="badge <?= $badgeClass; ?>"><?= $status; ?></span>
+                <form method="POST" action="">
+                  <input type="hidden" name="order_id" value="<?= $order['OrderId'] ?>">
+                  <input type="hidden" name="current_status" value="<?= htmlspecialchars($order['StatusOrder']) ?>">
+                  <button type="submit" name="toggle_status" class="btn btn-sm <?= $order['StatusOrder'] === 'Chưa xử lý' ? 'btn-warning' : 'btn-success' ?>" title="<?= $order['StatusOrder'] ?>">
+                    <?= $order['StatusOrder'] ?>
+                  </button>
+                </form>
               </td>
               <td class="text-center">
                 <a href="order-detail.php?id=<?= $order['OrderId']; ?>" class="btn btn-sm btn-info text-white" title="Xem">
