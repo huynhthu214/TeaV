@@ -25,6 +25,32 @@ $total_orders = mysqli_fetch_assoc($count_result)['total'];
 $total_pages = ceil($total_orders / $limit);
 
 // ==== Truy vấn danh sách đơn hàng có phân trang ====
+$search = isset($_GET['q']) ? trim($_GET['q']) : '';
+$search_safe = mysqli_real_escape_string($conn, $search); // luôn khai báo
+
+$search_sql = '';
+if ($search !== '') {
+    $search_sql = " AND (
+        o.OrderId LIKE '%$search_safe%' OR 
+        a.FullName LIKE '%$search_safe%' OR 
+        a.Email LIKE '%$search_safe%' OR 
+        p.Name LIKE '%$search_safe%'
+    )";
+}
+// Tổng số bản ghi sau tìm kiếm
+$count_sql = "
+    SELECT COUNT(DISTINCT o.OrderId) as total
+    FROM Orders o
+    LEFT JOIN Account a ON a.Email = o.Email
+    LEFT JOIN OrderProduct op ON o.OrderId = op.OrderId
+    LEFT JOIN Product p ON op.ProductId = p.ProductId
+    WHERE 1=1 $search_sql
+";
+$count_result = mysqli_query($conn, $count_sql);
+$total_orders = mysqli_fetch_assoc($count_result)['total'];
+$total_pages = ceil($total_orders / $limit);
+
+// Truy vấn chính có tìm kiếm và phân trang
 $sql = "
     SELECT 
         o.OrderId,
@@ -32,18 +58,20 @@ $sql = "
         o.TotalAmount,
         o.PaymentId,
         o.StatusOrder,
+        p.PaymentStatus,
         a.FullName AS CustomerName,
         a.Email AS CustomerEmail,
-        GROUP_CONCAT(CONCAT(p.Name, ' (x', op.Quantity, ')') SEPARATOR '<br>') AS Products
+        GROUP_CONCAT(CONCAT(pr.Name, ' (x', op.Quantity, ')') SEPARATOR '<br>') AS Products
     FROM Orders o
     LEFT JOIN OrderProduct op ON o.OrderId = op.OrderId
-    LEFT JOIN Product p ON op.ProductId = p.ProductId
+    LEFT JOIN Product pr ON op.ProductId = pr.ProductId
     LEFT JOIN Account a ON a.Email = o.Email
+    LEFT JOIN Payment p ON o.PaymentID = p.PaymentID
+    WHERE 1=1 $search_sql
     GROUP BY o.OrderId
     ORDER BY o.OrderDate DESC
     LIMIT $limit OFFSET $offset
 ";
-
 $result = mysqli_query($conn, $sql);
 $orders = [];
 if ($result && mysqli_num_rows($result) > 0) {
@@ -63,7 +91,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <div class="d-flex justify-content-between align-items-center mb-3">
   <!-- Tìm kiếm -->
   <form class="d-flex" role="search" method="GET" action="#">
-    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
+    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q" value="<?= htmlspecialchars($search) ?>" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">
       <i class="bi bi-search"></i>
     </button>
@@ -81,12 +109,18 @@ if ($result && mysqli_num_rows($result) > 0) {
       </select>
       <input type="hidden" name="page" value="1">
     </form>
+    <?php if ($search): ?>
+      <input type="hidden" name="q" value="<?= htmlspecialchars($search); ?>">
+    <?php endif; ?>
 
-    <button class="btn btn-primary" type="button" onclick="exportData()">
-      <i class="bi bi-download me-1"></i>
-    </button>
+      <button class="btn btn-primary" type="button" onclick="exportData(this)" data-type="order">
+        <i class="bi bi-download me-1"></i>
+      </button>
     <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
       <i class="bi bi-plus-circle me-1"></i> Thêm
+    </button>
+    <button type="button" id="delete" class="btn btn-danger" disabled>
+      <i class="bi bi-trash me-1"></i>Xóa
     </button>
   </div>
 </div>
@@ -123,12 +157,13 @@ if ($result && mysqli_num_rows($result) > 0) {
               <td><?= $order['Products']; ?></td>
               <td>
                 <?php
-                  $parts = explode(' ', $order['OrderDate']);
-                  echo $parts[0] . '<br><small class="text-muted">' . ($parts[1] ?? '') . '</small>';
+                  $formattedDate = date('d-m-Y', strtotime($order['OrderDate']));
+                  $time = date('H:i:s', strtotime($order['OrderDate']));
+                  echo $formattedDate . '<br><small class="text-muted">' . $time . '</small>';
                 ?>
               </td>
               <td><?= number_format($order['TotalAmount'], 3); ?> VND</td>
-              <td><?= $order['PaymentId'] ?? '<i>Chưa có</i>'; ?></td>
+              <td><?= $order['PaymentStatus']?></td>
               <td>
                 <?php
                   $status = $order['StatusOrder'];
@@ -148,9 +183,6 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <a href="edit-order.php?id=<?= $order['OrderId']; ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
                   <i class="bi bi-pencil-square"></i>
                 </a>
-                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('<?= $order['OrderId']; ?>')" title="Xóa">
-                  <i class="bi bi-trash"></i>
-                </button>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -166,45 +198,70 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 <!-- Modal thêm đơn hàng -->
 <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <form method="POST" action="add-order.php">
+  <div class="modal-dialog">
+    <form method="POST" action="add-order.php" id="orderForm">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="addOrderModalLabel">Thêm đơn hàng</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="order" class="form-label">Mã đơn hàng</label>
-            <input type="text" class="form-control" id="order" name="order" required>
-          </div>
-          <div class="mb-3">
-            <label for="products" class="form-label">Danh sách sản phẩm (ID:Số lượng, cách nhau dấu phẩy)</label>
-            <input type="text" class="form-control" id="products" name="products" required>
-            <small class="text-muted">VD: P001:2,P002:1</small>
-          </div>
+          <!-- Email khách -->
           <div class="mb-3">
             <label for="email" class="form-label">Email khách hàng</label>
             <input type="email" class="form-control" id="email" name="email" required>
           </div>
+
+          <!-- Mã đơn hàng -->
+            <div class="mb-3">
+              <label for="order-id" class="form-label">Mã đơn hàng</label>
+              <input type="text" id="orderId" name="orderId" class="form-control" readonly>
+            </div>
+            <!-- Chọn sản phẩm -->
+<div class="mb-3">
+  <label class="form-label">Sản phẩm</label>
+  <div id="product-list">
+    <div class="input-group mb-2 product-item">
+      <select class="form-select product-select" name="products[]" required>
+        <option value="">-- Chọn sản phẩm --</option>
+        <?php
+          $product_sql = "SELECT ProductId, Name, Price FROM Product";
+          $product_result = mysqli_query($conn, $product_sql);
+          while ($prod = mysqli_fetch_assoc($product_result)) {
+              echo '<option value="'.$prod['ProductId'].'" data-price="'.$prod['Price'].'">'
+                  . htmlspecialchars($prod['Name']) . ' - ' . number_format($prod['Price'], 3) . ' VND</option>';
+          }
+        ?>
+      </select>
+      <input type="number" class="form-control ms-2 quantity-input" name="quantities[]" min="1" value="1" required>
+      <button type="button" class="btn btn-danger ms-2 remove-product"><i class="bi bi-x"></i></button>
+    </div>
+  </div>
+  <button type="button" class="btn btn-outline-primary btn-sm" id="addProductRow"><i class="bi bi-plus"></i> Thêm sản phẩm</button>
+</div>
+          <!-- Tổng tiền (readonly) -->
           <div class="mb-3">
-            <label for="order-date" class="form-label">Ngày đặt</label>
-            <input type="date" class="form-control" id="order-date" name="order-date" required>
+            <label class="form-label">Tổng tiền (ước tính)</label>
+            <input type="text" class="form-control" id="total-amount" readonly>
           </div>
-          <div class="mb-3">
-            <label for="order-price" class="form-label">Tổng tiền</label>
-            <input type="text" class="form-control" id="order-price" name="order-price" required>
-          </div>
+
+          <!-- Thanh toán -->
           <div class="mb-3">
             <label for="payment" class="form-label">Hình thức thanh toán</label>
             <input type="text" class="form-control" id="payment" name="payment" required>
           </div>
+
+          <!-- Trạng thái -->
           <div class="mb-3">
-            <label for="status" class="form-label">Trạng thái</label>
-            <input type="text" class="form-control" id="status" name="status" required>
+            <label for="status" class="form-label">Trạng thái đơn hàng</label>
+            <select class="form-select" id="status" name="status" required>
+              <option value="Đang xử lý">Đang xử lý</option>
+              <option value="Đã giao">Đã giao</option>
+              <option value="Đã hủy">Đã hủy</option>
+            </select>
           </div>
-          
         </div>
+
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Lưu</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -213,6 +270,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     </form>
   </div>
 </div>
+
 </div>
 
 
