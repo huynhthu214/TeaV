@@ -48,8 +48,7 @@ if (isset($_SESSION['email'])) {
 }
 // Chi phí giả định
 $shipping_fee = 30000; 
-$discount = 0;       
-$final_total = $total * 1000 + $shipping_fee - $discount;
+$final_total = $total * 1000 + $shipping_fee;
 
 // Nếu POST & không có trường 'field' (tức là bấm nút "Xác nhận đặt hàng")
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST['field'])) {
@@ -180,10 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST['field'])) {
             <li class="list-group-item d-flex justify-content-between">
                 <span>Phí vận chuyển</span>
                 <strong><?= number_format($shipping_fee) ?> VND</strong>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Khuyến mãi</span>
-                <strong>-<?= number_format($discount) ?> VND</strong>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-success text-white">
                 <span><strong>Tổng thanh toán</strong></span>

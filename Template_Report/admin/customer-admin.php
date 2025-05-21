@@ -24,63 +24,6 @@ if ($searchQuery !== '') {
     $q = $conn->real_escape_string($searchQuery);
     $searchSQL = "WHERE a.FullName LIKE '%$q%' OR a.Email LIKE '%$q%' OR a.PhoneNumber LIKE '%$q%'";
 }
-
-// Xử lý xuất CSV
-if (isset($_GET['export']) && $_GET['export'] === 'csv') {
-    // Thiết lập header cho file CSV
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=danh-sach-khach-hang-' . date('Y-m-d') . '.csv');
-    
-    // Tạo file handle để ghi trực tiếp vào output
-    $output = fopen('php://output', 'w');
-    
-    // Thêm BOM để Excel hiển thị đúng tiếng Việt
-    fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
-    
-    // Header dòng đầu tiên cho CSV
-    fputcsv($output, [
-        'Họ tên',
-        'Email',
-        'Số điện thoại',
-        'Ngày đăng ký',
-        'Tổng đơn hàng',
-        'Tổng chi tiêu (VND)',
-        'Trạng thái'
-    ]);
-
-    // Lấy danh sách khách hàng với điều kiện tìm kiếm nếu có
-    $exportSql = "
-    SELECT 
-        a.Email, a.FullName, a.PhoneNumber, a.IsActive, a.CreatedDate,
-        COUNT(o.OrderId) AS TotalOrders,
-        COALESCE(SUM(o.TotalAmount), 0) AS TotalSpent
-    FROM Account a
-    LEFT JOIN Orders o ON a.Email = o.Email
-    $searchSQL
-    GROUP BY a.Email, a.FullName, a.PhoneNumber, a.IsActive, a.CreatedDate
-    ORDER BY a.CreatedDate DESC
-    ";
-    
-    $exportResult = $conn->query($exportSql);
-    
-    if ($exportResult) {
-        while ($row = $exportResult->fetch_assoc()) {
-            fputcsv($output, [
-                $row['FullName'],
-                $row['Email'],
-                $row['PhoneNumber'],
-                date("d/m/Y", strtotime($row['CreatedDate'])),
-                $row['TotalOrders'],
-                number_format($row['TotalSpent'], 3, '.', ','),
-                $row['IsActive'] === 'Yes' ? 'Hoạt động' : 'Ngừng hoạt động'
-            ]);
-        }
-    }
-    
-    fclose($output);
-    exit; // Kết thúc script sau khi xuất CSV
-}
-
 // Lấy danh sách khách hàng, bổ sung tổng đơn hàng và tổng chi tiêu
 $sql = "
 SELECT 
@@ -184,9 +127,9 @@ if ($result) {
   </form>
 
   <!-- Nút xuất CSV -->
-  <a href="?export=csv<?= $searchQuery ? '&q='.urlencode($searchQuery) : '' ?>" class="btn btn-primary">
-    <i class="bi bi-download me-1"></i> Xuất CSV
-  </a>
+  <a href="export-customer.php<?= $searchQuery ? '?q='.urlencode($searchQuery) : '' ?>" class="btn btn-primary">
+  <i class="bi bi-download me-1"></i>
+</a>
   
 </div>
 
@@ -216,7 +159,7 @@ if ($result) {
               <td class="text-start"><?= htmlspecialchars($customer['FullName']); ?></td>
               <td><?= htmlspecialchars($customer['Email']); ?></td>
               <td><?= htmlspecialchars($customer['PhoneNumber']); ?></td>
-              <td><?= date("d/m/Y", strtotime($customer['CreatedDate'])); ?></td>
+              <td><?= date("d-m-Y", strtotime($customer['CreatedDate'])); ?></td>
               <td><?= $customer['TotalOrders']; ?></td>
               <td><?= number_format($customer['TotalSpent'], 3); ?> VND</td>
               <td>

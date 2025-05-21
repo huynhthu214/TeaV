@@ -1,4 +1,13 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo '<pre>';
+    print_r($_POST);
+    print_r($_FILES);
+    echo '</pre>';
+    exit; // tạm dừng để xem dữ liệu gửi lên
+}
+?>
+<?php
 session_start();
 $namePage = "Soạn bài viết";
 include "view/header-admin.php";
@@ -61,8 +70,8 @@ $email = $_POST['email'] ?? '';
   </form>
 </div>
 
-<script>    
-     ClassicEditor
+<script>
+  ClassicEditor
     .create(document.querySelector('#content'), {
       toolbar: [
         'heading', '|',
@@ -71,8 +80,16 @@ $email = $_POST['email'] ?? '';
         'link', 'blockQuote', 'insertTable', 'undo', 'redo'
       ]
     })
+    .then(editor => {
+      const form = document.querySelector('form');
+      form.addEventListener('submit', () => {
+        editor.updateSourceElement(); // Cập nhật lại <textarea> thật sự trước khi submit
+      });
+    })
     .catch(error => {
       console.error(error);
     });
 </script>
+
+
 <?php include "view/footer-admin.php"; ?>

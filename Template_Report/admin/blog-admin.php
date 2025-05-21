@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_status'])) {
               <td><input type="checkbox" class="post-checkbox" value="<?= $blog['BlogId'] ?>"></td>
               <td class="text-start"><?= htmlspecialchars($blog['Title']) ?></td>
               <td><?= htmlspecialchars($blog['Author']) ?></td>
-              <td><?= date('d/m/Y', strtotime($blog['DateUpload'])) ?></td>
+              <td><?= date('d-m-Y', strtotime($blog['DateUpload'])) ?></td>
               <td><?= $blog['CommentCount'] ?></td>
               <td>
                 <form method="POST" action="" style="display:inline;">

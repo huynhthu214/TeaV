@@ -70,11 +70,10 @@ function confirmDelete(productId) {
     }
   };
 }
-  setTimeout(() => {
-    const alertEl = document.querySelector('.alert');
-    if (alertEl) {
-      const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
-      bsAlert.close();
-    }
-  }, 3000);
-
+setTimeout(() => {
+  const alertEl = document.querySelector(".alert");
+  if (alertEl) {
+    const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+    bsAlert.close();
+  }
+}, 5000);

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&?family=Merriweatherr:opsz,wght@1,18..144,900&family=Playfair+Display:wght@1,900&family=Merriweather&family=WindSong:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&?family=Merriweather:opsz,wght@1,18..144,900&family=Playfair+Display:wght@1,900&family=Merriweather&family=WindSong:wght@400;500&display=swap");
 
 /* Base Styles */
 * {
@@ -424,7 +424,7 @@ button .btn-primary.fw-bold {
 .product-detail h1 {
   font-size: 2.5rem;
   color: var(--color-forest-green);
-  font-family: "Playfair Display", serif;
+  font-family: "Merriweather", serif;
 }
 
 .about-us h3 {

@@ -70,7 +70,7 @@
                 } else {
                     // Không có return thì xử lý như bình thường
                     if ($userData['Type'] === 'Admin') {
-                        header('Location: dashboard.php');
+                        header('Location: ../admin/dashboard.php');
                     } else {
                         header('Location: index.php');
                     }

@@ -97,103 +97,6 @@ if (!$conn) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style-cart.css">
-    <title><?= $namePage ?></title>
-    <script>
-    // Hàm JavaScript để tăng/giảm số lượng mà không cần tải lại trang
-    function updateQuantity(action, productId) {
-        const quantityElement = document.getElementById('qty-' + productId);
-        let currentQty = parseInt(quantityElement.textContent);
-        
-        if (action === 'increase') {
-            currentQty += 1;
-        } else if (action === 'decrease') {
-            currentQty -= 1;
-            if (currentQty <= 0) {
-                if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
-                    window.location.href = 'cart.php?delete=' + productId;
-                    return;
-                } else {
-                    currentQty = 1; // Nếu người dùng hủy xóa, giữ số lượng tối thiểu là 1
-                }
-            }
-        }
-        
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'update-cart.php?action=' + action + '&id=' + productId, true);
-        xhr.onload = function() {
-            if (this.status === 200) {
-                try {
-                    const response = JSON.parse(this.responseText);
-                    
-                    if (response.status === 'success') {
-                        // Cập nhật số lượng hiển thị
-                        quantityElement.textContent = currentQty;
-                        
-                        // Cập nhật tổng tiền của sản phẩm này
-                        const priceElement = document.getElementById('price-' + productId);
-                        const price = parseFloat(priceElement.getAttribute('data-price'));
-                        const subtotalElement = document.getElementById('subtotal-' + productId);
-                        subtotalElement.textContent = '$' + (price * currentQty).toFixed(2);
-                        
-                        // Cập nhật tổng tiền giỏ hàng
-                        updateCartTotal();
-                    } else if (response.status === 'deleted') {
-                        // Nếu sản phẩm bị xóa (số lượng = 0), tải lại trang
-                        window.location.reload();
-                    } else {
-                        console.error('Lỗi: ' + response.message);
-                    }
-                } catch (e) {
-                    console.error('Lỗi xử lý phản hồi: ' + e.message);
-                    console.log('Phản hồi nhận được: ' + this.responseText);
-                }
-            }
-        };
-        xhr.onerror = function() {
-            console.error('Lỗi kết nối tới server');
-        };
-        xhr.send();
-    }
-    
-    // Hàm tính lại tổng tiền giỏ hàng
-    function updateCartTotal() {
-        let total = 0;
-        const subtotals = document.querySelectorAll('[id^="subtotal-"]');
-        subtotals.forEach(function(element) {
-            const value = parseFloat(element.textContent.replace('$', ''));
-            total += value;
-        });
-        document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
-    }
-    
-    // Thêm sự kiện DOMContentLoaded để đảm bảo tất cả các phần tử đều đã tải
-    document.addEventListener('DOMContentLoaded', function() {
-        // Gắn sự kiện cho các nút tăng giảm
-        const plusButtons = document.querySelectorAll('.plus-btn');
-        const minusButtons = document.querySelectorAll('.minus-btn');
-        
-        plusButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const productId = this.getAttribute('data-id');
-                updateQuantity('increase', productId);
-            });
-        });
-        
-        minusButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const productId = this.getAttribute('data-id');
-                updateQuantity('decrease', productId);
-            });
-        });
-    });
-    </script>
-</head>
 <body>
     <div class="cart-container py-5">
         <h2 class="text-center mb-4">Giỏ hàng của bạn</h2>
@@ -230,9 +133,7 @@ if (!$conn) {
                             </td>
                             <td class="quantity">
                                 <div class="quantity-control">
-                                    <button type="button" class="quantity-btn minus-btn" onclick="updateQuantity('decrease', <?= $item['id'] ?>)">-</button>
                                     <span class="quantity-display" id="qty-<?= $item['id'] ?>"><?= $quantity ?></span>
-                                    <button type="button" class="quantity-btn plus-btn" onclick="updateQuantity('increase', <?= $item['id'] ?>)">+</button>
                                 </div>
                             </td>
                             <td class="subtotal">

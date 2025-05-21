@@ -78,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // --- 4. Xóa giỏ hàng và chuyển trang ---
-    unset($_SESSION['cart']);
     header("Location: payment-qr.php?payment_id=" . urlencode($paymentId));
     exit;
 }
