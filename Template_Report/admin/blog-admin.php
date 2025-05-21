@@ -148,12 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
       <i class="bi bi-plus-circle"></i>Thêm
     </a>
   </div>
-
-  <div class="col-md-auto">
-    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
-      <i class="bi bi-trash"></i>Xóa
-    </button>  
-  </div>
   
 </form>
 
