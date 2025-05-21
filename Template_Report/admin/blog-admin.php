@@ -144,11 +144,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
   </div>
 
   <div class="col-md-auto">
-    <a href="add-blog-admin.php" class="btn btn-success">
+    <a href="blog-editor.php" class="btn btn-success">
       <i class="bi bi-plus-circle"></i>Thêm
     </a>
   </div>
   
+  <div class="col-md-auto">
+    <button type="button" id="delete-selected" class="btn btn-danger" disabled>
+      <i class="bi bi-trash me-1"></i>Xóa
+    </button>
+  </div>
+
 </form>
 
 <form id="posts-form" method="POST" action="">
@@ -189,13 +195,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
                   <i class="bi bi-chat-dots"></i>
                 </a>
                 <!-- Chỉnh sửa bài đăng -->
-                <a href="edit-blog-admin.php?blogid=<?= urlencode($blog['BlogId']) ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
+                <a href="blog-edit.php?blogid=<?= rawurlencode($blog['BlogId']) ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
                   <i class="bi bi-pencil-square"></i>
                 </a>
-                <!-- Xóa bài đăng -->
-                <button type="button" class="btn btn-sm btn-danger text-white" title="Xóa" data-bs-toggle="modal" data-bs-target="#deleteModal" data-blog-id="<?= $blog['BlogId'] ?>">
-                  <i class="bi bi-trash"></i>
-                </button>
+                <!-- Xem bai viet -->
+                <a href="blog-detail.php?id=<?= urlencode($blog['BlogId']); ?>" class="btn btn-sm btn-info text-white" title="Xem">
+                  <i class="fa fa-eye"></i>
+                </a>
               </td>
             </tr>
           <?php endforeach; ?>
