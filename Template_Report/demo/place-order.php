@@ -34,6 +34,10 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_SESSION['email'];
     $paymentMethod = $_POST['payment_method'] ?? 'Chưa chọn';
+    $deliveryMethod = $_POST['delivery_method'] ?? 'Chưa chọn';
+    $deliveryTime = $_POST['delivery_time'] ?? NULL; // định dạng: YYYY-MM-DD HH:MM:SS
+    $note = $_POST['note'] ?? '';
+    $paymentStatus = 'Chưa thanh toán';
     $cart = $_SESSION['cart'];
     $total = 0;
 
@@ -46,19 +50,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $paymentId = generateId($conn, "Payment", "PaymentId", "PM");
 
     // --- 1. Thêm vào bảng Payment ---
-    $stmt_payment = $conn->prepare("INSERT INTO Payment (PaymentId, TotalPrice, PaymentMethod) VALUES (?, ?, ?)");
-    $stmt_payment->bind_param("sds", $paymentId, $total, $paymentMethod);
+    $stmt_payment = $conn->prepare("INSERT INTO Payment 
+        (PaymentId, TotalPrice, PaymentMethod, DeliveryMethod, DeliveryTime, Note, PaymentStatus) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt_payment->bind_param("sdsssss", $paymentId, $total, $paymentMethod, $deliveryMethod, $deliveryTime, $note, $paymentStatus);
     if (!$stmt_payment->execute()) {
         die("Lỗi thêm thanh toán: " . $stmt_payment->error);
     }
 
     // --- 2. Thêm vào bảng Orders ---
     $statusOrder = "Chưa xử lý";
-    $paymentStatus = "Chưa thanh toán";
-
-    $stmt_order = $conn->prepare("INSERT INTO Orders (OrderId, Email, OrderDate, TotalAmount, StatusOrder, PaymentStatus)
-                                  VALUES (?, ?, NOW(), ?, ?, ?)");
-    $stmt_order->bind_param("ssdss", $orderId, $email, $total, $statusOrder, $paymentStatus);
+    $stmt_order = $conn->prepare("INSERT INTO Orders 
+        (OrderId, Email, PaymentId, OrderDate, TotalAmount, StatusOrder) 
+        VALUES (?, ?, ?, NOW(), ?, ?)");
+    $stmt_order->bind_param("sssds", $orderId, $email, $paymentId, $total, $statusOrder);
     if (!$stmt_order->execute()) {
         die("Lỗi thêm đơn hàng: " . $stmt_order->error);
     }
@@ -72,7 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // --- 5. Chuyển sang trang thanh toán QR ---
+    // --- 4. Xóa giỏ hàng và chuyển trang ---
+    unset($_SESSION['cart']);
     header("Location: payment-qr.php?payment_id=" . urlencode($paymentId));
     exit;
 }

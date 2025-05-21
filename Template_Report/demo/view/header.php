@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="layout/css/style_base.css"/>
     <link rel="stylesheet" href="layout/css/style1.css?v=2"/>
     <link rel="stylesheet" href="layout/css/style_header.css"/>
-     <link rel="stylesheet" href="layout/css/style_payment.css"/>
+    <link rel="stylesheet" href="layout/css/style_payment.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
@@ -110,7 +110,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="profile.php">Hồ sơ của tôi</a></li>
                                 <li><a class="dropdown-item" href="cart.php">Giỏ hàng của tôi</a></li>
-                                <li><a class="dropdown-item" href="cart.php">Đơn hàng của tôi</a></li>
+                                <li><a class="dropdown-item" href="payment-success.php">Đơn hàng của tôi</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="logout.php">Đăng xuất</a></li>
                             </ul>
