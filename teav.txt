@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     5/21/2025 12:25:41 AM                        */
+/* Created on:     5/21/2025 7:44:47 AM                         */
 /*==============================================================*/
 
 
@@ -140,7 +140,6 @@ create table Orders
    OrderDate            datetime,
    TotalAmount          float,
    StatusOrder          text,
-   PaymentStatus        text,
    primary key (OrderId)
 );
 
@@ -155,6 +154,7 @@ create table Payment
    DeliveryMethod       text,
    DeliveryTime         datetime,
    Note                 text,
+   PaymentStatus        text,
    primary key (PaymentId)
 );
 
