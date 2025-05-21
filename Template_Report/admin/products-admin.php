@@ -191,7 +191,6 @@
           <th>Số lượng</th>
           <th>Đơn vị</th>
           <th>Giá bán</th>
-          <th>Giảm giá</th>
           <th>Trạng thái</th>
           <th>Thao tác</th>
         </tr>
@@ -207,7 +206,6 @@
               <td><?= $product['Quantity']; ?></td>
               <td><?= htmlspecialchars($product['Unit']); ?></td>
               <td><?= number_format($product['Price'], 3); ?> VND</td>
-              <td><?= !empty($product['SaleOff']) ? $product['SaleOff'] . '%' : '0%'; ?></td>
               <td>
                 <form method="POST" action="" style="display:inline;">
                   <input type="hidden" name="productid" value="<?= htmlspecialchars($product['ProductId']) ?>">

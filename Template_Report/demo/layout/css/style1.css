@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&?family=Merriweather:opsz,wght@1,18..144,900&family=Playfair+Display:wght@1,900&family=Pacifico&family=WindSong:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&?family=Merriweatherr:opsz,wght@1,18..144,900&family=Playfair+Display:wght@1,900&family=Merriweather&family=WindSong:wght@400;500&display=swap");
 
 /* Base Styles */
 * {
@@ -118,7 +118,7 @@ header .navbar {
 
 .navbar .nav-logo .logo-text {
   color: var(--color-sage-green);
-  font-family: "Merriweather", serif;
+  font-family: "Merriweatherr", serif;
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-semibold);
 }
@@ -263,7 +263,7 @@ button#addItem:hover,
   font-size: 5rem;
   color: var(--color-light-mint);
   margin-bottom: var(--spacing-m);
-  font-family: "Pacifico", serif;
+  font-family: "Merriweatherr", serif;
 }
 
 .hero-details .subtitle {
@@ -474,7 +474,7 @@ button .btn-primary.fw-bold {
 .text p {
   color: white;
   padding: 10px;
-  font-family: "Merriweather", serif;
+  font-family: "Merriweatherr", serif;
   text-align: center;
   font-size: 1.38rem;
   font-style: italic;
@@ -729,7 +729,7 @@ button .btn-primary.fw-bold {
 }
 
 .term h5 {
-  font-family: "Pacifico", serif;
+  font-family: "Merriweather", serif;
   font-size: var(--font-size-xxl);
   color: var(--color-forest-green);
 }
@@ -770,7 +770,7 @@ button .btn-primary.fw-bold {
 
 /* Product Detail */
 .product-detail h1 {
-  font-family: "Pacifico", serif;
+  font-family: "Merriweather", serif;
   font-size: 1.5cm;
   color: #2c3e50;
   margin-bottom: 30px;
