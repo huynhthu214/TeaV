@@ -234,7 +234,7 @@ function generateOrderId() {
 }
 
 // Gọi khi modal mở
-document.getElementById('addOrderModal').addEventListener('show.bs.modal', function () {
+document.getElementById('addOrderModal').addEventListener('show.bs.modal', function ()) {
   generateOrderId();
   updateTotalAmount();
 }
