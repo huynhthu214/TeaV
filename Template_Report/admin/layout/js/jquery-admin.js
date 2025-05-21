@@ -84,14 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Các hàm bổ sung
 function exportData(button) {
-  const type = button.getAttribute('data-type');
+  const type = button.getAttribute("data-type");
   if (!type) {
     alert("Không xác định loại dữ liệu cần export.");
     return;
   }
 
   // Chuyển hướng để tải file CSV về
-  window.location.href = 'export.php?type=' + type;
+  window.location.href = "export.php?type=" + type;
 }
 
 function togglePassword(inputId, iconId) {
@@ -173,68 +173,76 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectAll = document.getElementById("select-all");
   const checkboxes = document.querySelectorAll('input[name="select[]"]');
 
-        if (selectAll) {
-            selectAll.addEventListener('change', function () {
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.checked = selectAll.checked;
-                });
-            });
-        }
+  if (selectAll) {
+    selectAll.addEventListener("change", function () {
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = selectAll.checked;
+      });
     });
-  function updateTotalAmount() {
-    let total = 0;
-    document.querySelectorAll('#product-list .product-item').forEach(item => {
-      const select = item.querySelector('.product-select');
-      const quantity = parseInt(item.querySelector('.quantity-input').value) || 0;
-      const price = parseFloat(select.selectedOptions[0]?.getAttribute('data-price')) || 0;
-      total += price * quantity;
-    });
-    document.getElementById('total-amount').value = total.toLocaleString('vi-VN') + ' VND';
   }
-
-  document.getElementById('addProductRow').addEventListener('click', () => {
-    const productList = document.getElementById('product-list');
-    const firstRow = productList.querySelector('.product-item');
-    const newRow = firstRow.cloneNode(true);
-    newRow.querySelector('.product-select').value = '';
-    newRow.querySelector('.quantity-input').value = 1;
-    productList.appendChild(newRow);
-    updateTotalAmount();
+});
+function updateTotalAmount() {
+  let total = 0;
+  document.querySelectorAll("#product-list .product-item").forEach((item) => {
+    const select = item.querySelector(".product-select");
+    const quantity = parseInt(item.querySelector(".quantity-input").value) || 0;
+    const price =
+      parseFloat(select.selectedOptions[0]?.getAttribute("data-price")) || 0;
+    total += price * quantity;
   });
+  document.getElementById("total-amount").value =
+    total.toLocaleString("vi-VN") + " VND";
+}
 
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('.remove-product')) {
-      const row = e.target.closest('.product-item');
-      const productList = document.getElementById('product-list');
-      if (productList.querySelectorAll('.product-item').length > 1) {
-        row.remove();
-        updateTotalAmount();
-      }
-    }
-  });
+document.getElementById("addProductRow").addEventListener("click", () => {
+  const productList = document.getElementById("product-list");
+  const firstRow = productList.querySelector(".product-item");
+  const newRow = firstRow.cloneNode(true);
+  newRow.querySelector(".product-select").value = "";
+  newRow.querySelector(".quantity-input").value = 1;
+  productList.appendChild(newRow);
+  updateTotalAmount();
+});
 
-  document.addEventListener('input', function (e) {
-    if (e.target.matches('.quantity-input') || e.target.matches('.product-select')) {
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".remove-product")) {
+    const row = e.target.closest(".product-item");
+    const productList = document.getElementById("product-list");
+    if (productList.querySelectorAll(".product-item").length > 1) {
+      row.remove();
       updateTotalAmount();
     }
-  });
+  }
+});
 
-  document.getElementById('addOrderModal').addEventListener('show.bs.modal', function () {
+document.addEventListener("input", function (e) {
+  if (
+    e.target.matches(".quantity-input") ||
+    e.target.matches(".product-select")
+  ) {
+    updateTotalAmount();
+  }
+});
+
+document
+  .getElementById("addOrderModal")
+  .addEventListener("show.bs.modal", function () {
     updateTotalAmount();
   });
-function generateOrderId() {
-  fetch('generate-order-id.php')
-    .then(response => response.text())
-    .then(orderId => {
-      document.getElementById('orderId').value = orderId;
-    })
-    .catch(error => {
-      console.error("Lỗi khi tạo mã đơn hàng:", error);
-    });
-}
 
-// Gọi khi modal mở
-document.getElementById('addOrderModal').addEventListener('show.bs.modal', function ()) {
-  generateOrderId();
-  updateTotalAmount();
-}
+// function generateOrderId() {
+//   fetch('generate-order-id.php')
+//     .then(response => response.text())
+//     .then(orderId => {
+//       document.getElementById('orderId').value = orderId;
+//     })
+//     .catch(error => {
+//       console.error("Lỗi khi tạo mã đơn hàng:", error);
+//     });
+// }
+
+// // Gọi khi modal mở
+// document.getElementById('addOrderModal').addEventListener('show.bs.modal', function ()) {
+//   generateOrderId();
+//   updateTotalAmount();
+// }
