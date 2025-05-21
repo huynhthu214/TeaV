@@ -10,7 +10,7 @@ if (!$conn) {
 }
 
 $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
-
+$search = isset($_GET['q']) ? mysqli_real_escape_string($conn, $_GET['q']) : '';
 // Lấy danh sách sản phẩm
 $products = [];
 $result = mysqli_query($conn, "SELECT * FROM Product");
@@ -66,8 +66,18 @@ $importList = [];
 $sql = "SELECT i.ImportId, i.ImportDate, i.Note, ip.ProductId, p.Name AS ProductName, ip.Quantity, ip.UnitPrice
         FROM Import i
         JOIN ImportProduct ip ON i.ImportId = ip.ImportId
-        JOIN Product p ON ip.ProductId = p.ProductId
-        ORDER BY i.ImportDate DESC";
+        JOIN Product p ON ip.ProductId = p.ProductId";
+
+if (!empty($search)) {
+    $sql .= " WHERE (
+        i.ImportId LIKE '%$search%' OR 
+        i.Note LIKE '%$search%' OR 
+        p.Name LIKE '%$search%' OR 
+        ip.ProductId LIKE '%$search%'
+    )";
+}
+
+$sql .= " ORDER BY i.ImportDate DESC LIMIT $limit";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
     $importList[] = $row;
@@ -75,12 +85,14 @@ while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
 <div class="content-wrapper">
-
+  <div class="page-title d-flex justify-content-between align-items-start mb-4">
+    <h2 style="color:rgb(10, 119, 52); margin-top: -10px;"><strong>Quản lý nhập hàng</strong></h2>
+  </div>
  <!-- Thanh điều khiển trên bảng -->
 <div class="d-flex justify-content-between align-items-center mb-3">
   <!-- Tìm kiếm -->
   <form class="d-flex" role="search" method="GET" action="#">
-    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q" aria-label="Search">
+    <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." name="q" value="<?= htmlspecialchars($search) ?>">
     <button class="btn btn-outline-success" type="submit">
       <i class="bi bi-search"></i>
     </button>
@@ -99,11 +111,14 @@ while ($row = mysqli_fetch_assoc($result)) {
       <input type="hidden" name="page" value="1">
     </form>
 
-    <button class="btn btn-primary" type="button" onclick="exportData()">
+    <button class="btn btn-primary" type="button" onclick="exportData(this)" data-type="import">
       <i class="bi bi-download me-1"></i>
     </button>
     <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
       <i class="bi bi-plus-circle me-1"></i> Thêm
+    </button>
+    <button type="button" id="delete" class="btn btn-danger" disabled>
+      <i class="bi bi-trash me-1"></i>Xóa
     </button>
   </div>
 </div>
@@ -131,7 +146,7 @@ if (count($importList) > 0):
         <tr>
             <td><input type="checkbox" name="select[]" value="<?= $row['ImportId']; ?>"></td>
             <td><?= $row['ImportId'] ?></td>
-            <td><?= $row['ImportDate'] ?></td>
+            <td><?= date('d-m-Y H:i:s', strtotime($row['ImportDate'])) ?></td>
             <td><?= $row['ProductName'] ?> (<?= $row['ProductId'] ?>)</td>
             <td><?= $row['Quantity'] ?></td>
             <td><?= number_format($row['UnitPrice'], 3) ?> VND</td>
@@ -144,9 +159,6 @@ if (count($importList) > 0):
                 <a href="#" class="btn btn-sm btn-warning text-white" title="Sửa" onclick="editImport('<?= $row['ImportId'] ?>')">
                   <i class="bi bi-pencil-square"></i>
                 </a>
-                  <a href="#" class="btn btn-sm btn-danger text-white" title="Xoá" onclick="confirmDelete('<?= $row['ImportId'] ?>')">
-                    <i class="bi bi-trash"></i>
-                  </a>
             </td>
         </tr>
 <?php 

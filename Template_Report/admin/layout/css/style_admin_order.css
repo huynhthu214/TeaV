@@ -9,3 +9,9 @@
   width: 30px;
   text-align: center;
 }
+
+button.btn-danger:disabled {
+  background-color: #dc3545 !important;
+  color: white !important;
+  opacity: 1 !important;
+}
