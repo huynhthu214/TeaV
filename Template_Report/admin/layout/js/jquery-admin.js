@@ -174,5 +174,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
-// Js của Customer
