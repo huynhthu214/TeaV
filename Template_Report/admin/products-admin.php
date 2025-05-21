@@ -219,23 +219,21 @@
   </div>
   
   <div class="col-md-auto">
-    <a href="add-product.php" class="btn btn-success">
-      <i class="bi bi-plus-circle me-1"></i>Thêm 
-    </a>
+    <button class="btn btn-success" type="button" id="add-product-btn">
+      <i class="bi bi-plus-circle me-1"></i>Thêm
+    </button>
   </div>
 
   <div class="col-md-auto">
-    <button type="button" id="delete-selected" class="btn btn-danger" disabled data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <button type="button" id="delete-selected" class="btn btn-danger" disabled>
       <i class="bi bi-trash me-1"></i>Xóa
     </button>
   </div>
     
   <div class="col-md-auto">
-    <form action="?" method="GET" class="d-inline">
-      <button class="btn btn-primary" type="submit" name="export" value="csv">
-        <i class="bi bi-download me-1"></i>
-      </button>
-    </form>
+    <a href="?export=csv" class="btn btn-primary">
+      <i class="bi bi-download me-1"></i>
+    </a>
   </div>
 
 </form>
@@ -282,10 +280,12 @@
                 <a href="view-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-info text-white" title="Xem">
                   <i class="fa fa-eye"></i>
                 </a>
-                <a href="edit-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-warning text-white" title="Sửa">
+                <button type="button" class="btn btn-sm btn-warning text-white edit-product" 
+                        data-email="<?= htmlspecialchars($product['ProductId']); ?>">
                   <i class="bi bi-pencil-square"></i>
-                </a>
-                <button type="button" class="btn btn-sm btn-danger text-white" title="Xoá" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="<?= $product['ProductId'] ?>">
+                </button>
+                <button type="button" class="btn btn-sm btn-danger text-white delete-single" 
+                          data-email="<?= htmlspecialchars($product['ProductId']); ?>">
                   <i class="bi bi-trash"></i>
                 </button>
               </td>
@@ -300,25 +300,131 @@
     </table>
   </div>
 
-  <!-- Modal xác nhận xóa -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+ <!-- Modal Thêm Sản phẩm -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="" id="add-product-form">
         <div class="modal-body">
-          Bạn có chắc chắn muốn xóa sản phẩm đã chọn không? Hành động này không thể hoàn tác.
+          <div class="mb-3">
+            <label for="add-name" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="add-name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="add-category" class="form-label">Danh mục <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="add-category" name="category" required>
+          </div>
+          <div class="mb-3">
+            <label for="add-quantity" class="form-label">Số lượng </label>
+            <input type="number" class="form-control" id="add-quantity" name="quantity" min="0">
+          </div>
+          <div class="mb-3">
+            <label for="add-unit" class="form-label">Đơn vị <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="add-unit" name="unit" required>
+          </div>
+          <div class="mb-3">
+            <label for="add-price" class="form-label">Giá bán <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="add-price" name="price" step="0.001" required>
+          </div>
+          <div class="mb-3">
+            <label for="add-sale" class="form-label">Giảm giá (%)</label>
+            <input type="number" class="form-control" id="add-sale" name="sale" min="0" max="100">
+          </div>
+          <div class="mb-3">
+            <label for="add-isActive" class="form-label">Trạng thái</label>
+            <select class="form-select" id="add-isActive" name="isActive">
+              <option value="Yes" selected>Hiển thị</option>
+              <option value="No">Ẩn</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" name="delete_products" class="btn btn-danger">Xóa</button>
+          <button type="submit" name="add_product" class="btn btn-success">Thêm</button>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Chỉnh Sửa Sản Phẩm -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="editProductModalLabel">Chỉnh sửa sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="" id="edit-product-form">
+        <div class="modal-body">
+          <input type="hidden" id="edit-id" name="product_id">
+          
+          <div class="mb-3">
+            <label for="edit-name" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="edit-name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="edit-category" class="form-label">Danh mục</label>
+            <input type="text" class="form-control" id="edit-category" name="category">
+          </div>
+          <div class="mb-3">
+            <label for="edit-quantity" class="form-label">Số lượng</label>
+            <input type="number" class="form-control" id="edit-quantity" name="quantity" min="0">
+          </div>
+          <div class="mb-3">
+            <label for="edit-unit" class="form-label">Đơn vị</label>
+            <input type="text" class="form-control" id="edit-unit" name="unit">
+          </div>
+          <div class="mb-3">
+            <label for="edit-price" class="form-label">Giá bán</label>
+            <input type="number" class="form-control" id="edit-price" name="price" step="0.001">
+          </div>
+          <div class="mb-3">
+            <label for="edit-sale" class="form-label">Giảm giá (%)</label>
+            <input type="number" class="form-control" id="edit-sale" name="sale" min="0" max="100">
+          </div>
+          <div class="mb-3">
+            <label for="edit-isActive" class="form-label">Trạng thái</label>
+            <select class="form-select" id="edit-isActive" name="isActive">
+              <option value="Yes">Hiển thị</option>
+              <option value="No">Ẩn</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" name="update_product" class="btn btn-warning">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Xác Nhận Xóa -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteConfirmModalLabel">Xác nhận xóa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa (các) <strong>sản phẩm</strong> đã chọn không?</p>
+        <p class="text-danger"><small>Lưu ý: Hành động này không thể hoàn tác.</small></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" id="confirm-delete" class="btn btn-danger">Xóa</button>
       </div>
     </div>
   </div>
-</form>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -376,6 +482,53 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Khởi tạo trạng thái nút xóa
     updateDeleteButtonState();
+
+    // ----- MODAL THÊM MỚI SẢN PHẨM -----
+
+    const addButton = document.getElementById('add-product-btn');
+    if (addButton) {
+        addButton.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(document.getElementById('addProductModal'));
+            modal.show();
+        });
+    }
+    
+    // ----- MODAL CHỈNH SỬA SẢN PHẨM -----
+    const editButtons = document.querySelectorAll('.edit-product');
+
+    editButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const productId = this.getAttribute('data-id');
+        if (!productId) return;
+
+        const row = this.closest('tr');
+        if (!row) return;
+
+        const name = row.cells[2]?.textContent.trim() || '';
+        const category = row.cells[3]?.textContent.trim() || '';
+        const quantity = row.cells[4]?.textContent.trim() || '';
+        const unit = row.cells[5]?.textContent.trim() || '';
+        const price = row.cells[6]?.textContent.trim().replace(/\D/g, '') || '';
+        const sale = row.cells[7]?.textContent.trim().replace('%', '') || '';
+        const isShow = row.querySelector('.btn-sm')?.textContent.trim() === 'Hiển thị' ? 'Yes' : 'No';
+
+        // Gán dữ liệu vào modal
+        document.getElementById('edit-product-id').value = productId;
+        document.getElementById('edit-name').value = name;
+        document.getElementById('edit-category').value = category;
+        document.getElementById('edit-quantity').value = quantity;
+        document.getElementById('edit-unit').value = unit;
+        document.getElementById('edit-price').value = price;
+        document.getElementById('edit-sale').value = sale;
+        document.getElementById('edit-isActive').value = isShow;
+
+        // Hiển thị modal
+        const modal = new bootstrap.Modal(document.getElementById('editProductModal'));
+        modal.show();
+    });
+  });
+
 });
 </script>
 
