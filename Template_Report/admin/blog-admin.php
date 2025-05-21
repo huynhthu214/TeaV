@@ -92,77 +92,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_status'])) {
     }
 }
 
-// Xử lý xóa bài đăng
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
-    if (isset($_POST['selected_posts']) && is_array($_POST['selected_posts'])) {
-        foreach ($_POST['selected_posts'] as $blogId) {
-            // Xóa các bình luận liên quan trước
-            $deleteReactionsSql = "DELETE FROM Reaction WHERE BlogId = ?";
-            $stmt = mysqli_prepare($conn, $deleteReactionsSql);
-            mysqli_stmt_bind_param($stmt, "s", $blogId);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            
-            // Sau đó xóa bài đăng
-            $deleteBlogSql = "DELETE FROM Blog WHERE BlogId = ?";
-            $stmt = mysqli_prepare($conn, $deleteBlogSql);
-            mysqli_stmt_bind_param($stmt, "s", $blogId);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-        }
-        
-        // Chuyển hướng lại trang sau khi xóa
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    }
-}
-
 ?>
+
+<style>
+  .toast-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 250px;
+  z-index: 1055; /* cao hơn modal và các phần khác */
+}
+</style>
 
 <div class="content-wrapper">
 <div class="page-title d-flex justify-content-between align-items-center mb-4">
+
+  <?php if (isset($_GET['deleted'])): ?>
+  <?php if ($_GET['deleted'] === 'success'): ?>
+    <div class="alert alert-success alert-dismissible fade show toast-alert" role="alert" id="toast-alert">
+      Đã xóa <strong>thành công</strong> các bài viết đã chọn.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php elseif ($_GET['deleted'] === 'error'): ?>
+    <div class="alert alert-danger alert-dismissible fade show toast-alert" role="alert" id="toast-alert">
+      Có lỗi xảy ra khi xóa bài viết. Vui lòng thử lại.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php endif; ?>
+<?php endif; ?>
+
   <h2 style="color:rgb(10, 119, 52); margin-top:-10px;"><strong> Quản lý bài đăng</strong></h2>
 </div>
 
-<form class="d-flex align-items-center gap-2 mb-4" method="GET" action="">
-  <div class="col-md">
-    <input class="form-control" type="search" placeholder="Tìm theo tiêu đề hoặc người viết..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
-  </div>
+<!-- Thanh tìm kiếm + nút thêm + nút xóa cùng 1 hàng -->
+<div class="d-flex align-items-center gap-2 mb-4 flex-wrap">
+  <form class="d-flex align-items-center gap-2 flex-grow-1" method="GET" action="">
+    <div class="col-md">
+      <input class="form-control" type="search" placeholder="Tìm theo tiêu đề hoặc người viết..." name="q" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+    </div>
 
-  <div class="col-md-auto">
-    <select class="form-select" name="isshow">
-      <option value=""> Tất cả trạng thái </option>
-      <option value="Yes" <?= (($_GET['isshow'] ?? '') === 'Yes') ? 'selected' : '' ?>>Hiển thị</option>
-      <option value="No" <?= (($_GET['isshow'] ?? '') === 'No') ? 'selected' : '' ?>>Ẩn</option>
-    </select>
-  </div>
+    <div class="col-md-auto">
+      <select class="form-select" name="isshow">
+        <option value=""> Tất cả trạng thái </option>
+        <option value="Yes" <?= (($_GET['isshow'] ?? '') === 'Yes') ? 'selected' : '' ?>>Hiển thị</option>
+        <option value="No" <?= (($_GET['isshow'] ?? '') === 'No') ? 'selected' : '' ?>>Ẩn</option>
+      </select>
+    </div>
 
-  <div class="col-md-auto">
-    <button class="btn btn-outline-success" type="submit">
-      <i class="bi bi-search"></i>
+    <div class="col-md-auto">
+      <button class="btn btn-outline-success" type="submit">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- Nút Thêm -->
+  <a href="blog-editor.php" class="btn btn-success">
+    <i class="bi bi-plus-circle"></i> Thêm
+  </a>
+
+  <!-- Nút Xóa + Modal trong 1 form riêng -->
+  <form id="delete-form" action="delete-blogs.php" method="POST">
+    <button type="button" id="delete-selected" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
+      <i class="bi bi-trash me-1"></i> Xóa
     </button>
-  </div>
 
-  <div class="col-md-auto">
-    <a href="blog-editor.php" class="btn btn-success">
-      <i class="bi bi-plus-circle"></i>Thêm
-    </a>
-  </div>
-  
-  <div class="col-md-auto">
-    <button type="button" id="delete-selected" class="btn btn-danger" disabled>
-      <i class="bi bi-trash me-1"></i>Xóa
-    </button>
-  </div>
+    <!-- Modal xác nhận xóa -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Bạn có chắc chắn muốn xóa các bài đăng đã chọn không? Hành động này không thể hoàn tác.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" name="delete_posts" class="btn btn-danger">Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-</form>
 
 <form id="posts-form" method="POST" action="">
   <div class="table-responsive">
     <table class="table table-striped table-bordered align-middle">
       <thead class="table-success text-center">
         <tr>
-          <th><input type="checkbox" id="select-all" class="form-check-input"></th>
+          <th><input type="checkbox" id="select-all"></th>
           <th>Tiêu đề</th>
           <th>Người viết</th>
           <th>Ngày đăng</th>
@@ -175,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
         <?php if (!empty($blogs)): ?>
           <?php foreach ($blogs as $index => $blog): ?>
             <tr class="text-center">
-              <td><input type="checkbox" name="selected_posts[]" class="form-check-input post-checkbox" value="<?php echo $blog['BlogId']; ?>"></td>
+              <td><input type="checkbox" class="post-checkbox" value="<?= $blog['BlogId'] ?>"></td>
               <td class="text-start"><?= htmlspecialchars($blog['Title']) ?></td>
               <td><?= htmlspecialchars($blog['Author']) ?></td>
               <td><?= date('d/m/Y', strtotime($blog['DateUpload'])) ?></td>
@@ -213,84 +235,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_posts'])) {
       </tbody>
     </table>
   </div>
-
-  <!-- Modal xác nhận xóa -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Bạn có chắc chắn muốn xóa bài đăng đã chọn không? Hành động này không thể hoàn tác và sẽ xóa cả các bình luận liên quan.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" name="delete_posts" class="btn btn-danger">Xóa</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </form>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Xử lý chọn tất cả
-    const selectAllCheckbox = document.getElementById('select-all');
-    const postCheckboxes = document.querySelectorAll('.post-checkbox');
-    const deleteSelectedBtn = document.getElementById('delete-selected');
-    
-    selectAllCheckbox.addEventListener('change', function() {
-        const isChecked = this.checked;
-        
-        postCheckboxes.forEach(checkbox => {
-            checkbox.checked = isChecked;
-        });
-        
-        updateDeleteButtonState();
+document.addEventListener('DOMContentLoaded', function () {
+  const selectAllCheckbox = document.getElementById('select-all');
+  const checkboxes = document.querySelectorAll('.post-checkbox');
+  const deleteBtn = document.getElementById('delete-selected');
+  const deleteForm = document.getElementById('delete-form');
+
+  // Cập nhật trạng thái nút xóa
+  function updateDeleteButton() {
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+    deleteBtn.disabled = !anyChecked;
+  }
+
+  // Xử lý chọn tất cả
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', function () {
+      checkboxes.forEach(cb => cb.checked = this.checked);
+      updateDeleteButton();
     });
-    
-    // Cập nhật trạng thái của nút xóa dựa trên số lượng checkbox được chọn
-    function updateDeleteButtonState() {
-        const checkedCount = document.querySelectorAll('.post-checkbox:checked').length;
-        deleteSelectedBtn.disabled = checkedCount === 0;
-    }
-    
-    // Thêm sự kiện cho từng checkbox
-    postCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            updateDeleteButtonState();
-            
-            // Kiểm tra xem tất cả có được chọn không
-            const allChecked = document.querySelectorAll('.post-checkbox:checked').length === postCheckboxes.length;
-            selectAllCheckbox.checked = allChecked;
-        });
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', updateDeleteButton);
+  });
+
+  // Trước khi mở modal xóa, thêm các checkbox được chọn vào form
+  deleteBtn.addEventListener('click', () => {
+    // Xóa input ẩn cũ
+    document.querySelectorAll('#delete-form input[name="blog_ids[]"]').forEach(e => e.remove());
+
+    // Tạo input ẩn từ checkbox đã chọn
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'blog_ids[]';
+        hiddenInput.value = cb.value;
+        deleteForm.appendChild(hiddenInput);
+      }
     });
-    
-    // Xử lý nút xóa đơn lẻ
-    const deleteSingleButtons = document.querySelectorAll('.delete-single');
-    deleteSingleButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Bỏ chọn tất cả các checkbox khác
-            postCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            
-            // Chỉ chọn checkbox tương ứng với bài đăng muốn xóa
-            const blogId = this.getAttribute('data-blog-id');
-            const correspondingCheckbox = document.querySelector(`.post-checkbox[value="${blogId}"]`);
-            if (correspondingCheckbox) {
-                correspondingCheckbox.checked = true;
-            }
-        });
-    });
-    
-    // Khởi tạo trạng thái nút xóa
-    updateDeleteButtonState();
+  });
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const toast = document.getElementById('toast-alert');
+    if (toast) {
+      setTimeout(() => {
+        // Dùng Bootstrap để ẩn alert (kích hoạt hiệu ứng fade)
+        const alert = bootstrap.Alert.getOrCreateInstance(toast);
+        alert.close();
+      }, 3000); // 3000ms = 3 giây
+    }
+  });
+
 </script>
 
 <?php 
