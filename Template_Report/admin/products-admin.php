@@ -277,7 +277,7 @@
                 </form>
               </td>
               <td>
-                <a href="view-product.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-info text-white" title="Xem">
+                <a href="product-detail.php?id=<?= urlencode($product['ProductId']); ?>" class="btn btn-sm btn-info text-white" title="Xem">
                   <i class="fa fa-eye"></i>
                 </a>
                 <button type="button" class="btn btn-sm btn-warning text-white edit-product" 

@@ -137,8 +137,10 @@ function deleteSelected() {
 }
 
 function showImportDetail(importId) {
-  const content = document.getElementById('import-detail-' + importId).innerHTML;
-  document.getElementById('importDetailContent').innerHTML = content;
+  const content = document.getElementById(
+    "import-detail-" + importId
+  ).innerHTML;
+  document.getElementById("importDetailContent").innerHTML = content;
 }
 
 function editImport(importId) {
@@ -167,9 +169,9 @@ function editImport(importId) {
   const modal = new bootstrap.Modal(document.getElementById("editImportModal"));
   modal.show();
 }
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectAll = document.getElementById('select-all');
-        const checkboxes = document.querySelectorAll('input[name="select[]"]');
+document.addEventListener("DOMContentLoaded", function () {
+  const selectAll = document.getElementById("select-all");
+  const checkboxes = document.querySelectorAll('input[name="select[]"]');
 
         if (selectAll) {
             selectAll.addEventListener('change', function () {
