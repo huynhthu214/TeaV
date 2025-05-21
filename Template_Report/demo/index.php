@@ -232,7 +232,7 @@ $first_about = $about_list[0];
               <h5 class="card-title"><?php echo $product['Name']; ?></h5>
               <p class="card-text">
                 <strong>Ingredients:</strong> <?php echo $product['ingredients']; ?><br />
-                <strong>Price:</strong> $<?php echo number_format($product['Price'], 2); ?>
+                <strong>Price: </strong><?php echo number_format($product['Price'], 3); ?> VND
               </p>
               <a href="detail-product.php?id=<?php echo $product['ProductId']; ?>" class="btn btn-success">Xem chi tiết</a>
             </div>
