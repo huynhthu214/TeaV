@@ -53,7 +53,7 @@ try {
     <div><strong>Mã đơn hàng:</strong> <?= htmlspecialchars($order['OrderId']) ?></div>
     <div><strong>Email khách hàng:</strong> <?= htmlspecialchars($order['Email']) ?></div>
     <div><strong>Ngày đặt hàng:</strong> <?= date("d/m/Y H:i", strtotime($order['OrderDate'])) ?></div>
-    <div><strong>Tổng tiền:</strong> <?= number_format($order['TotalAmount'], 0, ',', '.') ?> VNĐ</div>
+    <div><strong>Tổng tiền:</strong> <?= number_format($order['TotalAmount'], 3) ?> VNĐ</div>
     <div><strong>Trạng thái:</strong> <?= htmlspecialchars($order['StatusOrder']) ?></div>
   </div>
 

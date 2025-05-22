@@ -115,34 +115,6 @@ while ($row = mysqli_fetch_assoc($about_result)) {
           </div>
         </div>
       </div>
-      <div class="row py-5">
-        <div id="carouselExampleDark" class="carousel slide">
-          <div class="carousel-indicators">
-            <?php foreach ($quotes as $index => $quote): ?>
-              <button type="button" data-bs淹target="#carouselExampleDark" data-bs-slide-to="<?php echo $index; ?>" <?php echo $index === 0 ? 'class="active" aria-current="true"' : ''; ?> aria-label="Slide <?php echo $index + 1; ?>"></button>
-            <?php endforeach; ?>
-          </div>
-          <div class="carousel-inner">
-            <?php foreach ($quotes as $index => $quote): ?>
-              <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>" data-bs-interval="<?php echo $index === 0 ? '10000' : '2000'; ?>">
-                <img src="<?php echo htmlspecialchars($quote['img_about']); ?>" class="d-block-about w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <p style="font-style: italic;"><?php echo htmlspecialchars($quote['Content']); ?></p>
-                  <h6 style="font-weight: bold"><?php echo htmlspecialchars(substr($quote['Title'], 7)); ?></h6>
-                </div>
-              </div>
-            <?php endforeach; ?>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
     </div>
   </section>
 </main>
